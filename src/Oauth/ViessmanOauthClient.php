@@ -21,12 +21,15 @@ class ViessmanOauthClient
     private $credentials;
     private $serviceFactory;
     private $scope=["openid"];
+    private $user;
+    private $pwd;
     /**
      * ViessmanOauthClient constructor.
      * @param $viessmanOauthService
      */
     public function __construct($params)
-    {
+    {   $this->user=$params["user"];
+        $this->pwd=$params["pwd"];
         $this->serviceFactory=new ServiceFactory();
         $this->serviceFactory->registerService("Viessman","Viessman\Oauth\ViessmanOauthService");
         $this->storage=new Session();
@@ -43,7 +46,7 @@ class ViessmanOauthClient
         $client_id = '79742319e39245de5f91d15ff4cac2a8';
         $client_secret = '8ad97aceb92c5892e102b093c7c083fa';
 
-        $isiwebuserid = ';   //to be modified
+        $isiwebuserid = '';   //to be modified
         $isiwebpasswd = '';          //to be modified
 
         $authorizeURL = 'https://iam.viessmann.com/idp/v1/authorize';
@@ -55,7 +58,7 @@ class ViessmanOauthClient
             CURLOPT_HTTPHEADER => $header,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERPWD => "$isiwebuserid:$isiwebpasswd",
+            CURLOPT_USERPWD => "$this->user:$this->pwd",
             CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
             CURLOPT_POST => true,
         );
