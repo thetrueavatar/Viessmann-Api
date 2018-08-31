@@ -1,4 +1,5 @@
 resources/*.*
+resources/credentials.properties
 *.properties
 NotesPerso.txt
 .idea
