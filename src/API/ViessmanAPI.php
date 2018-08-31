@@ -15,6 +15,7 @@ final class ViessmanAPI
      */
     public function __construct()
     {
+        //TODO provide credentials as construct param
         $credentials = file("../../resources/credentials.properties");
         $params=[
             "user"=>trim("$credentials[0]","\n"),
@@ -48,8 +49,14 @@ final class ViessmanAPI
         return $this->gatewayId."";
     }
     public function getFeatures():String{
-        return $this->viessmanAuthClient->request("operational-data/installations/".$this->installationId."/gateways/".$this->gatewayId."/devices/0/features");
-// TODO find a better way to display data
+        return $this->formatData($this->viessmanAuthClient->request("operational-data/installations/".$this->installationId."/gateways/".$this->gatewayId."/devices/0/features"));
+
+    }
+
+    private function formatData(string $request)
+    {
+        return $request;
+        // TODO find a better way to display data
 //        $featureEntity=Entity::fromArray(json_decode($this->viessmanAuthClient->request("operational-data/installations/".$this->installationId."/gateways/".$this->gatewayId."/devices/0/features"),true));
 //        $data="{data=[";
 //        $i=1;
