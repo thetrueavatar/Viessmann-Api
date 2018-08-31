@@ -31,7 +31,7 @@ final class ViessmanAPI
     public function getOutsideTemperature():string{
 
     }
-    public function getInstallationId():int{
-        return $this->installationId;
+    public function getInstallationId():string{
+        return $this->installationId.PHP_EOL;
     }
 }
