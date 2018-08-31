@@ -5,7 +5,7 @@
  * Date: 31/08/18
  * Time: 12:43
  */
-namespace Viessman\API;
+namespace Viessman\API\Test;
 require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/../bootstrap.php';
 
@@ -27,6 +27,7 @@ class ViessmanOauthClientTest extends TestCase
         $viessmanAuthClient=new ViessmanOauthClient($params);
         $code=$viessmanAuthClient->getCode();
         self::assertNotNull($viessmanAuthClient->getToken($code));
+        self::assertNotNull($viessmanAuthClient->request("general-management/installations?expanded=true&"));
     }
 
 

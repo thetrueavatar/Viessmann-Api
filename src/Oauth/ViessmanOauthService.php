@@ -112,4 +112,10 @@ final class ViessmanOauthService extends AbstractService {
         }
         return $url;
     }
+
+    public function request($path, $method = 'GET', $body = null, array $extraHeaders = array())
+    {
+        return parent::request($path, $method, $body, $extraHeaders);
+    }
+
 }

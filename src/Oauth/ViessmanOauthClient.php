@@ -75,4 +75,9 @@ class ViessmanOauthClient
         return ($matches[1][0]);
     }
 
+    public function request($resourceUrl):string
+    {
+        return $this->viessmanOauthService->request($resourceUrl);
+    }
+
 }
