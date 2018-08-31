@@ -20,7 +20,7 @@ class ViessmanOauthClientTest extends TestCase
         $credentials = file("../../resources/credentials.properties");
         $params=[
             "user"=>trim("$credentials[0]","\n"),
-            "password"=>"$credentials[1]",
+            "pwd"=>"$credentials[1]",
             "uri"=>"vicare://oauth-callback/everest"
         ];
 

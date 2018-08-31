@@ -16,8 +16,6 @@ use OAuth\Common\Http\Uri\Uri;
 final class ViessmanOauthService extends AbstractService {
 
     const SCOPE_USAGE_GET       = 'openid';
-    protected $client_id = '79742319e39245de5f91d15ff4cac2a8';
-    protected $client_secret = '8ad97aceb92c5892e102b093c7c083fa';
     private $authorizeURL = 'https://iam.viessmann.com/idp/v1/authorize';
     private $token_url = 'https://iam.viessmann.com/idp/v1/token';
     protected $redirect_uri = "vicare://oauth-callback/everest";

@@ -27,13 +27,21 @@ class ViessmanOauthClient
      * ViessmanOauthClient constructor.
      * @param $viessmanOauthService
      */
+    const CONSUMERID = "79742319e39245de5f91d15ff4cac2a8";
+
+    const CONSUMERSECRET = "8ad97aceb92c5892e102b093c7c083fa";
+
+    const HTTPS_IAM_VIESSMANN_COM_IDP_V_1_AUTHORIZE = 'https://iam.viessmann.com/idp/v1/authorize';
+
+    const VICARE_OAUTH_CALLBACK_EVEREST = "vicare://oauth-callback/everest";
+
     public function __construct($params)
     {   $this->user=$params["user"];
         $this->pwd=$params["pwd"];
         $this->serviceFactory=new ServiceFactory();
         $this->serviceFactory->registerService("Viessman","Viessman\Oauth\ViessmanOauthService");
         $this->storage=new Session();
-        $this->credentials = new Credentials("79742319e39245de5f91d15ff4cac2a8","8ad97aceb92c5892e102b093c7c083fa","vicare://oauth-callback/everest");
+        $this->credentials = new Credentials("" . self::CONSUMERID, "" . self::CONSUMERSECRET, self::VICARE_OAUTH_CALLBACK_EVEREST);
         $this->viessmanOauthService=$this->serviceFactory->createService('Viessman', $this->credentials,$this->storage, $this->scope,new Uri('https://api.viessmann-platform.io'));
     }
 
@@ -43,14 +51,9 @@ class ViessmanOauthClient
     }
     public function getCode():string
     {
-        $client_id = '79742319e39245de5f91d15ff4cac2a8';
-        $client_secret = '8ad97aceb92c5892e102b093c7c083fa';
-
-        $isiwebuserid = '';   //to be modified
-        $isiwebpasswd = '';          //to be modified
-
-        $authorizeURL = 'https://iam.viessmann.com/idp/v1/authorize';
-        $callback_uri = "vicare://oauth-callback/everest";
+        $client_id = self::CONSUMERID;
+        $authorizeURL = self::HTTPS_IAM_VIESSMANN_COM_IDP_V_1_AUTHORIZE;
+        $callback_uri = self::VICARE_OAUTH_CALLBACK_EVEREST;
         $url = "$authorizeURL?client_id=$client_id&scope=openid&redirect_uri=$callback_uri&response_type=code";
         $header = array("Content-Type: application/x-www-form-urlencoded");
         $curloptions = array(
