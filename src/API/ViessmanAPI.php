@@ -47,11 +47,22 @@ final class ViessmanAPI
     {
         return $this->gatewayId."";
     }
-    public function getAllData():String{
-        $featureEntity=Entity::fromArray(json_decode($this->viessmanAuthClient->request("operational-data/installations/".$this->installationId."/gateways/".$this->gatewayId."/devices/0/features"),true));
-        foreach ($featureEntity->getEntities() as $entity){
-               print_r($entity->getClasses());
-               print_r($entity->getProperties());
-        };
+    public function getFeatures():String{
+        return $this->viessmanAuthClient->request("operational-data/installations/".$this->installationId."/gateways/".$this->gatewayId."/devices/0/features");
+// TODO find a better way to display data
+//        $featureEntity=Entity::fromArray(json_decode($this->viessmanAuthClient->request("operational-data/installations/".$this->installationId."/gateways/".$this->gatewayId."/devices/0/features"),true));
+//        $data="{data=[";
+//        $i=1;
+//        $size=count($featureEntity->getEntities());
+//        foreach ($featureEntity->getEntities() as $entity){
+//               $data=$data."{";
+//               $data=$data."classes :".(json_encode($entity->getClasses())).",";
+//               $data=$data."properties :".json_encode($entity->getProperties());
+//               $data=$data."}";
+//               if ($i!=$size){
+//                   $data=$data.",";
+//               }
+//        };
+//        return $data."]}";
     }
 }

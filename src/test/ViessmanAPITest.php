@@ -20,6 +20,6 @@ class ViessmanAPITest extends TestCase
         $viessmanApi=new ViessmanAPI();
         echo $viessmanApi->getInstallationId();
         echo $viessmanApi->getGatewayId();
-        echo $viessmanApi->getAllData();
+        echo $viessmanApi->getFeatures();
     }
 }
