@@ -37,15 +37,10 @@ const HEATING_TIMEBASE="heating.service.timeBased";
     /**
      * ViessmanAPI constructor.
      */
-    public function __construct()
+    public function __construct($params)
     {
         //TODO provide credentials as construct param
-        $credentials = file("../../resources/credentials.properties");
-        $params=[
-            "user"=>trim("$credentials[0]","\n"),
-            "pwd"=>"$credentials[1]",
-            "uri"=>"vicare://oauth-callback/everest"
-        ];
+
         https://api.viessmann-platform.io/operational-data/installations/ /gateways/ /devices/0/features
         $this->viessmanAuthClient=new ViessmanOauthClient($params);
         $code=$this->viessmanAuthClient->getCode();
