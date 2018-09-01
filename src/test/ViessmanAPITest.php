@@ -18,8 +18,10 @@ class ViessmanAPITest extends TestCase
     public function testAll()
     {
         $viessmanApi=new ViessmanAPI();
-        echo $viessmanApi->getInstallationId();
-        echo $viessmanApi->getGatewayId();
-        echo $viessmanApi->getFeatures();
+        echo "outside temperature: ".$viessmanApi->getOutsideTemperature();
+//        echo $viessmanApi->getInstallationId();
+//        echo $viessmanApi->getGatewayId();
+//        echo $viessmanApi->getFeatures();
+
     }
 }
