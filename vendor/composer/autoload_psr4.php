@@ -9,7 +9,7 @@ return array(
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
     'fkooman\\OAuth\\Client\\' => array($vendorDir . '/fkooman/oauth2-client/src'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
-    'Viessman\\' => array($baseDir . '/src'),
+    'Viessmann\\' => array($baseDir . '/src'),
     'TomPHP\\Siren\\' => array($vendorDir . '/tomphp/siren/src'),
     'TomPHP\\' => array($vendorDir . '/tomphp/exception-constructor-tools/src'),
     'Symfony\\Polyfill\\Util\\' => array($vendorDir . '/symfony/polyfill-util'),

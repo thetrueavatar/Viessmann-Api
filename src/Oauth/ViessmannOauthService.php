@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace Viessman\Oauth;
+namespace Viessmann\Oauth;
 
 use OAuth\Common\Consumer\CredentialsInterface;
 use OAuth\Common\Http\Client\ClientInterface;
@@ -13,14 +13,14 @@ use OAuth\Common\Http\Uri\Uri;
 /**
  * Bootstrap the example
  */
-final class ViessmanOauthService extends AbstractService {
+final class ViessmannOauthService extends AbstractService {
 
     const SCOPE_USAGE_GET       = 'openid';
     private $authorizeURL = 'https://iam.viessmann.com/idp/v1/authorize';
     private $token_url = 'https://iam.viessmann.com/idp/v1/token';
     protected $redirect_uri = "vicare://oauth-callback/everest";
     /**
-     * ViessmanOauthClient constructor.
+     * ViessmannOauthClient constructor.
      */
     public function __construct(
         CredentialsInterface $credentials,

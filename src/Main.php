@@ -7,15 +7,17 @@
  */
 
 require __DIR__ . '/../vendor/autoload.php';
-use Viessman\API\ViessmanAPI;
+use Viessmann\API\ViessmannAPI;
 $credentials = file("../resources/credentials.properties");
 $params=[
     "user"=>trim("$credentials[0]","\n"),
     "pwd"=>"$credentials[1]",
     "uri"=>"vicare://oauth-callback/everest"
 ];
-$viessmanApi=new ViessmanAPI($params);
+$viessmanApi=new ViessmannAPI($params);
 echo "Température extérieure ".$viessmanApi->getOutsideTemperature()."\n";
-echo "Température boiler ".$viessmanApi->getBoilerTempertaure()."\n";
+echo "Température boiler ".$viessmanApi->getBoilerTemperture()."\n";
 echo "Pente ".$viessmanApi->getSlope()."\n";
 echo "Parallèle ".$viessmanApi->getShift()."\n";
+echo "Mode chaudière ".$viessmanApi->getActiveMode()."\n";
+echo "Programme actif ".$viessmanApi->getActiveProgram()."\n";

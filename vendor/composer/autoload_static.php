@@ -28,7 +28,7 @@ class ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730
         ),
         'V' => 
         array (
-            'Viessman\\' => 9,
+            'Viessmann\\' => 10,
         ),
         'T' => 
         array (
@@ -76,7 +76,7 @@ class ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
-        'Viessman\\' => 
+        'Viessmann\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

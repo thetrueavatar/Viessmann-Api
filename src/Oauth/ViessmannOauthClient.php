@@ -6,7 +6,7 @@
  * Time: 12:27
  */
 
-namespace Viessman\Oauth;
+namespace Viessmann\Oauth;
 
 
 use OAuth\Common\Http\Uri\Uri;
@@ -14,9 +14,9 @@ use OAuth\Common\Storage\Session;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\ServiceFactory;
 
-class ViessmanOauthClient
+class ViessmannOauthClient
 {
-    private $viessmanOauthService;
+    private $viessmannOauthService;
     private $storage;
     private $credentials;
     private $serviceFactory;
@@ -24,8 +24,8 @@ class ViessmanOauthClient
     private $user;
     private $pwd;
     /**
-     * ViessmanOauthClient constructor.
-     * @param $viessmanOauthService
+     * ViessmannOauthClient constructor.
+     * @param $viessmannOauthService
      */
     const CONSUMERID = "79742319e39245de5f91d15ff4cac2a8";
 
@@ -39,14 +39,14 @@ class ViessmanOauthClient
     {   $this->user=$params["user"];
         $this->pwd=$params["pwd"];
         $this->serviceFactory=new ServiceFactory();
-        $this->serviceFactory->registerService("Viessman","Viessman\Oauth\ViessmanOauthService");
+        $this->serviceFactory->registerService("Viessmann","Viessmann\Oauth\ViessmannOauthService");
         $this->storage=new Session();
         $this->credentials = new Credentials("" . self::CONSUMERID, "" . self::CONSUMERSECRET, self::VICARE_OAUTH_CALLBACK_EVEREST);
-        $this->viessmanOauthService=$this->serviceFactory->createService('Viessman', $this->credentials,$this->storage, $this->scope,new Uri('https://api.viessmann-platform.io'));
+        $this->viessmannOauthService=$this->serviceFactory->createService('Viessmann', $this->credentials,$this->storage, $this->scope,new Uri('https://api.viessmann-platform.io'));
     }
 
      function getToken($code){
-            return $this->viessmanOauthService->requestAccessToken($code);
+            return $this->viessmannOauthService->requestAccessToken($code);
 
     }
     public function getCode():string
@@ -77,7 +77,7 @@ class ViessmanOauthClient
 
     public function request($resourceUrl):string
     {
-        return $this->viessmanOauthService->request($resourceUrl);
+        return $this->viessmannOauthService->request($resourceUrl);
     }
 
 }
