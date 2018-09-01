@@ -15,4 +15,5 @@ $params=[
     "uri"=>"vicare://oauth-callback/everest"
 ];
 $viessmanApi=new ViessmanAPI($params);
-echo $viessmanApi->getOutsideTemperature();
+echo "Température extérieure ".$viessmanApi->getOutsideTemperature()."\n";
+echo "Température boiler ".$viessmanApi->getBoilerTempertaure()."\n";

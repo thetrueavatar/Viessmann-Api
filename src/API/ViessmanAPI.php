@@ -74,6 +74,10 @@ const HEATING_TIMEBASE="heating.service.timeBased";
         $outsideTempEntity=Entity::fromArray(json_decode($this->formatData($this->viessmanAuthClient->request($this->featureUrl."/".ViessmanAPI::HEATING_TEMP_OUTSIDE)),true));
         return $outsideTempEntity->getProperty("value")["value"]."";
     }
+    public function getBoilerTempertaure():string{
+        $boilerTempEntity=Entity::fromArray(json_decode($this->formatData($this->viessmanAuthClient->request($this->featureUrl."/".ViessmanAPI::BOILER_TEMP)),true));
+        return $boilerTempEntity->getProperty("value")["value"]."";
+    }
 
     private function formatData(string $request)
     {
