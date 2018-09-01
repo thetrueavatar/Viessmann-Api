@@ -88,7 +88,7 @@ final class ViessmannAPI
         $outsideTempEntity=Entity::fromArray(json_decode($this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_TEMP_OUTSIDE)),true));
         return $outsideTempEntity->getProperty("value")["value"]."";
     }
-    public function getBoilerTemperture():string{
+    public function getBoilerTemperature():string{
         $boilerTempEntity=Entity::fromArray(json_decode($this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::BOILER_TEMP)),true));
         return $boilerTempEntity->getProperty("value")["value"]."";
     }
