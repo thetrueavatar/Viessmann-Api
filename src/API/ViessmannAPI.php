@@ -109,7 +109,45 @@ final class ViessmannAPI
         $activeProgramEntity=Entity::fromArray(json_decode( $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_ACTIVE)),true));
         return $activeProgramEntity->getProperty("value")["value"]."";
     }
+    public function isHeatingBurnerActive(): bool {
+        $heatingBurnerEntity=Entity::fromArray(json_decode( $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_BURNER)),true));
+        return $heatingBurnerEntity->getProperty("active")["value"];
+    }
 
+
+
+    public function isDhwModeActive():bool{
+        $dhwModeActiveEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_DWH_MODE)),true));
+        return $dhwModeActiveEntity->getProperty("active")["value"];
+    }
+    public function getComfortProgramTemperature():string{
+        $comfortProgramEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_COMFORT)),true));
+        return $comfortProgramEntity->getProperty("temperature")["value"]."";
+    }
+    public function getEchoProgramTemperature():string{
+        $echoProgramEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_ECHO)),true));
+        return $echoProgramEntity->getProperty("temperature")["value"]."";
+    }
+    public function getExternalProgramTemperature():string{
+        $externalProgramEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_EXTERNAL)),true));
+        return $externalProgramEntity->getProperty("temperature")["value"]."";
+    }
+    public function getNormalProgramTemperature():string{
+        $normalProgramEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_NORMAL)),true));
+        return $normalProgramEntity->getProperty("temperature")["value"]."";
+    }
+    public function getReducedProgramTemperature():string{
+        $reducedProgramEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_REDUCED)),true));
+        return $reducedProgramEntity->getProperty("temperature")["value"]."";
+    }
+    public function isInStandbyMode():bool{
+        $standbyProgramEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_STANDBY)),true));
+        return $standbyProgramEntity->getProperty("active")["value"];
+    }
+    public function getSupplyProgramTemperature():string{
+        $supplyProgramEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_SUPLY)),true));
+        return $supplyProgramEntity->getProperty("value")["value"]."";
+    }
     private function formatData(string $request)
     {
         return $request;
