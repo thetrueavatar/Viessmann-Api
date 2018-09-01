@@ -17,3 +17,5 @@ $params=[
 $viessmanApi=new ViessmanAPI($params);
 echo "Température extérieure ".$viessmanApi->getOutsideTemperature()."\n";
 echo "Température boiler ".$viessmanApi->getBoilerTempertaure()."\n";
+echo "Pente ".$viessmanApi->getSlope()."\n";
+echo "Parallèle ".$viessmanApi->getShift()."\n";

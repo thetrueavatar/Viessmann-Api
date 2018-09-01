@@ -78,7 +78,14 @@ const HEATING_TIMEBASE="heating.service.timeBased";
         $boilerTempEntity=Entity::fromArray(json_decode($this->formatData($this->viessmanAuthClient->request($this->featureUrl."/".ViessmanAPI::BOILER_TEMP)),true));
         return $boilerTempEntity->getProperty("value")["value"]."";
     }
-
+    public function getSlope():string{
+        $curveEntity=Entity::fromArray(json_decode($this->formatData($this->viessmanAuthClient->request($this->featureUrl."/".ViessmanAPI::HEATING_CURVE)),true));
+        return $curveEntity->getProperty("slope")["value"]."";
+    }
+    public function getShift():string{
+        $curveEntity=Entity::fromArray(json_decode($this->formatData($this->viessmanAuthClient->request($this->featureUrl."/".ViessmanAPI::HEATING_CURVE)),true));
+        return $curveEntity->getProperty("shift")["value"]."";
+    }
     private function formatData(string $request)
     {
         return $request;
