@@ -15,6 +15,7 @@ $params=[
     "uri"=>"vicare://oauth-callback/everest"
 ];
 $viessmanApi=new ViessmannAPI($params);
+    echo $viessmanApi->getFeatures();
     echo "Température extérieure ".$viessmanApi->getOutsideTemperature()."\n";
     echo "Température boiler ".$viessmanApi->getBoilerTemperature()."\n";
     echo "Pente ".$viessmanApi->getSlope()."\n";
@@ -29,3 +30,4 @@ $viessmanApi=new ViessmannAPI($params);
     echo "Température réduit ".$viessmanApi->getReducedProgramTemperature()."\n";
     echo "Température supply ".$viessmanApi->getSupplyProgramTemperature()."\n";
     echo "Est en veille ? ".$viessmanApi->isInStandbyMode()."\n";
+    echo "Appelle resources ".$viessmanApi->getRawData(ViessmannAPI::HEATING_PROGRAM_ACTIVE);

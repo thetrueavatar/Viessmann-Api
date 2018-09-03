@@ -10,7 +10,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/../bootstrap.php';
 
 use PHPUnit\Framework\TestCase;
-use Viessman\Oauth\ViessmannOauthClient;
+use Viessmann\Oauth\ViessmannOauthClient;
 
 class ViessmannOauthClientTest extends TestCase
 {
@@ -27,8 +27,8 @@ class ViessmannOauthClientTest extends TestCase
         $viessmannAuthClient = new ViessmannOauthClient($params);
         $code = $viessmannAuthClient->getCode();
         self::assertNotNull($viessmannAuthClient->getToken($code));
-        self::assertNotNull($viessmannAuthClient->request("general-management/installations?expanded=true&"));
-        echo $viessmannAuthClient->request("operational-data/installations/55994/gateways/7571381753685105/devices/0/features/heating.dhw");
+//        self::assertNotNull($viessmannAuthClient->request("general-management/installations?expanded=true&"));
+        echo $viessmannAuthClient->request("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage");
     }
 //https://api.viessmann-platform.io/operational-data/installations/55994/features/gateway.devices
     #                            /operational-data/installations/55994/gateways/7571381753685105/features/gateway.devices

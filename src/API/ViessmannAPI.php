@@ -148,6 +148,9 @@ final class ViessmannAPI
         $supplyProgramEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_SUPLY)),true));
         return $supplyProgramEntity->getProperty("value")["value"]."";
     }
+    public function getRawData($resources ):string{
+        return $this->formatData($this->viessmanAuthClient->request($this->featureHeatingUrl."/".$resources));
+}
     private function formatData(string $request)
     {
         return $request;
