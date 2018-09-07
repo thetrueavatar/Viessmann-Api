@@ -4,23 +4,17 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730
+class ComposerStaticInit1230ef7916f71bb12bff9bed4cf1a4db
 {
     public static $files = array (
-        'a4ecaeafb8cfb009ad0e052c90355e98' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
+        'a4ecaeafb8cfb009ad0e052c90355e98' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
-        ),
-        'f' => 
-        array (
-            'fkooman\\OAuth\\Client\\' => 21,
         ),
         'W' => 
         array (
@@ -35,20 +29,9 @@ class ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730
             'TomPHP\\Siren\\' => 13,
             'TomPHP\\' => 7,
         ),
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Util\\' => 22,
-            'Symfony\\Polyfill\\Php56\\' => 23,
-        ),
         'P' => 
         array (
-            'Psr\\Log\\' => 8,
             'Psr\\Link\\' => 9,
-            'ParagonIE\\ConstantTime\\' => 23,
-        ),
-        'M' => 
-        array (
-            'MediaWiki\\OAuthClient\\' => 22,
         ),
         'D' => 
         array (
@@ -65,12 +48,8 @@ class ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-        ),
-        'fkooman\\OAuth\\Client\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/fkooman/oauth2-client/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -88,29 +67,9 @@ class ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730
         array (
             0 => __DIR__ . '/..' . '/tomphp/exception-constructor-tools/src',
         ),
-        'Symfony\\Polyfill\\Util\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-util',
-        ),
-        'Symfony\\Polyfill\\Php56\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php56',
-        ),
-        'Psr\\Log\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
-        ),
         'Psr\\Link\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/link/src',
-        ),
-        'ParagonIE\\ConstantTime\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
-        ),
-        'MediaWiki\\OAuthClient\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/mediawiki/oauthclient/src',
         ),
         'Doctrine\\Instantiator\\' => 
         array (
@@ -692,10 +651,10 @@ class ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitc11eb9727aeeaaeeff0ecaa0145da730::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1230ef7916f71bb12bff9bed4cf1a4db::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1230ef7916f71bb12bff9bed4cf1a4db::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1230ef7916f71bb12bff9bed4cf1a4db::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1230ef7916f71bb12bff9bed4cf1a4db::$classMap;
 
         }, null, ClassLoader::class);
     }

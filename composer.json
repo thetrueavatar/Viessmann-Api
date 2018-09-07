@@ -2,17 +2,15 @@
     "require": {
         "php": "^7.0",
         "psr/link": "^1.0",
-      "tomphp/siren": "dev-master",
+        "tomphp/siren": "dev-master",
         "phpunit/phpunit": "7.3.2",
-        "mediawiki/oauthclient": "0.1.2",
-        "fkooman/oauth2-client": "7.1.3",
         "lusitanian/oauth": "v0.8.11"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "Tom Oram",
-            "email": "tom@codept.com"
+            "name": "thetrueavatar",
+            "email": "thetrueavatar@gmail.com"
         }
     ],
     "autoload": {
