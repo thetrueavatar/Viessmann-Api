@@ -1,0 +1,52 @@
+{
+    "name": "tomphp/exception-constructor-tools",
+    "description": "A simple PHP trait which makes creating static constructors for exceptions nicer.",
+    "license": "MIT",
+    "type": "library",
+    "homepage": "https://github.com/tomphp/exception-constructor-tools",
+    "keywords": ["exception", "static", "constructor"],
+    "authors": [
+        {
+            "name": "Tom Oram",
+            "email": "tom@codept.com",
+            "homepage": "https://github.com/tomphp",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^1.10",
+        "phpunit/phpunit": "^5.5",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "TomPHP\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\unit\\TomPHP\\": "tests/unit/",
+            "tests\\support\\": "tests/support/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "cs:fix": [
+            "phpcbf --standard=psr2 src tests; exit 0",
+            "php-cs-fixer fix --verbose; exit 0"
+        ],
+        "cs:check": [
+            "phpcs --standard=psr2 src tests",
+            "php-cs-fixer fix --dry-run --verbose"
+        ],
+        "test": [
+            "@cs:check",
+            "phpunit --colors=always"
+        ]
+    }
+}

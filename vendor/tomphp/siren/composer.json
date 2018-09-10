@@ -1,0 +1,30 @@
+{
+    "name": "tomphp/siren",
+    "description": "A library for creating and parsing Siren APIs in PHP",
+    "type": "library",
+    "require": {
+        "php": "^7.0",
+        "beberlei/assert": "^2.6",
+        "tomphp/exception-constructor-tools": "^1.0",
+        "psr/link": "^1.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "2.0.0-RC",
+        "phpunit/phpunit": "^5.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tom Oram",
+            "email": "tom@codept.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "TomPHP\\Siren\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "files": ["vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"]
+    }
+}
