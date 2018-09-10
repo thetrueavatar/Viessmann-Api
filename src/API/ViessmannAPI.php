@@ -55,7 +55,7 @@ final class ViessmannAPI
         $this->viessmanAuthClient->getToken($code);
         $installationJson=$this->viessmanAuthClient->request("general-management/installations");
         $installationEntity=Entity::fromArray(json_decode($installationJson,true));
-        $modelInstallationEntity=$installationEntity->getEntitiesByClass("model.installation")[0];
+        $modelInstallationEntity=$installationEntity->getEntities()[0];
         $this->installationId=$modelInstallationEntity->getProperty('id');
         $modelDevice=$modelInstallationEntity->getEntities()[0];
         $this->gatewayId=$modelDevice->getProperty('serial');
