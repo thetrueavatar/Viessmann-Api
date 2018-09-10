@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8fd03742e4b25b7259e968216296115",
+    "content-hash": "f043e92b4807868c3fd76d0811eff40a",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1944,16 +1944,16 @@
         },
         {
             "name": "tomphp/siren",
-            "version": "dev-master",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tomphp/siren-php.git",
-                "reference": "22bdce3d7d87693df29011a5139dbad349c875db"
+                "reference": "4b58f2e2adb7c87b4b2f0e85120e3dcf6f188f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tomphp/siren-php/zipball/22bdce3d7d87693df29011a5139dbad349c875db",
-                "reference": "22bdce3d7d87693df29011a5139dbad349c875db",
+                "url": "https://api.github.com/repos/tomphp/siren-php/zipball/4b58f2e2adb7c87b4b2f0e85120e3dcf6f188f1b",
+                "reference": "4b58f2e2adb7c87b4b2f0e85120e3dcf6f188f1b",
                 "shasum": ""
             },
             "require": {
@@ -1983,7 +1983,7 @@
                 }
             ],
             "description": "A library for creating and parsing Siren APIs in PHP",
-            "time": "2017-01-12T08:08:41+00:00"
+            "time": "2016-12-05T22:04:55+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -2039,9 +2039,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "tomphp/siren": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
