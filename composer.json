@@ -2,9 +2,9 @@
     "require": {
         "php": "^7.0",
         "psr/link": "^1.0",
-        "tomphp/siren": "dev-master",
         "phpunit/phpunit": "7.3.2",
-        "lusitanian/oauth": "v0.8.11"
+        "lusitanian/oauth": "v0.8.11",
+        "tomphp/siren": "v0.1.0"
     },
     "license": "MIT",
     "authors": [
