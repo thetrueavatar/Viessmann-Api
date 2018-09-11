@@ -1,19 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thetrueavatar
- * Date: 30/08/18
- * Time: 15:46
- */
-
-require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/bootstrap.php';
+include 'phar://../bin/Viessmann-Api-0.1-SNAPSHOT.phar/index.php';
 use Viessmann\API\ViessmannAPI;
 $credentials = file("../resources/credentials.properties");
 $params=[
-    "user"=>trim("$credentials[0]","\n"),
-    "pwd"=>trim("$credentials[1]","\n"),
-    "uri"=>"vicare://oauth-callback/everest"
+"user"=>trim("$credentials[0]","\n"),
+"pwd"=>trim("$credentials[1]","\n"),
+"uri"=>"vicare://oauth-callback/everest"
 ];
 $viessmanApi=new ViessmannAPI($params);
 echo $viessmanApi->getFeatures();
