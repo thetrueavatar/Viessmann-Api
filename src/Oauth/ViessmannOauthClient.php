@@ -75,9 +75,18 @@ class ViessmannOauthClient
         return ($matches[1][0]);
     }
 
-    public function request($resourceUrl):string
+    public function readData($resourceUrl):string
     {
         return $this->viessmannOauthService->request($resourceUrl);
+    }
+
+    public function setData($resourceUrl,$data)
+    {
+        $headers=[
+            "Content-Type"=>"application/json",
+            "Accept"=>"application/vnd.siren+json"
+        ];
+        return $this->viessmannOauthService->request($resourceUrl,'POST',$data,$headers);
     }
 
 }

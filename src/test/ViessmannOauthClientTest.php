@@ -10,26 +10,45 @@ require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/../bootstrap.php';
 
 use PHPUnit\Framework\TestCase;
+use Viessmann\API\ViessmannAPI;
 use Viessmann\Oauth\ViessmannOauthClient;
 
 class ViessmannOauthClientTest extends TestCase
 {
+
+    private $params;
+    /**
+     * ViessmannOauthClientTest constructor.
+     */
+
 
     public function testAll()
     {
         $credentials = file("../../resources/credentials.properties");
         $params = [
             "user" => trim("$credentials[0]", "\n"),
+            "pwd" => trim("$credentials[1]", "\n"),
+            "uri" => "vicare://oauth-callback/everest"
+        ];
+
+        $viessmannAuthClient = new ViessmannOauthClient($this->params);
+        $code = $viessmannAuthClient->getCode();
+        self::assertNotNull($viessmannAuthClient->getToken($code));
+//        self::assertNotNull($viessmannAuthClient->request("general-management/installations?expanded=true&"));
+        echo $viessmannAuthClient->readData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/".ViessmannAPI::HEATING_DWH_TEMPERATURE);
+    }
+    public function testWriteData(){
+        $credentials = file("../../resources/credentials.properties");
+        $this->params = [
+            "user" => trim("$credentials[0]", "\n"),
             "pwd" => "$credentials[1]",
             "uri" => "vicare://oauth-callback/everest"
         ];
 
-        $viessmannAuthClient = new ViessmannOauthClient($params);
+        $viessmannAuthClient = new ViessmannOauthClient($this->params);
         $code = $viessmannAuthClient->getCode();
         self::assertNotNull($viessmannAuthClient->getToken($code));
-//        self::assertNotNull($viessmannAuthClient->request("general-management/installations?expanded=true&"));
-        echo $viessmannAuthClient->request("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage");
+        $data="{\"temperature\": 58.0}";
+        echo $viessmannAuthClient->setData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/".ViessmannAPI::HEATING_DWH_TEMPERATURE."/setTargetTemperature",$data);
     }
-//https://api.viessmann-platform.io/operational-data/installations/55994/features/gateway.devices
-    #                            /operational-data/installations/55994/gateways/7571381753685105/features/gateway.devices
 }
