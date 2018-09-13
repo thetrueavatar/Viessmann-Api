@@ -1,9 +1,9 @@
 <?php
-include 'phar://../bin/Viessmann-Api-0.3-SNAPSHOT.phar/index.php';
+include 'phar://Viessmann-Api-0.2.phar/index.php';
 
 use Viessmann\API\ViessmannAPI;
 
-$credentials = file("../resources/credentials.properties");
+$credentials = file("credentials.properties");
 $params = [
     "user" => trim("$credentials[0]", "\n"),
     "pwd" => trim("$credentials[1]", "\n"),
@@ -26,5 +26,5 @@ echo "Température réduit " . $viessmanApi->getReducedProgramTemperature() . "\
 echo "Température supply " . $viessmanApi->getSupplyProgramTemperature() . "\n";
 echo "Est en veille ? " . $viessmanApi->isInStandbyMode() . "\n";
 echo "Appelle resources " . $viessmanApi->getRawJsonData(ViessmannAPI::HEATING_PROGRAM_ACTIVE). "\n";
-echo "écriture température ecs avec json ".$viessmanApi->setRawJsonData(ViessmannAPI::HEATING_DWH_TEMPERATURE,"setTargetTemperature","{\"temperature\":60.0}"). "\n";
-echo "écriture température ecs ".$viessmanApi->setDhwTemperature("58.0"). "\n";
+#echo "écriture température ecs avec json ".$viessmanApi->setRawJsonData(ViessmannAPI::HEATING_DWH_TEMPERATURE,"setTargetTemperature","{\"temperature\":60.0}"). "\n";
+#echo "écriture température ecs ".$viessmanApi->setDhwTemperature("58.0"). "\n";
