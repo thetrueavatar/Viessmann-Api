@@ -1,5 +1,5 @@
 <?php
-include 'phar://Viessmann-Api-0.3-SNAPSHOT.phar/index.php';
+include 'phar://'.__DIR__.'/Viessmann-Api-0.2.phar/index.php';
 
 use Viessmann\API\ViessmannAPI;
 
