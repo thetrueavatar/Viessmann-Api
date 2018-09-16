@@ -1,15 +1,5 @@
 <?php
-include 'phar://'.__DIR__.'/Viessmann-Api-0.2.phar/index.php';
-
-use Viessmann\API\ViessmannAPI;
-
-$credentials = file("credentials.properties");
-$params = [
-    "user" => trim("$credentials[0]", "\n"),
-    "pwd" => trim("$credentials[1]", "\n"),
-    "uri" => "vicare://oauth-callback/everest"
-];
-$viessmanApi = new ViessmannAPI($params);
+include __DIR__.'/bootstrap.php';
 echo $viessmanApi->getFeatures();
 echo "Température extérieure " . $viessmanApi->getOutsideTemperature() . "\n";
 echo "Température boiler " . $viessmanApi->getBoilerTemperature() . "\n";
