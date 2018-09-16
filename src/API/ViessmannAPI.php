@@ -136,6 +136,9 @@ final class ViessmannAPI
         $normalProgramEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->readData($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_NORMAL)),true));
         return $normalProgramEntity->getProperty("temperature")["value"]."";
     }
+    public function setNormalProgramTemperature($temperature){
+        $this->setRawJsonData(ViessmannAPI::HEATING_PROGRAM_NORMAL,"setTemperature","{\"targetTemperature\":".$temperature."}");
+    }
     public function getReducedProgramTemperature():string{
         $reducedProgramEntity=Entity::fromArray(json_decode(  $this->formatData($this->viessmanAuthClient->readData($this->featureHeatingUrl."/".ViessmannAPI::HEATING_PROGRAM_REDUCED)),true));
         return $reducedProgramEntity->getProperty("temperature")["value"]."";
