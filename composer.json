@@ -17,5 +17,16 @@
         "psr-4": {
             "Viessmann\\": "src/"
         }
+    },
+    "extra": {
+        "phar-builder": {
+            "compression": "GZip",
+            "name": "Viessmann-Api-0.3-SNAPSHOT.phar",
+            "output-dir": "./example",
+            "entry-point": "./index.php",
+            "include": "php",
+            "include-dev": false,
+            "skip-shebang":false
+        }
     }
 }
