@@ -7,4 +7,4 @@ $params = [
     "pwd" => trim("$credentials[1]", "\n"),
     "uri" => "vicare://oauth-callback/everest"
 ];
-$viessmanApi = new ViessmannAPI($params);
+$viessmannApi = new ViessmannAPI($params);
