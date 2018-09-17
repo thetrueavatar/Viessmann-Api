@@ -11,7 +11,7 @@ echo "Programme actif " . $viessmannApi->getActiveProgram() . "\n";
 echo "Is Heating Burner active ? " . $viessmannApi->isHeatingBurnerActive() . "\n";//in php false bool is converted into empty string
 echo "Is Dhw mode active ? " . $viessmannApi->isDhwModeActive() . "\n";
 echo "Température de confort " . $viessmannApi->getComfortProgramTemperature() . "\n";
-echo "Température écho " . $viessmannApi->getEchoProgramTemperature() . "\n";
+echo "Température écho " . $viessmannApi->getEcoProgramTemperature() . "\n";
 echo "Température externe " . $viessmannApi->getExternalProgramTemperature() . "\n";
 echo "Température réduit " . $viessmannApi->getReducedProgramTemperature() . "\n";
 echo "Température supply " . $viessmannApi->getSupplyProgramTemperature() . "\n";

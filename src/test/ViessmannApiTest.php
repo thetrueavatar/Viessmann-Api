@@ -1,3 +1,6 @@
 <?php
 include __DIR__.'/bootstrap.php';
-echo $viessmannApi->setCurve("-5","1");
+//echo $viessmannApi->getActiveMode();
+$viessmannApi->getEcoProgramTemperature();
+//echo $viessmannApi->setReducedProgramTemperature("20");
+echo $viessmannApi->deActivateEcoProgram();
