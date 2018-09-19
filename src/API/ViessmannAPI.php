@@ -96,9 +96,13 @@ final class ViessmannAPI
         $curveEntity=Entity::fromArray(json_decode($this->formatData($this->viessmanAuthClient->readData($this->featureHeatingUrl."/".ViessmannAPI::HEATING_CURVE)),true));
         return $curveEntity->getProperty("slope")["value"]."";
     }
+
     public function getShift():string{
         $curveEntity=Entity::fromArray(json_decode($this->formatData($this->viessmanAuthClient->readData($this->featureHeatingUrl."/".ViessmannAPI::HEATING_CURVE)),true));
         return $curveEntity->getProperty("shift")["value"]."";
+    }
+    public function setCurve($shift,$slope){
+        $this->setRawJsonData(ViessmannAPI::HEATING_CURVE,"setCurve","{\"shift\":".$shift.",\"slope\":".$slope."}");
     }
     public function getActiveMode():string{
         $activeModeEntity=Entity::fromArray(json_decode( $this->formatData($this->viessmanAuthClient->readData($this->featureHeatingUrl."/".ViessmannAPI::HEATING_OPERATING_MODES)),true));
