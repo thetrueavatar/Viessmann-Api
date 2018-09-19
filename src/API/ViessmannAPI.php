@@ -79,10 +79,6 @@ final class ViessmannAPI
         return $this->viessmanAuthClient->readData($this->featureHeatingUrl);
     }
 
-    public function functionAddDhwSchedule($beginDate,$endDate){
-        $this->setRawJsonData(HEATING_DWH_SCHEDULE,"setSchedule",${});
-}
-
     public function getOutsideTemperature():string{
         $outsideTempEntity=$this->getEntity(ViessmannAPI::HEATING_TEMP_OUTSIDE);
         return $outsideTempEntity->getProperty("value")["value"]."";
