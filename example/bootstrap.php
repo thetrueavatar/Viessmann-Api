@@ -1,0 +1,10 @@
+<?php
+include 'phar://'.__DIR__.'/Viessmann-Api-0.2.1.phar/index.php';
+use Viessmann\API\ViessmannAPI;
+$credentials = file(__DIR__."/credentials.properties");
+$params = [
+    "user" => trim("$credentials[0]", "\n"),
+    "pwd" => trim("$credentials[1]", "\n"),
+    "uri" => "vicare://oauth-callback/everest"
+];
+$viessmannApi = new ViessmannAPI($params);
