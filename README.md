@@ -1,6 +1,6 @@
 Implémentation d'une interface pour récupérer les données exposées par le service Viessmann.
 
-Ce service accessible via autorisation OAUTH2 expose les données via l'approche HATEAOS implémentée par Siren dont la spécification est définie ici:
+Ce service accessible via autorisation OAUTH2 expose les données via l'approche HATEOAS implémentée par Siren dont la spécification est définie ici:
 
 https://github.com/kevinswiber/siren
 
