@@ -186,7 +186,7 @@ final class ViessmannAPI
     }
     public function setDhwTemperature($temperature){
         $data="{\"temperature\": $temperature}";
-        $this->viessmanAuthClient->setData($this->featureHeatingUrl."/".ViessmannAPI::HEATING_DWH_TEMPERATURE."/setTargetTemperature",$data);
+        $this->viessmanAuthClient->setRawJsonData(ViessmannAPI::HEATING_DWH_TEMPERATURE,"setTargetTemperature",$data);
     }
 
 
