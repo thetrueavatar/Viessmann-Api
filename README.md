@@ -11,4 +11,4 @@ Je suis novice en php(JAVAEE Dev) donc il se peut que je ne connaisse pas les co
 Je précise aussi que je partage mon dev perso mais ne souhaite pas faire un support intensif (pas le temps). Je ne donne donc pas de garantie sur la résolution de tel ou tel bug en terme de délais de résolution.
 De toute façon, cmme on dit dans l'open-source "Please contribute" ;-)
 
-Pour voir les explications sur l'utilisation voir wiki: https://github.com/thetrueavatar/Viessmann-Api/wiki ou le code de example/Main.php
+Pour voir les explications sur l'utilisation voir wiki: https://github.com/thetrueavatar/Viessmann-Api/wiki/french ou le code de example/Main.php
