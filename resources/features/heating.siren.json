@@ -1,0 +1,140 @@
+{
+  "actions": [],
+  "links": [
+    {
+      "rel": [
+        "self"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating"
+    },
+    {
+      "rel": [
+        "up"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#live-updates"
+      ],
+      "href": "/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating"
+    },
+    {
+      "rel": [
+        "via"
+      ],
+      "href": "https://staging-estrella.viessmann-platform.io/estrella/rest/v1.0/installations/demo/gateways/7123456789123456/devices/0/features/heating"
+    }
+  ],
+  "properties": {},
+  "entities": [
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#feature-meta-information"
+      ],
+      "properties": {
+        "apiVersion": 1,
+        "isEnabled": true,
+        "isReady": true,
+        "gatewayId": "7123456789123456",
+        "timestamp": "2017-12-22T12:19:05.613Z",
+        "uri": "/v1/gateways/7123456789123456/devices/0/features/heating",
+        "feature": "heating",
+        "deviceId": "0"
+      }
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#0",
+        "http://schema.viessmann.com/link-relations#feature-component"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.0"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#1",
+        "http://schema.viessmann.com/link-relations#feature-component"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.1"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#2",
+        "http://schema.viessmann.com/link-relations#feature-component"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.2"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#3",
+        "http://schema.viessmann.com/link-relations#feature-component"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.3"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#4",
+        "http://schema.viessmann.com/link-relations#feature-component"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.4"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#5",
+        "http://schema.viessmann.com/link-relations#feature-component"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.5"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#6",
+        "http://schema.viessmann.com/link-relations#feature-component"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.6"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#7",
+        "http://schema.viessmann.com/link-relations#feature-component"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.7"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#8",
+        "http://schema.viessmann.com/link-relations#feature-component"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.8"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#9",
+        "http://schema.viessmann.com/link-relations#feature-component"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.9"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#feature-components"
+      ],
+      "properties": {
+        "components": [
+          "boiler",
+          "burner",
+          "circuits",
+          "device",
+          "dhw",
+          "errors",
+          "sensors",
+          "service",
+          "controller",
+          "gas"
+        ]
+      }
+    }
+  ],
+  "class": [
+    "heating",
+    "feature"
+  ]
+}
