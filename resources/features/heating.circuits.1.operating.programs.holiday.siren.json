@@ -1,0 +1,91 @@
+{
+  "actions": [
+    {
+      "isExecutable": true,
+      "href": "http://0.0.0.0:8082/operational-data/installations/291/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.programs.holiday/schedule",
+      "method": "POST",
+      "title": "schedule",
+      "name": "schedule",
+      "fields": [
+        {
+          "name": "start",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "end",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "isExecutable": true,
+      "href": "http://0.0.0.0:8082/operational-data/installations/291/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.programs.holiday/unschedule",
+      "method": "POST",
+      "title": "unschedule",
+      "name": "unschedule"
+    }
+  ],
+  "links": [
+    {
+      "rel": [
+        "self"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/291/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.programs.holiday"
+    },
+    {
+      "rel": [
+        "up"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/291/gateways/7123456789123456/devices/0/features"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#live-updates"
+      ],
+      "href": "/operational-data/installations/291/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.programs.holiday"
+    },
+    {
+      "rel": [
+        "via"
+      ],
+      "href": "https://staging-estrella.viessmann-platform.io/estrella/rest/v1.0/installations/291/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.programs.holiday"
+    }
+  ],
+  "properties": {
+    "active": {
+      "value": false,
+      "type": "boolean"
+    },
+    "start": {
+      "value": "",
+      "type": "string"
+    },
+    "end": {
+      "value": "",
+      "type": "string"
+    }
+  },
+  "entities": [
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#feature-meta-information"
+      ],
+      "properties": {
+        "apiVersion": 1,
+        "isEnabled": true,
+        "isReady": true,
+        "gatewayId": "7123456789123456",
+        "timestamp": "2017-12-22T12:19:05.613Z",
+        "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.programs.holiday",
+        "feature": "heating.circuits.1.operating.programs.holiday",
+        "deviceId": "0"
+      }
+    }
+  ],
+  "class": [
+    "heating.circuits.1.operating.programs.holiday",
+    "feature"
+  ]
+}

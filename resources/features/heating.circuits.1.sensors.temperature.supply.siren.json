@@ -1,0 +1,60 @@
+{
+  "actions": [],
+  "links": [
+    {
+      "rel": [
+        "self"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/291/gateways/7123456789123456/devices/0/features/heating.circuits.1.sensors.temperature.supply"
+    },
+    {
+      "rel": [
+        "up"
+      ],
+      "href": "http://0.0.0.0:8082/operational-data/installations/291/gateways/7123456789123456/devices/0/features"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#live-updates"
+      ],
+      "href": "/operational-data/installations/291/gateways/7123456789123456/devices/0/features/heating.circuits.1.sensors.temperature.supply"
+    },
+    {
+      "rel": [
+        "via"
+      ],
+      "href": "https://staging-estrella.viessmann-platform.io/estrella/rest/v1.0/installations/291/gateways/7123456789123456/devices/0/features/heating.circuits.1.sensors.temperature.supply"
+    }
+  ],
+  "properties": {
+    "status": {
+      "value": "connected",
+      "type": "string"
+    },
+    "value": {
+      "value": 20,
+      "type": "number"
+    }
+  },
+  "entities": [
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#feature-meta-information"
+      ],
+      "properties": {
+        "apiVersion": 1,
+        "isEnabled": true,
+        "isReady": true,
+        "gatewayId": "7123456789123456",
+        "timestamp": "2017-12-22T12:19:05.613Z",
+        "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.circuits.1.sensors.temperature.supply",
+        "feature": "heating.circuits.1.sensors.temperature.supply",
+        "deviceId": "0"
+      }
+    }
+  ],
+  "class": [
+    "heating.circuits.1.sensors.temperature.supply",
+    "feature"
+  ]
+}
