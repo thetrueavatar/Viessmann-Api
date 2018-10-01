@@ -40,6 +40,8 @@ final class ViessmannAPI
     const HEATING_TIMEBASE="heating.service.timeBased";
     const HEATING_SENSORS="heating.sensors";
     const GATEWAY_DEVICES="gateway.devices";
+    const HEATING_CIRCUITS_0_CIRCULATION_SCHEDULE="heating.circuits.0.circulation.schedule";
+    const HEATING_CIRCUITS_0_HEATING_SCHEDULE="heating.circuits.0.heating.schedule";
     private $installationId;
     private $gatewayId;
     private $viessmanAuthClient;
