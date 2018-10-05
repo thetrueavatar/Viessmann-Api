@@ -11,6 +11,7 @@ final class ViessmannAPI
     const HEATING_CIRCUITS="heating.circuits";
     const HEATING_CIRCUITS_0="heating.circuits.0";
     const HEATING_CURVE="heating.circuits.0.heating.curve";
+    const ACTIVE_OPERATING_MODE="operating.modes.active";
     const HEATING_OPERATING_MODES="heating.circuits.0.operating.modes.active";
     const HEATING_DWH_MODE="heating.circuits.0.operating.modes.dhw";
     const HEATING_DWH_AND_HEATING_MODE="heating.circuits.0.operating.modes.dhwAndHeating";
@@ -105,8 +106,8 @@ final class ViessmannAPI
     public function setCurve($shift,$slope){
         $this->setRawJsonData(ViessmannAPI::HEATING_CURVE,"setCurve","{\"shift\":".$shift.",\"slope\":".$slope."}");
     }
-    public function getActiveMode():string{
-        $activeModeEntity=$this->getEntity(ViessmannAPI::HEATING_OPERATING_MODES);
+    public function getActiveMode($circuit=0):string{
+        $activeModeEntity=$this->getEntity(self::HEATING_CIRCUITS.".".$circuit.".".self::ACTIVE_OPERATING_MODE);
         return $activeModeEntity->getProperty("value")["value"]."";
 
     }
