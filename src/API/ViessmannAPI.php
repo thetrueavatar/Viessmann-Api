@@ -62,7 +62,7 @@ final class ViessmannAPI
         $this->installationId=$modelInstallationEntity->getProperty('id');
         $modelDevice=$modelInstallationEntity->getEntities()[0];
         $this->gatewayId=$modelDevice->getProperty('serial');
-        $this->featureHeatingUrl="operational-data/installations/".$this->installationId."/gateways/".$this->gatewayId."/devices/0/features";
+        $this->featureHeatingUrl="operational-data/installations/".$this->installationId."/gateways/".$this->gatewayId."/devices/".($params["deviceId"]?? 0)."/features";
 
     }
 
