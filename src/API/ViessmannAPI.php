@@ -110,7 +110,7 @@ final class ViessmannAPI
 
     }
     public function setActiveMode($mode,$circuitId=NULL){
-        $this->setRawJsonData($this->buildFeature(self::HEATING_CIRCUITS,$circuitId,self::HEATING_OPERATING_MODES),"setMode","{\"mode\":".$mode."}");
+        $this->setRawJsonData($this->buildFeature(self::HEATING_CIRCUITS,$circuitId,self::HEATING_OPERATING_MODES),"setMode","{\"mode\":\"".$mode."\"}");
     }
     public function getActiveProgram($circuitId=NULL):string{
         $activeProgramEntity=$this->getEntity($this->buildFeature(self::HEATING_CIRCUITS,$circuitId,self::HEATING_PROGRAM_ACTIVE));
