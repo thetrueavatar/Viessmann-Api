@@ -1,5 +1,5 @@
 <?php
-include __DIR__.'/../index.php';
+include 'phar://'.__DIR__.'/Viessmann-Api-0.3-SNAPSHOT.phar/index.php';
 use Viessmann\API\ViessmannAPI;
 $credentials = file(__DIR__."/credentials.properties");
 $params = [
