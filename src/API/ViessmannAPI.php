@@ -2,14 +2,14 @@
 
 namespace Viessmann\API;
 
-use TomPHP\Siren\{ActionBuilder, Entity, Action};
+use TomPHP\Siren\Entity;
 use Viessmann\Oauth\ViessmannOauthClient;
+
 final class ViessmannAPI
 {
     const BOILER_TEMP="heating.boiler.sensors.temperature.main";
     const HEATING_BURNER="heating.burner";
     const HEATING_CIRCUITS="heating.circuits";
-    const HEATING_CIRCUITS_0="heating.circuits.0";
     const HEATING_CURVE="heating.curve";
     const ACTIVE_OPERATING_MODE="operating.modes.active";
     const HEATING_OPERATING_MODES="operating.modes.active";
@@ -38,9 +38,6 @@ final class ViessmannAPI
     const HEATING_GAS_CONSUMPTION_DHW="heating.gas.consumption.dhw";
     const HEATING_TEMP_OUTSIDE="heating.sensors.temperature.outside";
     const HEATING_SENSORS_TEMPERATURE="heating.sensors.temperature";
-    const HEATING_TIMEBASE="heating.service.timeBased";
-    const HEATING_SENSORS="heating.sensors";
-    const GATEWAY_DEVICES="gateway.devices";
     const HEATING_CIRCUITS_0_CIRCULATION_SCHEDULE="circulation.schedule";
     const HEATING_CIRCUITS_0_HEATING_SCHEDULE="heating.schedule";
     private $installationId;
@@ -85,11 +82,11 @@ final class ViessmannAPI
     }
 
     public function getOutsideTemperature():string{
-        $outsideTempEntity=$this->getEntity(self::HEATING_TEMP_OUTSIDE);
+        $outsideTempEntity = $this->getEntity(ViessmannFeature::HEATING_SENSORS_TEMPERATURE_OUTSIDE);
         return $outsideTempEntity->getProperty("value")["value"]."";
     }
     public function getBoilerTemperature():string{
-        $boilerTempEntity=$this->getEntity(self::BOILER_TEMP);
+        $boilerTempEntity = $this->getEntity(ViessmannFeature::HEATING_BOILER_SENSORS_TEMPERATURE_MAIN);
         return $boilerTempEntity->getProperty("value")["value"]."";
     }
     public function getSlope($circuitId=NULL):string{
@@ -118,7 +115,7 @@ final class ViessmannAPI
     }
 
     public function isHeatingBurnerActive(): bool {
-        $heatingBurnerEntity=$this->getEntity(self::HEATING_BURNER);
+        $heatingBurnerEntity = $this->getEntity(ViessmannFeature::HEATING_BURNER);
         return $heatingBurnerEntity->getProperty("active")["value"];
     }
 
@@ -148,7 +145,7 @@ final class ViessmannAPI
         return $externalProgramEntity->getProperty("temperature")["value"]."";
     }
     public function setExternalProgramTemperature($temperature,$circuitId=NULL){
-        $this->setRawJsonData(self::HEATING_PROGRAM_REDUCED,"setTemperature","{\"targetTemperature\":".$temperature."}");
+        $this->setRawJsonData(ViessmannFeature::HEATING_PROGRAM_REDUCED, "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
     }
     public function getNormalProgramTemperature($circuitId=NULL):string{
         $normalProgramEntity=$this->getEntity($this->buildFeature(self::HEATING_CIRCUITS,$circuitId,self::HEATING_PROGRAM_NORMAL));
@@ -187,7 +184,7 @@ final class ViessmannAPI
     }
     public function setDhwTemperature($temperature){
         $data="{\"temperature\": $temperature}";
-        $this->viessmanAuthClient->setRawJsonData(self::HEATING_DWH_TEMPERATURE,"setTargetTemperature",$data);
+        $this->viessmanAuthClient->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
     }
     private function buildFeature($prefix,$circuitId,$feature){
         if ($circuitId==NULL){

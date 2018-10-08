@@ -1,7 +1,9 @@
 <?php
 include __DIR__.'/bootstrap.php';
+
 use Viessmann\API\ViessmannAPI;
-echo $viessmannApi->getFeatures();
+
+echo $viessmannApi->getFeatures() . "\n";
 echo "Température extérieure " . $viessmannApi->getOutsideTemperature() . "\n";
 echo "Température boiler " . $viessmannApi->getBoilerTemperature() . "\n";
 echo "Pente " . $viessmannApi->getSlope() . "\n";
