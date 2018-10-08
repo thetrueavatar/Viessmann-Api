@@ -185,11 +185,7 @@ final class ViessmannAPI
 
     public function getRawJsonData($resources): string
     {
-        try {
             return $this->viessmanAuthClient->readData($this->featureHeatingUrl . "/" . $resources);
-        } catch (TokenResponseException $e) {
-            throw new \ViessmannApiException("Erreur lors de l'appel. Si 400 bad Request alors mauvais structure de données. Si 502, souvent une erreur de format donnée(20.0 au lieu de 20,...)", 0, $e);
-        }
     }
 
     private function getEntity($resources): Entity
@@ -197,18 +193,18 @@ final class ViessmannAPI
         return Entity::fromArray(json_decode($this->getRawJsonData($resources), true));
     }
 
-    public function setRawJsonData($feature, $action, $data)
-    {
-        $this->viessmanAuthClient->setData($this->featureHeatingUrl . "/" . $feature . "/" . $action, $data);
-    }
+
 
     public function setDhwTemperature($temperature)
     {
         $data = "{\"temperature\": $temperature}";
-        $this->viessmanAuthClient->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
+        $this->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
     }
 
-
+    public function setRawJsonData($feature, $action, $data)
+    {
+        $this->viessmanAuthClient->setData($this->featureHeatingUrl . "/" . $feature . "/" . $action, $data);
+    }
     private function buildFeature($circuitId, $feature)
     {
         if ($circuitId == NULL) {

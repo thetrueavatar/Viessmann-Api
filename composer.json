@@ -4,7 +4,9 @@
         "psr/link": "^1.0",
         "phpunit/phpunit": "^7.3.2",
         "lusitanian/oauth": "v0.8.11",
-        "tomphp/siren": "v0.1.0"
+      "tomphp/siren": "v0.1.0",
+      "ext-json": "*",
+      "ext-curl": "*"
     },
     "license": "MIT",
     "authors": [

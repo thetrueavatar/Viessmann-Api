@@ -3,12 +3,12 @@ namespace Viessmann\Oauth;
 
 use OAuth\Common\Consumer\CredentialsInterface;
 use OAuth\Common\Http\Client\ClientInterface;
+use OAuth\Common\Http\Exception\TokenResponseException;
+use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Uri\UriInterface;
 use OAuth\Common\Storage\TokenStorageInterface;
 use OAuth\OAuth2\Service\AbstractService;
 use OAuth\OAuth2\Token\StdOAuth2Token;
-use OAuth\Common\Http\Exception\TokenResponseException;
-use OAuth\Common\Http\Uri\Uri;
 
 /**
  * Bootstrap the example
@@ -50,13 +50,7 @@ final class ViessmannOauthService extends AbstractService {
     {
         return new Uri($this->token_url);
     }
-    /**
-     * {@inheritdoc}
-     */
-    protected function getAuthorizationMethod()
-    {
-        return static::AUTHORIZATION_METHOD_HEADER_BEARER;
-    }
+
     /**
      * {@inheritdoc}
      */

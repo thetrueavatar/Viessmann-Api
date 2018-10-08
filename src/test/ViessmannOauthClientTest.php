@@ -10,7 +10,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/../bootstrap.php';
 
 use PHPUnit\Framework\TestCase;
-use Viessmann\API\ViessmannAPI;
+use Viessmann\API\ViessmannFeature;
 use Viessmann\Oauth\ViessmannOauthClient;
 
 class ViessmannOauthClientTest extends TestCase
@@ -31,11 +31,11 @@ class ViessmannOauthClientTest extends TestCase
             "uri" => "vicare://oauth-callback/everest"
         ];
 
-        $viessmannAuthClient = new ViessmannOauthClient($this->params);
+        $viessmannAuthClient = new ViessmannOauthClient($params);
         $code = $viessmannAuthClient->getCode();
         self::assertNotNull($viessmannAuthClient->getToken($code));
 //        self::assertNotNull($viessmannAuthClient->request("general-management/installations?expanded=true&"));
-        echo $viessmannAuthClient->readData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/".ViessmannAPI::HEATING_DWH_TEMPERATURE);
+        echo $viessmannAuthClient->readData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/" . ViessmannFeature::HEATING_DHW_TEMPERATURE);
     }
     public function testWriteData(){
         $credentials = file("../../resources/credentials.properties");
@@ -49,6 +49,6 @@ class ViessmannOauthClientTest extends TestCase
         $code = $viessmannAuthClient->getCode();
         self::assertNotNull($viessmannAuthClient->getToken($code));
         $data="{\"temperature\": 58.0}";
-        echo $viessmannAuthClient->setData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/".ViessmannAPI::HEATING_DWH_TEMPERATURE."/setTargetTemperature",$data);
+        echo $viessmannAuthClient->setData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/" . ViessmannFeature::HEATING_DHW_TEMPERATURE . "/setTargetTemperature", $data);
     }
 }
