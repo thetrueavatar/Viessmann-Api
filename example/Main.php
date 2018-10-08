@@ -1,5 +1,5 @@
 <?php
-include __DIR__.'/bootstrap.php';
+include __DIR__ . '/bootstrap.php';
 
 use Viessmann\API\ViessmannFeature;
 
@@ -19,5 +19,5 @@ echo "Température réduit " . $viessmannApi->getReducedProgramTemperature() . "
 echo "Température supply " . $viessmannApi->getSupplyProgramTemperature() . "\n";
 echo "Est en veille ? " . $viessmannApi->isInStandbyMode() . "\n";
 echo "Appelle resources " . $viessmannApi->getRawJsonData(ViessmannFeature::HEATING_CIRCUITS_0_OPERATING_PROGRAMS_ACTIVE) . "\n";
-#echo "écriture température ecs avec json ".$viessmanApi->setRawJsonData(ViessmannAPI::HEATING_DWH_TEMPERATURE,"setTargetTemperature","{\"temperature\":60.0}"). "\n";
+#echo "écriture température ecs avec json ".$viessmanApi->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE,"setTargetTemperature","{\"temperature\":60.0}"). "\n";
 #echo "écriture température ecs ".$viessmanApi->setDhwTemperature("58.0"). "\n";
