@@ -48,9 +48,7 @@ final class ViessmannAPI
         $modelDevice = $modelInstallationEntity->getEntities()[0];
         $this->gatewayId = $modelDevice->getProperty('serial');
         $this->featureHeatingUrl = "operational-data/installations/" . $this->installationId . "/gateways/" . $this->gatewayId . "/devices/" . ($params["deviceId"] ?? 0) . "/features";
-
     }
-
 
     public function getInstallationId(): string
     {
@@ -72,26 +70,22 @@ final class ViessmannAPI
 
     public function getOutsideTemperature(): string
     {
-        $outsideTempEntity = $this->getEntity(ViessmannFeature::HEATING_SENSORS_TEMPERATURE_OUTSIDE);
-        return $outsideTempEntity->getProperty("value")["value"];
+        return $this->getEntity(ViessmannFeature::HEATING_SENSORS_TEMPERATURE_OUTSIDE)->getProperty("value")["value"];
     }
 
     public function getBoilerTemperature(): string
     {
-        $boilerTempEntity = $this->getEntity(ViessmannFeature::HEATING_BOILER_SENSORS_TEMPERATURE_MAIN);
-        return $boilerTempEntity->getProperty("value")["value"];
+        return $this->getEntity(ViessmannFeature::HEATING_BOILER_SENSORS_TEMPERATURE_MAIN)->getProperty("value")["value"];
     }
 
     public function getSlope($circuitId = NULL): string
     {
-        $curveEntity = $this->getEntity($this->buildFeature($circuitId, self::HEATING_CURVE));
-        return $curveEntity->getProperty("slope")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::HEATING_CURVE))->getProperty("slope")["value"];
     }
 
     public function getShift($circuitId = NULL): string
     {
-        $curveEntity = $this->getEntity($this->buildFeature($circuitId, self::HEATING_CURVE));
-        return $curveEntity->getProperty("shift")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::HEATING_CURVE))->getProperty("shift")["value"];
     }
 
     public function setCurve($shift, $slope, $circuitId = NULL)
@@ -101,9 +95,7 @@ final class ViessmannAPI
 
     public function getActiveMode($circuitId = NULL): string
     {
-        $activeModeEntity = $this->getEntity($this->buildFeature($circuitId, self::ACTIVE_OPERATING_MODE));
-        return $activeModeEntity->getProperty("value")["value"];
-
+        return $this->getEntity($this->buildFeature($circuitId, self::ACTIVE_OPERATING_MODE))->getProperty("value")["value"];
     }
 
     public function setActiveMode($mode, $circuitId = NULL)
@@ -113,26 +105,22 @@ final class ViessmannAPI
 
     public function getActiveProgram($circuitId = NULL): string
     {
-        $activeProgramEntity = $this->getEntity($this->buildFeature($circuitId, self::ACTIVE_PROGRAM));
-        return $activeProgramEntity->getProperty("value")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::ACTIVE_PROGRAM))->getProperty("value")["value"];
     }
 
     public function isHeatingBurnerActive(): bool
     {
-        $heatingBurnerEntity = $this->getEntity(ViessmannFeature::HEATING_BURNER);
-        return $heatingBurnerEntity->getProperty("active")["value"];
+        return $this->getEntity(ViessmannFeature::HEATING_BURNER)->getProperty("active")["value"];
     }
 
     public function isDhwModeActive($circuitId = NULL): bool
     {
-        $dhwModeActiveEntity = $this->getEntity($this->buildFeature($circuitId, self::DHW_MODE));
-        return $dhwModeActiveEntity->getProperty("active")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::DHW_MODE))->getProperty("active")["value"];
     }
 
     public function getComfortProgramTemperature($circuitId = NULL): string
     {
-        $comfortProgramEntity = $this->getEntity($this->buildFeature($circuitId, self::COMFORT_PROGRAM));
-        return $comfortProgramEntity->getProperty("temperature")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::COMFORT_PROGRAM))->getProperty("temperature")["value"];
     }
 
     public function setComfortProgramTemperature($temperature, $circuitId = NULL)
@@ -142,8 +130,7 @@ final class ViessmannAPI
 
     public function getEcoProgramTemperature($circuitId = NULL): string
     {
-        $ecoProgramEntity = $this->getEntity($this->buildFeature($circuitId, self::ECO_PROGRAM));
-        return $ecoProgramEntity->getProperty("temperature")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::ECO_PROGRAM))->getProperty("temperature")["value"];
     }
 
     public function activateEcoProgram($temperature, $circuitId = NULL)
@@ -158,19 +145,17 @@ final class ViessmannAPI
 
     public function getExternalProgramTemperature($circuitId = NULL): string
     {
-        $externalProgramEntity = $this->getEntity($this->buildFeature($circuitId, self::EXTERNAL_PROGRAM));
-        return $externalProgramEntity->getProperty("temperature")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::EXTERNAL_PROGRAM))->getProperty("temperature")["value"];
     }
 
     public function setExternalProgramTemperature($temperature, $circuitId = NULL)
     {
-        $this->setRawJsonData(self::HEATING_PROGRAM_REDUCED, "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
+        $this->setRawJsonData($this->buildFeature($circuitId, self::REDUCED_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
     }
 
     public function getNormalProgramTemperature($circuitId = NULL): string
     {
-        $normalProgramEntity = $this->getEntity($this->buildFeature($circuitId, self::NORMAL_PROGRAM));
-        return $normalProgramEntity->getProperty("temperature")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::NORMAL_PROGRAM))->getProperty("temperature")["value"];
     }
 
     public function setNormalProgramTemperature($temperature, $circuitId = NULL)
@@ -180,8 +165,7 @@ final class ViessmannAPI
 
     public function getReducedProgramTemperature($circuitId = NULL): string
     {
-        $reducedProgramEntity = $this->getEntity($this->buildFeature($circuitId, self::REDUCED_PROGRAM));
-        return $reducedProgramEntity->getProperty("temperature")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::REDUCED_PROGRAM))->getProperty("temperature")["value"];
     }
 
     public function setReducedProgramTemperature($temperature, $circuitId = NULL)
@@ -191,14 +175,12 @@ final class ViessmannAPI
 
     public function isInStandbyMode($circuitId = NULL): bool
     {
-        $standbyProgramEntity = $this->getEntity($this->buildFeature($circuitId, self::STANDBY_PROGRAM));
-        return $standbyProgramEntity->getProperty("active")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::STANDBY_PROGRAM))->getProperty("active")["value"];
     }
 
     public function getSupplyProgramTemperature($circuitId = NULL): string
     {
-        $supplyProgramEntity = $this->getEntity($this->buildFeature($circuitId, self::SUPPLY_PROGRAM));
-        return $supplyProgramEntity->getProperty("value")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::SUPPLY_PROGRAM))->getProperty("value")["value"];
     }
 
     public function getRawJsonData($resources): string
