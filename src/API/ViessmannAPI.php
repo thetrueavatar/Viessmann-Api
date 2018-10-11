@@ -37,7 +37,7 @@ final class ViessmannAPI
      */
     public function __construct($params)
     {
-        $this->circuitId = $param["circuitId"] ?? 0;
+        $this->circuitId = $params["circuitId"] ?? 0;
         $this->viessmanAuthClient = new ViessmannOauthClient($params);
         $code = $this->viessmanAuthClient->getCode();
         $this->viessmanAuthClient->getToken($code);
