@@ -10,6 +10,8 @@ final class ViessmannAPI
     const HEATING_BURNER = "heating.burner";
     const HEATING_CIRCUITS = "heating.circuits";
     const HEATING_CURVE = "heating.curve";
+    const SENSORS_TEMPERATURE_ROOM = "sensors.temperature.room";
+    const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
     const ACTIVE_OPERATING_MODE = "operating.modes.active";
     const OPERATING_MODES = "operating.modes.active";
     const DHW_MODE = "operating.modes.dhw";
@@ -76,6 +78,16 @@ final class ViessmannAPI
     public function getBoilerTemperature(): string
     {
         return $this->getEntity(ViessmannFeature::HEATING_BOILER_SENSORS_TEMPERATURE_MAIN)->getProperty("value")["value"];
+    }
+
+    public function getRoomTemperature($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_ROOM))->getProperty("value")["value"];
+    }
+
+    public function getSupplyTemperature($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_SUPPLY))->getProperty("value")["value"];
     }
 
     public function getSlope($circuitId = NULL): string
