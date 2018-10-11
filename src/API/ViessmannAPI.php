@@ -195,6 +195,11 @@ final class ViessmannAPI
         return $this->getEntity($this->buildFeature($circuitId, self::SUPPLY_PROGRAM))->getProperty("value")["value"];
     }
 
+    public function getHotWaterStorageTemperature($circuit = NULL): string
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_HOTWATERSTORAGE)->getProperty("value")["value"];
+    }
+
     public function getRawJsonData($resources): string
     {
             return $this->viessmanAuthClient->readData($this->featureHeatingUrl . "/" . $resources);
