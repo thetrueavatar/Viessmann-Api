@@ -2,6 +2,7 @@
 
 namespace Viessmann\API;
 
+use OAuth\Common\Http\Exception\TokenResponseException;
 use TomPHP\Siren\Entity;
 use Viessmann\Oauth\ViessmannOauthClient;
 
@@ -202,14 +203,21 @@ final class ViessmannAPI
 
     public function getRawJsonData($resources): string
     {
-            return $this->viessmanAuthClient->readData($this->featureHeatingUrl . "/" . $resources);
+        try {
+            $data = json_decode($this->viessmanAuthClient->readData($this->featureHeatingUrl . "/" . $resources), true);
+            if ($data["statusCode"] != NULL) {
+                throw new ViessmannApiException("Unable to get data for feature " . $resources . " on url " . $this->featureHeatingUrl . "\nReason: " . $data["message"], 1);
+            }
+            return $data;
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("Unable to get data for url " . $this->featureHeatingUrl . "/" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
+        }
     }
 
     private function getEntity($resources): Entity
     {
         return Entity::fromArray(json_decode($this->getRawJsonData($resources), true));
     }
-
 
 
     public function setDhwTemperature($temperature)
@@ -222,6 +230,7 @@ final class ViessmannAPI
     {
         $this->viessmanAuthClient->setData($this->featureHeatingUrl . "/" . $feature . "/" . $action, $data);
     }
+
     private function buildFeature($circuitId, $feature)
     {
         if ($circuitId == NULL) {

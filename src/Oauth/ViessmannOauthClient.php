@@ -9,9 +9,10 @@
 namespace Viessmann\Oauth;
 
 
+use OAuth\Common\Consumer\Credentials;
+use OAuth\Common\Http\Client\CurlClient;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Storage\Session;
-use OAuth\Common\Consumer\Credentials;
 use OAuth\ServiceFactory;
 
 class ViessmannOauthClient
@@ -39,16 +40,19 @@ class ViessmannOauthClient
     {   $this->user=$params["user"];
         $this->pwd=$params["pwd"];
         $this->serviceFactory=new ServiceFactory();
+        $httpClient = new CurlClient();
+        $this->serviceFactory->setHttpClient($httpClient);
         $this->serviceFactory->registerService("Viessmann","Viessmann\Oauth\ViessmannOauthService");
         $this->storage=new Session();
         $this->credentials = new Credentials("" . self::CONSUMERID, "" . self::CONSUMERSECRET, self::VICARE_OAUTH_CALLBACK_EVEREST);
         $this->viessmannOauthService=$this->serviceFactory->createService('Viessmann', $this->credentials,$this->storage, $this->scope,new Uri('https://api.viessmann-platform.io'));
     }
 
-     function getToken($code){
-            return $this->viessmannOauthService->requestAccessToken($code);
+    function getToken($code){
+        return $this->viessmannOauthService->requestAccessToken($code);
 
     }
+
     public function getCode():string
     {
         $client_id = self::CONSUMERID;
