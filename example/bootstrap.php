@@ -1,6 +1,8 @@
 <?php
 include 'phar://'.__DIR__.'/Viessmann-Api-0.3-SNAPSHOT.phar/index.php';
-use Viessmann\API\ViessmannAPI;
+
+use Viessmann\API\{ViessmannAPI, ViessmannApiException};
+
 $credentials = file(__DIR__."/credentials.properties");
 $params = [
     "user" => trim("$credentials[0]", "\n"),
@@ -8,4 +10,9 @@ $params = [
     "deviceId" => "0",
     "circuitId"=>"0"
 ];
+try {
 $viessmannApi = new ViessmannAPI($params);
+} catch (ViessmannApiException $e) {
+    echo $e->getMessage();
+    exit();
+}

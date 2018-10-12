@@ -14,6 +14,7 @@ use OAuth\Common\Http\Client\CurlClient;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Storage\Session;
 use OAuth\ServiceFactory;
+use Viessmann\API\ViessmannApiException;
 
 class ViessmannOauthClient
 {
@@ -75,8 +76,11 @@ class ViessmannOauthClient
         curl_close($curl);
         $matches = array();
         $pattern = '/code=(.*)"/';
-        preg_match_all($pattern, $response, $matches);
-        return ($matches[1][0]);
+        if (preg_match_all($pattern, $response, $matches)) {
+            return ($matches[1][0]);
+        } else {
+            throw new ViessmannApiException("Error during authentication process. Please review your username/password");
+        }
     }
 
     public function readData($resourceUrl):string

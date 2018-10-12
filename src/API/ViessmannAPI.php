@@ -203,20 +203,21 @@ final class ViessmannAPI
 
     public function getRawJsonData($resources): string
     {
-        try {
-            $data = json_decode($this->viessmanAuthClient->readData($this->featureHeatingUrl . "/" . $resources), true);
-            if ($data["statusCode"] != NULL) {
-                throw new ViessmannApiException("Unable to get data for feature " . $resources . " on url " . $this->featureHeatingUrl . "\nReason: " . $data["message"], 1);
-            }
-            return $data;
-        } catch (TokenResponseException $e) {
-            throw new ViessmannApiException("Unable to get data for url " . $this->featureHeatingUrl . "/" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
-        }
+        return $this->viessmanAuthClient->readData($this->featureHeatingUrl . "/" . $resources);
     }
 
     private function getEntity($resources): Entity
     {
-        return Entity::fromArray(json_decode($this->getRawJsonData($resources), true));
+        try {
+            $data = json_decode($this->getRawJsonData($resources), true);
+            if (isset($data["statusCode"])) {
+                throw new ViessmannApiException("Unable to get data for feature " . $resources . " on url " . $this->featureHeatingUrl . "\nReason: " . $data["message"], 1);
+            }
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("Unable to get data for url " . $this->featureHeatingUrl . "/" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
+        }
+        return Entity::fromArray($data, true);
+
     }
 
 

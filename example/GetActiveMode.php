@@ -4,7 +4,7 @@ include __DIR__.'/bootstrap.php';
 use Viessmann\API\ViessmannApiException;
 
 try {
-    echo "Active mode for default circuit(): " . $viessmannApi->getActiveMode(5) . "\n";
+    echo "Active mode for default circuit(): " . $viessmannApi->getActiveMode(1) . "\n";
 } catch (ViessmannApiException $e) {
     echo "Message: " . $e->getMessage() . "\n";
     echo "Code: " . $e->getCode() . "\n";
