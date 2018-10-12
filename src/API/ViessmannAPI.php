@@ -203,19 +203,21 @@ final class ViessmannAPI
 
     public function getRawJsonData($resources): string
     {
-        return $this->viessmanAuthClient->readData($this->featureHeatingUrl . "/" . $resources);
+        try {
+            return $this->viessmanAuthClient->readData($this->featureHeatingUrl . "/" . $resources);
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("Unable to get data for url " . $this->featureHeatingUrl . "/" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
+        }
     }
 
     private function getEntity($resources): Entity
     {
-        try {
-            $data = json_decode($this->getRawJsonData($resources), true);
+
+        $data = json_decode($this->getRawJsonData($resources), true);
             if (isset($data["statusCode"])) {
                 throw new ViessmannApiException("Unable to get data for feature " . $resources . " on url " . $this->featureHeatingUrl . "\nReason: " . $data["message"], 1);
             }
-        } catch (TokenResponseException $e) {
-            throw new ViessmannApiException("Unable to get data for url " . $this->featureHeatingUrl . "/" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
-        }
+
         return Entity::fromArray($data, true);
 
     }
