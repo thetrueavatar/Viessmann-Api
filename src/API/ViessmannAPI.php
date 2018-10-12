@@ -2,70 +2,60 @@
 
 namespace Viessmann\API;
 
-use TomPHP\Siren\{ActionBuilder, Entity, Action};
+use OAuth\Common\Http\Exception\TokenResponseException;
+use TomPHP\Siren\Entity;
 use Viessmann\Oauth\ViessmannOauthClient;
+
 final class ViessmannAPI
 {
-    const BOILER_TEMP="heating.boiler.sensors.temperature.main";
-    const HEATING_BURNER="heating.burner";
-    const HEATING_CIRCUITS="heating.circuits";
-    const HEATING_CIRCUITS_0="heating.circuits.0";
-    const HEATING_CURVE="heating.circuits.0.heating.curve";
-    const HEATING_OPERATING_MODES="heating.circuits.0.operating.modes.active";
-    const HEATING_DWH_MODE="heating.circuits.0.operating.modes.dhw";
-    const HEATING_DWH_AND_HEATING_MODE="heating.circuits.0.operating.modes.dhwAndHeating";
-    const HEATING_FORCED_NORMAL_MODE="heating.circuits.0.operating.modes.forcedNormal";
-    const HEATING_FORCED_REDUCTED_MODE="heating.circuits.0.operating.modes.forcedReduced";
-    const HEATING_STANDY_MODE="heating.circuits.0.operating.modes.standby";
-    const HEATING_PROGRAM_ACTIVE="heating.circuits.0.operating.programs.active";
-    const HEATING_PROGRAM_COMFORT="heating.circuits.0.operating.programs.comfort";
-    const HEATING_PROGRAM_ECO="heating.circuits.0.operating.programs.eco";
-    const HEATING_PROGRAM_EXTERNAL="heating.circuits.0.operating.programs.external";
-    const HEATING_PROGRAM_NORMAL="heating.circuits.0.operating.programs.normal";
-    const HEATING_PROGRAM_REDUCED="heating.circuits.0.operating.programs.reduced";
-    const HEATING_PROGRAM_STANDBY="heating.circuits.0.operating.programs.standby";
-    const HEATING_PROGRAM_SUPPLY="heating.circuits.0.sensors.temperature.supply";
-    const HEATING_TIME_OFFSET="heating.device.time.offset";
-    const HEATING_DWH="heating.dhw";
-    const HEATING_CIRCUITS_1_DHW="heating.circuits.1.dhw";
-    const HEATING_DWH_TEMPERATURE="heating.dhw.temperature";
-    const HEATING_DWH_SENSORS="heating.dhw.sensors";
-    const HEATING_DWH_SENSORS_TEMPERATURE="heating.dhw.sensors.temperature";
-    const HEATING_DWH_SCHEDULE="heating.dhw.schedule";
-    const HEATING_DWH_TEMPERATURE_HOTWATER_STORAGE="heating.dhw.sensors.temperature.hotWaterStorage";
-    const HEATING_DWH_TEMPERATURE_OUTLET="heating.dhw.sensors.temperature.outlet";
-    const HEATING_GAS_CONSUMPTION_DHW="heating.gas.consumption.dhw";
-    const HEATING_TEMP_OUTSIDE="heating.sensors.temperature.outside";
-    const HEATING_SENSORS_TEMPERATURE="heating.sensors.temperature";
-    const HEATING_TIMEBASE="heating.service.timeBased";
-    const HEATING_SENSORS="heating.sensors";
-    const GATEWAY_DEVICES="gateway.devices";
+    const HEATING_BURNER = "heating.burner";
+    const HEATING_CIRCUITS = "heating.circuits";
+    const HEATING_CURVE = "heating.curve";
+    const SENSORS_TEMPERATURE_ROOM = "sensors.temperature.room";
+    const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
+    const ACTIVE_OPERATING_MODE = "operating.modes.active";
+    const OPERATING_MODES = "operating.modes.active";
+    const DHW_MODE = "operating.modes.dhw";
+    const DHW_AND_HEATING_MODE = "operating.modes.dhwAndHeating";
+    const FORCED_NORMAL_MODE = "operating.modes.forcedNormal";
+    const FORCED_REDUCTED_MODE = "operating.modes.forcedReduced";
+    const STANDY_MODE = "operating.modes.standby";
+    const ACTIVE_PROGRAM = "operating.programs.active";
+    const COMFORT_PROGRAM = "operating.programs.comfort";
+    const ECO_PROGRAM = "operating.programs.eco";
+    const EXTERNAL_PROGRAM = "operating.programs.external";
+    const NORMAL_PROGRAM = "operating.programs.normal";
+    const REDUCED_PROGRAM = "operating.programs.reduced";
+    const STANDBY_PROGRAM = "operating.programs.standby";
+    const SUPPLY_PROGRAM = "sensors.temperature.supply";
+    const CIRCULATION_SCHEDULE = "circulation.schedule";
     private $installationId;
     private $gatewayId;
     private $viessmanAuthClient;
     private $featureHeatingUrl;
+    private $circuitId;
 
     /**
      * ViessmannAPI constructor.
      */
     public function __construct($params)
     {
-        $this->viessmanAuthClient=new ViessmannOauthClient($params);
-        $code=$this->viessmanAuthClient->getCode();
+        $this->circuitId = $params["circuitId"] ?? 0;
+        $this->viessmanAuthClient = new ViessmannOauthClient($params);
+        $code = $this->viessmanAuthClient->getCode();
         $this->viessmanAuthClient->getToken($code);
-        $installationJson=$this->viessmanAuthClient->readData("general-management/installations");
-        $installationEntity=Entity::fromArray(json_decode($installationJson,true));
-        $modelInstallationEntity=$installationEntity->getEntities()[0];
-        $this->installationId=$modelInstallationEntity->getProperty('id');
-        $modelDevice=$modelInstallationEntity->getEntities()[0];
-        $this->gatewayId=$modelDevice->getProperty('serial');
-        $this->featureHeatingUrl="operational-data/installations/".$this->installationId."/gateways/".$this->gatewayId."/devices/0/features";
-
+        $installationJson = $this->viessmanAuthClient->readData("general-management/installations");
+        $installationEntity = Entity::fromArray(json_decode($installationJson, true));
+        $modelInstallationEntity = $installationEntity->getEntities()[0];
+        $this->installationId = $modelInstallationEntity->getProperty('id');
+        $modelDevice = $modelInstallationEntity->getEntities()[0];
+        $this->gatewayId = $modelDevice->getProperty('serial');
+        $this->featureHeatingUrl = "operational-data/installations/" . $this->installationId . "/gateways/" . $this->gatewayId . "/devices/" . ($params["deviceId"] ?? 0) . "/features";
     }
 
-
-    public function getInstallationId():string{
-        return $this->installationId."";
+    public function getInstallationId(): string
+    {
+        return $this->installationId;
     }
 
     /**
@@ -73,117 +63,181 @@ final class ViessmannAPI
      */
     public function getGatewayId(): string
     {
-        return $this->gatewayId."";
+        return $this->gatewayId;
     }
-    public function getFeatures():String{
+
+    public function getFeatures(): String
+    {
         return $this->viessmanAuthClient->readData($this->featureHeatingUrl);
     }
 
-    public function getOutsideTemperature():string{
-        $outsideTempEntity=$this->getEntity(ViessmannAPI::HEATING_TEMP_OUTSIDE);
-        return $outsideTempEntity->getProperty("value")["value"]."";
-    }
-    public function getBoilerTemperature():string{
-        $boilerTempEntity=$this->getEntity(ViessmannAPI::BOILER_TEMP);
-        return $boilerTempEntity->getProperty("value")["value"]."";
-    }
-    public function getSlope():string{
-        $curveEntity=$this->getEntity(ViessmannAPI::HEATING_CURVE);
-        return $curveEntity->getProperty("slope")["value"]."";
+    public function getOutsideTemperature(): string
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SENSORS_TEMPERATURE_OUTSIDE)->getProperty("value")["value"];
     }
 
-    public function getShift():string{
-        $curveEntity=$this->getEntity(ViessmannAPI::HEATING_CURVE);
-        return $curveEntity->getProperty("shift")["value"]."";
-    }
-    public function setCurve($shift,$slope){
-        $this->setRawJsonData(ViessmannAPI::HEATING_CURVE,"setCurve","{\"shift\":".$shift.",\"slope\":".$slope."}");
-    }
-    public function getActiveMode():string{
-        $activeModeEntity=$this->getEntity(ViessmannAPI::HEATING_OPERATING_MODES);
-        return $activeModeEntity->getProperty("value")["value"]."";
-
-    }
-    public function setActiveMode($mode){
-        $this->setRawJsonData(ViessmannAPI::HEATING_OPERATING_MODES,"setMode","{\"mode\":".$mode."}");
-    }
-    public function getActiveProgram():string{
-        $activeProgramEntity=$this->getEntity(ViessmannAPI::HEATING_PROGRAM_ACTIVE);
-        return $activeProgramEntity->getProperty("value")["value"]."";
+    public function getBoilerTemperature(): string
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_BOILER_SENSORS_TEMPERATURE_MAIN)->getProperty("value")["value"];
     }
 
-    public function isHeatingBurnerActive(): bool {
-        $heatingBurnerEntity=$this->getEntity(ViessmannAPI::HEATING_BURNER);
-        return $heatingBurnerEntity->getProperty("active")["value"];
+    public function getRoomTemperature($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_ROOM))->getProperty("value")["value"];
     }
 
-    public function isDhwModeActive():bool{
-        $dhwModeActiveEntity=$this->getEntity(ViessmannAPI::HEATING_DWH_MODE);
-        return $dhwModeActiveEntity->getProperty("active")["value"];
+    public function getSupplyTemperature($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_SUPPLY))->getProperty("value")["value"];
     }
-    public function getComfortProgramTemperature():string{
-        $comfortProgramEntity=$this->getEntity(ViessmannAPI::HEATING_PROGRAM_COMFORT);
-        return $comfortProgramEntity->getProperty("temperature")["value"]."";
+
+    public function getSlope($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::HEATING_CURVE))->getProperty("slope")["value"];
     }
-    public function setComfortProgramTemperature($temperature){
-        $this->setRawJsonData(ViessmannAPI::HEATING_PROGRAM_COMFORT,"setTemperature","{\"targetTemperature\":".$temperature."}");
+
+    public function getShift($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::HEATING_CURVE))->getProperty("shift")["value"];
     }
-    public function getEcoProgramTemperature():string{
-        $ecoProgramEntity=$this->getEntity(ViessmannAPI::HEATING_PROGRAM_ECO);
-        return $ecoProgramEntity->getProperty("temperature")["value"]."";
+
+    public function setCurve($shift, $slope, $circuitId = NULL)
+    {
+        $this->setRawJsonData($this->buildFeature($circuitId, self::HEATING_CURVE), "setCurve", "{\"shift\":" . $shift . ",\"slope\":" . $slope . "}");
     }
-    public function activateEcoProgram($temperature){
-        $this->setRawJsonData(ViessmannAPI::HEATING_PROGRAM_ECO,"activate","{\"temperature\":".$temperature."}");
+
+    public function getActiveMode($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::ACTIVE_OPERATING_MODE))->getProperty("value")["value"];
     }
-    public function deActivateEcoProgram(){
-        $this->setRawJsonData(ViessmannAPI::HEATING_PROGRAM_ECO,"deactivate",null);
+
+    public function setActiveMode($mode, $circuitId = NULL)
+    {
+        $this->setRawJsonData($this->buildFeature($circuitId, self::OPERATING_MODES), "setMode", "{\"mode\":\"" . $mode . "\"}");
     }
-    public function getExternalProgramTemperature():string{
-        $externalProgramEntity=$this->getEntity(ViessmannAPI::HEATING_PROGRAM_EXTERNAL);
-        return $externalProgramEntity->getProperty("temperature")["value"]."";
+
+    public function getActiveProgram($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::ACTIVE_PROGRAM))->getProperty("value")["value"];
     }
-    public function setExternalProgramTemperature($temperature){
-        $this->setRawJsonData(ViessmannAPI::HEATING_PROGRAM_REDUCED,"setTemperature","{\"targetTemperature\":".$temperature."}");
+
+    public function isHeatingBurnerActive(): bool
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_BURNER)->getProperty("active")["value"];
     }
-    public function getNormalProgramTemperature():string{
-        $normalProgramEntity=$this->getEntity(ViessmannAPI::HEATING_PROGRAM_NORMAL);
-        return $normalProgramEntity->getProperty("temperature")["value"]."";
+
+    public function isDhwModeActive($circuitId = NULL): bool
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::DHW_MODE))->getProperty("active")["value"];
     }
-    public function setNormalProgramTemperature($temperature){
-        $this->setRawJsonData(ViessmannAPI::HEATING_PROGRAM_NORMAL,"setTemperature","{\"targetTemperature\":".$temperature."}");
+
+    public function getComfortProgramTemperature($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::COMFORT_PROGRAM))->getProperty("temperature")["value"];
     }
-    public function getReducedProgramTemperature():string{
-        $reducedProgramEntity=$this->getEntity(ViessmannAPI::HEATING_PROGRAM_REDUCED);
-        return $reducedProgramEntity->getProperty("temperature")["value"]."";
+
+    public function setComfortProgramTemperature($temperature, $circuitId = NULL)
+    {
+        $this->setRawJsonData($this->buildFeature($circuitId, self::COMFORT_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
     }
-    public function setReducedProgramTemperature($temperature){
-        $this->setRawJsonData(ViessmannAPI::HEATING_PROGRAM_REDUCED,"setTemperature","{\"targetTemperature\":".$temperature."}");
+
+    public function getEcoProgramTemperature($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::ECO_PROGRAM))->getProperty("temperature")["value"];
     }
-    public function isInStandbyMode():bool{
-        $standbyProgramEntity=$this->getEntity(ViessmannAPI::HEATING_PROGRAM_STANDBY);
-        return $standbyProgramEntity->getProperty("active")["value"];
+
+    public function activateEcoProgram($temperature, $circuitId = NULL)
+    {
+        $this->setRawJsonData($this->buildFeature($circuitId, self::ECO_PROGRAM), "activate", "{\"temperature\":" . $temperature . "}");
     }
-    public function getSupplyProgramTemperature():string{
-        $supplyProgramEntity=$this->getEntity(ViessmannAPI::HEATING_PROGRAM_SUPPLY);
-        return $supplyProgramEntity->getProperty("value")["value"]."";
+
+    public function deActivateEcoProgram($circuitId = NULL)
+    {
+        $this->setRawJsonData($this->buildFeature($circuitId, self::ECO_PROGRAM), "deactivate", null);
     }
-    public function getRawJsonData($resources):string{
-        try{
-            return $this->viessmanAuthClient->readData($this->featureHeatingUrl."/".$resources);
-        }catch (TokenResponseException $e){
-            throw new \ViessmannApiException("Erreur lors de l'appel. Si 400 bad Request alors mauvais structure de données. Si 502, souvent une erreur de format donnée(20.0 au lieu de 20,...)",0,$e);
+
+    public function getExternalProgramTemperature($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::EXTERNAL_PROGRAM))->getProperty("temperature")["value"];
+    }
+
+    public function setExternalProgramTemperature($temperature, $circuitId = NULL)
+    {
+        $this->setRawJsonData($this->buildFeature($circuitId, self::REDUCED_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
+    }
+
+    public function getNormalProgramTemperature($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::NORMAL_PROGRAM))->getProperty("temperature")["value"];
+    }
+
+    public function setNormalProgramTemperature($temperature, $circuitId = NULL)
+    {
+        $this->setRawJsonData($this->buildFeature($circuitId, self::NORMAL_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
+    }
+
+    public function getReducedProgramTemperature($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::REDUCED_PROGRAM))->getProperty("temperature")["value"];
+    }
+
+    public function setReducedProgramTemperature($temperature, $circuitId = NULL)
+    {
+        $this->setRawJsonData($this->buildFeature($circuitId, self::REDUCED_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
+    }
+
+    public function isInStandbyMode($circuitId = NULL): bool
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::STANDBY_PROGRAM))->getProperty("active")["value"];
+    }
+
+    public function getSupplyProgramTemperature($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::SUPPLY_PROGRAM))->getProperty("value")["value"];
+    }
+
+    public function getHotWaterStorageTemperature($circuit = NULL): string
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_HOTWATERSTORAGE)->getProperty("value")["value"];
+    }
+
+    public function getRawJsonData($resources): string
+    {
+        return $this->viessmanAuthClient->readData($this->featureHeatingUrl . "/" . $resources);
+    }
+
+    private function getEntity($resources): Entity
+    {
+        try {
+            $data = json_decode($this->getRawJsonData($resources), true);
+            if (isset($data["statusCode"])) {
+                throw new ViessmannApiException("Unable to get data for feature " . $resources . " on url " . $this->featureHeatingUrl . "\nReason: " . $data["message"], 1);
+            }
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("Unable to get data for url " . $this->featureHeatingUrl . "/" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
         }
-    }
-    private function getEntity($resources):Entity{
-        return Entity::fromArray(json_decode($this->getRawJsonData($resources),true));
-    }
-    public function setRawJsonData($feature, $action, $data){
-        $this->viessmanAuthClient->setData($this->featureHeatingUrl."/".$feature."/".$action,$data);
-    }
-    public function setDhwTemperature($temperature){
-        $data="{\"temperature\": $temperature}";
-        $this->viessmanAuthClient->setData($this->featureHeatingUrl."/".ViessmannAPI::HEATING_DWH_TEMPERATURE."/setTargetTemperature",$data);
+        return Entity::fromArray($data, true);
+
     }
 
+
+    public function setDhwTemperature($temperature)
+    {
+        $data = "{\"temperature\": $temperature}";
+        $this->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
+    }
+
+    public function setRawJsonData($feature, $action, $data)
+    {
+        $this->viessmanAuthClient->setData($this->featureHeatingUrl . "/" . $feature . "/" . $action, $data);
+    }
+
+    private function buildFeature($circuitId, $feature)
+    {
+        if ($circuitId == NULL) {
+            $circuitId = $this->circuitId;
+        }
+        return self::HEATING_CIRCUITS . "." . $circuitId . "." . $feature;
+    }
 
 }
