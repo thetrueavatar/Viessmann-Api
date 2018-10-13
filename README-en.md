@@ -8,3 +8,5 @@ The goal of this api is to hide technical aspect to expose only raw data so that
 This api is implemented in php and is package as a phar(php archive). This phar is available in the release part. 
 
 More explanation cand be found on the wiki https://github.com/thetrueavatar/Viessmann-Api/wiki/english
+
+If you wish, you can support me or thanks me with a donation [![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
