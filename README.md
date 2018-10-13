@@ -15,3 +15,5 @@ Je précise aussi que je partage mon dev perso mais ne souhaite pas faire un sup
 De toute façon, cmme on dit dans l'open-source "Please contribute" ;-)
 
 Pour voir les explications sur l'utilisation voir wiki: https://github.com/thetrueavatar/Viessmann-Api/wiki/French ou le code de example/Main.php
+
+[![paypal](https://www.paypalobjects.com/fr_VE/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
