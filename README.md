@@ -16,4 +16,4 @@ De toute façon, cmme on dit dans l'open-source "Please contribute" ;-)
 
 Pour voir les explications sur l'utilisation voir wiki: https://github.com/thetrueavatar/Viessmann-Api/wiki/French ou le code de example/Main.php
 
-Sans aucune obligation bien sûr, si vous souhaitez me soutenir ou me remercier vous pouvez me faire un don paypal :[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
+Si vous souhaitez me soutenir ou me remercier vous pouvez me faire un don paypal :[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
