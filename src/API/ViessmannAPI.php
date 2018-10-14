@@ -12,7 +12,6 @@ final class ViessmannAPI
     const HEATING_CIRCUITS = "heating.circuits";
     const HEATING_CURVE = "heating.curve";
     const SENSORS_TEMPERATURE_ROOM = "sensors.temperature.room";
-    const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
     const ACTIVE_OPERATING_MODE = "operating.modes.active";
     const OPERATING_MODES = "operating.modes.active";
     const DHW_MODE = "operating.modes.dhw";
@@ -27,7 +26,7 @@ final class ViessmannAPI
     const NORMAL_PROGRAM = "operating.programs.normal";
     const REDUCED_PROGRAM = "operating.programs.reduced";
     const STANDBY_PROGRAM = "operating.programs.standby";
-    const SUPPLY_PROGRAM = "sensors.temperature.supply";
+    const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
     const CIRCULATION_SCHEDULE = "circulation.schedule";
     private $installationId;
     private $gatewayId;
@@ -84,11 +83,6 @@ final class ViessmannAPI
     public function getRoomTemperature($circuitId = NULL): string
     {
         return $this->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_ROOM))->getProperty("value")["value"];
-    }
-
-    public function getSupplyTemperature($circuitId = NULL): string
-    {
-        return $this->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_SUPPLY))->getProperty("value")["value"];
     }
 
     public function getSlope($circuitId = NULL): string
@@ -193,7 +187,7 @@ final class ViessmannAPI
 
     public function getSupplyProgramTemperature($circuitId = NULL): string
     {
-        return $this->getEntity($this->buildFeature($circuitId, self::SUPPLY_PROGRAM))->getProperty("value")["value"];
+        return $this->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_SUPPLY))->getProperty("value")["value"];
     }
 
     public function getHotWaterStorageTemperature($circuit = NULL): string
