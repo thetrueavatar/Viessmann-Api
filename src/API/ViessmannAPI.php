@@ -179,6 +179,11 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
     }
 
+    public function getHeatingBurnerStatistics($type)
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_BURNER_STATISTICS)->getProperty($type)["value"];
+    }
+
     public function getRawJsonData($resources): string
     {
         try {

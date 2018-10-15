@@ -61,4 +61,14 @@ class ViessmannApiTest extends TestCase
         self::assertNotNull($heatingGasComsumption);
 
     }
+
+    public function testGetHeatingBurnerStatistics()
+    {
+        $hoursStats = $this->viessmannApi->getHeatingBurnerStatistics("hours");
+        $startsStats = $this->viessmannApi->getHeatingBurnerStatistics("starts");
+        self::assertNotNull($hoursStats);
+        self::assertNotNull($startsStats);
+        echo "hours stats: " . $hoursStats;
+        echo "\nstarts stats: " . $startsStats;
+    }
 }
