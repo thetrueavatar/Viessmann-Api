@@ -212,12 +212,56 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_BURNER_MODULATION)->getProperty("value")["value"];
     }
 
-    public function getCirculationPump($circuitId = NULL)
+    public function getCirculationPumpStatus($circuitId = NULL)
     {
         return $this->getEntity($this->buildFeature($circuitId, self::CIRCULATION_PUMP))->getProperty("status")["value"];
     }
 
+    public function isDhwCharging(): bool
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_CHARGING)->getProperty("active")["value"];
+    }
 
+    public function getDhwChargingLevel(): String
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_CHARGING_LEVEL)->getProperty("value")["value"];
+    }
+
+    public function isOneTimeDhwCharge(): String
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_ONETIMECHARGE)->getProperty("active")["value"];
+    }
+
+    public function getDhwPumpsCirculation(): String
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_CIRCULATION)->getProperty("status")["value"];
+    }
+
+    public function getDhwPumpsPrimary(): String
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_PRIMARY)->getProperty("status")["value"];
+    }
+
+    public function getDhwTemperatureOutlet(): String
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_OUTLET)->getProperty("value")["value"];
+    }
+
+    public function getDhwTemperature(): String
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_TEMPERATURE)->getProperty("value")["value"];
+    }
+
+    public function setDhwTemperature($temperature)
+    {
+        $data = "{\"temperature\": $temperature}";
+        $this->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
+    }
+
+    public function setRawJsonData($feature, $action, $data)
+    {
+        $this->viessmanAuthClient->setData($feature, $action, $data);
+    }
 
     public function getRawJsonData($resources): string
     {
@@ -241,16 +285,6 @@ final class ViessmannAPI
     }
 
 
-    public function setDhwTemperature($temperature)
-    {
-        $data = "{\"temperature\": $temperature}";
-        $this->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
-    }
-
-    public function setRawJsonData($feature, $action, $data)
-    {
-        $this->viessmanAuthClient->setData($feature, $action, $data);
-    }
 
     private function buildFeature($circuitId, $feature)
     {

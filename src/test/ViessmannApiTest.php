@@ -86,7 +86,7 @@ class ViessmannApiTest extends TestCase
     public function testGetHeatingBurnerCurrentPower()
     {
         $heatingBurnerCurrentPower = $this->viessmannApi->getHeatingBurnerCurrentPower();
-        echo "heating burner current power ";
+        echo "\nheating burner current power ";
         echo $heatingBurnerCurrentPower;
         self::assertNotNull($heatingBurnerCurrentPower);
     }
@@ -94,18 +94,65 @@ class ViessmannApiTest extends TestCase
     public function testGetHeatingBurnerModulation()
     {
         $heatingBurnerModulation = $this->viessmannApi->getHeatingBurnerModulation();
-        echo "heating burner modulation ";
+        echo "\nheating burner modulation ";
         echo $heatingBurnerModulation;
         self::assertNotNull($heatingBurnerModulation);
     }
 
-    public function testGetCirculationPump()
+    public function testGetCirculationPumpStatus($circuitId = NULL)
     {
-        $circulationPump = $this->viessmannApi->getCirculationPump();
-        echo "Circulation pump  ";
-        echo $circulationPump;
-        self::assertNotNull($circulationPump);
+        $circulationPumpStatus = $this->viessmannApi->getCirculationPumpStatus();
+        echo "\ngetCirculationPumpStatus  ";
+        echo $circulationPumpStatus;
+        self::assertNotNull($circulationPumpStatus);
     }
 
+    public function testIsDhwCharging(): bool
+    {
+        $isDhwCharging = $this->viessmannApi->isDhwCharging();
+        echo "\nisDhwCharging  ";
+        echo $isDhwCharging;
+        self::assertNotNull($isDhwCharging);
+    }
+
+    public function testGetDhwChargingLevel(): String
+    {
+        $dhwChargingLevel = $this->viessmannApi->getDhwChargingLevel();
+        echo "\ngetDhwChargingLevel  ";
+        echo $dhwChargingLevel;
+        self::assertNotNull($dhwChargingLevel);
+    }
+
+    public function testIsOneTimeDhwCharge(): bool
+    {
+        $isOneTimeDhwCharge = $this->viessmannApi->isOneTimeDhwCharge();
+        echo "\nisOneTimeDhwCharge  ";
+        echo $isOneTimeDhwCharge;
+        self::assertNotNull($isOneTimeDhwCharge);
+    }
+
+    public function testGetDhwPumpsCirculation(): String
+    {
+        $dhwPumpsCirculation = $this->viessmannApi->getDhwPumpsCirculation();
+        echo "\ndhwPumpsCirculation  ";
+        echo $dhwPumpsCirculation;
+        self::assertNotNull($dhwPumpsCirculation);
+    }
+
+    public function testGetDhwPumpsPrimary(): String
+    {
+        $dhwPumpsPrimary = $this->viessmannApi->getDhwPumpsPrimary();
+        echo "\ndhwPumpsPrimary  ";
+        echo $dhwPumpsPrimary;
+        self::assertNotNull($dhwPumpsPrimary);
+    }
+
+    public function testGetDhwTemperature(): String
+    {
+        $dhwTemperature = $this->viessmannApi->getDhwTemperature();
+        echo "\nDHW Temperature  ";
+        echo $dhwTemperature;
+        self::assertNotNull($dhwTemperature);
+    }
 
 }
