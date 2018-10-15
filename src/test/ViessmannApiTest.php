@@ -1,17 +1,87 @@
 <?php
-include __DIR__.'/bootstrap.php';
-echo $viessmannApi->getFeatures();
-echo "Température extérieure " . $viessmannApi->getOutsideTemperature() . "\n";
-echo "Température boiler " . $viessmannApi->getBoilerTemperature() . "\n";
-echo "Pente " . $viessmannApi->getSlope() . "\n";
-echo "Parallèle " . $viessmannApi->getShift() . "\n";
-echo "Mode chaudière " . $viessmannApi->getActiveMode() . "\n";
-echo "Programme actif " . $viessmannApi->getActiveProgram() . "\n";
-echo "Is Heating Burner active ? " . $viessmannApi->isHeatingBurnerActive() . "\n";//in php false bool is converted into empty string
-echo "Is Dhw mode active ? " . $viessmannApi->isDhwModeActive() . "\n";
-echo "Température de confort " . $viessmannApi->getComfortProgramTemperature() . "\n";
-echo "Température écho " . $viessmannApi->getEcoProgramTemperature() . "\n";
-echo "Température externe " . $viessmannApi->getExternalProgramTemperature() . "\n";
-echo "Température réduit " . $viessmannApi->getReducedProgramTemperature() . "\n";
-echo "Température supply " . $viessmannApi->getSupplyProgramTemperature() . "\n";
-echo "Est en veille ? " . $viessmannApi->isInStandbyMode() . "\n";
+
+namespace Viessmann\API\Test;
+require __DIR__ . '/../../vendor/autoload.php';
+
+use PHPUnit\Framework\TestCase;
+use Viessmann\API\ViessmannAPI;
+use Viessmann\test\ViessmannMockClient;
+
+
+class ViessmannApiTest extends TestCase
+{
+
+    private $viessmannApi;
+
+    /**
+     * ViessmannApiTest constructor.
+     */
+    public function setUp()
+    {
+
+        $this->viessmannApi = new ViessmannAPI(array(), new ViessmannMockClient());
+    }
+
+    public function testGetHeatingGasConsumption()
+    {
+        $heatingGasComsumption = $this->viessmannApi->getHeatingGasConsumption("day");
+        print_r($heatingGasComsumption);
+        $heatingGasComsumption = $this->viessmannApi->getHeatingGasConsumption("week");
+        print_r($heatingGasComsumption);
+        echo "\n";
+        $heatingGasComsumption = $this->viessmannApi->getHeatingGasConsumption("month");
+        print_r($heatingGasComsumption);
+        echo "\n";
+        $heatingGasComsumption = $this->viessmannApi->getHeatingGasConsumption("year");
+        print_r($heatingGasComsumption);
+        echo "\n";
+        self::assertNotNull($heatingGasComsumption);
+
+    }
+
+    public function testGetDhwGasConsumption()
+    {
+        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("day");
+        print_r($heatingGasComsumption);
+        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("week");
+        print_r($heatingGasComsumption);
+        echo "\n";
+        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("month");
+        print_r($heatingGasComsumption);
+        echo "\n";
+        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("year");
+        print_r($heatingGasComsumption);
+        echo "\n";
+        self::assertNotNull($heatingGasComsumption);
+
+    }
+
+    public function testGetHeatingBurnerStatistics()
+    {
+        $hoursStats = $this->viessmannApi->getHeatingBurnerStatistics("hours");
+        $startsStats = $this->viessmannApi->getHeatingBurnerStatistics("starts");
+        self::assertNotNull($hoursStats);
+        self::assertNotNull($startsStats);
+        echo "hours stats: " . $hoursStats;
+        echo "\nstarts stats: " . $startsStats;
+    }
+
+    public function testGetSchedule()
+    {
+        $heatingSchedule = $this->viessmannApi->getHeatingSchedule();
+        $circulationSchedule = $this->viessmannApi->getCirculationSchedule();
+        $dhwSchedule = $this->viessmannApi->getDhwSchedule();
+        echo "heating schedule ";
+        print_r($heatingSchedule);
+        echo "\n circulation schedule";
+        print_r($circulationSchedule);
+        echo "\n dhw schedule";
+        print_r($dhwSchedule);
+        self::assertNotNull($heatingSchedule);
+        self::assertNotNull($circulationSchedule);
+        self::assertNotNull($dhwSchedule);
+
+    }
+
+
+}
