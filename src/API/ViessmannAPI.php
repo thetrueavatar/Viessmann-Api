@@ -206,6 +206,11 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_BURNER_CURRENT_POWER)->getProperty("value")["value"];
     }
 
+    public function getHeatingBurnerModulation()
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_BURNER_MODULATION)->getProperty("value")["value"];
+    }
+
 
 
     public function getRawJsonData($resources): string

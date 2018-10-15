@@ -91,5 +91,13 @@ class ViessmannApiTest extends TestCase
         self::assertNotNull($heatingBurnerCurrentPower);
     }
 
+    public function testGetHeatingBurnerModulation()
+    {
+        $heatingBurnerModulation = $this->viessmannApi->getHeatingBurnerModulation();
+        echo "heating burner modulation ";
+        echo $heatingBurnerModulation;
+        self::assertNotNull($heatingBurnerModulation);
+    }
+
 
 }
