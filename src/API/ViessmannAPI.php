@@ -186,10 +186,10 @@ final class ViessmannAPI
 //        return $this->getEntity(ViessmannFeature::HEATING_BURNER_STATISTICS)->getProperty($type)["value"];
 //    }
 //
-//    public function getDhwSchedule($circuitId = NULL)
-//    {
-//        return $this->getEntity($this->buildFeature($circuitId, self::DHW_SCHEDULE))->getProperties();
-//    }
+    public function getDhwSchedule($circuitId = NULL)
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::DHW_SCHEDULE))->getProperties();
+    }
 
     public function getCirculationSchedule($circuitId = NULL)
     {
