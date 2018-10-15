@@ -83,5 +83,13 @@ class ViessmannApiTest extends TestCase
 
     }
 
+    public function testGetHeatingBurnerCurrentPower()
+    {
+        $heatingBurnerCurrentPower = $this->viessmannApi->getHeatingBurnerCurrentPower();
+        echo "heating burner current power ";
+        echo $heatingBurnerCurrentPower;
+        self::assertNotNull($heatingBurnerCurrentPower);
+    }
+
 
 }

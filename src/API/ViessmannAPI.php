@@ -200,6 +200,14 @@ final class ViessmannAPI
     {
         return $this->getEntity($this->buildFeature($circuitId, self::HEATING_SCHEDULE))->getProperties();
     }
+
+    public function getHeatingBurnerCurrentPower()
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_BURNER_CURRENT_POWER)->getProperty("value")["value"];
+    }
+
+
+
     public function getRawJsonData($resources): string
     {
         try {
