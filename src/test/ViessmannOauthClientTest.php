@@ -37,6 +37,22 @@ class ViessmannOauthClientTest extends TestCase
 //        self::assertNotNull($viessmannAuthClient->request("general-management/installations?expanded=true&"));
         echo $viessmannAuthClient->readData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/" . ViessmannFeature::HEATING_DHW_TEMPERATURE);
     }
+
+    public function testGasConsumption()
+    {
+        $credentials = file("../../resources/credentials.properties");
+        $params = [
+            "user" => trim("$credentials[0]", "\n"),
+            "pwd" => trim("$credentials[1]", "\n"),
+            "uri" => "vicare://oauth-callback/everest"
+        ];
+
+        $viessmannAuthClient = new ViessmannOauthClient($params);
+        $code = $viessmannAuthClient->getCode();
+        self::assertNotNull($viessmannAuthClient->getToken($code));
+//        self::assertNotNull($viessmannAuthClient->request("general-management/installations?expanded=true&"));
+        echo $viessmannAuthClient->readData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/" . ViessmannFeature::HEATING_DHW_TEMPERATURE);
+    }
     public function testWriteData(){
         $credentials = file("../../resources/credentials.properties");
         $this->params = [

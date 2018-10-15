@@ -31,43 +31,19 @@ final class ViessmannAPI
     private $installationId;
     private $gatewayId;
     private $viessmanAuthClient;
-    private $featureHeatingUrl;
     private $circuitId;
 
     /**
      * ViessmannAPI constructor.
      */
-    public function __construct($params)
+    public function __construct($params, $viessmannOauthClient = NULL)
     {
         $this->circuitId = $params["circuitId"] ?? 0;
-        $this->viessmanAuthClient = new ViessmannOauthClient($params);
-        $code = $this->viessmanAuthClient->getCode();
-        $this->viessmanAuthClient->getToken($code);
-        $installationJson = $this->viessmanAuthClient->readData("general-management/installations");
-        $installationEntity = Entity::fromArray(json_decode($installationJson, true));
-        $modelInstallationEntity = $installationEntity->getEntities()[0];
-        $this->installationId = $modelInstallationEntity->getProperty('id');
-        $modelDevice = $modelInstallationEntity->getEntities()[0];
-        $this->gatewayId = $modelDevice->getProperty('serial');
-        $this->featureHeatingUrl = "operational-data/installations/" . $this->installationId . "/gateways/" . $this->gatewayId . "/devices/" . ($params["deviceId"] ?? 0) . "/features";
+        $this->viessmanAuthClient = $viessmannOauthClient ?? new ViessmannOauthClient($params);
     }
-
-    public function getInstallationId(): string
-    {
-        return $this->installationId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getGatewayId(): string
-    {
-        return $this->gatewayId;
-    }
-
     public function getFeatures(): String
     {
-        return $this->viessmanAuthClient->readData($this->featureHeatingUrl);
+        return $this->viessmanAuthClient->readData("");
     }
 
     public function getOutsideTemperature(): string
@@ -195,12 +171,22 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_HOTWATERSTORAGE)->getProperty("value")["value"];
     }
 
+    public function getDhwGasConcumption($circuit = NULL): string
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty("day")["value"];
+    }
+
+    public function getHeatingGasConcumption($circuit = NULL): string
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty("day")["value"];
+    }
+
     public function getRawJsonData($resources): string
     {
         try {
-            return $this->viessmanAuthClient->readData($this->featureHeatingUrl . "/" . $resources);
+            return $this->viessmanAuthClient->readData($resources);
         } catch (TokenResponseException $e) {
-            throw new ViessmannApiException("Unable to get data for url " . $this->featureHeatingUrl . "/" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
+            throw new ViessmannApiException("Unable to get data for feature" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
         }
     }
 
@@ -209,7 +195,7 @@ final class ViessmannAPI
 
         $data = json_decode($this->getRawJsonData($resources), true);
             if (isset($data["statusCode"])) {
-                throw new ViessmannApiException("Unable to get data for feature " . $resources . " on url " . $this->featureHeatingUrl . "\nReason: " . $data["message"], 1);
+                throw new ViessmannApiException("Unable to get data for feature " . $resources . "\nReason: " . $data["message"], 1);
             }
 
         return Entity::fromArray($data, true);
@@ -225,7 +211,7 @@ final class ViessmannAPI
 
     public function setRawJsonData($feature, $action, $data)
     {
-        $this->viessmanAuthClient->setData($this->featureHeatingUrl . "/" . $feature . "/" . $action, $data);
+        $this->viessmanAuthClient->setData($feature, $action, $data);
     }
 
     private function buildFeature($circuitId, $feature)

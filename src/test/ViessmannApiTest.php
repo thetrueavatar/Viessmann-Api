@@ -1,17 +1,38 @@
 <?php
-include __DIR__.'/bootstrap.php';
-echo $viessmannApi->getFeatures();
-echo "Température extérieure " . $viessmannApi->getOutsideTemperature() . "\n";
-echo "Température boiler " . $viessmannApi->getBoilerTemperature() . "\n";
-echo "Pente " . $viessmannApi->getSlope() . "\n";
-echo "Parallèle " . $viessmannApi->getShift() . "\n";
-echo "Mode chaudière " . $viessmannApi->getActiveMode() . "\n";
-echo "Programme actif " . $viessmannApi->getActiveProgram() . "\n";
-echo "Is Heating Burner active ? " . $viessmannApi->isHeatingBurnerActive() . "\n";//in php false bool is converted into empty string
-echo "Is Dhw mode active ? " . $viessmannApi->isDhwModeActive() . "\n";
-echo "Température de confort " . $viessmannApi->getComfortProgramTemperature() . "\n";
-echo "Température écho " . $viessmannApi->getEcoProgramTemperature() . "\n";
-echo "Température externe " . $viessmannApi->getExternalProgramTemperature() . "\n";
-echo "Température réduit " . $viessmannApi->getReducedProgramTemperature() . "\n";
-echo "Température supply " . $viessmannApi->getSupplyProgramTemperature() . "\n";
-echo "Est en veille ? " . $viessmannApi->isInStandbyMode() . "\n";
+/**
+ * Created by PhpStorm.
+ * User: thetrueavatar
+ * Date: 31/08/18
+ * Time: 12:43
+ */
+
+namespace Viessmann\API\Test;
+
+use PHPUnit\Framework\TestCase;
+use test\ViessmannMockClient;
+use Viessmann\API\ViessmannAPI;
+
+require __DIR__ . '/../../vendor/autoload.php';
+
+class ViessmannApiTest extends TestCase
+{
+
+    private $viessmannApi;
+
+    /**
+     * ViessmannApiTest constructor.
+     */
+    public function __construct()
+    {
+
+        $viessmannApi = new ViessmannAPI([], new ViessmannMockClient());
+    }
+
+    /**
+     * ViessmannOauthClientTest constructor.
+     */
+    public function testGasConsumption()
+    {
+        $this->viessmannApi->getHotWaterStorageTemperature();
+    }
+}

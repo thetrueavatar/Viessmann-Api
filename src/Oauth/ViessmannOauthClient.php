@@ -14,7 +14,9 @@ use OAuth\Common\Http\Client\CurlClient;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Storage\Session;
 use OAuth\ServiceFactory;
+use TomPHP\Siren\Entity;
 use Viessmann\API\ViessmannApiException;
+
 
 class ViessmannOauthClient
 {
@@ -25,6 +27,9 @@ class ViessmannOauthClient
     private $scope=["openid"];
     private $user;
     private $pwd;
+    private $installationId;
+    private $gatewayId;
+    private $featureHeatingBaseUrl;
     /**
      * ViessmannOauthClient constructor.
      * @param $viessmannOauthService
@@ -47,6 +52,15 @@ class ViessmannOauthClient
         $this->storage=new Session();
         $this->credentials = new Credentials("" . self::CONSUMERID, "" . self::CONSUMERSECRET, self::VICARE_OAUTH_CALLBACK_EVEREST);
         $this->viessmannOauthService=$this->serviceFactory->createService('Viessmann', $this->credentials,$this->storage, $this->scope,new Uri('https://api.viessmann-platform.io'));
+        $code = $this->getCode();
+        $this->getToken($code);
+        $installationJson = $this->readData("general-management/installations");
+        $installationEntity = Entity::fromArray(json_decode($installationJson, true));
+        $modelInstallationEntity = $installationEntity->getEntities()[0];
+        $this->installationId = $modelInstallationEntity->getProperty('id');
+        $modelDevice = $modelInstallationEntity->getEntities()[0];
+        $this->gatewayId = $modelDevice->getProperty('serial');
+        $this->featureHeatingBaseUrl = "operational-data/installations/" . $this->installationId . "/gateways/" . $this->gatewayId . "/devices/" . ($params["deviceId"] ?? 0) . "/features";
     }
 
     function getToken($code){
@@ -85,16 +99,15 @@ class ViessmannOauthClient
 
     public function readData($resourceUrl):string
     {
-        return $this->viessmannOauthService->request($resourceUrl);
+        return $this->viessmannOauthService->request($this->featureHeatingBaseUrl . "/" . $resourceUrl);
     }
 
-    public function setData($resourceUrl,$data)
+    public function setData($feature, $action, $data)
     {
         $headers=[
             "Content-Type"=>"application/json",
             "Accept"=>"application/vnd.siren+json"
         ];
-        return $this->viessmannOauthService->request($resourceUrl,'POST',$data,$headers);
+        return $this->viessmannOauthService->request($this->featureHeatingBaseUrl . "/" . $feature . "/" . $action, $data, 'POST', $data, $headers);
     }
-
 }
