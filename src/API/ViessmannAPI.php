@@ -30,6 +30,7 @@ final class ViessmannAPI
     const CIRCULATION_SCHEDULE = "circulation.schedule";
     const DHW_SCHEDULE = "dhw.schedule";
     const HEATING_SCHEDULE = "heating.schedule";
+    const CIRCULATION_PUMP = "circulation.pump";
     private $viessmanAuthClient;
     private $circuitId;
 
@@ -209,6 +210,11 @@ final class ViessmannAPI
     public function getHeatingBurnerModulation()
     {
         return $this->getEntity(ViessmannFeature::HEATING_BURNER_MODULATION)->getProperty("value")["value"];
+    }
+
+    public function getCirculationPump($circuitId = NULL)
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::CIRCULATION_PUMP))->getProperty("status")["value"];
     }
 
 

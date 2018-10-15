@@ -99,5 +99,13 @@ class ViessmannApiTest extends TestCase
         self::assertNotNull($heatingBurnerModulation);
     }
 
+    public function testGetCirculationPump()
+    {
+        $circulationPump = $this->viessmannApi->getCirculationPump();
+        echo "Circulation pump  ";
+        echo $circulationPump;
+        self::assertNotNull($circulationPump);
+    }
+
 
 }
