@@ -4,7 +4,7 @@ namespace Viessmann\API;
 
 use OAuth\Common\Http\Exception\TokenResponseException;
 use TomPHP\Siren\Entity;
-use Viessmann\Oauth\ViessmannOauthClient;
+use Viessmann\Oauth\ViessmannOauthClientImpl;
 
 final class ViessmannAPI
 {
@@ -28,8 +28,6 @@ final class ViessmannAPI
     const STANDBY_PROGRAM = "operating.programs.standby";
     const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
     const CIRCULATION_SCHEDULE = "circulation.schedule";
-    private $installationId;
-    private $gatewayId;
     private $viessmanAuthClient;
     private $circuitId;
 
@@ -39,7 +37,7 @@ final class ViessmannAPI
     public function __construct($params, $viessmannOauthClient = NULL)
     {
         $this->circuitId = $params["circuitId"] ?? 0;
-        $this->viessmanAuthClient = $viessmannOauthClient ?? new ViessmannOauthClient($params);
+        $this->viessmanAuthClient = $viessmannOauthClient ?? new ViessmannOauthClientImpl($params);
     }
     public function getFeatures(): String
     {
@@ -171,14 +169,14 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_HOTWATERSTORAGE)->getProperty("value")["value"];
     }
 
-    public function getDhwGasConcumption($circuit = NULL): string
+    public function getDhwGasConsumption($period = "day")
     {
-        return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty("day")["value"];
+        return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
     }
 
-    public function getHeatingGasConcumption($circuit = NULL): string
+    public function getHeatingGasConsumption($period = "day")
     {
-        return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty("day")["value"];
+        return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
     }
 
     public function getRawJsonData($resources): string
