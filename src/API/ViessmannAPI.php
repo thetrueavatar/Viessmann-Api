@@ -171,25 +171,25 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_HOTWATERSTORAGE)->getProperty("value")["value"];
     }
 
-    public function getDhwGasConsumption($period = "day")
-    {
-        return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
-    }
-
-    public function getHeatingGasConsumption($period = "day")
-    {
-        return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
-    }
-
-    public function getHeatingBurnerStatistics($type)
-    {
-        return $this->getEntity(ViessmannFeature::HEATING_BURNER_STATISTICS)->getProperty($type)["value"];
-    }
-
-    public function getDhwSchedule($circuitId = NULL)
-    {
-        return $this->getEntity($this->buildFeature($circuitId, self::DHW_SCHEDULE))->getProperties();
-    }
+//    public function getDhwGasConsumption($period = "day")
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
+//    }
+//
+//    public function getHeatingGasConsumption($period = "day")
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
+//    }
+//
+//    public function getHeatingBurnerStatistics($type)
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_BURNER_STATISTICS)->getProperty($type)["value"];
+//    }
+//
+//    public function getDhwSchedule($circuitId = NULL)
+//    {
+//        return $this->getEntity($this->buildFeature($circuitId, self::DHW_SCHEDULE))->getProperties();
+//    }
 
     public function getCirculationSchedule($circuitId = NULL)
     {
