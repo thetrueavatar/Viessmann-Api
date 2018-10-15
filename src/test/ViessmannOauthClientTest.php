@@ -35,7 +35,7 @@ class ViessmannOauthClientTest extends TestCase
         $code = $viessmannAuthClient->getCode();
         self::assertNotNull($viessmannAuthClient->getToken($code));
 //        self::assertNotNull($viessmannAuthClient->request("general-management/installations?expanded=true&"));
-        echo $viessmannAuthClient->readData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/" . ViessmannFeature::HEATING_DHW_TEMPERATURE);
+        echo $viessmannAuthClient->readFeatureData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/" . ViessmannFeature::HEATING_DHW_TEMPERATURE);
     }
 
     public function testGasConsumption()
@@ -51,7 +51,7 @@ class ViessmannOauthClientTest extends TestCase
         $code = $viessmannAuthClient->getCode();
         self::assertNotNull($viessmannAuthClient->getToken($code));
 //        self::assertNotNull($viessmannAuthClient->request("general-management/installations?expanded=true&"));
-        echo $viessmannAuthClient->readData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/" . ViessmannFeature::HEATING_DHW_TEMPERATURE);
+        echo $viessmannAuthClient->readFeatureData("https://api.viessmann-platform.io/operational-data/installations/55994/gateways/7571381753685105/devices/0/features/" . ViessmannFeature::HEATING_DHW_TEMPERATURE);
     }
     public function testWriteData(){
         $credentials = file("../../resources/credentials.properties");

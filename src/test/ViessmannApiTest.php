@@ -1,18 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thetrueavatar
- * Date: 31/08/18
- * Time: 12:43
- */
 
 namespace Viessmann\API\Test;
+require __DIR__ . '/../../vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
 use Viessmann\API\ViessmannAPI;
 use Viessmann\test\ViessmannMockClient;
 
-require __DIR__ . '/../../vendor/autoload.php';
 
 class ViessmannApiTest extends TestCase
 {
@@ -71,4 +65,23 @@ class ViessmannApiTest extends TestCase
         echo "hours stats: " . $hoursStats;
         echo "\nstarts stats: " . $startsStats;
     }
+
+    public function testGetSchedule()
+    {
+        $heatingSchedule = $this->viessmannApi->getHeatingSchedule();
+        $circulationSchedule = $this->viessmannApi->getCirculationSchedule();
+        $dhwSchedule = $this->viessmannApi->getDhwSchedule();
+        echo "heating schedule ";
+        print_r($heatingSchedule);
+        echo "\n circulation schedule";
+        print_r($circulationSchedule);
+        echo "\n dhw schedule";
+        print_r($dhwSchedule);
+        self::assertNotNull($heatingSchedule);
+        self::assertNotNull($circulationSchedule);
+        self::assertNotNull($dhwSchedule);
+
+    }
+
+
 }

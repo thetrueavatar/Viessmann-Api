@@ -30,9 +30,9 @@ class ViessmannMockClient implements ViessmannOauthClient
         return NULL;
     }
 
-    public function readData($resourceUrl): string
+    public function readData($feature): string
     {
-        return file_get_contents($this->resourcesDir . $resourceUrl . ".siren.json");
+        return file_get_contents($this->resourcesDir . $feature . ".siren.json");
     }
 
     public function setData($feature, $action, $data)

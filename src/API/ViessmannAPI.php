@@ -28,6 +28,8 @@ final class ViessmannAPI
     const STANDBY_PROGRAM = "operating.programs.standby";
     const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
     const CIRCULATION_SCHEDULE = "circulation.schedule";
+    const DHW_SCHEDULE = "dhw.schedule";
+    const HEATING_SCHEDULE = "heating.schedule";
     private $viessmanAuthClient;
     private $circuitId;
 
@@ -184,6 +186,20 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_BURNER_STATISTICS)->getProperty($type)["value"];
     }
 
+    public function getDhwSchedule($circuitId = NULL)
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::DHW_SCHEDULE))->getProperties();
+    }
+
+    public function getCirculationSchedule($circuitId = NULL)
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::CIRCULATION_SCHEDULE))->getProperties();
+    }
+
+    public function getHeatingSchedule($circuitId = NULL)
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::HEATING_SCHEDULE))->getProperties();
+    }
     public function getRawJsonData($resources): string
     {
         try {
