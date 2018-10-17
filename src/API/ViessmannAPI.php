@@ -30,6 +30,7 @@ final class ViessmannAPI
     const CIRCULATION_SCHEDULE = "circulation.schedule";
     const DHW_SCHEDULE = "dhw.schedule";
     const HEATING_SCHEDULE = "heating.schedule";
+    const CIRCULATION_PUMP = "circulation.pump";
     private $viessmanAuthClient;
     private $circuitId;
 
@@ -185,7 +186,7 @@ final class ViessmannAPI
 //    {
 //        return $this->getEntity(ViessmannFeature::HEATING_BURNER_STATISTICS)->getProperty($type)["value"];
 //    }
-//
+
     public function getDhwSchedule($circuitId = NULL)
     {
         return $this->getEntity($this->buildFeature($circuitId, self::DHW_SCHEDULE))->getProperties();
@@ -200,6 +201,68 @@ final class ViessmannAPI
     {
         return $this->getEntity($this->buildFeature($circuitId, self::HEATING_SCHEDULE))->getProperties();
     }
+
+//    public function getHeatingBurnerCurrentPower()
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_BURNER_CURRENT_POWER)->getProperty("value")["value"];
+//    }
+//
+//    public function getHeatingBurnerModulation()
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_BURNER_MODULATION)->getProperty("value")["value"];
+//    }
+//
+//    public function getCirculationPumpStatus($circuitId = NULL)
+//    {
+//        return $this->getEntity($this->buildFeature($circuitId, self::CIRCULATION_PUMP))->getProperty("status")["value"];
+//    }
+//
+//    public function isDhwCharging(): bool
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_DHW_CHARGING)->getProperty("active")["value"];
+//    }
+//
+//    public function getDhwChargingLevel(): String
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_DHW_CHARGING_LEVEL)->getProperty("value")["value"];
+//    }
+//
+//    public function isOneTimeDhwCharge(): String
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_DHW_ONETIMECHARGE)->getProperty("active")["value"];
+//    }
+//
+//    public function getDhwPumpsCirculation(): String
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_CIRCULATION)->getProperty("status")["value"];
+//    }
+//
+//    public function getDhwPumpsPrimary(): String
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_PRIMARY)->getProperty("status")["value"];
+//    }
+//
+//    public function getDhwTemperatureOutlet(): String
+//    {
+//        return $this->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_OUTLET)->getProperty("value")["value"];
+//    }
+
+    public function getDhwTemperature(): String
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_TEMPERATURE)->getProperty("value")["value"];
+    }
+
+    public function setDhwTemperature($temperature)
+    {
+        $data = "{\"temperature\": $temperature}";
+        $this->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
+    }
+
+    public function setRawJsonData($feature, $action, $data)
+    {
+        $this->viessmanAuthClient->setData($feature, $action, $data);
+    }
+
     public function getRawJsonData($resources): string
     {
         try {
@@ -219,18 +282,6 @@ final class ViessmannAPI
 
         return Entity::fromArray($data, true);
 
-    }
-
-
-    public function setDhwTemperature($temperature)
-    {
-        $data = "{\"temperature\": $temperature}";
-        $this->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
-    }
-
-    public function setRawJsonData($feature, $action, $data)
-    {
-        $this->viessmanAuthClient->setData($feature, $action, $data);
     }
 
     private function buildFeature($circuitId, $feature)
