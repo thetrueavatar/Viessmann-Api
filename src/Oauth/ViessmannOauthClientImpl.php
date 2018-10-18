@@ -110,6 +110,6 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
             "Content-Type" => "application/json",
             "Accept" => "application/vnd.siren+json"
         ];
-        return $this->viessmannOauthService->request($this->featureHeatingBaseUrl . "/" . $feature . "/" . $action, $data, $headers);
+        return $this->viessmannOauthService->request($this->featureHeatingBaseUrl . "/" . $feature . "/" . $action, 'POST', $data, $headers);
     }
 }
