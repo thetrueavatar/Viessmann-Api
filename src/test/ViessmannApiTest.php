@@ -83,5 +83,76 @@ class ViessmannApiTest extends TestCase
 
     }
 
+    public function testGetHeatingBurnerCurrentPower()
+    {
+        $heatingBurnerCurrentPower = $this->viessmannApi->getHeatingBurnerCurrentPower();
+        echo "\nheating burner current power ";
+        echo $heatingBurnerCurrentPower;
+        self::assertNotNull($heatingBurnerCurrentPower);
+    }
+
+    public function testGetHeatingBurnerModulation()
+    {
+        $heatingBurnerModulation = $this->viessmannApi->getHeatingBurnerModulation();
+        echo "\nheating burner modulation ";
+        echo $heatingBurnerModulation;
+        self::assertNotNull($heatingBurnerModulation);
+    }
+
+    public function testGetCirculationPumpStatus($circuitId = NULL)
+    {
+        $circulationPumpStatus = $this->viessmannApi->getCirculationPumpStatus();
+        echo "\ngetCirculationPumpStatus  ";
+        echo $circulationPumpStatus;
+        self::assertNotNull($circulationPumpStatus);
+    }
+
+    public function testIsDhwCharging()
+    {
+        $isDhwCharging = $this->viessmannApi->isDhwCharging();
+        echo "\nisDhwCharging  ";
+        echo gettype($isDhwCharging);
+        self::assertNotNull($isDhwCharging);
+    }
+
+    public function testGetDhwChargingLevel()
+    {
+        $dhwChargingLevel = $this->viessmannApi->getDhwChargingLevel();
+        echo "\ngetDhwChargingLevel  ";
+        echo $dhwChargingLevel;
+        self::assertNotNull($dhwChargingLevel);
+    }
+
+    public function testIsOneTimeDhwCharge()
+    {
+        $isOneTimeDhwCharge = $this->viessmannApi->isOneTimeDhwCharge();
+        echo "\nisOneTimeDhwCharge  ";
+        echo $isOneTimeDhwCharge;
+        self::assertNotNull($isOneTimeDhwCharge);
+    }
+
+    public function testGetDhwPumpsCirculation()
+    {
+        $dhwPumpsCirculation = $this->viessmannApi->getDhwPumpsCirculation();
+        echo "\ndhwPumpsCirculation  ";
+        echo $dhwPumpsCirculation;
+        self::assertNotNull($dhwPumpsCirculation);
+    }
+
+    public function testGetDhwPumpsPrimary()
+    {
+        $dhwPumpsPrimary = $this->viessmannApi->getDhwPumpsPrimary();
+        echo "\ndhwPumpsPrimary  ";
+        echo $dhwPumpsPrimary;
+        self::assertNotNull($dhwPumpsPrimary);
+    }
+
+    public function testGetDhwTemperature()
+    {
+        $dhwTemperature = $this->viessmannApi->getDhwTemperature();
+        echo "\nDHW Temperature  ";
+        echo $dhwTemperature;
+        self::assertNotNull($dhwTemperature);
+    }
 
 }
