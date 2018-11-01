@@ -2,5 +2,5 @@ parameters:
   visibility_levels: [public, protected] # array
   annotation_groups: [todo, deprecated] # array
   title: "ApiGen Docs" # string
-  base_url: "http://apigen.org/api" # string
+  base_url: "https://github.com/thetrueavatar/Viessmann-API" # string
   overwrite: false # bool
