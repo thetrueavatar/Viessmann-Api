@@ -19,4 +19,4 @@ Pour voir les explications sur l'utilisation voir wiki: https://github.com/thetr
 Si vous souhaitez me soutenir ou me remercier vous pouvez me faire un don paypal :[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
 
 
-Voici la doc des méthodes de l'api [**Viessmann API**](https://github.com/thetrueavatar/Viessmann-API/docs/):
+Voici la doc des méthodes de l'api [**Viessmann API**](./docs/index.html):
