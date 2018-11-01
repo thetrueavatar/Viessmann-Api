@@ -1,0 +1,6 @@
+parameters:
+  visibility_levels: [public, protected] # array
+  annotation_groups: [todo, deprecated] # array
+  title: "ApiGen Docs" # string
+  base_url: "http://apigen.org/api" # string
+  overwrite: false # bool

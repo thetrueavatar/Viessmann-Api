@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 use PHPUnit\Framework\TestCase;
 
 class MultipleDataProviderTest extends TestCase
@@ -16,7 +17,7 @@ class MultipleDataProviderTest extends TestCase
         return [
             ['ok', null, null],
             ['ok', null, null],
-            ['ok', null, null]
+            ['ok', null, null],
         ];
     }
 
@@ -25,7 +26,7 @@ class MultipleDataProviderTest extends TestCase
         return [
             [null, 'ok', null],
             [null, 'ok', null],
-            [null, 'ok', null]
+            [null, 'ok', null],
         ];
     }
 
@@ -34,7 +35,7 @@ class MultipleDataProviderTest extends TestCase
         return [
             [null, null, 'ok'],
             [null, null, 'ok'],
-            [null, null, 'ok']
+            [null, null, 'ok'],
         ];
     }
 
@@ -62,7 +63,7 @@ class MultipleDataProviderTest extends TestCase
             [
                 [null, null, 'ok'],
                 [null, null, 'ok'],
-                [null, null, 'ok']
+                [null, null, 'ok'],
             ]
         );
 
