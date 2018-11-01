@@ -155,4 +155,12 @@ class ViessmannApiTest extends TestCase
         self::assertNotNull($dhwTemperature);
     }
 
+    public function testIsHeatingBurnerActive()
+    {
+        $heatingBurnerActive = (int)$this->viessmannApi->isHeatingBurnerActive();
+        echo "\nHeating Burner Active  ";
+        echo $heatingBurnerActive;
+        self::assertNotNull($heatingBurnerActive);
+    }
+
 }
