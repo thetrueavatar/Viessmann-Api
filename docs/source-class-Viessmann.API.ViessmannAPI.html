@@ -464,7 +464,7 @@
 </span><span class="l" id="line-44">    }
 </span><span class="l" id="line-45">
 </span><span class="l" id="line-46">    <span class="php-comment">/**
-</span></span><span class="l" id="line-47"><span class="php-comment">     * @return String a json string that contains all the features at once in Siren Json style
+</span></span><span class="l" id="line-47"><span class="php-comment">     * return:  String a json string that contains all the features at once in Siren Json style
 </span></span><span class="l" id="line-48"><span class="php-comment">     */</span>
 </span><span class="l" id="line-49">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getFeatures(): String
@@ -474,8 +474,8 @@
 </span><span class="l" id="line-52">    }
 </span><span class="l" id="line-53">
 </span><span class="l" id="line-54">    <span class="php-comment">/**
-</span></span><span class="l" id="line-55"><span class="php-comment">     * @return string the outside temperature if available
-</span></span><span class="l" id="line-56"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-55"><span class="php-comment">     * return:  string the outside temperature if available
+</span></span><span class="l" id="line-56"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-57"><span class="php-comment">     */</span>
 </span><span class="l" id="line-58">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getOutsideTemperature(): string
@@ -485,8 +485,8 @@
 </span><span class="l" id="line-61">    }
 </span><span class="l" id="line-62">
 </span><span class="l" id="line-63">    <span class="php-comment">/**
-</span></span><span class="l" id="line-64"><span class="php-comment">     * @return string the current Boiler Temperature
-</span></span><span class="l" id="line-65"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-64"><span class="php-comment">     * return:  string the current Boiler Temperature
+</span></span><span class="l" id="line-65"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-66"><span class="php-comment">     */</span>
 </span><span class="l" id="line-67">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getBoilerTemperature(): string
@@ -496,9 +496,9 @@
 </span><span class="l" id="line-70">    }
 </span><span class="l" id="line-71">
 </span><span class="l" id="line-72">    <span class="php-comment">/**
-</span></span><span class="l" id="line-73"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-74"><span class="php-comment">     * @return string the Room temperature
-</span></span><span class="l" id="line-75"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-73"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-74"><span class="php-comment">     * return:  string the Room temperature
+</span></span><span class="l" id="line-75"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-76"><span class="php-comment">     */</span>
 </span><span class="l" id="line-77">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getRoomTemperature(<span class="php-var">$circuitId</span> = <span
@@ -510,9 +510,9 @@
 </span><span class="l" id="line-80">    }
 </span><span class="l" id="line-81">
 </span><span class="l" id="line-82">    <span class="php-comment">/**
-</span></span><span class="l" id="line-83"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-84"><span class="php-comment">     * @return string the slope configured
-</span></span><span class="l" id="line-85"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-83"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-84"><span class="php-comment">     * return:  string the slope configured
+</span></span><span class="l" id="line-85"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-86"><span class="php-comment">     */</span>
 </span><span class="l" id="line-87">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getSlope(<span class="php-var">$circuitId</span> = <span
@@ -524,9 +524,9 @@
 </span><span class="l" id="line-90">    }
 </span><span class="l" id="line-91">
 </span><span class="l" id="line-92">    <span class="php-comment">/**
-</span></span><span class="l" id="line-93"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-94"><span class="php-comment">     * @return string the shift configured
-</span></span><span class="l" id="line-95"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-93"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-94"><span class="php-comment">     * return:  string the shift configured
+</span></span><span class="l" id="line-95"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-96"><span class="php-comment">     */</span>
 </span><span class="l" id="line-97">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getShift(<span class="php-var">$circuitId</span> = <span
@@ -538,9 +538,9 @@
 </span><span class="l" id="line-100">    }
 </span><span class="l" id="line-101">
 </span><span class="l" id="line-102">    <span class="php-comment">/**
-</span></span><span class="l" id="line-103"><span class="php-comment">     * @param $shift the new shift to set
-</span></span><span class="l" id="line-104"><span class="php-comment">     * @param $slope the new slope to set
-</span></span><span class="l" id="line-105"><span class="php-comment">     * @param null $circuitId
+</span></span><span class="l" id="line-103"><span class="php-comment">     * param:  $shift the new shift to set
+</span></span><span class="l" id="line-104"><span class="php-comment">     * param:  $slope the new slope to set
+</span></span><span class="l" id="line-105"><span class="php-comment">     * param:  null $circuitId
 </span></span><span class="l" id="line-106"><span class="php-comment">     */</span>
 </span><span class="l" id="line-107">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> setCurve(<span class="php-var">$shift</span>, <span
@@ -555,9 +555,9 @@
 </span><span class="l" id="line-110">    }
 </span><span class="l" id="line-111">
 </span><span class="l" id="line-112">    <span class="php-comment">/**
-</span></span><span class="l" id="line-113"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-114"><span class="php-comment">     * @return string the activeMode( &quot;standby&quot;,&quot;dhw&quot;,&quot;dhwAndHeating&quot;,&quot;forcedReduced&quot;,&quot;forcedNormal&quot;)
-</span></span><span class="l" id="line-115"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-113"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-114"><span class="php-comment">     * return:  string the activeMode( &quot;standby&quot;,&quot;dhw&quot;,&quot;dhwAndHeating&quot;,&quot;forcedReduced&quot;,&quot;forcedNormal&quot;)
+</span></span><span class="l" id="line-115"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-116"><span class="php-comment">     */</span>
 </span><span class="l" id="line-117">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getActiveMode(<span
@@ -570,8 +570,8 @@
 </span><span class="l" id="line-121">
 </span><span class="l" id="line-122">    <span class="php-comment">/**
 </span></span><span class="l" id="line-123"><span class="php-comment">     * Set the active mode to the given mode
-</span></span><span class="l" id="line-124"><span class="php-comment">     * @param $mode the activeMode( &quot;standby&quot;,&quot;dhw&quot;,&quot;dhwAndHeating&quot;,&quot;forcedReduced&quot;,&quot;forcedNormal&quot;)
-</span></span><span class="l" id="line-125"><span class="php-comment">     * @param null $circuitId
+</span></span><span class="l" id="line-124"><span class="php-comment">     * param:  $mode the activeMode( &quot;standby&quot;,&quot;dhw&quot;,&quot;dhwAndHeating&quot;,&quot;forcedReduced&quot;,&quot;forcedNormal&quot;)
+</span></span><span class="l" id="line-125"><span class="php-comment">     * param:  null $circuitId
 </span></span><span class="l" id="line-126"><span class="php-comment">     */</span>
 </span><span class="l" id="line-127">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> setActiveMode(<span class="php-var">$mode</span>, <span
@@ -584,9 +584,9 @@
 </span><span class="l" id="line-130">    }
 </span><span class="l" id="line-131">
 </span><span class="l" id="line-132">    <span class="php-comment">/**
-</span></span><span class="l" id="line-133"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-134"><span class="php-comment">     * @return string the active program(&quot;comfort&quot;,&quot;eco&quot;,&quot;external&quot;,&quot;holiday&quot;,&quot;normal&quot;,&quot;reduced&quot;, &quot;standby&quot;)
-</span></span><span class="l" id="line-135"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-133"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-134"><span class="php-comment">     * return:  string the active program(&quot;comfort&quot;,&quot;eco&quot;,&quot;external&quot;,&quot;holiday&quot;,&quot;normal&quot;,&quot;reduced&quot;, &quot;standby&quot;)
+</span></span><span class="l" id="line-135"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-136"><span class="php-comment">     */</span>
 </span><span class="l" id="line-137">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getActiveProgram(<span class="php-var">$circuitId</span> = <span
@@ -598,8 +598,8 @@
 </span><span class="l" id="line-140">    }
 </span><span class="l" id="line-141">
 </span><span class="l" id="line-142">    <span class="php-comment">/**
-</span></span><span class="l" id="line-143"><span class="php-comment">     * @return bool true if heating burner is active. False otherwise
-</span></span><span class="l" id="line-144"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-143"><span class="php-comment">     * return:  bool true if heating burner is active. False otherwise
+</span></span><span class="l" id="line-144"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-145"><span class="php-comment">     */</span>
 </span><span class="l" id="line-146">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> isHeatingBurnerActive(): bool
@@ -609,8 +609,8 @@
 </span><span class="l" id="line-149">    }
 </span><span class="l" id="line-150">
 </span><span class="l" id="line-151">    <span class="php-comment">/**
-</span></span><span class="l" id="line-152"><span class="php-comment">     * @return bool true if DhwMode is active. False otherwise
-</span></span><span class="l" id="line-153"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-152"><span class="php-comment">     * return:  bool true if DhwMode is active. False otherwise
+</span></span><span class="l" id="line-153"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-154"><span class="php-comment">     */</span>
 </span><span class="l" id="line-155">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> isDhwModeActive(<span
@@ -622,9 +622,9 @@
 </span><span class="l" id="line-158">    }
 </span><span class="l" id="line-159">
 </span><span class="l" id="line-160">    <span class="php-comment">/**
-</span></span><span class="l" id="line-161"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-162"><span class="php-comment">     * @return string Conformat program temperature insntruction
-</span></span><span class="l" id="line-163"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-161"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-162"><span class="php-comment">     * return:  string Conformat program temperature insntruction
+</span></span><span class="l" id="line-163"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-164"><span class="php-comment">     */</span>
 </span><span class="l" id="line-165">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getComfortProgramTemperature(<span class="php-var">$circuitId</span> = <span
@@ -637,8 +637,8 @@
 </span><span class="l" id="line-168">    }
 </span><span class="l" id="line-169">
 </span><span class="l" id="line-170">    <span class="php-comment">/**
-</span></span><span class="l" id="line-171"><span class="php-comment">     * @param $temperature onformat program temperature insntruction
-</span></span><span class="l" id="line-172"><span class="php-comment">     * @param null $circuitId
+</span></span><span class="l" id="line-171"><span class="php-comment">     * param:  $temperature onformat program temperature insntruction
+</span></span><span class="l" id="line-172"><span class="php-comment">     * param:  null $circuitId
 </span></span><span class="l" id="line-173"><span class="php-comment">     */</span>
 </span><span class="l" id="line-174">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> setComfortProgramTemperature(<span class="php-var">$temperature</span>, <span
@@ -651,9 +651,9 @@
 </span><span class="l" id="line-177">    }
 </span><span class="l" id="line-178">
 </span><span class="l" id="line-179">    <span class="php-comment">/**
-</span></span><span class="l" id="line-180"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-181"><span class="php-comment">     * @return string Eco program temperature insntruction
-</span></span><span class="l" id="line-182"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-180"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-181"><span class="php-comment">     * return:  string Eco program temperature insntruction
+</span></span><span class="l" id="line-182"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-183"><span class="php-comment">     */</span>
 </span><span class="l" id="line-184">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getEcoProgramTemperature(<span
@@ -686,9 +686,9 @@
 </span><span class="l" id="line-197">    }
 </span><span class="l" id="line-198">
 </span><span class="l" id="line-199">    <span class="php-comment">/**
-</span></span><span class="l" id="line-200"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-201"><span class="php-comment">     * @return string External program temperature insntruction
-</span></span><span class="l" id="line-202"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-200"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-201"><span class="php-comment">     * return:  string External program temperature insntruction
+</span></span><span class="l" id="line-202"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-203"><span class="php-comment">     */</span>
 </span><span class="l" id="line-204">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getExternalProgramTemperature(<span class="php-var">$circuitId</span> = <span
@@ -701,9 +701,9 @@
 </span><span class="l" id="line-207">    }
 </span><span class="l" id="line-208">
 </span><span class="l" id="line-209">    <span class="php-comment">/**
-</span></span><span class="l" id="line-210"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-211"><span class="php-comment">     * @return string External program temperature insntruction
-</span></span><span class="l" id="line-212"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-210"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-211"><span class="php-comment">     * return:  string External program temperature insntruction
+</span></span><span class="l" id="line-212"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-213"><span class="php-comment">     */</span>
 </span><span class="l" id="line-214">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> setExternalProgramTemperature(<span class="php-var">$temperature</span>, <span
@@ -716,9 +716,9 @@
 </span><span class="l" id="line-217">    }
 </span><span class="l" id="line-218">
 </span><span class="l" id="line-219">    <span class="php-comment">/**
-</span></span><span class="l" id="line-220"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-221"><span class="php-comment">     * @return string Normal program temperature insntruction
-</span></span><span class="l" id="line-222"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-220"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-221"><span class="php-comment">     * return:  string Normal program temperature insntruction
+</span></span><span class="l" id="line-222"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-223"><span class="php-comment">     */</span>
 </span><span class="l" id="line-224">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getNormalProgramTemperature(<span class="php-var">$circuitId</span> = <span
@@ -731,9 +731,9 @@
 </span><span class="l" id="line-227">    }
 </span><span class="l" id="line-228">
 </span><span class="l" id="line-229">    <span class="php-comment">/**
-</span></span><span class="l" id="line-230"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-231"><span class="php-comment">     * @return string Normal program temperature insntruction
-</span></span><span class="l" id="line-232"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-230"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-231"><span class="php-comment">     * return:  string Normal program temperature insntruction
+</span></span><span class="l" id="line-232"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-233"><span class="php-comment">     */</span>
 </span><span class="l" id="line-234">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> setNormalProgramTemperature(<span class="php-var">$temperature</span>, <span
@@ -746,9 +746,9 @@
 </span><span class="l" id="line-237">    }
 </span><span class="l" id="line-238">
 </span><span class="l" id="line-239">    <span class="php-comment">/**
-</span></span><span class="l" id="line-240"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-241"><span class="php-comment">     * @return string Reduced program temperature insntruction
-</span></span><span class="l" id="line-242"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-240"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-241"><span class="php-comment">     * return:  string Reduced program temperature insntruction
+</span></span><span class="l" id="line-242"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-243"><span class="php-comment">     */</span>
 </span><span class="l" id="line-244">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getReducedProgramTemperature(<span class="php-var">$circuitId</span> = <span
@@ -761,9 +761,9 @@
 </span><span class="l" id="line-247">    }
 </span><span class="l" id="line-248">
 </span><span class="l" id="line-249">    <span class="php-comment">/**
-</span></span><span class="l" id="line-250"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-251"><span class="php-comment">     * @return string Reduced program temperature insntruction
-</span></span><span class="l" id="line-252"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-250"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-251"><span class="php-comment">     * return:  string Reduced program temperature insntruction
+</span></span><span class="l" id="line-252"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-253"><span class="php-comment">     */</span>
 </span><span class="l" id="line-254">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> setReducedProgramTemperature(<span class="php-var">$temperature</span>, <span
@@ -776,9 +776,9 @@
 </span><span class="l" id="line-257">    }
 </span><span class="l" id="line-258">
 </span><span class="l" id="line-259">    <span class="php-comment">/**
-</span></span><span class="l" id="line-260"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-261"><span class="php-comment">     * @return bool true if is standy. False otherwise
-</span></span><span class="l" id="line-262"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-260"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-261"><span class="php-comment">     * return:  bool true if is standy. False otherwise
+</span></span><span class="l" id="line-262"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-263"><span class="php-comment">     */</span>
 </span><span class="l" id="line-264">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> isInStandbyMode(<span
@@ -799,9 +799,9 @@
 </span><span class="l" id="line-272">    }
 </span><span class="l" id="line-273">
 </span><span class="l" id="line-274">    <span class="php-comment">/**
-</span></span><span class="l" id="line-275"><span class="php-comment">     * @param null $circuit
-</span></span><span class="l" id="line-276"><span class="php-comment">     * @return string Hot Water storage temperature
-</span></span><span class="l" id="line-277"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-275"><span class="php-comment">     * param:  null $circuit
+</span></span><span class="l" id="line-276"><span class="php-comment">     * return:  string Hot Water storage temperature
+</span></span><span class="l" id="line-277"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-278"><span class="php-comment">     */</span>
 </span><span class="l" id="line-279">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getHotWaterStorageTemperature(<span class="php-var">$circuit</span> = <span
@@ -813,12 +813,12 @@
 </span><span class="l" id="line-283">
 </span><span class="l" id="line-284">    <span class="php-comment">/**
 </span></span><span class="l" id="line-285"><span class="php-comment">     * Return the Gas consumption for DHW. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
-</span></span><span class="l" id="line-286"><span class="php-comment">     * @param string $period amongst enume &quot;day&quot;,&quot;week&quot;,&quot;month&quot;,&quot;year
-</span></span><span class="l" id="line-287"><span class="php-comment">     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+</span></span><span class="l" id="line-286"><span class="php-comment">     * param:  string $period amongst enume &quot;day&quot;,&quot;week&quot;,&quot;month&quot;,&quot;year
+</span></span><span class="l" id="line-287"><span class="php-comment">     * return:  if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
 </span></span><span class="l" id="line-288"><span class="php-comment">     *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
 </span></span><span class="l" id="line-289"><span class="php-comment">     *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
 </span></span><span class="l" id="line-290"><span class="php-comment">     *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
-</span></span><span class="l" id="line-291"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-291"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-292"><span class="php-comment">     */</span>
 </span><span class="l" id="line-293">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getDhwGasConsumption(<span class="php-var">$period</span> = <span
@@ -830,12 +830,12 @@
 </span><span class="l" id="line-297">
 </span><span class="l" id="line-298">    <span class="php-comment">/**
 </span></span><span class="l" id="line-299"><span class="php-comment">     * Return the Gas consumption for Heating. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
-</span></span><span class="l" id="line-300"><span class="php-comment">     * @param string $period amongst enume &quot;day&quot;,&quot;week&quot;,&quot;month&quot;,&quot;year
-</span></span><span class="l" id="line-301"><span class="php-comment">     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+</span></span><span class="l" id="line-300"><span class="php-comment">     * param:  string $period amongst enume &quot;day&quot;,&quot;week&quot;,&quot;month&quot;,&quot;year
+</span></span><span class="l" id="line-301"><span class="php-comment">     * return:  if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
 </span></span><span class="l" id="line-302"><span class="php-comment">     *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
 </span></span><span class="l" id="line-303"><span class="php-comment">     *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
 </span></span><span class="l" id="line-304"><span class="php-comment">     *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
-</span></span><span class="l" id="line-305"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-305"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-306"><span class="php-comment">     */</span>
 </span><span class="l" id="line-307">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getHeatingGasConsumption(<span
@@ -846,9 +846,9 @@
 </span><span class="l" id="line-310">    }
 </span><span class="l" id="line-311">
 </span><span class="l" id="line-312">    <span class="php-comment">/**
-</span></span><span class="l" id="line-313"><span class="php-comment">     * @param string $type the type of statistics(&quot;hours&quot;:number of active hours or &quot;starts&quot;: number of start)
-</span></span><span class="l" id="line-314"><span class="php-comment">     * @return mixed number of hours or number of starts
-</span></span><span class="l" id="line-315"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-313"><span class="php-comment">     * param:  string $type the type of statistics(&quot;hours&quot;:number of active hours or &quot;starts&quot;: number of start)
+</span></span><span class="l" id="line-314"><span class="php-comment">     * return:  mixed number of hours or number of starts
+</span></span><span class="l" id="line-315"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-316"><span class="php-comment">     */</span>
 </span><span class="l" id="line-317">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getHeatingBurnerStatistics(<span
@@ -859,8 +859,8 @@
 </span><span class="l" id="line-320">    }
 </span><span class="l" id="line-321">
 </span><span class="l" id="line-322">    <span class="php-comment">/**
-</span></span><span class="l" id="line-323"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-324"><span class="php-comment">     * @return map containing the Dhw schedule for each days in format:
+</span></span><span class="l" id="line-323"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-324"><span class="php-comment">     * return:  map containing the Dhw schedule for each days in format:
 </span></span><span class="l" id="line-325"><span class="php-comment">     * &quot;mon&quot;: [
 </span></span><span class="l" id="line-326"><span class="php-comment">     * {
 </span></span><span class="l" id="line-327"><span class="php-comment">     * &quot;start&quot;: &quot;03:00&quot;,
@@ -869,7 +869,7 @@
 </span></span><span class="l" id="line-330"><span class="php-comment">     * &quot;position&quot;: 1
 </span></span><span class="l" id="line-331"><span class="php-comment">     * }
 </span></span><span class="l" id="line-332"><span class="php-comment">     * ]
-</span></span><span class="l" id="line-333"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-333"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-334"><span class="php-comment">     */</span>
 </span><span class="l" id="line-335">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getDhwSchedule(<span
@@ -880,8 +880,8 @@
 </span><span class="l" id="line-338">    }
 </span><span class="l" id="line-339">
 </span><span class="l" id="line-340">    <span class="php-comment">/**
-</span></span><span class="l" id="line-341"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-342"><span class="php-comment">     * @return map containing the Circulation schedule for each days in format:
+</span></span><span class="l" id="line-341"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-342"><span class="php-comment">     * return:  map containing the Circulation schedule for each days in format:
 </span></span><span class="l" id="line-343"><span class="php-comment">     * &quot;mon&quot;: [
 </span></span><span class="l" id="line-344"><span class="php-comment">    {
 </span></span><span class="l" id="line-345"><span class="php-comment">    &quot;start&quot;: &quot;03:00&quot;,
@@ -890,7 +890,7 @@
 </span></span><span class="l" id="line-348"><span class="php-comment">    &quot;position&quot;: 1
 </span></span><span class="l" id="line-349"><span class="php-comment">    }
 </span></span><span class="l" id="line-350"><span class="php-comment">    ]
-</span></span><span class="l" id="line-351"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-351"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-352"><span class="php-comment">     */</span>
 </span><span class="l" id="line-353">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getCirculationSchedule(<span
@@ -901,8 +901,8 @@
 </span><span class="l" id="line-356">    }
 </span><span class="l" id="line-357">
 </span><span class="l" id="line-358">    <span class="php-comment">/**
-</span></span><span class="l" id="line-359"><span class="php-comment">     * @param null $circuitId
-</span></span><span class="l" id="line-360"><span class="php-comment">     * @return map containing the Heating schedule for each days in format:
+</span></span><span class="l" id="line-359"><span class="php-comment">     * param:  null $circuitId
+</span></span><span class="l" id="line-360"><span class="php-comment">     * return:  map containing the Heating schedule for each days in format:
 </span></span><span class="l" id="line-361"><span class="php-comment">     * &quot;mon&quot;: [
 </span></span><span class="l" id="line-362"><span class="php-comment">    {
 </span></span><span class="l" id="line-363"><span class="php-comment">    &quot;start&quot;: &quot;03:00&quot;,
@@ -911,7 +911,7 @@
 </span></span><span class="l" id="line-366"><span class="php-comment">    &quot;position&quot;: 1
 </span></span><span class="l" id="line-367"><span class="php-comment">    }
 </span></span><span class="l" id="line-368"><span class="php-comment">    ]
-</span></span><span class="l" id="line-369"><span class="php-comment">     * @throws ViessmannApiException
+</span></span><span class="l" id="line-369"><span class="php-comment">     * throws:  ViessmannApiException
 </span></span><span class="l" id="line-370"><span class="php-comment">     */</span>
 </span><span class="l" id="line-371">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getHeatingSchedule(<span class="php-var">$circuitId</span> = <span

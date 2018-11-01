@@ -44,7 +44,7 @@ final class ViessmannAPI
     }
 
     /**
-     * @return String a json string that contains all the features at once in Siren Json style
+     * return:  String a json string that contains all the features at once in Siren Json style
      */
     public function getFeatures(): String
     {
@@ -52,8 +52,8 @@ final class ViessmannAPI
     }
 
     /**
-     * @return string the outside temperature if available
-     * @throws ViessmannApiException
+     * return:  string the outside temperature if available
+     * throws:  ViessmannApiException
      */
     public function getOutsideTemperature(): string
     {
@@ -61,8 +61,8 @@ final class ViessmannAPI
     }
 
     /**
-     * @return string the current Boiler Temperature
-     * @throws ViessmannApiException
+     * return:  string the current Boiler Temperature
+     * throws:  ViessmannApiException
      */
     public function getBoilerTemperature(): string
     {
@@ -70,9 +70,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string the Room temperature
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string the Room temperature
+     * throws:  ViessmannApiException
      */
     public function getRoomTemperature($circuitId = NULL): string
     {
@@ -80,9 +80,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string the slope configured
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string the slope configured
+     * throws:  ViessmannApiException
      */
     public function getSlope($circuitId = NULL): string
     {
@@ -90,9 +90,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string the shift configured
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string the shift configured
+     * throws:  ViessmannApiException
      */
     public function getShift($circuitId = NULL): string
     {
@@ -100,9 +100,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param $shift the new shift to set
-     * @param $slope the new slope to set
-     * @param null $circuitId
+     * param:  $shift the new shift to set
+     * param:  $slope the new slope to set
+     * param:  null $circuitId
      */
     public function setCurve($shift, $slope, $circuitId = NULL)
     {
@@ -110,9 +110,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
+     * throws:  ViessmannApiException
      */
     public function getActiveMode($circuitId = NULL): string
     {
@@ -121,8 +121,8 @@ final class ViessmannAPI
 
     /**
      * Set the active mode to the given mode
-     * @param $mode the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
-     * @param null $circuitId
+     * param:  $mode the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
+     * param:  null $circuitId
      */
     public function setActiveMode($mode, $circuitId = NULL)
     {
@@ -130,9 +130,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string the active program("comfort","eco","external","holiday","normal","reduced", "standby")
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string the active program("comfort","eco","external","holiday","normal","reduced", "standby")
+     * throws:  ViessmannApiException
      */
     public function getActiveProgram($circuitId = NULL): string
     {
@@ -140,8 +140,8 @@ final class ViessmannAPI
     }
 
     /**
-     * @return bool true if heating burner is active. False otherwise
-     * @throws ViessmannApiException
+     * return:  bool true if heating burner is active. False otherwise
+     * throws:  ViessmannApiException
      */
     public function isHeatingBurnerActive(): bool
     {
@@ -149,8 +149,8 @@ final class ViessmannAPI
     }
 
     /**
-     * @return bool true if DhwMode is active. False otherwise
-     * @throws ViessmannApiException
+     * return:  bool true if DhwMode is active. False otherwise
+     * throws:  ViessmannApiException
      */
     public function isDhwModeActive($circuitId = NULL): bool
     {
@@ -158,9 +158,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string Conformat program temperature insntruction
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string Conformat program temperature insntruction
+     * throws:  ViessmannApiException
      */
     public function getComfortProgramTemperature($circuitId = NULL): string
     {
@@ -168,8 +168,8 @@ final class ViessmannAPI
     }
 
     /**
-     * @param $temperature onformat program temperature insntruction
-     * @param null $circuitId
+     * param:  $temperature onformat program temperature insntruction
+     * param:  null $circuitId
      */
     public function setComfortProgramTemperature($temperature, $circuitId = NULL)
     {
@@ -177,9 +177,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string Eco program temperature insntruction
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string Eco program temperature insntruction
+     * throws:  ViessmannApiException
      */
     public function getEcoProgramTemperature($circuitId = NULL): string
     {
@@ -197,9 +197,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string External program temperature insntruction
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string External program temperature insntruction
+     * throws:  ViessmannApiException
      */
     public function getExternalProgramTemperature($circuitId = NULL): string
     {
@@ -207,9 +207,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string External program temperature insntruction
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string External program temperature insntruction
+     * throws:  ViessmannApiException
      */
     public function setExternalProgramTemperature($temperature, $circuitId = NULL)
     {
@@ -217,9 +217,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string Normal program temperature insntruction
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string Normal program temperature insntruction
+     * throws:  ViessmannApiException
      */
     public function getNormalProgramTemperature($circuitId = NULL): string
     {
@@ -227,9 +227,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string Normal program temperature insntruction
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string Normal program temperature insntruction
+     * throws:  ViessmannApiException
      */
     public function setNormalProgramTemperature($temperature, $circuitId = NULL)
     {
@@ -237,9 +237,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string Reduced program temperature insntruction
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string Reduced program temperature insntruction
+     * throws:  ViessmannApiException
      */
     public function getReducedProgramTemperature($circuitId = NULL): string
     {
@@ -247,9 +247,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return string Reduced program temperature insntruction
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  string Reduced program temperature insntruction
+     * throws:  ViessmannApiException
      */
     public function setReducedProgramTemperature($temperature, $circuitId = NULL)
     {
@@ -257,9 +257,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return bool true if is standy. False otherwise
-     * @throws ViessmannApiException
+     * param:  null $circuitId
+     * return:  bool true if is standy. False otherwise
+     * throws:  ViessmannApiException
      */
     public function isInStandbyMode($circuitId = NULL): bool
     {
@@ -272,9 +272,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuit
-     * @return string Hot Water storage temperature
-     * @throws ViessmannApiException
+     * param:  null $circuit
+     * return:  string Hot Water storage temperature
+     * throws:  ViessmannApiException
      */
     public function getHotWaterStorageTemperature($circuit = NULL): string
     {
@@ -283,12 +283,12 @@ final class ViessmannAPI
 
     /**
      * Return the Gas consumption for DHW. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
-     * @param string $period amongst enume "day","week","month","year
-     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+     * param:  string $period amongst enume "day","week","month","year
+     * return:  if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
      *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
      *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
      *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
-     * @throws ViessmannApiException
+     * throws:  ViessmannApiException
      */
     public function getDhwGasConsumption($period = "day")
     {
@@ -297,12 +297,12 @@ final class ViessmannAPI
 
     /**
      * Return the Gas consumption for Heating. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
-     * @param string $period amongst enume "day","week","month","year
-     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+     * param:  string $period amongst enume "day","week","month","year
+     * return:  if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
      *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
      *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
      *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
-     * @throws ViessmannApiException
+     * throws:  ViessmannApiException
      */
     public function getHeatingGasConsumption($period = "day")
     {
@@ -310,9 +310,9 @@ final class ViessmannAPI
     }
 
     /**
-     * @param string $type the type of statistics("hours":number of active hours or "starts": number of start)
-     * @return mixed number of hours or number of starts
-     * @throws ViessmannApiException
+     * param:  string $type the type of statistics("hours":number of active hours or "starts": number of start)
+     * return:  mixed number of hours or number of starts
+     * throws:  ViessmannApiException
      */
     public function getHeatingBurnerStatistics($type = "hours")
     {
@@ -320,8 +320,8 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return map containing the Dhw schedule for each days in format:
+     * param:  null $circuitId
+     * return:  map containing the Dhw schedule for each days in format:
      * "mon": [
      * {
      * "start": "03:00",
@@ -330,7 +330,7 @@ final class ViessmannAPI
      * "position": 1
      * }
      * ]
-     * @throws ViessmannApiException
+     * throws:  ViessmannApiException
      */
     public function getDhwSchedule($circuitId = NULL)
     {
@@ -338,17 +338,17 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return map containing the Circulation schedule for each days in format:
+     * param:  null $circuitId
+     * return:  map containing the Circulation schedule for each days in format:
      * "mon": [
-    {
-    "start": "03:00",
-    "end": "24:00",
-    "mode": "on",
-    "position": 1
-    }
-    ]
-     * @throws ViessmannApiException
+    * {
+    * "start": "03:00",
+    * "end": "24:00",
+    * "mode": "on",
+    * "position": 1
+     * }
+     * ]
+     * throws:  ViessmannApiException
      */
     public function getCirculationSchedule($circuitId = NULL)
     {
@@ -356,17 +356,17 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
-     * @return map containing the Heating schedule for each days in format:
+     * param:  null $circuitId
+     * return:  map containing the Heating schedule for each days in format:
      * "mon": [
-    {
-    "start": "03:00",
-    "end": "24:00",
-    "mode": "on",
-    "position": 1
-    }
-    ]
-     * @throws ViessmannApiException
+    * {
+    * "start": "03:00",
+    * "end": "24:00",
+    * "mode": "on",
+    * "position": 1
+     * }
+     * ]
+     * throws:  ViessmannApiException
      */
     public function getHeatingSchedule($circuitId = NULL)
     {
