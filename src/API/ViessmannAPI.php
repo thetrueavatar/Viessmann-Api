@@ -332,9 +332,22 @@ final class ViessmannAPI
      * ]
      * @throws ViessmannApiException
      */
-    public function getDhwSchedule($circuitId = NULL)
+    public function getDhwSchedule()
     {
-        return $this->getEntity($this->buildFeature($circuitId, self::DHW_SCHEDULE))->getProperties();
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_SCHEDULE)->getProperties();
+    }
+
+    /**
+     * Replace the full schedule for DHW
+     * @param null $circuitId
+     * @param $schedule
+     * @return array
+     * @throws ViessmannApiException
+     */
+    public function setRawDhwSchedule($schedule, $circuitId = NULL)
+    {
+        $data = "{\"newSchedule\": $schedule}";
+        $this->setRawJsonData($this->buildFeature($circuitId, self::DHW_SCHEDULE), "setSchedule", $data);
     }
 
     /**
@@ -356,6 +369,17 @@ final class ViessmannAPI
     }
 
     /**
+     * Post a complete new schedule. Warning !!! this would erase all previous schedule.
+     *
+     * @param $schedule the schedule(see format above
+     * @param null $circuitId
+     */
+    public function setRawCirculationSchedule($schedule, $circuitId = NULL)
+    {
+        $data = "{\"newSchedule\": $schedule}";
+        $this->setRawJsonData($this->buildFeature($circuitId, self::CIRCULATION_SCHEDULE), "setSchedule", $data);
+    }
+    /**
      * @param null $circuitId
      * @return map containing the Heating schedule for each days in format:
      * "mon": [
@@ -373,6 +397,88 @@ final class ViessmannAPI
         return $this->getEntity($this->buildFeature($circuitId, self::HEATING_SCHEDULE))->getProperties();
     }
 
+    /**
+     * Replace the full schedule for Heating:
+     * "{
+     * \"mon\": [
+     * {
+     * \"start\": \"07:30\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"normal\",
+     * \"position\": 0
+     * }
+     * ],
+     * \"tue\": [
+     * {
+     * \"start\": \"05:50\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"normal\",
+     * \"position\": 0
+     * }
+     * ],
+     * \"wed\": [
+     * {
+     * \"start\": \"05:50\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"normal\",
+     * \"position\": 0
+     * }
+     * ],
+     * \"thu\": [
+     * {
+     * \"start\": \"05:50\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"normal\",
+     * \"position\": 0
+     * }
+     * ],
+     * \"fri\": [
+     * {
+     * \"start\": \"05:50\",
+     * \"end\": \"08:00\",
+     * \"mode\": \"normal\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"16:00\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"normal\",
+     * \"position\": 1
+     * }
+     * ],
+     * \"sat\": [
+     * {
+     * \"start\": \"07:00\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"normal\",
+     * \"position\": 0
+     * }
+     * ],
+     * \"sun\": [
+     * {
+     * \"start\": \"05:50\",
+     * \"end\": \"12:00\",
+     * \"mode\": \"normal\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"18:00\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"normal\",
+     * \"position\": 1
+     * }
+     * ]
+     * }"
+     * @param null $circuitId
+     * @param $schedule
+     * @return array
+     * @throws ViessmannApiException
+     */
+    public function setRawHeatingSchedule($schedule, $circuitId = NULL)
+    {
+        $data = "{\"newSchedule\": $schedule}";
+        $this->setRawJsonData($this->buildFeature($circuitId, self::HEATING_SCHEDULE), "setSchedule", $data);
+    }
     public function getHeatingBurnerCurrentPower()
     {
         return $this->getEntity(ViessmannFeature::HEATING_BURNER_CURRENT_POWER)->getProperty("value")["value"];

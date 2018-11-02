@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="resources/style.css">
 
     <title>
-        Class Viessmann\API\ViessmannAPI | ApiGen Docs
+        Class Viessmann\API\ViessmannAPI | Viessmann Api
     </title>
 </head>
 
@@ -23,7 +23,7 @@
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="index.html">
-                                ApiGen Docs
+                                Viessmann Api
                             </a>
                         </li>
 
@@ -153,7 +153,6 @@
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#49-52">getFeatures</a>( )</code>
 
                             <div class="description">
-                                return: String a json string that contains all the features at once in Siren Json style
 
 
                             </div>
@@ -179,8 +178,6 @@
                                 )</code>
 
                             <div class="description">
-                                return: string the outside temperature if available
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -206,8 +203,6 @@
                                 )</code>
 
                             <div class="description">
-                                return: string the current Boiler Temperature
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -230,13 +225,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_getRoomTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#77-80">getRoomTemperature</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string the Room temperature
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -258,14 +250,11 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getSlope">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#87-90">getSlope</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#87-90">getSlope</a>( <span> null <span
+                                    class="property-name">$circuitId</span> = <span
+                                    class="php-keyword1">NULL</span></span> )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string the slope configured
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -287,14 +276,11 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getShift">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#97-100">getShift</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#97-100">getShift</a>( <span> null <span
+                                    class="property-name">$circuitId</span> = <span
+                                    class="php-keyword1">NULL</span></span> )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string the shift configured
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -318,13 +304,11 @@
                             <a class="anchor pull-right" href="#_setCurve">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#107-110">setCurve</a>(
                                 <span> <span class="property-name">$shift</span> </span>, <span> <span
-                                        class="property-name">$slope</span> </span>, <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                        class="property-name">$slope</span> </span>, <span> null <span
+                                        class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: $shift the new shift to set
-                                param: $slope the new slope to set
-                                param: null $circuitId
 
 
                             </div>
@@ -347,14 +331,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_getActiveMode">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#117-120">getActiveMode</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string the activeMode(
-                                "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -377,15 +357,12 @@
                         <div>
                             <a class="anchor pull-right" href="#_setActiveMode">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#127-130">setActiveMode</a>(
-                                <span> <span class="property-name">$mode</span> </span>, <span> <span
+                                <span> <span class="property-name">$mode</span> </span>, <span> null <span
                                         class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
                                 )</code>
 
                             <div class="description">
                                 Set the active mode to the given mode
-                                param: $mode the activeMode(
-                                "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
-                                param: null $circuitId
 
 
                             </div>
@@ -408,14 +385,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_getActiveProgram">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#137-140">getActiveProgram</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string the active
-                                program("comfort","eco","external","holiday","normal","reduced", "standby")
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -442,8 +415,6 @@
                                 )</code>
 
                             <div class="description">
-                                return: bool true if heating burner is active. False otherwise
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -470,8 +441,6 @@
                                         class="php-keyword1">NULL</span></span> )</code>
 
                             <div class="description">
-                                return: bool true if DhwMode is active. False otherwise
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -494,13 +463,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_getComfortProgramTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#165-168">getComfortProgramTemperature</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string Conformat program temperature insntruction
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -523,13 +489,11 @@
                         <div>
                             <a class="anchor pull-right" href="#_setComfortProgramTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#174-177">setComfortProgramTemperature</a>(
-                                <span> <span class="property-name">$temperature</span> </span>, <span> <span
+                                <span> <span class="property-name">$temperature</span> </span>, <span> null <span
                                         class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
                                 )</code>
 
                             <div class="description">
-                                param: $temperature onformat program temperature insntruction
-                                param: null $circuitId
 
 
                             </div>
@@ -552,13 +516,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_getEcoProgramTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#184-187">getEcoProgramTemperature</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string Eco program temperature insntruction
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -635,13 +596,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_getExternalProgramTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#204-207">getExternalProgramTemperature</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string External program temperature insntruction
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -664,14 +622,11 @@
                         <div>
                             <a class="anchor pull-right" href="#_setExternalProgramTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#214-217">setExternalProgramTemperature</a>(
-                                <span> <span class="property-name">$temperature</span> </span>, <span> <span
+                                <span> null <span class="property-name">$temperature</span> </span>, <span> <span
                                         class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
                                 )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string External program temperature insntruction
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -694,13 +649,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_getNormalProgramTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#224-227">getNormalProgramTemperature</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string Normal program temperature insntruction
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -723,14 +675,11 @@
                         <div>
                             <a class="anchor pull-right" href="#_setNormalProgramTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#234-237">setNormalProgramTemperature</a>(
-                                <span> <span class="property-name">$temperature</span> </span>, <span> <span
+                                <span> null <span class="property-name">$temperature</span> </span>, <span> <span
                                         class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
                                 )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string Normal program temperature insntruction
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -753,13 +702,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_getReducedProgramTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#244-247">getReducedProgramTemperature</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string Reduced program temperature insntruction
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -782,14 +728,11 @@
                         <div>
                             <a class="anchor pull-right" href="#_setReducedProgramTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#254-257">setReducedProgramTemperature</a>(
-                                <span> <span class="property-name">$temperature</span> </span>, <span> <span
+                                <span> null <span class="property-name">$temperature</span> </span>, <span> <span
                                         class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
                                 )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: string Reduced program temperature insntruction
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -812,13 +755,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_isInStandbyMode">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#264-267">isInStandbyMode</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: bool true if is standy. False otherwise
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -867,13 +807,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_getHotWaterStorageTemperature">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#279-282">getHotWaterStorageTemperature</a>(
-                                <span> <span class="property-name">$circuit</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                <span> null <span class="property-name">$circuit</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuit
-                                return: string Hot Water storage temperature
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -897,23 +834,13 @@
                             <a class="anchor pull-right" href="#_getDhwGasConsumption">#</a>
                             <code><a
                                     href="source-class-Viessmann.API.ViessmannAPI.html#293-296">getDhwGasConsumption</a>(
-                                <span> <span class="property-name">$period</span> = <span class="php-quote">'day'</span></span>
-                                )</code>
+                                <span> string <span class="property-name">$period</span> = <span
+                                        class="php-quote">'day'</span></span> )</code>
 
                             <div class="description">
                                 Return the Gas consumption for DHW. A period is needeed amongs
                                 day(default),week,month,year. Currently the number are not the same that displayed on
                                 heating device
-                                param: string $period amongst enume "day","week","month","year
-                                return: if day an array containing daily consommation for the last 7 days(each entry is
-                                consumption for a day)
-                                if week an array containing weekly consommation for the last 52 weeks(each entry is
-                                consumption for a week)
-                                if month an array containing monthly consommation for the last 12 month(each entry is
-                                consumption for one month)
-                                if year an array containing yearly consommation for the last 2 years(each entry is
-                                consumption for one year)
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -936,23 +863,13 @@
                         <div>
                             <a class="anchor pull-right" href="#_getHeatingGasConsumption">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#307-310">getHeatingGasConsumption</a>(
-                                <span> <span class="property-name">$period</span> = <span class="php-quote">'day'</span></span>
-                                )</code>
+                                <span> string <span class="property-name">$period</span> = <span
+                                        class="php-quote">'day'</span></span> )</code>
 
                             <div class="description">
                                 Return the Gas consumption for Heating. A period is needeed amongs
                                 day(default),week,month,year. Currently the number are not the same that displayed on
                                 heating device
-                                param: string $period amongst enume "day","week","month","year
-                                return: if day an array containing daily consommation for the last 7 days(each entry is
-                                consumption for a day)
-                                if week an array containing weekly consommation for the last 52 weeks(each entry is
-                                consumption for a week)
-                                if month an array containing monthly consommation for the last 12 month(each entry is
-                                consumption for one month)
-                                if year an array containing yearly consommation for the last 2 years(each entry is
-                                consumption for one year)
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -975,14 +892,10 @@
                         <div>
                             <a class="anchor pull-right" href="#_getHeatingBurnerStatistics">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#317-320">getHeatingBurnerStatistics</a>(
-                                <span> <span class="property-name">$type</span> = <span class="php-quote">'hours'</span></span>
-                                )</code>
+                                <span> string <span class="property-name">$type</span> = <span
+                                        class="php-quote">'hours'</span></span> )</code>
 
                             <div class="description">
-                                param: string $type the type of statistics("hours":number of active hours or "starts":
-                                number of start)
-                                return: mixed number of hours or number of starts
-                                throws: ViessmannApiException
 
 
                             </div>
@@ -1005,21 +918,37 @@
                         <div>
                             <a class="anchor pull-right" href="#_getDhwSchedule">#</a>
                             <code><a href="source-class-Viessmann.API.ViessmannAPI.html#335-338">getDhwSchedule</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: map containing the Dhw schedule for each days in format:
-                                "mon": [
-                                {
-                                "start": "03:00",
-                                "end": "24:00",
-                                "mode": "on",
-                                "position": 1
-                                }
-                                ]
-                                throws: ViessmannApiException
+
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr id="_setRawDhwSchedule">
+
+                    <td class="attributes col-md-1">
+                        <code class="keyword">
+                            public
+
+
+                        </code>
+                    </td>
+
+                    <td class="name">
+                        <div>
+                            <a class="anchor pull-right" href="#_setRawDhwSchedule">#</a>
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#347-351">setRawDhwSchedule</a>(
+                                <span> null <span class="property-name">$schedule</span> </span>, <span> <span
+                                        class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
+
+                            <div class="description">
+                                Replace the full schedule for DHW
 
 
                             </div>
@@ -1042,22 +971,39 @@
                         <div>
                             <a class="anchor pull-right" href="#_getCirculationSchedule">#</a>
                             <code><a
-                                    href="source-class-Viessmann.API.ViessmannAPI.html#353-356">getCirculationSchedule</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                                    href="source-class-Viessmann.API.ViessmannAPI.html#366-369">getCirculationSchedule</a>(
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: map containing the Circulation schedule for each days in format:
-                                "mon": [
-                                {
-                                "start": "03:00",
-                                "end": "24:00",
-                                "mode": "on",
-                                "position": 1
-                                }
-                                ]
-                                throws: ViessmannApiException
+
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr id="_setRawCirculationSchedule">
+
+                    <td class="attributes col-md-1">
+                        <code class="keyword">
+                            public
+
+
+                        </code>
+                    </td>
+
+                    <td class="name">
+                        <div>
+                            <a class="anchor pull-right" href="#_setRawCirculationSchedule">#</a>
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#377-381">setRawCirculationSchedule</a>(
+                                <span> <span class="property-name">$schedule</span> </span>, <span> null <span
+                                        class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
+
+                            <div class="description">
+                                Post a complete new schedule. Warning !!! this would erase all previous schedule.
 
 
                             </div>
@@ -1079,22 +1025,110 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getHeatingSchedule">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#371-374">getHeatingSchedule</a>(
-                                <span> <span class="property-name">$circuitId</span> = <span
-                                        class="php-keyword1">NULL</span></span> )</code>
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#395-398">getHeatingSchedule</a>(
+                                <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
 
                             <div class="description">
-                                param: null $circuitId
-                                return: map containing the Heating schedule for each days in format:
-                                "mon": [
+
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr id="_setRawHeatingSchedule">
+
+                    <td class="attributes col-md-1">
+                        <code class="keyword">
+                            public
+
+
+                        </code>
+                    </td>
+
+                    <td class="name">
+                        <div>
+                            <a class="anchor pull-right" href="#_setRawHeatingSchedule">#</a>
+                            <code><a
+                                    href="source-class-Viessmann.API.ViessmannAPI.html#476-480">setRawHeatingSchedule</a>(
+                                <span> null <span class="property-name">$schedule</span> </span>, <span> <span
+                                        class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
+                                )</code>
+
+                            <div class="description">
+                                Replace the full schedule for Heating:
+                                "{
+                                \"mon\": [
                                 {
-                                "start": "03:00",
-                                "end": "24:00",
-                                "mode": "on",
-                                "position": 1
+                                \"start\": \"07:30\",
+                                \"end\": \"22:00\",
+                                \"mode\": \"normal\",
+                                \"position\": 0
+                                }
+                                ],
+                                \"tue\": [
+                                {
+                                \"start\": \"05:50\",
+                                \"end\": \"22:00\",
+                                \"mode\": \"normal\",
+                                \"position\": 0
+                                }
+                                ],
+                                \"wed\": [
+                                {
+                                \"start\": \"05:50\",
+                                \"end\": \"22:00\",
+                                \"mode\": \"normal\",
+                                \"position\": 0
+                                }
+                                ],
+                                \"thu\": [
+                                {
+                                \"start\": \"05:50\",
+                                \"end\": \"22:00\",
+                                \"mode\": \"normal\",
+                                \"position\": 0
+                                }
+                                ],
+                                \"fri\": [
+                                {
+                                \"start\": \"05:50\",
+                                \"end\": \"08:00\",
+                                \"mode\": \"normal\",
+                                \"position\": 0
+                                },
+                                {
+                                \"start\": \"16:00\",
+                                \"end\": \"22:00\",
+                                \"mode\": \"normal\",
+                                \"position\": 1
+                                }
+                                ],
+                                \"sat\": [
+                                {
+                                \"start\": \"07:00\",
+                                \"end\": \"22:00\",
+                                \"mode\": \"normal\",
+                                \"position\": 0
+                                }
+                                ],
+                                \"sun\": [
+                                {
+                                \"start\": \"05:50\",
+                                \"end\": \"12:00\",
+                                \"mode\": \"normal\",
+                                \"position\": 0
+                                },
+                                {
+                                \"start\": \"18:00\",
+                                \"end\": \"22:00\",
+                                \"mode\": \"normal\",
+                                \"position\": 1
                                 }
                                 ]
-                                throws: ViessmannApiException
+                                }"
 
 
                             </div>
@@ -1116,7 +1150,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getHeatingBurnerCurrentPower">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#376-379">getHeatingBurnerCurrentPower</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#481-484">getHeatingBurnerCurrentPower</a>(
                                 )</code>
 
                             <div class="description">
@@ -1141,7 +1175,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getHeatingBurnerModulation">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#381-384">getHeatingBurnerModulation</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#486-489">getHeatingBurnerModulation</a>(
                                 )</code>
 
                             <div class="description">
@@ -1166,7 +1200,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getCirculationPumpStatus">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#386-389">getCirculationPumpStatus</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#491-494">getCirculationPumpStatus</a>(
                                 <span> <span class="property-name">$circuitId</span> = <span
                                         class="php-keyword1">NULL</span></span> )</code>
 
@@ -1192,7 +1226,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_isDhwCharging">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#391-394">isDhwCharging</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#496-499">isDhwCharging</a>(
                                 )</code>
 
                             <div class="description">
@@ -1217,7 +1251,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getDhwChargingLevel">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#396-399">getDhwChargingLevel</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#501-504">getDhwChargingLevel</a>(
                                 )</code>
 
                             <div class="description">
@@ -1242,7 +1276,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_isOneTimeDhwCharge">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#401-404">isOneTimeDhwCharge</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#506-509">isOneTimeDhwCharge</a>(
                                 )</code>
 
                             <div class="description">
@@ -1268,7 +1302,7 @@
                         <div>
                             <a class="anchor pull-right" href="#_getDhwPumpsCirculation">#</a>
                             <code><a
-                                    href="source-class-Viessmann.API.ViessmannAPI.html#406-409">getDhwPumpsCirculation</a>(
+                                    href="source-class-Viessmann.API.ViessmannAPI.html#511-514">getDhwPumpsCirculation</a>(
                                 )</code>
 
                             <div class="description">
@@ -1293,7 +1327,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getDhwPumpsPrimary">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#411-414">getDhwPumpsPrimary</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#516-519">getDhwPumpsPrimary</a>(
                                 )</code>
 
                             <div class="description">
@@ -1319,7 +1353,7 @@
                         <div>
                             <a class="anchor pull-right" href="#_getDhwTemperatureOutlet">#</a>
                             <code><a
-                                    href="source-class-Viessmann.API.ViessmannAPI.html#416-419">getDhwTemperatureOutlet</a>(
+                                    href="source-class-Viessmann.API.ViessmannAPI.html#521-524">getDhwTemperatureOutlet</a>(
                                 )</code>
 
                             <div class="description">
@@ -1344,7 +1378,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getDhwTemperature">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#421-424">getDhwTemperature</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#526-529">getDhwTemperature</a>(
                                 )</code>
 
                             <div class="description">
@@ -1369,7 +1403,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_setDhwTemperature">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#426-430">setDhwTemperature</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#531-535">setDhwTemperature</a>(
                                 <span> <span class="property-name">$temperature</span> </span> )</code>
 
                             <div class="description">
@@ -1394,7 +1428,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_setRawJsonData">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#432-435">setRawJsonData</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#537-540">setRawJsonData</a>(
                                 <span> <span class="property-name">$feature</span> </span>, <span> <span
                                         class="property-name">$action</span> </span>, <span> <span
                                         class="property-name">$data</span> </span> )</code>
@@ -1421,7 +1455,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getRawJsonData">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#437-444">getRawJsonData</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#542-549">getRawJsonData</a>(
                                 <span> <span class="property-name">$resources</span> </span> )</code>
 
                             <div class="description">
