@@ -942,13 +942,70 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_setRawDhwSchedule">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#347-351">setRawDhwSchedule</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#404-408">setRawDhwSchedule</a>(
                                 <span> null <span class="property-name">$schedule</span> </span>, <span> <span
                                         class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
                                 )</code>
 
                             <div class="description">
-                                Replace the full schedule for DHW
+                                Replace the full schedule for DHW. Sample of schedule:
+                                "{"\"mon\": [
+                                {
+                                \"start\": \"03:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 1
+                                }
+                                ],
+                                \"tue\": [
+                                {
+                                \"start\": \"03:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 3
+                                }
+                                ],
+                                \"wed\": [
+                                {
+                                \"start\": \"02:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 2
+                                }
+                                ],
+                                \"thu\": [
+                                {
+                                \"start\": \"03:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 0
+                                }
+                                ],
+                                \"fri\": [
+                                {
+                                \"start\": \"03:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 4
+                                }
+                                ],
+                                \"sat\": [
+                                {
+                                \"start\": \"03:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 0
+                                }
+                                ],
+                                \"sun\": [
+                                {
+                                \"start\": \"03:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 0
+                                }
+                                ]
+                                }"
 
 
                             </div>
@@ -971,7 +1028,7 @@
                         <div>
                             <a class="anchor pull-right" href="#_getCirculationSchedule">#</a>
                             <code><a
-                                    href="source-class-Viessmann.API.ViessmannAPI.html#366-369">getCirculationSchedule</a>(
+                                    href="source-class-Viessmann.API.ViessmannAPI.html#423-426">getCirculationSchedule</a>(
                                 <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
                                 )</code>
 
@@ -997,13 +1054,180 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_setRawCirculationSchedule">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#377-381">setRawCirculationSchedule</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#600-604">setRawCirculationSchedule</a>(
                                 <span> <span class="property-name">$schedule</span> </span>, <span> null <span
                                         class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
                                 )</code>
 
                             <div class="description">
                                 Post a complete new schedule. Warning !!! this would erase all previous schedule.
+                                Sample:
+                                "{
+                                \"mon\": [
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 0
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 1
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 2
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 3
+                                }
+                                ],
+                                \"tue\": [
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"23:50\",
+                                \"mode\": \"on\",
+                                \"position\": 0
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"00:10\",
+                                \"mode\": \"on\",
+                                \"position\": 1
+                                },
+                                {
+                                \"start\": \"23:20\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 2
+                                },
+                                {
+                                \"start\": \"05:30\",
+                                \"end\": \"22:00\",
+                                \"mode\": \"on\",
+                                \"position\": 3
+                                }
+                                ],
+                                \"wed\": [
+                                {
+                                \"start\": \"05:30\",
+                                \"end\": \"22:00\",
+                                \"mode\": \"on\",
+                                \"position\": 0
+                                }
+                                ],
+                                \"thu\": [
+                                {
+                                \"start\": \"05:30\",
+                                \"end\": \"20:00\",
+                                \"mode\": \"on\",
+                                \"position\": 0
+                                },
+                                {
+                                \"start\": \"02:30\",
+                                \"end\": \"11:00\",
+                                \"mode\": \"on\",
+                                \"position\": 1
+                                },
+                                {
+                                \"start\": \"17:30\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 2
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"08:00\",
+                                \"mode\": \"on\",
+                                \"position\": 3
+                                }
+                                ],
+                                \"fri\": [
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 0
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 1
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 2
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 3
+                                }
+                                ],
+                                \"sat\": [
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"23:30\",
+                                \"mode\": \"on\",
+                                \"position\": 0
+                                },
+                                {
+                                \"start\": \"00:30\",
+                                \"end\": \"23:00\",
+                                \"mode\": \"on\",
+                                \"position\": 1
+                                },
+                                {
+                                \"start\": \"01:00\",
+                                \"end\": \"22:30\",
+                                \"mode\": \"on\",
+                                \"position\": 2
+                                },
+                                {
+                                \"start\": \"01:30\",
+                                \"end\": \"22:00\",
+                                \"mode\": \"on\",
+                                \"position\": 3
+                                }
+                                ],
+                                \"sun\": [
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 0
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 1
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 2
+                                },
+                                {
+                                \"start\": \"00:00\",
+                                \"end\": \"24:00\",
+                                \"mode\": \"on\",
+                                \"position\": 3
+                                }
+                                ]
+                                }"
 
 
                             </div>
@@ -1025,7 +1249,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getHeatingSchedule">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#395-398">getHeatingSchedule</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#618-621">getHeatingSchedule</a>(
                                 <span> null <span class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
                                 )</code>
 
@@ -1052,13 +1276,13 @@
                         <div>
                             <a class="anchor pull-right" href="#_setRawHeatingSchedule">#</a>
                             <code><a
-                                    href="source-class-Viessmann.API.ViessmannAPI.html#476-480">setRawHeatingSchedule</a>(
+                                    href="source-class-Viessmann.API.ViessmannAPI.html#700-704">setRawHeatingSchedule</a>(
                                 <span> null <span class="property-name">$schedule</span> </span>, <span> <span
                                         class="property-name">$circuitId</span> = <span class="php-keyword1">NULL</span></span>
                                 )</code>
 
                             <div class="description">
-                                Replace the full schedule for Heating:
+                                Replace the full schedule for Heating. Sample of schedule
                                 "{
                                 \"mon\": [
                                 {
@@ -1150,7 +1374,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getHeatingBurnerCurrentPower">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#481-484">getHeatingBurnerCurrentPower</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#705-708">getHeatingBurnerCurrentPower</a>(
                                 )</code>
 
                             <div class="description">
@@ -1175,7 +1399,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getHeatingBurnerModulation">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#486-489">getHeatingBurnerModulation</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#710-713">getHeatingBurnerModulation</a>(
                                 )</code>
 
                             <div class="description">
@@ -1200,7 +1424,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getCirculationPumpStatus">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#491-494">getCirculationPumpStatus</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#715-718">getCirculationPumpStatus</a>(
                                 <span> <span class="property-name">$circuitId</span> = <span
                                         class="php-keyword1">NULL</span></span> )</code>
 
@@ -1226,7 +1450,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_isDhwCharging">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#496-499">isDhwCharging</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#720-723">isDhwCharging</a>(
                                 )</code>
 
                             <div class="description">
@@ -1251,7 +1475,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getDhwChargingLevel">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#501-504">getDhwChargingLevel</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#725-728">getDhwChargingLevel</a>(
                                 )</code>
 
                             <div class="description">
@@ -1276,7 +1500,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_isOneTimeDhwCharge">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#506-509">isOneTimeDhwCharge</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#730-733">isOneTimeDhwCharge</a>(
                                 )</code>
 
                             <div class="description">
@@ -1302,7 +1526,7 @@
                         <div>
                             <a class="anchor pull-right" href="#_getDhwPumpsCirculation">#</a>
                             <code><a
-                                    href="source-class-Viessmann.API.ViessmannAPI.html#511-514">getDhwPumpsCirculation</a>(
+                                    href="source-class-Viessmann.API.ViessmannAPI.html#735-738">getDhwPumpsCirculation</a>(
                                 )</code>
 
                             <div class="description">
@@ -1327,7 +1551,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getDhwPumpsPrimary">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#516-519">getDhwPumpsPrimary</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#740-743">getDhwPumpsPrimary</a>(
                                 )</code>
 
                             <div class="description">
@@ -1353,7 +1577,7 @@
                         <div>
                             <a class="anchor pull-right" href="#_getDhwTemperatureOutlet">#</a>
                             <code><a
-                                    href="source-class-Viessmann.API.ViessmannAPI.html#521-524">getDhwTemperatureOutlet</a>(
+                                    href="source-class-Viessmann.API.ViessmannAPI.html#745-748">getDhwTemperatureOutlet</a>(
                                 )</code>
 
                             <div class="description">
@@ -1378,7 +1602,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getDhwTemperature">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#526-529">getDhwTemperature</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#750-753">getDhwTemperature</a>(
                                 )</code>
 
                             <div class="description">
@@ -1403,7 +1627,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_setDhwTemperature">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#531-535">setDhwTemperature</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#755-759">setDhwTemperature</a>(
                                 <span> <span class="property-name">$temperature</span> </span> )</code>
 
                             <div class="description">
@@ -1428,7 +1652,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_setRawJsonData">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#537-540">setRawJsonData</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#761-764">setRawJsonData</a>(
                                 <span> <span class="property-name">$feature</span> </span>, <span> <span
                                         class="property-name">$action</span> </span>, <span> <span
                                         class="property-name">$data</span> </span> )</code>
@@ -1455,7 +1679,7 @@
                     <td class="name">
                         <div>
                             <a class="anchor pull-right" href="#_getRawJsonData">#</a>
-                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#542-549">getRawJsonData</a>(
+                            <code><a href="source-class-Viessmann.API.ViessmannAPI.html#766-773">getRawJsonData</a>(
                                 <span> <span class="property-name">$resources</span> </span> )</code>
 
                             <div class="description">

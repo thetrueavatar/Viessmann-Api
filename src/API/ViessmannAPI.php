@@ -338,7 +338,64 @@ final class ViessmannAPI
     }
 
     /**
-     * Replace the full schedule for DHW
+     * Replace the full schedule for DHW. Sample of schedule:
+     * "{"\"mon\": [
+     * {
+     * \"start\": \"03:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * }
+     * ],
+     * \"tue\": [
+     * {
+     * \"start\": \"03:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"wed\": [
+     * {
+     * \"start\": \"02:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * }
+     * ],
+     * \"thu\": [
+     * {
+     * \"start\": \"03:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * }
+     * ],
+     * \"fri\": [
+     * {
+     * \"start\": \"03:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 4
+     * }
+     * ],
+     * \"sat\": [
+     * {
+     * \"start\": \"03:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * }
+     * ],
+     * \"sun\": [
+     * {
+     * \"start\": \"03:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * }
+     * ]
+     * }"
      * @param null $circuitId
      * @param $schedule
      * @return array
@@ -369,7 +426,173 @@ final class ViessmannAPI
     }
 
     /**
-     * Post a complete new schedule. Warning !!! this would erase all previous schedule.
+     * Post a complete new schedule. Warning !!! this would erase all previous schedule. Sample:
+     * "{
+    \"mon\": [
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 0
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 1
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 2
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 3
+    }
+    ],
+    \"tue\": [
+    {
+    \"start\": \"00:00\",
+    \"end\": \"23:50\",
+    \"mode\": \"on\",
+    \"position\": 0
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"00:10\",
+    \"mode\": \"on\",
+    \"position\": 1
+    },
+    {
+    \"start\": \"23:20\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 2
+    },
+    {
+    \"start\": \"05:30\",
+    \"end\": \"22:00\",
+    \"mode\": \"on\",
+    \"position\": 3
+    }
+    ],
+    \"wed\": [
+    {
+    \"start\": \"05:30\",
+    \"end\": \"22:00\",
+    \"mode\": \"on\",
+    \"position\": 0
+    }
+    ],
+    \"thu\": [
+    {
+    \"start\": \"05:30\",
+    \"end\": \"20:00\",
+    \"mode\": \"on\",
+    \"position\": 0
+    },
+    {
+    \"start\": \"02:30\",
+    \"end\": \"11:00\",
+    \"mode\": \"on\",
+    \"position\": 1
+    },
+    {
+    \"start\": \"17:30\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 2
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"08:00\",
+    \"mode\": \"on\",
+    \"position\": 3
+    }
+    ],
+    \"fri\": [
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 0
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 1
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 2
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 3
+    }
+    ],
+    \"sat\": [
+    {
+    \"start\": \"00:00\",
+    \"end\": \"23:30\",
+    \"mode\": \"on\",
+    \"position\": 0
+    },
+    {
+    \"start\": \"00:30\",
+    \"end\": \"23:00\",
+    \"mode\": \"on\",
+    \"position\": 1
+    },
+    {
+    \"start\": \"01:00\",
+    \"end\": \"22:30\",
+    \"mode\": \"on\",
+    \"position\": 2
+    },
+    {
+    \"start\": \"01:30\",
+    \"end\": \"22:00\",
+    \"mode\": \"on\",
+    \"position\": 3
+    }
+    ],
+    \"sun\": [
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 0
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 1
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 2
+    },
+    {
+    \"start\": \"00:00\",
+    \"end\": \"24:00\",
+    \"mode\": \"on\",
+    \"position\": 3
+    }
+    ]
+    }"
      *
      * @param $schedule the schedule(see format above
      * @param null $circuitId
@@ -398,7 +621,7 @@ final class ViessmannAPI
     }
 
     /**
-     * Replace the full schedule for Heating:
+     * Replace the full schedule for Heating. Sample of schedule
      * "{
      * \"mon\": [
      * {
