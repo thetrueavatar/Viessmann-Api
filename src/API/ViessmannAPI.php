@@ -186,9 +186,12 @@ final class ViessmannAPI
         return $this->getEntity($this->buildFeature($circuitId, self::ECO_PROGRAM))->getProperty("temperature")["value"];
     }
 
-    public function activateEcoProgram($temperature, $circuitId = NULL)
+    public function activateEcoProgram($temperature = NULL, $circuitId = NULL)
     {
-        $this->setRawJsonData($this->buildFeature($circuitId, self::ECO_PROGRAM), "activate", "{\"temperature\":" . $temperature . "}");
+        if (isset($temperature)) {
+            $data = "{\"temperature\":\"" . $temperature . "\"}";
+        }
+        $this->setRawJsonData($this->buildFeature($circuitId, self::ECO_PROGRAM), "activate", $data);
     }
 
     public function deActivateEcoProgram($circuitId = NULL)
