@@ -1,3 +1,3 @@
 <?php
 include __DIR__ . '/bootstrap.php';
-print_r($viessmannApi->getCirculationSchedule());
+echo json_encode($viessmannApi->getCirculationSchedule());
