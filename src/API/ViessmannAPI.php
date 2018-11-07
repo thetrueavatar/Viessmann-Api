@@ -324,7 +324,7 @@ final class ViessmannAPI
 
     /**
      * @param null $circuitId
-     * @return map containing the Dhw schedule for each days in format:
+     * @return json containing the Dhw schedule for each days in format:
      * "mon": [
      * {
      * "start": "03:00",
@@ -335,9 +335,9 @@ final class ViessmannAPI
      * ]
      * @throws ViessmannApiException
      */
-    public function getDhwSchedule()
+    public function getDhwSchedule(): string
     {
-        return $this->getEntity(ViessmannFeature::HEATING_DHW_SCHEDULE)->getProperties();
+        return json_encode($this->getEntity(ViessmannFeature::HEATING_DHW_SCHEDULE)->getProperties());
     }
 
     /**
@@ -412,7 +412,7 @@ final class ViessmannAPI
 
     /**
      * @param null $circuitId
-     * @return map containing the Circulation schedule for each days in format:
+     * @return json containing the Circulation schedule for each days in format:
      * "mon": [
      * {
      * "start": "03:00",
@@ -423,9 +423,9 @@ final class ViessmannAPI
      * ]
      * @throws ViessmannApiException
      */
-    public function getCirculationSchedule($circuitId = NULL)
+    public function getCirculationSchedule($circuitId = NULL): string
     {
-        return $this->getEntity($this->buildFeature($circuitId, self::CIRCULATION_SCHEDULE))->getProperties();
+        return json_encode($this->getEntity($this->buildFeature($circuitId, self::CIRCULATION_SCHEDULE))->getProperties());
     }
 
     /**
@@ -607,7 +607,7 @@ final class ViessmannAPI
     }
     /**
      * @param null $circuitId
-     * @return map containing the Heating schedule for each days in format:
+     * @return json containing the Heating schedule for each days in format:
      * "mon": [
      * {
      * "start": "03:00",
@@ -620,7 +620,7 @@ final class ViessmannAPI
      */
     public function getHeatingSchedule($circuitId = NULL)
     {
-        return $this->getEntity($this->buildFeature($circuitId, self::HEATING_SCHEDULE))->getProperties();
+        return json_encode($this->getEntity($this->buildFeature($circuitId, self::HEATING_SCHEDULE))->getProperties());
     }
 
     /**
