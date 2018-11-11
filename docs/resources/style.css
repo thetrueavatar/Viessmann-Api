@@ -58,7 +58,6 @@ pre {
     text-decoration: line-through;
     opacity: .5;
 }
-
 .deprecated span, .deprecated a {
     text-decoration: line-through;
 }
@@ -255,24 +254,19 @@ table .name > div > .description {
     background: none;
     border: 0;
 }
-
 #source pre.numbers {
     padding-right: 0;
 }
-
 #source pre.numbers a {
     background: transparent;
     color: #929292 !important;
 }
-
 #source pre.code {
     padding-left: 0;
 }
-
 #source pre.code span {
     white-space: pre;
 }
-
 .php-keyword1 {
     color: #e71818;
     font-weight: bold;
@@ -367,7 +361,6 @@ code {
     background: none;
     color: inherit;
 }
-
 code.keyword {
     color: #c7254e;
 }

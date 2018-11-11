@@ -719,7 +719,10 @@
                             id="794" class="l"><a href="#794">794: </a></span><span id="795" class="l"><a href="#795">795: </a></span><span
                             id="796" class="l"><a href="#796">796: </a></span><span id="797" class="l"><a href="#797">797: </a></span><span
                             id="798" class="l"><a href="#798">798: </a></span><span id="799" class="l"><a href="#799">799: </a></span><span
-                            id="800" class="l"><a href="#800">800: </a></span></code></pre>
+                            id="800" class="l"><a href="#800">800: </a></span><span id="801" class="l"><a href="#801">801: </a></span><span
+                            id="802" class="l"><a href="#802">802: </a></span><span id="803" class="l"><a href="#803">803: </a></span><span
+                            id="804" class="l"><a href="#804">804: </a></span><span id="805" class="l"><a href="#805">805: </a></span><span
+                            id="806" class="l"><a href="#806">806: </a></span><span id="807" class="l"><a href="#807">807: </a></span></code></pre>
                 <pre class="code"><code><span class="l" id="line-1"><span class="xlang">&lt;?php</span>
 </span><span class="l" id="line-2">
 </span><span class="l" id="line-3"><span class="php-keyword1">namespace</span> Viessmann\API;
@@ -1202,7 +1205,7 @@
 </span></span><span class="l" id="line-336"><span class="php-comment">     * @throws ViessmannApiException
 </span></span><span class="l" id="line-337"><span class="php-comment">     */</span>
 </span><span class="l" id="line-338">    <span class="php-keyword1">public</span> <span
-                        class="php-keyword1">function</span> getDhwSchedule():string
+                        class="php-keyword1">function</span> getDhwSchedule(): string
 </span><span class="l" id="line-339">    {
 </span><span class="l" id="line-340">        <span class="php-keyword1">return</span> <span class="php-keyword2">json_encode</span>(<span
                         class="php-var">$this</span>-&gt;getEntity(ViessmannFeature::HEATING_DHW_SCHEDULE)-&gt;getProperties());
@@ -1299,7 +1302,7 @@
 </span></span><span class="l" id="line-425"><span class="php-comment">     */</span>
 </span><span class="l" id="line-426">    <span class="php-keyword1">public</span> <span
                         class="php-keyword1">function</span> getCirculationSchedule(<span
-                        class="php-var">$circuitId</span> = <span class="php-keyword1">NULL</span>):string
+                        class="php-var">$circuitId</span> = <span class="php-keyword1">NULL</span>): string
 </span><span class="l" id="line-427">    {
 </span><span class="l" id="line-428">        <span class="php-keyword1">return</span> <span class="php-keyword2">json_encode</span>(<span
                         class="php-var">$this</span>-&gt;getEntity(<span
@@ -1684,65 +1687,87 @@
                         class="php-keyword1">function</span> setRawJsonData(<span class="php-var">$feature</span>, <span
                         class="php-var">$action</span>, <span class="php-var">$data</span>)
 </span><span class="l" id="line-765">    {
-</span><span class="l" id="line-766">        <span class="php-var">$this</span>-&gt;viessmanAuthClient-&gt;setData(<span
-                        class="php-var">$feature</span>, <span class="php-var">$action</span>, <span class="php-var">$data</span>);
-</span><span class="l" id="line-767">    }
-</span><span class="l" id="line-768">
-</span><span class="l" id="line-769">    <span class="php-keyword1">public</span> <span
-                        class="php-keyword1">function</span> getRawJsonData(<span class="php-var">$resources</span>): string
-</span><span class="l" id="line-770">    {
-</span><span class="l" id="line-771">        <span class="php-keyword1">try</span> {
-</span><span class="l" id="line-772">            <span class="php-keyword1">return</span> <span
-                        class="php-var">$this</span>-&gt;viessmanAuthClient-&gt;readData(<span class="php-var">$resources</span>);
-</span><span class="l" id="line-773">        } <span class="php-keyword1">catch</span> (TokenResponseException <span
+</span><span class="l" id="line-766">        <span class="php-keyword1">try</span>{
+</span><span class="l" id="line-767">            <span class="php-var">$data</span>=<span class="php-keyword2">json_decode</span>(<span
+                        class="php-var">$this</span>-&gt;viessmanAuthClient-&gt;setData(<span
+                        class="php-var">$feature</span>, <span class="php-var">$action</span>, <span class="php-var">$data</span>),<span
+                        class="php-keyword1">true</span>);
+</span><span class="l" id="line-768">            <span class="php-keyword1">if</span> (<span
+                        class="php-keyword1">isset</span>(<span class="php-var">$data</span>[<span class="php-quote">&quot;statusCode&quot;</span>])) {
+</span><span class="l" id="line-769">                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ViessmannApiException(<span
+                        class="php-quote">&quot;Unable to set data for feature&quot;</span> . <span class="php-var">$feature</span>. <span
+                        class="php-quote">&quot;and action &quot;</span>.<span class="php-var">$action</span>. <span
+                        class="php-quote">&quot; and data&quot;</span>. <span class="php-var">$data</span>. <span
+                        class="php-quote">&quot;\n Reason: &quot;</span> . <span class="php-var">$data</span>[<span
+                        class="php-quote">&quot;message&quot;</span>], <span class="php-num">1</span>);
+</span><span class="l" id="line-770">            }
+</span><span class="l" id="line-771">        } <span class="php-keyword1">catch</span> (TokenResponseException <span
                         class="php-var">$e</span>) {
-</span><span class="l" id="line-774">            <span class="php-keyword1">throw</span> <span
+</span><span class="l" id="line-772">            <span class="php-keyword1">throw</span> <span
+                        class="php-keyword1">new</span> ViessmannApiException(<span class="php-quote">&quot;Unable to set data for feature&quot;</span> . <span
+                        class="php-var">$feature</span>. <span class="php-quote">&quot;and action &quot;</span>.<span
+                        class="php-var">$action</span>. <span class="php-quote">&quot;and data&quot;</span>. <span
+                        class="php-var">$data</span>. <span class="php-quote">&quot;\n Reason: &quot;</span> . <span
+                        class="php-var">$e</span>-&gt;getMessage(), <span class="php-num">1</span>, <span
+                        class="php-var">$e</span>);
+</span><span class="l" id="line-773">        }
+</span><span class="l" id="line-774">    }
+</span><span class="l" id="line-775">
+</span><span class="l" id="line-776">    <span class="php-keyword1">public</span> <span
+                        class="php-keyword1">function</span> getRawJsonData(<span class="php-var">$resources</span>): string
+</span><span class="l" id="line-777">    {
+</span><span class="l" id="line-778">        <span class="php-keyword1">try</span> {
+</span><span class="l" id="line-779">            <span class="php-keyword1">return</span> <span
+                        class="php-var">$this</span>-&gt;viessmanAuthClient-&gt;readData(<span class="php-var">$resources</span>);
+</span><span class="l" id="line-780">        } <span class="php-keyword1">catch</span> (TokenResponseException <span
+                        class="php-var">$e</span>) {
+</span><span class="l" id="line-781">            <span class="php-keyword1">throw</span> <span
                         class="php-keyword1">new</span> ViessmannApiException(<span class="php-quote">&quot;Unable to get data for feature&quot;</span> . <span
                         class="php-var">$resources</span> . <span
                         class="php-quote">&quot;\n Reason: &quot;</span> . <span class="php-var">$e</span>-&gt;getMessage(), <span
                         class="php-num">1</span>, <span class="php-var">$e</span>);
-</span><span class="l" id="line-775">        }
-</span><span class="l" id="line-776">    }
-</span><span class="l" id="line-777">
-</span><span class="l" id="line-778">    <span class="php-keyword1">private</span> <span
+</span><span class="l" id="line-782">        }
+</span><span class="l" id="line-783">    }
+</span><span class="l" id="line-784">
+</span><span class="l" id="line-785">    <span class="php-keyword1">private</span> <span
                         class="php-keyword1">function</span> getEntity(<span class="php-var">$resources</span>): Entity
-</span><span class="l" id="line-779">    {
-</span><span class="l" id="line-780">
-</span><span class="l" id="line-781">        <span class="php-var">$data</span> = <span
+</span><span class="l" id="line-786">    {
+</span><span class="l" id="line-787">
+</span><span class="l" id="line-788">        <span class="php-var">$data</span> = <span
                         class="php-keyword2">json_decode</span>(<span
                         class="php-var">$this</span>-&gt;getRawJsonData(<span class="php-var">$resources</span>), <span
                         class="php-keyword1">true</span>);
-</span><span class="l" id="line-782">        <span class="php-keyword1">if</span> (<span
+</span><span class="l" id="line-789">        <span class="php-keyword1">if</span> (<span
                         class="php-keyword1">isset</span>(<span class="php-var">$data</span>[<span class="php-quote">&quot;statusCode&quot;</span>])) {
-</span><span class="l" id="line-783">            <span class="php-keyword1">throw</span> <span
+</span><span class="l" id="line-790">            <span class="php-keyword1">throw</span> <span
                         class="php-keyword1">new</span> ViessmannApiException(<span class="php-quote">&quot;Unable to get data for feature &quot;</span> . <span
                         class="php-var">$resources</span> . <span
                         class="php-quote">&quot;\nReason: &quot;</span> . <span class="php-var">$data</span>[<span
                         class="php-quote">&quot;message&quot;</span>], <span class="php-num">1</span>);
-</span><span class="l" id="line-784">        }
-</span><span class="l" id="line-785">
-</span><span class="l" id="line-786">        <span class="php-keyword1">return</span> Entity::fromArray(<span
+</span><span class="l" id="line-791">        }
+</span><span class="l" id="line-792">
+</span><span class="l" id="line-793">        <span class="php-keyword1">return</span> Entity::fromArray(<span
                         class="php-var">$data</span>, <span class="php-keyword1">true</span>);
-</span><span class="l" id="line-787">
-</span><span class="l" id="line-788">    }
-</span><span class="l" id="line-789">
-</span><span class="l" id="line-790">
-</span><span class="l" id="line-791">    <span class="php-keyword1">private</span> <span
+</span><span class="l" id="line-794">
+</span><span class="l" id="line-795">    }
+</span><span class="l" id="line-796">
+</span><span class="l" id="line-797">
+</span><span class="l" id="line-798">    <span class="php-keyword1">private</span> <span
                         class="php-keyword1">function</span> buildFeature(<span class="php-var">$circuitId</span>, <span
                         class="php-var">$feature</span>)
-</span><span class="l" id="line-792">    {
-</span><span class="l" id="line-793">        <span class="php-keyword1">if</span> (<span
+</span><span class="l" id="line-799">    {
+</span><span class="l" id="line-800">        <span class="php-keyword1">if</span> (<span
                         class="php-var">$circuitId</span> == <span class="php-keyword1">NULL</span>) {
-</span><span class="l" id="line-794">            <span class="php-var">$circuitId</span> = <span
+</span><span class="l" id="line-801">            <span class="php-var">$circuitId</span> = <span
                         class="php-var">$this</span>-&gt;circuitId;
-</span><span class="l" id="line-795">        }
-</span><span class="l" id="line-796">        <span class="php-keyword1">return</span> self::HEATING_CIRCUITS . <span
+</span><span class="l" id="line-802">        }
+</span><span class="l" id="line-803">        <span class="php-keyword1">return</span> self::HEATING_CIRCUITS . <span
                         class="php-quote">&quot;.&quot;</span> . <span class="php-var">$circuitId</span> . <span
                         class="php-quote">&quot;.&quot;</span> . <span class="php-var">$feature</span>;
-</span><span class="l" id="line-797">    }
-</span><span class="l" id="line-798">
-</span><span class="l" id="line-799">}
-</span><span class="l" id="line-800"></span><br></code></pre>
+</span><span class="l" id="line-804">    }
+</span><span class="l" id="line-805">
+</span><span class="l" id="line-806">}
+</span><span class="l" id="line-807"></span><br></code></pre>
             </div>
             <div id="footer">
                 Generated by <a href="https://github.com/apigen/apigen">ApiGen</a>

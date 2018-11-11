@@ -1,149 +1,142 @@
 {
-  "actions": [],
   "links": [
     {
       "rel": [
         "self"
       ],
-      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.gas.consumption.dhw"
+      "href": "https://api.viessmann-platform.io/operational-data/installations/xxxxx/gateways/xxxxxxxxxxxxxxxx/devices/0/features/heating.gas.consumption.dhw"
     },
     {
       "rel": [
         "up"
       ],
-      "href": "http://0.0.0.0:8082/operational-data/installations/demo/gateways/7123456789123456/devices/0/features"
+      "href": "https://api.viessmann-platform.io/operational-data/installations/xxxxx/gateways/xxxxxxxxxxxxxxxx/devices/0/features"
     },
     {
       "rel": [
-        "http://schema.viessmann.com/link-relations#live-updates"
+        "http://schema.viessmann.com/link-relations#live-updates",
+        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
       ],
-      "href": "/operational-data/installations/demo/gateways/7123456789123456/devices/0/features/heating.gas.consumption.dhw"
-    },
-    {
-      "rel": [
-        "via"
-      ],
-      "href": "https://staging-estrella.viessmann-platform.io/estrella/rest/v1.0/installations/demo/gateways/7123456789123456/devices/0/features/heating.gas.consumption.dhw"
-    }
-  ],
-  "properties": {
-    "day": {
-      "value": [
-        10,
-        20,
-        30,
-        40,
-        50,
-        60,
-        70,
-        80
-      ],
-      "type": "array"
-    },
-    "week": {
-      "value": [
-        10,
-        20,
-        30,
-        40,
-        50,
-        60,
-        70,
-        80,
-        90,
-        100,
-        110,
-        120,
-        130,
-        140,
-        150,
-        160,
-        170,
-        180,
-        190,
-        200,
-        210,
-        220,
-        230,
-        240,
-        250,
-        260,
-        270,
-        280,
-        290,
-        300,
-        310,
-        320,
-        330,
-        340,
-        350,
-        360,
-        370,
-        380,
-        390,
-        400,
-        410,
-        420,
-        430,
-        440,
-        450,
-        460,
-        470,
-        480,
-        490,
-        500,
-        510,
-        520,
-        530
-      ],
-      "type": "array"
-    },
-    "month": {
-      "value": [
-        10,
-        20,
-        30,
-        40,
-        50,
-        60,
-        70,
-        80,
-        90,
-        100,
-        110,
-        120,
-        130
-      ],
-      "type": "array"
-    },
-    "year": {
-      "value": [
-        10,
-        20,
-        30
-      ],
-      "type": "array"
-    }
-  },
-  "entities": [
-    {
-      "rel": [
-        "http://schema.viessmann.com/link-relations#feature-meta-information"
-      ],
-      "properties": {
-        "apiVersion": 1,
-        "isEnabled": true,
-        "isReady": true,
-        "gatewayId": "7123456789123456",
-        "timestamp": "2017-12-22T12:19:05.613Z",
-        "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.gas.consumption.dhw",
-        "feature": "heating.gas.consumption.dhw",
-        "deviceId": "0"
-      }
+      "href": "/operational-data/installations/xxxxx/gateways/xxxxxxxxxxxxxxxx/devices/0/features/heating.gas.consumption.dhw"
     }
   ],
   "class": [
     "heating.gas.consumption.dhw",
     "feature"
-  ]
+  ],
+  "properties": {
+    "day": {
+      "type": "array",
+      "value": [
+        240,
+        288,
+        168,
+        136,
+        104,
+        384,
+        384
+      ]
+    },
+    "week": {
+      "type": "array",
+      "value": [
+        816,
+        1480,
+        1360,
+        216,
+        144,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        792,
+        528,
+        1272,
+        224,
+        160,
+        1360,
+        1064,
+        1208,
+        2376,
+        1024,
+        1024,
+        2824,
+        2584,
+        1840,
+        2864,
+        2680,
+        1664,
+        1704,
+        2480,
+        1120,
+        1864,
+        2488,
+        2592,
+        2848,
+        2944,
+        1320,
+        2136
+      ]
+    },
+    "month": {
+      "type": "array",
+      "value": [
+        1176,
+        1816,
+        0,
+        0,
+        0,
+        0,
+        1392,
+        2264,
+        5856,
+        8704,
+        6432,
+        8792
+      ]
+    },
+    "year": {
+      "type": "array",
+      "value": [
+        25592,
+        14352
+      ]
+    }
+  },
+  "entities": [
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#feature-meta-information",
+        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+      ],
+      "properties": {
+        "apiVersion": 1,
+        "isEnabled": true,
+        "isReady": true,
+        "gatewayId": "xxxxxxxxxxxxxxxx",
+        "feature": "heating.gas.consumption.dhw",
+        "uri": "/v1/gateways/xxxxxxxxxxxxxxxx/devices/0/features/heating.gas.consumption.dhw",
+        "deviceId": "0",
+        "timestamp": "2018-11-09T18:39:45.640Z"
+      }
+    }
+  ],
+  "actions": []
 }
