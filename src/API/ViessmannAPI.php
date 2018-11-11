@@ -764,9 +764,9 @@ final class ViessmannAPI
     public function setRawJsonData($feature, $action, $data)
     {
         try {
-            $data = json_decode($this->viessmanAuthClient->setData($feature, $action, $data), true);
-            if (isset($data["statusCode"])) {
-                throw new ViessmannApiException("Unable to set data for feature" . $feature . "and action " . $action . " and data" . $data . "\n Reason: " . $data["message"], 1);
+            $response = json_decode($this->viessmanAuthClient->setData($feature, $action, $data), true);
+            if (isset($response["statusCode"])) {
+                throw new ViessmannApiException("Unable to set data for feature" . $feature . "and action " . $action . " and data" . $data . "\n Reason: " . $response["message"], 1);
             }
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("Unable to set data for feature" . $feature . "and action " . $action . "and data" . $data . "\n Reason: " . $e->getMessage(), 1, $e);

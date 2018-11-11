@@ -1687,27 +1687,28 @@
                         class="php-keyword1">function</span> setRawJsonData(<span class="php-var">$feature</span>, <span
                         class="php-var">$action</span>, <span class="php-var">$data</span>)
 </span><span class="l" id="line-765">    {
-</span><span class="l" id="line-766">        <span class="php-keyword1">try</span>{
-</span><span class="l" id="line-767">            <span class="php-var">$data</span>=<span class="php-keyword2">json_decode</span>(<span
+</span><span class="l" id="line-766">        <span class="php-keyword1">try</span> {
+</span><span class="l" id="line-767">            <span class="php-var">$response</span> = <span class="php-keyword2">json_decode</span>(<span
                         class="php-var">$this</span>-&gt;viessmanAuthClient-&gt;setData(<span
-                        class="php-var">$feature</span>, <span class="php-var">$action</span>, <span class="php-var">$data</span>),<span
+                        class="php-var">$feature</span>, <span class="php-var">$action</span>, <span class="php-var">$data</span>), <span
                         class="php-keyword1">true</span>);
 </span><span class="l" id="line-768">            <span class="php-keyword1">if</span> (<span
-                        class="php-keyword1">isset</span>(<span class="php-var">$data</span>[<span class="php-quote">&quot;statusCode&quot;</span>])) {
+                        class="php-keyword1">isset</span>(<span class="php-var">$response</span>[<span
+                        class="php-quote">&quot;statusCode&quot;</span>])) {
 </span><span class="l" id="line-769">                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ViessmannApiException(<span
-                        class="php-quote">&quot;Unable to set data for feature&quot;</span> . <span class="php-var">$feature</span>. <span
-                        class="php-quote">&quot;and action &quot;</span>.<span class="php-var">$action</span>. <span
-                        class="php-quote">&quot; and data&quot;</span>. <span class="php-var">$data</span>. <span
-                        class="php-quote">&quot;\n Reason: &quot;</span> . <span class="php-var">$data</span>[<span
+                        class="php-quote">&quot;Unable to set data for feature&quot;</span> . <span class="php-var">$feature</span> . <span
+                        class="php-quote">&quot;and action &quot;</span> . <span class="php-var">$action</span> . <span
+                        class="php-quote">&quot; and data&quot;</span> . <span class="php-var">$data</span> . <span
+                        class="php-quote">&quot;\n Reason: &quot;</span> . <span class="php-var">$response</span>[<span
                         class="php-quote">&quot;message&quot;</span>], <span class="php-num">1</span>);
 </span><span class="l" id="line-770">            }
 </span><span class="l" id="line-771">        } <span class="php-keyword1">catch</span> (TokenResponseException <span
                         class="php-var">$e</span>) {
 </span><span class="l" id="line-772">            <span class="php-keyword1">throw</span> <span
                         class="php-keyword1">new</span> ViessmannApiException(<span class="php-quote">&quot;Unable to set data for feature&quot;</span> . <span
-                        class="php-var">$feature</span>. <span class="php-quote">&quot;and action &quot;</span>.<span
-                        class="php-var">$action</span>. <span class="php-quote">&quot;and data&quot;</span>. <span
-                        class="php-var">$data</span>. <span class="php-quote">&quot;\n Reason: &quot;</span> . <span
+                        class="php-var">$feature</span> . <span class="php-quote">&quot;and action &quot;</span> . <span
+                        class="php-var">$action</span> . <span class="php-quote">&quot;and data&quot;</span> . <span
+                        class="php-var">$data</span> . <span class="php-quote">&quot;\n Reason: &quot;</span> . <span
                         class="php-var">$e</span>-&gt;getMessage(), <span class="php-num">1</span>, <span
                         class="php-var">$e</span>);
 </span><span class="l" id="line-773">        }
