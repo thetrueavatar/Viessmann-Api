@@ -1,4 +1,14 @@
 <?php
+const JEEDOM_IP = "192.168.0.2";
+const JEEDOM_API_KEY = "";
+const CMD_ID = "1022";
+const CMD_ID1 = "1024";
+const CMD_ID2 = "1027";
+const CMD_ID3 = "1028";
+const CMD_ID4 = "1018";
+const CMD_ID5 = "1019";
+const CMD_ID6 = "1021";
+const CMD_ID7 = "1023";
 include __DIR__ . '/bootstrap.php';
 
 function post_request($url, array $params)
@@ -26,20 +36,19 @@ function post_request($url, array $params)
 
 function jeedom_post($cmd_id, $value)
 {
-    $jeedom_apikey = "SKqLrR6l8T7CB4REvAEj7DHKfrJHa0PM";
-    $jeedom_url_retour = "http://192.168.0.2/core/api/jeeApi.php?plugin=virtual&apikey={$jeedom_apikey}&type=virtual&id={$cmd_id}&value={$value}";
+    $jeedom_url_retour = "http://" . JEEDOM_API . "/core/api/jeeApi.php?plugin=virtual&apikey={" . JEEDOM_API_KEY . "}&type=virtual&id={$cmd_id}&value={$value}";
     $jeedom_params = array('key1' => '', 'key2' => '');
     $result = post_request($jeedom_url_retour, $jeedom_params);
     return $result;
 }
 
-jeedom_post("1022", $viessmannApi->getOutsideTemperature());
+jeedom_post("" . CMD_ID . "", $viessmannApi->getOutsideTemperature());
 
-jeedom_post("1024", $viessmannApi->getBoilerTemperature());
+jeedom_post("" . CMD_ID1 . "", $viessmannApi->getBoilerTemperature());
 
-jeedom_post("1027", $viessmannApi->getSlope());
+jeedom_post("" . CMD_ID2 . "", $viessmannApi->getSlope());
 
-jeedom_post("1028", $viessmannApi->getShift());
+jeedom_post("" . CMD_ID3 . "", $viessmannApi->getShift());
 
 $res = $viessmannApi->getActiveMode();
 if ($res == "standby"):
@@ -55,7 +64,7 @@ elseif ($res == "forcedNormal"):
 else:
     $res = "Erreur";
 endif;
-jeedom_post("1018", $res);
+jeedom_post("" . CMD_ID4 . "", $res);
 
 $res = $viessmannApi->getActiveProgram();
 if ($res == "reduced"):
@@ -69,6 +78,6 @@ elseif ($res == "forcedReduced"):
 elseif ($res == "forcedNormal"):
     $res = "ForceNormal";
 endif;
-jeedom_post("1019", $res);
-jeedom_post("1021", (int)$viessmannApi->isHeatingBurnerActive());
-jeedom_post("1023", $viessmannApi->getHotWaterStorageTemperature());
+jeedom_post("" . CMD_ID5 . "", $res);
+jeedom_post("" . CMD_ID6 . "", (int)$viessmannApi->isHeatingBurnerActive());
+jeedom_post("" . CMD_ID7 . "", $viessmannApi->getHotWaterStorageTemperature());
