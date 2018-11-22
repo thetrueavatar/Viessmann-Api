@@ -95,7 +95,7 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
         if (preg_match_all($pattern, $response, $matches)) {
             return ($matches[1][0]);
         } else {
-            throw new ViessmannApiException("Error during authentication process. Please review your username/password");
+            throw new ViessmannApiException("Error during authentication process. Please review your username/password", 0, new ViessmannApiException("response didn't contains code to get token probably due to an error in authentication process. Response : " . $response));
         }
     }
 
