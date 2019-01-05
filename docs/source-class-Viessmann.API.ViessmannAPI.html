@@ -851,7 +851,7 @@
 </span></span><span class="l" id="line-774"><span class="php-comment">     * @return number of month beetween service if available
 </span></span><span class="l" id="line-775"><span class="php-comment">     * @throws ViessmannApiException
 </span></span><span class="l" id="line-776"><span class="php-comment">     */</span>
-</span><span class="l" id="line-777">   <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getServiceInterval(): number
+</span><span class="l" id="line-777">   <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getServiceInterval(): int
 </span><span class="l" id="line-778">    {
 </span><span class="l" id="line-779">        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED )-&gt;getProperty(<span class="php-quote">&quot;serviceIntervalMonths&quot;</span>)[<span class="php-quote">&quot;value&quot;</span>];
 </span><span class="l" id="line-780">    }
@@ -860,7 +860,7 @@
 </span></span><span class="l" id="line-783"><span class="php-comment">     * @return number of month since service if available
 </span></span><span class="l" id="line-784"><span class="php-comment">     * @throws ViessmannApiException
 </span></span><span class="l" id="line-785"><span class="php-comment">     */</span>
-</span><span class="l" id="line-786">   <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getActiveMonthSinceService(): number
+</span><span class="l" id="line-786">   <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getActiveMonthSinceService(): int
 </span><span class="l" id="line-787">    {
 </span><span class="l" id="line-788">        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED )-&gt;getProperty(<span class="php-quote">&quot;activeMonthSinceLastService&quot;</span>)[<span class="php-quote">&quot;value&quot;</span>];
 </span><span class="l" id="line-789">    }  

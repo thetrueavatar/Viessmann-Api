@@ -774,7 +774,7 @@ final class ViessmannAPI
      * @return number of month beetween service if available
      * @throws ViessmannApiException
      */
-   public function getServiceInterval(): number
+   public function getServiceInterval(): int
     {
         return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED )->getProperty("serviceIntervalMonths")["value"];
     }
@@ -783,7 +783,7 @@ final class ViessmannAPI
      * @return number of month since service if available
      * @throws ViessmannApiException
      */
-   public function getActiveMonthSinceService(): number
+   public function getActiveMonthSinceService(): int
     {
         return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED )->getProperty("activeMonthSinceLastService")["value"];
     }  

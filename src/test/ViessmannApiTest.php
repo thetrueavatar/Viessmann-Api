@@ -162,5 +162,24 @@ class ViessmannApiTest extends TestCase
         echo $heatingBurnerActive;
         self::assertNotNull($heatingBurnerActive);
     }
+    public function testGetLastServiceDate(){
+        $lastServiceDate=$this->viessmannApi->getLastServiceDate();
+        echo "\nLast Service Active  ";
+        echo $lastServiceDate;
+        self::assertNotNull($lastServiceDate);
+    }
+    public function testGetServiceInterval(){
+        $serviceInternal=$this->viessmannApi->getServiceInterval();
+        echo "\nService Interval  ";
+        echo $serviceInternal;
+        self::assertNotNull($serviceInternal);
+    }
+    public function testGetActiveMonthSinceService(){
+        $activeMonthSinceService=$this->viessmannApi->getActiveMonthSinceService();
+        echo "\nActive Month Since Service  ";
+        echo $activeMonthSinceService;
+        self::assertNotNull($activeMonthSinceService);
+    }
+
 
 }
