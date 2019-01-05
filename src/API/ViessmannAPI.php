@@ -760,6 +760,34 @@ final class ViessmannAPI
         $data = "{\"temperature\": $temperature}";
         $this->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
     }
+    
+     /**
+     * @return string last service if available
+     * @throws ViessmannApiException
+     */
+   public function getLastServiceDate(): string
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED )->getProperty("lastService")["value"];
+    }
+    
+     /**
+     * @return number of month beetween service if available
+     * @throws ViessmannApiException
+     */
+   public function getServiceInterval(): number
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED )->getProperty("serviceIntervalMonths")["value"];
+    }
+    
+     /**
+     * @return number of month since service if available
+     * @throws ViessmannApiException
+     */
+   public function getActiveMonthSinceService(): number
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED )->getProperty("activeMonthSinceLastService")["value"];
+    }  
+    
 
     public function setRawJsonData($feature, $action, $data)
     {
