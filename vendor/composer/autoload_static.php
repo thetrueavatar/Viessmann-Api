@@ -53,10 +53,10 @@ class ComposerStaticInit263d70fe5eedcdb42a1a4fc542646a22
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
         ),
-        'R' =>
-            array(
-                'Roave\\Signature\\' => 16,
-                'Roave\\BetterReflection\\' => 23,
+        'R' => 
+        array (
+            'Roave\\Signature\\' => 16,
+            'Roave\\BetterReflection\\' => 23,
         ),
         'P' => 
         array (
@@ -90,10 +90,10 @@ class ComposerStaticInit263d70fe5eedcdb42a1a4fc542646a22
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
-        'Zend\\EventManager\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/zendframework/zend-eventmanager/src',
-            ),
+        'Zend\\EventManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-eventmanager/src',
+        ),
         'Zend\\Code\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-code/src',
@@ -122,57 +122,57 @@ class ComposerStaticInit263d70fe5eedcdb42a1a4fc542646a22
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Ctype\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
-            ),
-        'Symfony\\Component\\Yaml\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/yaml',
-            ),
-        'Symfony\\Component\\HttpKernel\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/http-kernel',
-            ),
-        'Symfony\\Component\\HttpFoundation\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/http-foundation',
-            ),
-        'Symfony\\Component\\Finder\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/finder',
-            ),
-        'Symfony\\Component\\Filesystem\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/filesystem',
-            ),
-        'Symfony\\Component\\EventDispatcher\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
-            ),
-        'Symfony\\Component\\DependencyInjection\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/dependency-injection',
-            ),
-        'Symfony\\Component\\Debug\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/debug',
-            ),
-        'Symfony\\Component\\Console\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/console',
-            ),
-        'Symfony\\Component\\Config\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/config',
-            ),
-        'Roave\\Signature\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/roave/signature/src',
-            ),
-        'Roave\\BetterReflection\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/roave/better-reflection/src',
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Symfony\\Component\\Yaml\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
+        'Symfony\\Component\\HttpKernel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/http-kernel',
+        ),
+        'Symfony\\Component\\HttpFoundation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/http-foundation',
+        ),
+        'Symfony\\Component\\Finder\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/finder',
+        ),
+        'Symfony\\Component\\Filesystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/filesystem',
+        ),
+        'Symfony\\Component\\EventDispatcher\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
+        ),
+        'Symfony\\Component\\DependencyInjection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/dependency-injection',
+        ),
+        'Symfony\\Component\\Debug\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/debug',
+        ),
+        'Symfony\\Component\\Console\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Symfony\\Component\\Config\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/config',
+        ),
+        'Roave\\Signature\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/roave/signature/src',
+        ),
+        'Roave\\BetterReflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/roave/better-reflection/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -202,34 +202,34 @@ class ComposerStaticInit263d70fe5eedcdb42a1a4fc542646a22
         array (
             0 => __DIR__ . '/..' . '/beberlei/assert/lib/Assert',
         ),
-        'ApiGen\\StringRouting\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/apigen/apigen/packages/StringRouting/src',
-            ),
-        'ApiGen\\Reflection\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/apigen/apigen/packages/Reflection/src',
-            ),
-        'ApiGen\\ModularConfiguration\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/apigen/apigen/packages/ModularConfiguration/src',
-            ),
-        'ApiGen\\Element\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/apigen/apigen/packages/Element/src',
-            ),
-        'ApiGen\\BetterReflection\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/apigen/apigen/packages/BetterReflection/src',
-            ),
-        'ApiGen\\Annotation\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/apigen/apigen/packages/Annotation/src',
-            ),
-        'ApiGen\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/apigen/apigen/src',
-            ),
+        'ApiGen\\StringRouting\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apigen/apigen/packages/StringRouting/src',
+        ),
+        'ApiGen\\Reflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apigen/apigen/packages/Reflection/src',
+        ),
+        'ApiGen\\ModularConfiguration\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apigen/apigen/packages/ModularConfiguration/src',
+        ),
+        'ApiGen\\Element\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apigen/apigen/packages/Element/src',
+        ),
+        'ApiGen\\BetterReflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apigen/apigen/packages/BetterReflection/src',
+        ),
+        'ApiGen\\Annotation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apigen/apigen/packages/Annotation/src',
+        ),
+        'ApiGen\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/apigen/apigen/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -251,13 +251,13 @@ class ComposerStaticInit263d70fe5eedcdb42a1a4fc542646a22
                 0 => __DIR__ . '/..' . '/lusitanian/oauth/src',
             ),
         ),
-        'F' =>
-            array(
-                'FSHL' =>
-                    array(
-                        0 => __DIR__ . '/..' . '/kukulich/fshl',
-                    ),
+        'F' => 
+        array (
+            'FSHL' => 
+            array (
+                0 => __DIR__ . '/..' . '/kukulich/fshl',
             ),
+        ),
     );
 
     public static $classMap = array (

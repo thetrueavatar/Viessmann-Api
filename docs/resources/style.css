@@ -217,12 +217,13 @@ table .name > div > code {
     white-space: pre-wrap;
 }
 
-table .name > div > code span {
+table .name > div > code span
+{
     white-space: nowrap;
     display: inline-block;
 }
-
-table .name > div > .description {
+table .name > div > .description
+{
     white-space: normal;
 }
 
@@ -265,7 +266,7 @@ table .name > div > .description {
     padding-left: 0;
 }
 #source pre.code span {
-    white-space: pre;
+	white-space: pre;
 }
 .php-keyword1 {
     color: #e71818;
@@ -371,7 +372,7 @@ code.keyword {
     height: 2.3em;
 }
 
-.breadcrumb > li + li:before {
+.breadcrumb>li+li:before {
     padding: 0;
     content: "";
 }

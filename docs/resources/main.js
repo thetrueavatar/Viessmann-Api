@@ -1,5 +1,5 @@
 // $( function() {
-$(document).ready(function () {
+$(document).ready(function() {
     var $document = $(document);
 
     // Autocomplete search
@@ -41,7 +41,7 @@ $(document).ready(function () {
 
     // Save selected lines
     var lastLine;
-    $('.numbers .l a').click(function (event) {
+    $('.numbers .l a').click(function(event) {
         event.preventDefault();
 
         var selectedLine = $(this).parent().index() + 1;
@@ -52,24 +52,24 @@ $(document).ready(function () {
                     $('#' + i + ', #line-' + i).addClass('selected');
                 }
             } else {
-                $('#' + selectedLine + ', #line-' + selectedLine).addClass('selected');
+                 $('#' + selectedLine + ', #line-' + selectedLine).addClass('selected');
             }
         } else if (event.ctrlKey) {
-            $('#' + selectedLine + ', #line-' + selectedLine).toggleClass('selected');
+              $('#' + selectedLine + ', #line-' + selectedLine).toggleClass('selected');
         } else {
-            var selected = $('.l.selected').not('#' + selectedLine + ', #line-' + selectedLine).removeClass('selected');
-            $('#' + selectedLine + ', #line-' + selectedLine).addClass('selected');
+           var selected = $('.l.selected').not('#' + selectedLine + ', #line-' + selectedLine).removeClass('selected');
+           $('#' + selectedLine + ', #line-' + selectedLine).addClass('selected');
         }
 
         lastLine = $('#' + selectedLine).hasClass('selected') ? selectedLine : null;
 
         // Update hash
         var lines = $('.numbers .l.selected')
-            .map(function () {
+            .map(function() {
                 return parseInt($(this).attr('id'));
             })
             .get()
-            .sort(function (a, b) {
+            .sort(function(a, b) {
                 return a - b;
             });
 
