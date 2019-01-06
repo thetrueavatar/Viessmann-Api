@@ -794,10 +794,10 @@ final class ViessmannAPI
         try {
             $response = json_decode($this->viessmanAuthClient->setData($feature, $action, $data), true);
             if (isset($response["statusCode"])) {
-                throw new ViessmannApiException("Unable to set data for feature" . $feature . "and action " . $action . " and data" . $data . "\n Reason: " . $response["message"], 1);
+                throw new ViessmannApiException("\n\t Unable to set data for feature" . $feature . " and action " . $action . " and data" . $data . "\n\t Reason: " . $response["message"], 1);
             }
         } catch (TokenResponseException $e) {
-            throw new ViessmannApiException("Unable to set data for feature" . $feature . "and action " . $action . "and data" . $data . "\n Reason: " . $e->getMessage(), 1, $e);
+            throw new ViessmannApiException("\n\t Unable to set data for feature" . $feature . " and action " . $action . " and data" . $data . " \n\t Reason: " . $e->getMessage(), 1, $e);
         }
     }
 
