@@ -188,6 +188,7 @@ final class ViessmannAPI
 
     public function activateEcoProgram($temperature = NULL, $circuitId = NULL)
     {
+        $data=NULL;
         if (isset($temperature)) {
             $data = "{\"temperature\":\"" . $temperature . "\"}";
         }
@@ -196,7 +197,7 @@ final class ViessmannAPI
 
     public function deActivateEcoProgram($circuitId = NULL)
     {
-        $this->setRawJsonData($this->buildFeature($circuitId, self::ECO_PROGRAM), "deactivate", null);
+        $this->setRawJsonData($this->buildFeature($circuitId, self::ECO_PROGRAM), "deactivate", "{}");
     }
 
     /**
