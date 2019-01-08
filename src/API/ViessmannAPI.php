@@ -26,6 +26,7 @@ final class ViessmannAPI
     const NORMAL_PROGRAM = "operating.programs.normal";
     const REDUCED_PROGRAM = "operating.programs.reduced";
     const STANDBY_PROGRAM = "operating.programs.standby";
+    const HOLIDAY_PROGRAM="operating.programs.holiday";
     const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
     const CIRCULATION_SCHEDULE = "circulation.schedule";
     const DHW_SCHEDULE = "dhw.schedule";
@@ -159,7 +160,7 @@ final class ViessmannAPI
 
     /**
      * @param null $circuitId
-     * @return string Conformat program temperature insntruction
+     * @return string Comfort program temperature programmed
      * @throws ViessmannApiException
      */
     public function getComfortProgramTemperature($circuitId = NULL): string
@@ -168,7 +169,7 @@ final class ViessmannAPI
     }
 
     /**
-     * @param $temperature onformat program temperature insntruction
+     * @param $temperature Comfort program temperature to program
      * @param null $circuitId
      */
     public function setComfortProgramTemperature($temperature, $circuitId = NULL)
@@ -186,23 +187,86 @@ final class ViessmannAPI
         return $this->getEntity($this->buildFeature($circuitId, self::ECO_PROGRAM))->getProperty("temperature")["value"];
     }
 
+    /**
+     * Activate eco program
+     * @param null $temperature optional temperature to set for eco program
+     * @param null $circuitId
+     * @throws ViessmannApiException
+     */
     public function activateEcoProgram($temperature = NULL, $circuitId = NULL)
     {
         $data=NULL;
         if (isset($temperature)) {
             $data = "{\"temperature\":\"" . $temperature . "\"}";
         }
+        else{
+            $data="{}";
+        }
         $this->setRawJsonData($this->buildFeature($circuitId, self::ECO_PROGRAM), "activate", $data);
     }
 
+    /**DeActivate eco program
+     * @param null $circuitId
+     * @throws ViessmannApiException
+     */
     public function deActivateEcoProgram($circuitId = NULL)
     {
         $this->setRawJsonData($this->buildFeature($circuitId, self::ECO_PROGRAM), "deactivate", "{}");
     }
 
     /**
+     * schedule holiday program
+     * @param $start of holiday
+     * @param $end of holiday
      * @param null $circuitId
-     * @return string External program temperature insntruction
+     * @throws ViessmannApiException
+     */
+    public function scheduleHolidayProgram($start,$end, $circuitId = NULL)
+    {
+        $data = "{\"start\":\"" . $start . "\", \"end\":\"".$end."\"}";
+        $this->setRawJsonData($this->buildFeature($circuitId, self::HOLIDAY_PROGRAM), "schedule", $data);
+    }
+
+    /** remove current holiday program's schedule
+     * @param null $circuitId
+     * @throws ViessmannApiException
+     */
+    public function unscheduleHolidayProgram($circuitId = NULL)
+    {
+        $this->setRawJsonData($this->buildFeature($circuitId, self::HOLIDAY_PROGRAM), "unschedule", "{}");
+    }
+
+    /**
+     * Activate Comfort program
+     * @param null $temperature
+     * @param null $circuitId
+     * @throws ViessmannApiException
+     */
+    public function activateComfortProgram($temperature = NULL, $circuitId = NULL)
+    {
+        $data=NULL;
+        if (isset($temperature)) {
+            $data = "{\"temperature\":\"" . $temperature . "\"}";
+        }
+        else{
+            $data="{}";
+        }
+        $this->setRawJsonData($this->buildFeature($circuitId, self::COMFORT_PROGRAM), "activate", $data);
+    }
+
+    /**
+     * Deactivate Comfort Program
+     * @param null $circuitId
+     * @throws ViessmannApiException
+     */
+    public function deActivateComfortProgram($circuitId = NULL)
+    {
+        $this->setRawJsonData($this->buildFeature($circuitId, self::COMFORT_PROGRAM), "deactivate", "{}");
+    }
+
+    /**
+     * @param null $circuitId
+     * @return string External program temperature programmed
      * @throws ViessmannApiException
      */
     public function getExternalProgramTemperature($circuitId = NULL): string
@@ -212,12 +276,12 @@ final class ViessmannAPI
 
     /**
      * @param null $circuitId
-     * @return string External program temperature insntruction
+     * @return string External program temperature to program
      * @throws ViessmannApiException
      */
     public function setExternalProgramTemperature($temperature, $circuitId = NULL)
     {
-        $this->setRawJsonData($this->buildFeature($circuitId, self::REDUCED_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
+        $this->setRawJsonData($this->buildFeature($circuitId, self::EXTERNAL_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
     }
 
     /**
