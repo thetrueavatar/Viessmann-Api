@@ -4,9 +4,9 @@
         "psr/link": "^1.0",
         "phpunit/phpunit": "^7.3.2",
         "lusitanian/oauth": "v0.8.11",
-        "tomphp/siren": "v0.1.0",
-        "ext-json": "*",
-        "ext-curl": "*"
+      "tomphp/siren": "v0.1.0",
+      "ext-json": "*",
+      "ext-curl": "*"
     },
     "license": "MIT",
     "authors": [
@@ -23,12 +23,16 @@
     "extra": {
         "phar-builder": {
             "compression": "GZip",
-            "name": "Viessmann-Api-0.3.phar",
+            "name": "Viessmann-Api-0.4-SNAPSHOT.phar",
             "output-dir": "./example",
             "entry-point": "./index.php",
             "include": "php",
             "include-dev": false,
             "skip-shebang":false
         }
+    },
+    "require-dev": {
+        "apigen/apigen": "dev-master",
+        "roave/better-reflection": "dev-master"
     }
 }

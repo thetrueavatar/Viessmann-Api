@@ -1,3 +1,3 @@
 <?php
 include __DIR__.'/bootstrap.php';
-echo $viessmannApi->isHeatingBurnerActive();
+echo (int)$viessmannApi->isHeatingBurnerActive();

@@ -1,0 +1,6 @@
+parameters:
+  visibility_levels: [public, protected] # array
+  annotation_groups: [todo,param, deprecated] # array
+  title: "Viessmann Api" # string
+  base_url: "https://github.com/thetrueavatar/Viessmann-API" # string
+  overwrite: false # bool

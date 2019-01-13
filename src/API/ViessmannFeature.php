@@ -116,5 +116,6 @@ final class ViessmannFeature
     const HEATING_SENSORS_TEMPERATURE_OUTSIDE = "heating.sensors.temperature.outside";
     const HEATING_SENSORS_TEMPERATURE = "heating.sensors.temperature";
     const HEATING_SERVICE = "heating.service";
+    const HEATING_SERVICE_TIMEBASED = "heating.service.timeBased";
     const HEATING = "heating";
 }

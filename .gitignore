@@ -1,5 +1,3 @@
-resources/*.*
-resources/credentials.properties
 example/credentials.properties
 *.properties
 NotesPerso.txt
