@@ -197,7 +197,7 @@ final class ViessmannAPI
     {
         $data=NULL;
         if (isset($temperature)) {
-            $data = "{\"temperature\":\"" . $temperature . "\"}";
+            $data = "{\"temperature\":".$temperature. "}";
         }
         else{
             $data="{}";
@@ -246,7 +246,7 @@ final class ViessmannAPI
     {
         $data=NULL;
         if (isset($temperature)) {
-            $data = "{\"temperature\":\"" . $temperature . "\"}";
+            $data = "{\"temperature\":" . $temperature . "}";
         }
         else{
             $data="{}";
