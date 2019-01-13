@@ -1,3 +1,5 @@
+Version 1.0 available here ! : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.0
+
 Translated documentation can be found here:
 - English: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/README-en.md 
 
