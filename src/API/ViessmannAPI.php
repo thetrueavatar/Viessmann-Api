@@ -216,8 +216,9 @@ final class ViessmannAPI
 
     /**
      * schedule holiday program
-     * @param $start of holiday
-     * @param $end of holiday
+     * start en end are in xml datetime format. See https://www.w3schools.com/xml/schema_dtypes_date.asp form more details
+     * @param $start of holiday in xml datetime format
+     * @param $end of holiday in datetime xml format
      * @param null $circuitId
      * @throws ViessmannApiException
      */
