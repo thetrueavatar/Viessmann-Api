@@ -51,6 +51,21 @@ final class ViessmannAPI
     {
         return $this->viessmanAuthClient->readData("");
     }
+    /**
+     * @return String containing a list of all the features having either a property either an action on it
+     */
+    public function getAvailableFeatures(): String
+    {
+        $features=$this->getEntity("");
+        $classes="";
+
+        foreach ($features->getEntities() as $feature) {
+            if ($feature->getActions()!=NULL||$feature->getProperties()!=NULL){
+                $classes=$classes.($feature->getClasses()[0])."\n";
+            }
+        }
+        return $classes;
+    }
 
     /**
      * @return string the outside temperature if available
