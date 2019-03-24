@@ -8,8 +8,8 @@ include 'phar://' . __DIR__ . '/Viessmann-Api-1.1-SNAPSHOT.phar/index.php';
 
 $credentials = file(__DIR__ . "/credentials.properties");
 $params = [
-    "user" => trim("$credentials[0]", "\n"),
-    "pwd" => trim("$credentials[1]", "\n"),
+    "user" => trim("$credentials[0]"),
+    "pwd" => trim("$credentials[1]"),
     "deviceId" => "0",
     "circuitId" => "0"
 ];
