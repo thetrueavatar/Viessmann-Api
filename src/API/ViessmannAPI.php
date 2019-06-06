@@ -26,7 +26,7 @@ final class ViessmannAPI
     const NORMAL_PROGRAM = "operating.programs.normal";
     const REDUCED_PROGRAM = "operating.programs.reduced";
     const STANDBY_PROGRAM = "operating.programs.standby";
-    const HOLIDAY_PROGRAM="operating.programs.holiday";
+    const HOLIDAY_PROGRAM = "operating.programs.holiday";
     const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
     const CIRCULATION_SCHEDULE = "circulation.schedule";
     const DHW_SCHEDULE = "dhw.schedule";
@@ -210,12 +210,11 @@ final class ViessmannAPI
      */
     public function activateEcoProgram($temperature = NULL, $circuitId = NULL)
     {
-        $data=NULL;
+        $data = NULL;
         if (isset($temperature)) {
-            $data = "{\"temperature\":".$temperature. "}";
-        }
-        else{
-            $data="{}";
+            $data = "{\"temperature\":" . $temperature . "}";
+        } else {
+            $data = "{}";
         }
         $this->setRawJsonData($this->buildFeature($circuitId, self::ECO_PROGRAM), "activate", $data);
     }
@@ -237,9 +236,9 @@ final class ViessmannAPI
      * @param null $circuitId
      * @throws ViessmannApiException
      */
-    public function scheduleHolidayProgram($start,$end, $circuitId = NULL)
+    public function scheduleHolidayProgram($start, $end, $circuitId = NULL)
     {
-        $data = "{\"start\":\"" . $start . "\", \"end\":\"".$end."\"}";
+        $data = "{\"start\":\"" . $start . "\", \"end\":\"" . $end . "\"}";
         $this->setRawJsonData($this->buildFeature($circuitId, self::HOLIDAY_PROGRAM), "schedule", $data);
     }
 
@@ -260,12 +259,11 @@ final class ViessmannAPI
      */
     public function activateComfortProgram($temperature = NULL, $circuitId = NULL)
     {
-        $data=NULL;
+        $data = NULL;
         if (isset($temperature)) {
             $data = "{\"temperature\":" . $temperature . "}";
-        }
-        else{
-            $data="{}";
+        } else {
+            $data = "{}";
         }
         $this->setRawJsonData($this->buildFeature($circuitId, self::COMFORT_PROGRAM), "activate", $data);
     }
@@ -512,171 +510,171 @@ final class ViessmannAPI
     /**
      * Post a complete new schedule. Warning !!! this would erase all previous schedule. Sample:
      * "{
-    \"mon\": [
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 0
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 1
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 2
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 3
-    }
-    ],
-    \"tue\": [
-    {
-    \"start\": \"00:00\",
-    \"end\": \"23:50\",
-    \"mode\": \"on\",
-    \"position\": 0
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"00:10\",
-    \"mode\": \"on\",
-    \"position\": 1
-    },
-    {
-    \"start\": \"23:20\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 2
-    },
-    {
-    \"start\": \"05:30\",
-    \"end\": \"22:00\",
-    \"mode\": \"on\",
-    \"position\": 3
-    }
-    ],
-    \"wed\": [
-    {
-    \"start\": \"05:30\",
-    \"end\": \"22:00\",
-    \"mode\": \"on\",
-    \"position\": 0
-    }
-    ],
-    \"thu\": [
-    {
-    \"start\": \"05:30\",
-    \"end\": \"20:00\",
-    \"mode\": \"on\",
-    \"position\": 0
-    },
-    {
-    \"start\": \"02:30\",
-    \"end\": \"11:00\",
-    \"mode\": \"on\",
-    \"position\": 1
-    },
-    {
-    \"start\": \"17:30\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 2
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"08:00\",
-    \"mode\": \"on\",
-    \"position\": 3
-    }
-    ],
-    \"fri\": [
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 0
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 1
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 2
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 3
-    }
-    ],
-    \"sat\": [
-    {
-    \"start\": \"00:00\",
-    \"end\": \"23:30\",
-    \"mode\": \"on\",
-    \"position\": 0
-    },
-    {
-    \"start\": \"00:30\",
-    \"end\": \"23:00\",
-    \"mode\": \"on\",
-    \"position\": 1
-    },
-    {
-    \"start\": \"01:00\",
-    \"end\": \"22:30\",
-    \"mode\": \"on\",
-    \"position\": 2
-    },
-    {
-    \"start\": \"01:30\",
-    \"end\": \"22:00\",
-    \"mode\": \"on\",
-    \"position\": 3
-    }
-    ],
-    \"sun\": [
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 0
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 1
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 2
-    },
-    {
-    \"start\": \"00:00\",
-    \"end\": \"24:00\",
-    \"mode\": \"on\",
-    \"position\": 3
-    }
-    ]
-    }"
+     * \"mon\": [
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"tue\": [
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"23:50\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"00:10\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"23:20\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"05:30\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"wed\": [
+     * {
+     * \"start\": \"05:30\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * }
+     * ],
+     * \"thu\": [
+     * {
+     * \"start\": \"05:30\",
+     * \"end\": \"20:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"02:30\",
+     * \"end\": \"11:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"17:30\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"08:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"fri\": [
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"sat\": [
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"23:30\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"00:30\",
+     * \"end\": \"23:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"01:00\",
+     * \"end\": \"22:30\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"01:30\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"sun\": [
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ]
+     * }"
      *
      * @param $schedule the schedule(see format above
      * @param null $circuitId
@@ -686,6 +684,7 @@ final class ViessmannAPI
         $data = "{\"newSchedule\": $schedule}";
         $this->setRawJsonData($this->buildFeature($circuitId, self::CIRCULATION_SCHEDULE), "setSchedule", $data);
     }
+
     /**
      * @param null $circuitId
      * @return json containing the Heating schedule for each days in format:
@@ -786,6 +785,7 @@ final class ViessmannAPI
         $data = "{\"newSchedule\": $schedule}";
         $this->setRawJsonData($this->buildFeature($circuitId, self::HEATING_SCHEDULE), "setSchedule", $data);
     }
+
     public function getHeatingBurnerCurrentPower()
     {
         return $this->getEntity(ViessmannFeature::HEATING_BURNER_CURRENT_POWER)->getProperty("value")["value"];
@@ -816,6 +816,19 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_DHW_ONETIMECHARGE)->getProperty("active")["value"];
     }
 
+    public function startOneTimeDhwCharge(): String
+    {
+        $data = "{\"mode\": \"activate\"}";
+        return $this->setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "activate", $data);
+    }
+
+    public function stopOneTimeDhwCharge(): String
+    {
+
+        $data = "{\"mode\": \"deactivate\"}";
+        return $this->setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "deactivate", $data);
+    }
+
     public function getDhwPumpsCirculation(): String
     {
         return $this->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_CIRCULATION)->getProperty("status")["value"];
@@ -841,34 +854,34 @@ final class ViessmannAPI
         $data = "{\"temperature\": $temperature}";
         $this->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
     }
-    
-     /**
+
+    /**
      * @return string last service if available
      * @throws ViessmannApiException
      */
-   public function getLastServiceDate(): string
+    public function getLastServiceDate(): string
     {
-        return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED )->getProperty("lastService")["value"];
+        return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED)->getProperty("lastService")["value"];
     }
-    
-     /**
+
+    /**
      * @return number of month beetween service if available
      * @throws ViessmannApiException
      */
-   public function getServiceInterval(): int
+    public function getServiceInterval(): int
     {
-        return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED )->getProperty("serviceIntervalMonths")["value"];
+        return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED)->getProperty("serviceIntervalMonths")["value"];
     }
-    
-     /**
+
+    /**
      * @return number of month since service if available
      * @throws ViessmannApiException
      */
-   public function getActiveMonthSinceService(): int
+    public function getActiveMonthSinceService(): int
     {
-        return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED )->getProperty("activeMonthSinceLastService")["value"];
-    }  
-    
+        return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED)->getProperty("activeMonthSinceLastService")["value"];
+    }
+
 
     public function setRawJsonData($feature, $action, $data)
     {
