@@ -7,7 +7,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 use PHPUnit\Framework\TestCase;
 
 class DataProviderTestDoxTest extends TestCase
@@ -65,21 +64,20 @@ class DataProviderTestDoxTest extends TestCase
     public function placeHolderprovider(): array
     {
         return [
-            'boolean' => [true],
-            'integer' => [1],
-            'float' => [1.0],
-            'string' => ['string'],
-            'array' => [[1, 2, 3]],
-            'object' => [new \stdClass],
-            'stringableObject' => [new class
-            {
+            'boolean'          => [true],
+            'integer'          => [1],
+            'float'            => [1.0],
+            'string'           => ['string'],
+            'array'            => [[1, 2, 3]],
+            'object'           => [new \stdClass],
+            'stringableObject' => [new class {
                 public function __toString()
                 {
                     return 'string';
                 }
             }],
-            'resource' => [\fopen(__FILE__, 'rb')],
-            'null' => [null],
+            'resource'         => [\fopen(__FILE__, 'rb')],
+            'null'             => [null],
         ];
     }
 }

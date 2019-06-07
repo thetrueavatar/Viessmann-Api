@@ -1775,7 +1775,7 @@ abstract class Assert
     public static function assertEqualXMLStructure(DOMElement $expectedElement, DOMElement $actualElement, bool $checkAttributes = false, string $message = ''): void
     {
         $expectedElement = Xml::import($expectedElement);
-        $actualElement = Xml::import($actualElement);
+        $actualElement   = Xml::import($actualElement);
 
         static::assertSame(
             $expectedElement->tagName,

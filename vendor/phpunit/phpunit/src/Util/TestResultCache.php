@@ -154,7 +154,7 @@ class TestResultCache implements \Serializable, TestResultCacheInterface
     {
         return \serialize([
             'defects' => $this->defects,
-            'times' => $this->times,
+            'times'   => $this->times,
         ]);
     }
 

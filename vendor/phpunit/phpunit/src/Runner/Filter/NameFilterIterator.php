@@ -69,7 +69,7 @@ class NameFilterIterator extends RecursiveFilterIterator
             $accepted = $set >= $this->filterMin && $set <= $this->filterMax;
         }
 
-        return (bool)$accepted;
+        return (bool) $accepted;
     }
 
     /**
