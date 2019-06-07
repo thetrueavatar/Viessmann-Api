@@ -811,22 +811,22 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_DHW_CHARGING_LEVEL)->getProperty("value")["value"];
     }
 
-    public function isOneTimeDhwCharge(): String
+    public function isOneTimeDhwCharge(): bool
     {
         return $this->getEntity(ViessmannFeature::HEATING_DHW_ONETIMECHARGE)->getProperty("active")["value"];
     }
 
-    public function startOneTimeDhwCharge(): String
+    public function startOneTimeDhwCharge()
     {
         $data = "{\"mode\": \"activate\"}";
-        return $this->setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "activate", $data);
+        $this->setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "activate", $data);
     }
 
-    public function stopOneTimeDhwCharge(): String
+    public function stopOneTimeDhwCharge()
     {
 
         $data = "{\"mode\": \"deactivate\"}";
-        return $this->setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "deactivate", $data);
+        $this->setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "deactivate", $data);
     }
 
     public function getDhwPumpsCirculation(): String
