@@ -1,3 +1,6 @@
+**WARNING: Due to update in viessmann Oauth process, I had to update authorization method from OAuth to Bearer and add an extra Header. This has been fixed in 1.1-SNAPSHOT(available in example directory). As soon as I have enough feedback, I will do a release with this fix !**
+
+
 Version 1.0.1 available here ! : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.0.1
 
 Translated documentation can be found here:
