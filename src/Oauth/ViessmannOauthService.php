@@ -1,4 +1,5 @@
 <?php
+
 namespace Viessmann\Oauth;
 
 use OAuth\Common\Consumer\CredentialsInterface;
@@ -13,12 +14,14 @@ use OAuth\OAuth2\Token\StdOAuth2Token;
 /**
  * Bootstrap the example
  */
-final class ViessmannOauthService extends AbstractService {
+final class ViessmannOauthService extends AbstractService
+{
 
-    const SCOPE_USAGE_GET       = 'openid';
+    const SCOPE_USAGE_GET = 'openid';
     private $authorizeURL = 'https://iam.viessmann.com/idp/v1/authorize';
     private $token_url = 'https://iam.viessmann.com/idp/v1/token';
     protected $redirect_uri = "vicare://oauth-callback/everest";
+
     /**
      * ViessmannOauthClient constructor.
      */
@@ -28,7 +31,8 @@ final class ViessmannOauthService extends AbstractService {
         TokenStorageInterface $storage,
         $scopes = array(),
         UriInterface $baseApiUri = null
-    ) {
+    )
+    {
         parent::__construct(
             $credentials,
             $httpClient,
@@ -43,6 +47,7 @@ final class ViessmannOauthService extends AbstractService {
     {
         return new Uri($this->authorizeURL);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -51,12 +56,17 @@ final class ViessmannOauthService extends AbstractService {
         return new Uri($this->token_url);
     }
 
+    protected function getAuthorizationMethod()
+    {
+        return static::AUTHORIZATION_METHOD_HEADER_BEARER;
+    }
+
     /**
      * {@inheritdoc}
      */
     protected function parseAccessTokenResponse($responseBody)
     {
-        $data=(array)json_decode($responseBody);
+        $data = (array)json_decode($responseBody);
         if (null === $data || !is_array($data)) {
             throw new TokenResponseException('Unable to parse response.');
         } elseif (isset($data['error'])) {
@@ -76,6 +86,7 @@ final class ViessmannOauthService extends AbstractService {
         $token->setExtraParams($data);
         return $token;
     }
+
     /**
      * {@inheritdoc}
      */
@@ -84,9 +95,9 @@ final class ViessmannOauthService extends AbstractService {
         $parameters = array_merge(
             $additionalParameters,
             array(
-                'type'          => 'web_server',
-                'client_id'     => $this->credentials->getConsumerId(),
-                'redirect_uri'  => $this->credentials->getCallbackUrl(),
+                'type' => 'web_server',
+                'client_id' => $this->credentials->getConsumerId(),
+                'redirect_uri' => $this->credentials->getCallbackUrl(),
                 'response_type' => 'code',
             )
         );
@@ -109,7 +120,12 @@ final class ViessmannOauthService extends AbstractService {
 
     public function request($path, $method = 'GET', $body = null, array $extraHeaders = array())
     {
-        return parent::request($path, $method, $body, $extraHeaders);
+        $viessmanHeader = array(
+            'Accept' => 'application/vnd.siren+json',
+            'x-api-key' => 'token 38c97795ed8ae0ec139409d785840113bb0f5479893a72997932d447bd1178c8'
+        );
+
+        return parent::request($path, $method, $body, $viessmanHeader);
     }
 
 }
