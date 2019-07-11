@@ -888,22 +888,22 @@
 </span><span class="l" id="line-811">        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;getEntity(ViessmannFeature::HEATING_DHW_CHARGING_LEVEL)-&gt;getProperty(<span class="php-quote">&quot;value&quot;</span>)[<span class="php-quote">&quot;value&quot;</span>];
 </span><span class="l" id="line-812">    }
 </span><span class="l" id="line-813">
-</span><span class="l" id="line-814">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> isOneTimeDhwCharge(): String
+</span><span class="l" id="line-814">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> isOneTimeDhwCharge(): bool
 </span><span class="l" id="line-815">    {
 </span><span class="l" id="line-816">        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;getEntity(ViessmannFeature::HEATING_DHW_ONETIMECHARGE)-&gt;getProperty(<span class="php-quote">&quot;active&quot;</span>)[<span class="php-quote">&quot;value&quot;</span>];
 </span><span class="l" id="line-817">    }
 </span><span class="l" id="line-818">
-</span><span class="l" id="line-819">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> startOneTimeDhwCharge(): String
+</span><span class="l" id="line-819">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> startOneTimeDhwCharge()
 </span><span class="l" id="line-820">    {
 </span><span class="l" id="line-821">        <span class="php-var">$data</span> = <span class="php-quote">&quot;{\&quot;mode\&quot;: \&quot;activate\&quot;}&quot;</span>;
-</span><span class="l" id="line-822">        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, <span class="php-quote">&quot;activate&quot;</span>, <span class="php-var">$data</span>);
+</span><span class="l" id="line-822">        <span class="php-var">$this</span>-&gt;setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, <span class="php-quote">&quot;activate&quot;</span>, <span class="php-var">$data</span>);
 </span><span class="l" id="line-823">    }
 </span><span class="l" id="line-824">
-</span><span class="l" id="line-825">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> stopOneTimeDhwCharge(): String
+</span><span class="l" id="line-825">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> stopOneTimeDhwCharge()
 </span><span class="l" id="line-826">    {
 </span><span class="l" id="line-827">
 </span><span class="l" id="line-828">        <span class="php-var">$data</span> = <span class="php-quote">&quot;{\&quot;mode\&quot;: \&quot;deactivate\&quot;}&quot;</span>;
-</span><span class="l" id="line-829">        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, <span class="php-quote">&quot;deactivate&quot;</span>, <span class="php-var">$data</span>);
+</span><span class="l" id="line-829">        <span class="php-var">$this</span>-&gt;setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, <span class="php-quote">&quot;deactivate&quot;</span>, <span class="php-var">$data</span>);
 </span><span class="l" id="line-830">    }
 </span><span class="l" id="line-831">
 </span><span class="l" id="line-832">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getDhwPumpsCirculation(): String

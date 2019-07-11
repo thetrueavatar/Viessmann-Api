@@ -128,7 +128,7 @@ abstract class Renderer
                 'classes_bar'            => $classesBar,
                 'classes_tested_percent' => $data['testedClassesPercentAsString'] ?? '',
                 'classes_level'          => $classesLevel,
-                'classes_number' => $classesNumber,
+                'classes_number'         => $classesNumber,
             ]
         );
 

@@ -51,7 +51,7 @@ final class TestSuiteSorter
         BaseTestRunner::STATUS_INCOMPLETE => 3,
         BaseTestRunner::STATUS_RISKY      => 2,
         BaseTestRunner::STATUS_SKIPPED    => 1,
-        BaseTestRunner::STATUS_UNKNOWN => 0,
+        BaseTestRunner::STATUS_UNKNOWN    => 0,
     ];
 
     /**
