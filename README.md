@@ -2,7 +2,7 @@
 
 **WARNING 12/07/2019 : Due to update in viessmann Oauth process, method call with version before 12/07/2019 now fails(message  Call to a member function getProperty() on null). I had to update authorization method from OAuth to Bearer and add an extra Header. This has been fixed in 1.1-SNAPSHOT(available in example directory). As soon as I have enough feedback, I will do a release with this fix !**
 
-**ATTENTION: A cause d'un changment dans la procédure Oauth de Viessmann, les appelles avec la version datant d'avant 12/07/20119 échouent systématiquement(messsage  Call to a member function getProperty() on null).  J'ai du passer en Token Bearer plutôt qu'OAuth et ajouter  un header supplémentaire. Ca a été corrigé dans la version 1.1-SNAPSHOT(dispo dans le répertoire example). Dès que j'ai assez de retour, je ferai une release.**
+**ATTENTION: A cause d'un changment dans la procédure Oauth de Viessmann, les appels avec la version datant d'avant 12/07/20119 échouent systématiquement(messsage  Call to a member function getProperty() on null).  J'ai du passer en Token Bearer plutôt qu'OAuth et ajouter  un header supplémentaire. Ca a été corrigé dans la version 1.1-SNAPSHOT(dispo dans le répertoire example). Dès que j'ai assez de retour, je ferai une release.**
 
 Version 1.0.1 available here ! : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.0.1
 
