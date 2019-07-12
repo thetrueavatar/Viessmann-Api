@@ -6,7 +6,7 @@
 
 If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
 
-Version 1.0.1 available here ! : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.0.1
+Version 1.1.0 available here ! : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.1.0
 Translated documentation can be found here:
 - English: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/README-en.md 
 
