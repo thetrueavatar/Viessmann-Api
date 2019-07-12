@@ -479,7 +479,7 @@ class Generator
                 $methodTemplate->setVar(
                     [
                         'method_name' => $name,
-                        'arguments' => \implode(', ', $args),
+                        'arguments'   => \implode(', ', $args),
                     ]
                 );
 
@@ -510,7 +510,7 @@ class Generator
                 'class_name' => $className,
                 'wsdl'       => $wsdlFile,
                 'options'    => $optionsBuffer,
-                'methods' => $methodsBuffer,
+                'methods'    => $methodsBuffer,
             ]
         );
 
@@ -545,7 +545,7 @@ class Generator
      */
     public function mockClassMethods(string $className, bool $callOriginalMethods, bool $cloneArguments): array
     {
-        $class = new ReflectionClass($className);
+        $class   = new ReflectionClass($className);
         $methods = [];
 
         foreach ($class->getMethods() as $method) {
@@ -627,7 +627,7 @@ class Generator
 
     /**
      * @param array|string $type
-     * @param null|array $explicitMethods
+     * @param null|array   $explicitMethods
      * @param string       $mockClassName
      * @param bool         $callOriginalClone
      * @param bool         $callAutoload
@@ -648,8 +648,8 @@ class Generator
         $cloneTemplate        = '';
         $isClass              = false;
         $isInterface          = false;
-        $class = null;
-        $mockMethods = new MockMethodSet;
+        $class                = null;
+        $mockMethods          = new MockMethodSet;
 
         if (\is_array($type)) {
             $interfaceMethods = [];
@@ -665,7 +665,7 @@ class Generator
                 }
 
                 $additionalInterfaces[] = $_type;
-                $typeClass = new ReflectionClass($_type);
+                $typeClass              = new ReflectionClass($_type);
 
                 foreach ($this->getClassMethods($_type) as $method) {
                     if (\in_array($method, $interfaceMethods, true)) {
@@ -802,7 +802,7 @@ class Generator
         }
 
         $mockedMethods = '';
-        $configurable = [];
+        $configurable  = [];
 
         /** @var MockMethod $mockMethod */
         foreach ($mockMethods->asArray() as $mockMethod) {
@@ -831,15 +831,15 @@ class Generator
                 'mock_class_name'   => $mockClassName['className'],
                 'mocked_methods'    => $mockedMethods,
                 'method'            => $method,
-                'configurable' => '[' . \implode(
-                        ', ',
-                        \array_map(
-                            function ($m) {
-                                return '\'' . $m . '\'';
-                            },
-                            $configurable
-                        )
-                    ) . ']',
+                'configurable'      => '[' . \implode(
+                    ', ',
+                    \array_map(
+                        function ($m) {
+                            return '\'' . $m . '\'';
+                        },
+                        $configurable
+                    )
+                ) . ']',
             ]
         );
 
@@ -888,7 +888,7 @@ class Generator
             'className'         => $className,
             'originalClassName' => $type,
             'fullClassName'     => $fullClassName,
-            'namespaceName' => $namespaceName,
+            'namespaceName'     => $namespaceName,
         ];
     }
 

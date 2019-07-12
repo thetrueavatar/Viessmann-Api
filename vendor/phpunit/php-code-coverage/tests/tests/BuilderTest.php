@@ -10,8 +10,11 @@
 
 namespace SebastianBergmann\CodeCoverage\Report;
 
-use SebastianBergmann\CodeCoverage\Node\Builder;
+use SebastianBergmann\CodeCoverage\Driver\Driver;
+use SebastianBergmann\CodeCoverage\CodeCoverage;
+use SebastianBergmann\CodeCoverage\Filter;
 use SebastianBergmann\CodeCoverage\TestCase;
+use SebastianBergmann\CodeCoverage\Node\Builder;
 
 class BuilderTest extends TestCase
 {
@@ -206,7 +209,7 @@ class BuilderTest extends TestCase
 
         $prefixes = ["C:$s", "$s"];
 
-        foreach ($prefixes as $p) {
+        foreach($prefixes as $p){
             yield [
                 [
                     "Money.php" => []
@@ -219,26 +222,26 @@ class BuilderTest extends TestCase
 
             yield [
                 [
-                    "Money.php" => [],
+                    "Money.php"    => [],
                     "MoneyBag.php" => []
                 ],
                 "{$p}home{$s}sb{$s}Money",
                 [
-                    "{$p}home{$s}sb{$s}Money{$s}Money.php" => [],
+                    "{$p}home{$s}sb{$s}Money{$s}Money.php"    => [],
                     "{$p}home{$s}sb{$s}Money{$s}MoneyBag.php" => []
                 ]
             ];
 
             yield [
                 [
-                    "Money.php" => [],
-                    "MoneyBag.php" => [],
+                    "Money.php"          => [],
+                    "MoneyBag.php"       => [],
                     "Cash.phar{$s}Cash.php" => [],
                 ],
                 "{$p}home{$s}sb{$s}Money",
                 [
-                    "{$p}home{$s}sb{$s}Money{$s}Money.php" => [],
-                    "{$p}home{$s}sb{$s}Money{$s}MoneyBag.php" => [],
+                    "{$p}home{$s}sb{$s}Money{$s}Money.php"                 => [],
+                    "{$p}home{$s}sb{$s}Money{$s}MoneyBag.php"              => [],
                     "phar://{$p}home{$s}sb{$s}Money{$s}Cash.phar{$s}Cash.php" => [],
                 ],
             ];

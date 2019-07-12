@@ -34,6 +34,7 @@ use PHPUnit\Util\TextTestListRenderer;
 use PHPUnit\Util\XmlTestListRenderer;
 use ReflectionClass;
 use SebastianBergmann\FileIterator\Facade as FileIteratorFacade;
+
 use Throwable;
 
 /**
@@ -53,7 +54,7 @@ class Command
         'loader'                  => null,
         'useDefaultConfiguration' => true,
         'loadedExtensions'        => [],
-        'notLoadedExtensions' => [],
+        'notLoadedExtensions'     => [],
     ];
 
     /**
@@ -66,7 +67,7 @@ class Command
      */
     protected $longOptions = [
         'atleast-version='          => null,
-        'prepend=' => null,
+        'prepend='                  => null,
         'bootstrap='                => null,
         'cache-result'              => null,
         'cache-result-file='        => null,
@@ -84,7 +85,7 @@ class Command
         'disallow-test-output'      => null,
         'disallow-resource-usage'   => null,
         'disallow-todo-tests'       => null,
-        'default-time-limit=' => null,
+        'default-time-limit='       => null,
         'enforce-time-limit'        => null,
         'exclude-group='            => null,
         'filter='                   => null,
@@ -140,8 +141,8 @@ class Command
         'testsuite='                => null,
         'verbose'                   => null,
         'version'                   => null,
-        'whitelist=' => null,
-        'dump-xdebug-filter=' => null,
+        'whitelist='                => null,
+        'dump-xdebug-filter='       => null,
     ];
 
     /**
@@ -693,7 +694,7 @@ class Command
                     break;
 
                 case '--default-time-limit':
-                    $this->arguments['defaultTimeLimit'] = (int)$option[1];
+                    $this->arguments['defaultTimeLimit'] = (int) $option[1];
 
                     break;
 

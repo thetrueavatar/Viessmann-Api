@@ -89,7 +89,7 @@ final class Text
             'methods' => '',
             'lines'   => '',
             'reset'   => '',
-            'eol' => '',
+            'eol'     => '',
         ];
 
         if ($showColors) {

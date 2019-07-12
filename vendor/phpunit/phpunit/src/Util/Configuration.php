@@ -339,11 +339,11 @@ final class Configuration
                 'processUncoveredFilesFromWhitelist' => $processUncoveredFilesFromWhitelist,
                 'include'                            => [
                     'directory' => $includeDirectory,
-                    'file' => $includeFile,
+                    'file'      => $includeFile,
                 ],
                 'exclude' => [
                     'directory' => $excludeDirectory,
-                    'file' => $excludeFile,
+                    'file'      => $excludeFile,
                 ],
             ],
         ];
@@ -472,7 +472,7 @@ final class Configuration
             'cookie'       => [],
             'server'       => [],
             'files'        => [],
-            'request' => [],
+            'request'      => [],
         ];
 
         foreach ($this->xpath->query('php/includePath') as $includePath) {
@@ -858,7 +858,7 @@ final class Configuration
 
         if ($root->hasAttribute('defaultTimeLimit')) {
             $result['defaultTimeLimit'] = $this->getInteger(
-                (string)$root->getAttribute('defaultTimeLimit'),
+                (string) $root->getAttribute('defaultTimeLimit'),
                 1
             );
         }
@@ -1171,15 +1171,15 @@ final class Configuration
 
     private function satisfiesPhpVersion(DOMElement $node): bool
     {
-        $phpVersion = \PHP_VERSION;
+        $phpVersion         = \PHP_VERSION;
         $phpVersionOperator = '>=';
 
         if ($node->hasAttribute('phpVersion')) {
-            $phpVersion = (string)$node->getAttribute('phpVersion');
+            $phpVersion = (string) $node->getAttribute('phpVersion');
         }
 
         if ($node->hasAttribute('phpVersionOperator')) {
-            $phpVersionOperator = (string)$node->getAttribute('phpVersionOperator');
+            $phpVersionOperator = (string) $node->getAttribute('phpVersionOperator');
         }
 
         return \version_compare(\PHP_VERSION, $phpVersion, $phpVersionOperator);
@@ -1248,7 +1248,7 @@ final class Configuration
                 'path'   => $this->toAbsolutePath($directoryPath),
                 'prefix' => $prefix,
                 'suffix' => $suffix,
-                'group' => $group,
+                'group'  => $group,
             ];
         }
 

@@ -159,7 +159,7 @@ class TestRunner extends BaseTestRunner
         $this->handleConfiguration($arguments);
 
         if (\is_int($arguments['columns']) && $arguments['columns'] < 16) {
-            $arguments['columns'] = 16;
+            $arguments['columns']   = 16;
             $tooFewColumnsRequested = true;
         }
 
@@ -556,7 +556,7 @@ class TestRunner extends BaseTestRunner
 
             if (isset($arguments['xdebugFilterFile'], $filterConfiguration)) {
                 $filterScriptGenerator = new XdebugFilterScriptGenerator;
-                $script = $filterScriptGenerator->generate($filterConfiguration['whitelist']);
+                $script                = $filterScriptGenerator->generate($filterConfiguration['whitelist']);
                 \file_put_contents($arguments['xdebugFilterFile'], $script);
 
                 $this->write("\n");
@@ -1207,7 +1207,7 @@ class TestRunner extends BaseTestRunner
         $arguments['crap4jThreshold']                                 = $arguments['crap4jThreshold'] ?? 30;
         $arguments['disallowTestOutput']                              = $arguments['disallowTestOutput'] ?? false;
         $arguments['disallowTodoAnnotatedTests']                      = $arguments['disallowTodoAnnotatedTests'] ?? false;
-        $arguments['defaultTimeLimit'] = $arguments['defaultTimeLimit'] ?? 0;
+        $arguments['defaultTimeLimit']                                = $arguments['defaultTimeLimit'] ?? 0;
         $arguments['enforceTimeLimit']                                = $arguments['enforceTimeLimit'] ?? false;
         $arguments['excludeGroups']                                   = $arguments['excludeGroups'] ?? [];
         $arguments['failOnRisky']                                     = $arguments['failOnRisky'] ?? false;

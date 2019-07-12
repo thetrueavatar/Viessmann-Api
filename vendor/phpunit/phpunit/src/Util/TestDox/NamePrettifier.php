@@ -67,7 +67,7 @@ final class NamePrettifier
             $result = $annotations['method']['testdox'][0];
 
             if (\strpos($result, '$') !== false) {
-                $annotation = $annotations['method']['testdox'][0];
+                $annotation   = $annotations['method']['testdox'][0];
                 $providedData = $this->mapTestMethodParameterNamesToProvidedDataValues($test);
 
                 $result = \trim(
@@ -168,7 +168,7 @@ final class NamePrettifier
                 $reflector = new \ReflectionObject($value);
 
                 if ($reflector->hasMethod('__toString')) {
-                    $value = (string)$value;
+                    $value = (string) $value;
                 }
             }
 
