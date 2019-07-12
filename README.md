@@ -2,7 +2,7 @@
 
 **WARNING 12/07/2019 : Due to update in viessmann Oauth process, method call with version before 12/07/2019 now fails(message  Call to a member function getProperty() on null).This has been fixed in 1.1.0(https://github.com/thetrueavatar/Viessmann-Api/releases/download/1.1.0/Viessmann-Api-1.1.0.phar) and 1.2.0-SNAPSHOT version**
 
-**ATTENTION: A cause d'un changment dans la procédure Oauth de Viessmann, les appels avec la version datant d'avant 12/07/20119 échouent systématiquement(messsage  Call to a member function getProperty() on null).  Ca a été corrigé dans la version 1.1.0(https://github.com/thetrueavatar/Viessmann-Api/releases/download/1.1.0/Viessmann-Api-1.1.0.phar) et la version 1.2.0-SNAPSHOT**
+**ATTENTION 12/07/2019: A cause d'un changment dans la procédure Oauth de Viessmann, les appels avec la version datant d'avant 12/07/20119 échouent systématiquement(messsage  Call to a member function getProperty() on null).  Ca a été corrigé dans la version 1.1.0(https://github.com/thetrueavatar/Viessmann-Api/releases/download/1.1.0/Viessmann-Api-1.1.0.phar) et la version 1.2.0-SNAPSHOT**
 
 Version 1.0.1 available here ! : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.0.1
 
