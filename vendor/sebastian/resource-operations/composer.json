@@ -10,23 +10,23 @@
         }
     ],
     "require": {
-      "php": "^7.1"
+        "php": "^7.1"
     },
     "autoload": {
         "classmap": [
             "src/"
         ]
     },
-  "config": {
-    "platform": {
-      "php": "7.1.0"
+    "config": {
+        "platform": {
+            "php": "7.1.0"
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
     },
-    "optimize-autoloader": true,
-    "sort-packages": true
-  },
     "extra": {
         "branch-alias": {
-          "dev-master": "2.0-dev"
+            "dev-master": "2.0-dev"
         }
     }
 }

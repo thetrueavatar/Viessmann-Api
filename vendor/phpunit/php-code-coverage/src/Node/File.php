@@ -492,7 +492,7 @@ final class File extends AbstractNode
                 'coverage'        => 0,
                 'crap'            => 0,
                 'package'         => $class['package'],
-                'link' => $link . $class['startLine'],
+                'link'            => $link . $class['startLine'],
             ];
 
             foreach ($class['methods'] as $methodName => $method) {
@@ -528,7 +528,7 @@ final class File extends AbstractNode
                 'coverage'        => 0,
                 'crap'            => 0,
                 'package'         => $trait['package'],
-                'link' => $link . $trait['startLine'],
+                'link'            => $link . $trait['startLine'],
             ];
 
             foreach ($trait['methods'] as $methodName => $method) {
@@ -567,7 +567,7 @@ final class File extends AbstractNode
                 'ccn'             => $function['ccn'],
                 'coverage'        => 0,
                 'crap'            => 0,
-                'link' => $link . $function['startLine'],
+                'link'            => $link . $function['startLine'],
             ];
 
             foreach (\range($function['startLine'], $function['endLine']) as $lineNumber) {

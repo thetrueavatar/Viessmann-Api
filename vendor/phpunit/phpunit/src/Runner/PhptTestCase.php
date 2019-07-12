@@ -480,7 +480,7 @@ class PhptTestCase implements Test, SelfDescribing
 
         return [
             'coverage' => $baseDir . $basename . 'coverage',
-            'job' => $baseDir . $basename . 'php',
+            'job'      => $baseDir . $basename . 'php',
         ];
     }
 
@@ -516,7 +516,7 @@ class PhptTestCase implements Test, SelfDescribing
                 'phar'             => $phar,
                 'globals'          => $globals,
                 'job'              => $files['job'],
-                'coverageFile' => $files['coverage'],
+                'coverageFile'     => $files['coverage'],
             ]
         );
 

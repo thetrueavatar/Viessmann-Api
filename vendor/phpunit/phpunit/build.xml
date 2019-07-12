@@ -26,8 +26,7 @@
         <property name="prepare.done" value="true"/>
     </target>
 
-    <target name="validate-composer-json" depends="clean" unless="validate-composer-json.done"
-            description="Validate composer.json">
+    <target name="validate-composer-json" depends="clean" unless="validate-composer-json.done" description="Validate composer.json">
         <exec executable="${basedir}/build/tools/composer" failonerror="true" taskname="composer">
             <arg value="validate"/>
             <arg value="--strict"/>
@@ -127,8 +126,7 @@
 
         <copy file="${basedir}/phpunit.xsd" tofile="${basedir}/build/phar/phpunit.xsd"/>
 
-        <exec executable="${basedir}/build/phar-manifest.php" output="${basedir}/build/phar/manifest.txt"
-              failonerror="true"/>
+        <exec executable="${basedir}/build/phar-manifest.php" output="${basedir}/build/phar/manifest.txt" failonerror="true"/>
 
         <copy file="${basedir}/vendor/phpunit/php-code-coverage/LICENSE" tofile="${basedir}/build/phar/php-code-coverage/LICENSE"/>
         <copy todir="${basedir}/build/phar/php-code-coverage">
@@ -370,7 +368,7 @@
     </target>
 
     <target name="-phar-determine-version">
-        <exec executable="${basedir}/build/version.php" outputproperty="version" failonerror="true"/>
+        <exec executable="${basedir}/build/version.php" outputproperty="version" failonerror="true" />
     </target>
 
     <target name="generate-project-documentation" depends="-phploc,-checkstyle,-phpunit">

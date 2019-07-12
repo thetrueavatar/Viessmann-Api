@@ -90,7 +90,7 @@ final class Clover
                         'crap'        => $method['crap'],
                         'type'        => 'method',
                         'visibility'  => $method['visibility'],
-                        'name' => $methodName,
+                        'name'        => $methodName,
                     ];
                 }
 

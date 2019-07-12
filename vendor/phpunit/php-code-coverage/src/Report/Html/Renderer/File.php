@@ -67,7 +67,7 @@ final class File extends Renderer
                 'testedMethodsPercentAsString' => $node->getTestedFunctionsAndMethodsPercent(),
                 'testedClassesPercent'         => $node->getTestedClassesAndTraitsPercent(false),
                 'testedClassesPercentAsString' => $node->getTestedClassesAndTraitsPercent(),
-                'crap' => '<abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr>',
+                'crap'                         => '<abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr>',
             ]
         );
 
@@ -130,7 +130,7 @@ final class File extends Renderer
             $buffer .= $this->renderItemTemplate(
                 $template,
                 [
-                    'name' => $this->abbreviateClassName($name),
+                    'name'                         => $this->abbreviateClassName($name),
                     'numClasses'                   => $numClasses,
                     'numTestedClasses'             => $numTestedClasses,
                     'numMethods'                   => $numMethods,
@@ -161,7 +161,7 @@ final class File extends Renderer
                         1,
                         true
                     ),
-                    'crap' => $item['crap'],
+                    'crap'                         => $item['crap'],
                 ]
             );
 
@@ -240,7 +240,7 @@ final class File extends Renderer
                     1,
                     true
                 ),
-                'crap' => $item['crap'],
+                'crap'                         => $item['crap'],
             ]
         );
     }

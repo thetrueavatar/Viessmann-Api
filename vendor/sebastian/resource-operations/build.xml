@@ -18,7 +18,7 @@
     </target>
 
     <target name="generate" depends="-download-arginfo">
-        <exec executable="${basedir}/build/generate.php" taskname="generate"/>
+        <exec executable="${basedir}/build/generate.php" taskname="generate" />
     </target>
 
     <target name="-download-arginfo">
@@ -28,12 +28,11 @@
 
         <delete>
             <fileset dir="${basedir}/build">
-                <include name="arginfo.php"/>
+                <include name="arginfo.php" />
                 <date datetime="${thirty.days.ago}" when="before"/>
             </fileset>
         </delete>
 
-        <get src="https://raw.githubusercontent.com/phan/phan/master/src/Phan/Language/Internal/FunctionSignatureMap.php"
-             dest="${basedir}/build/FunctionSignatureMap.php" skipexisting="true"/>
+        <get src="https://raw.githubusercontent.com/phan/phan/master/src/Phan/Language/Internal/FunctionSignatureMap.php" dest="${basedir}/build/FunctionSignatureMap.php" skipexisting="true"/>
     </target>
 </project>

@@ -898,7 +898,7 @@ final class Test
             'beforeClass' => ['setUpBeforeClass'],
             'before'      => ['setUp'],
             'after'       => ['tearDown'],
-            'afterClass' => ['tearDownAfterClass'],
+            'afterClass'  => ['tearDownAfterClass'],
         ];
     }
 

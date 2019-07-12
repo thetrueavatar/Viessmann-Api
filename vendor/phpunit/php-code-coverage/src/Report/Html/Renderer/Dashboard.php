@@ -47,7 +47,7 @@ final class Dashboard extends Renderer
                 'complexity_class'              => $complexity['class'],
                 'complexity_method'             => $complexity['method'],
                 'class_coverage_distribution'   => $coverageDistribution['class'],
-                'method_coverage_distribution' => $coverageDistribution['method'],
+                'method_coverage_distribution'  => $coverageDistribution['method'],
             ]
         );
 
@@ -113,7 +113,7 @@ final class Dashboard extends Renderer
                 '70-80%'  => 0,
                 '80-90%'  => 0,
                 '90-100%' => 0,
-                '100%' => 0,
+                '100%'    => 0,
             ],
             'method' => [
                 '0%'      => 0,
@@ -127,7 +127,7 @@ final class Dashboard extends Renderer
                 '70-80%'  => 0,
                 '80-90%'  => 0,
                 '90-100%' => 0,
-                '100%' => 0,
+                '100%'    => 0,
             ],
         ];
 
