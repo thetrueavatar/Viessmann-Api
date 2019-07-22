@@ -11,6 +11,7 @@ final class ViessmannAPI
     const HEATING_BURNER = "heating.burner";
     const HEATING_CIRCUITS = "heating.circuits";
     const HEATING_CURVE = "heating.curve";
+//    const HEATING_POWER_CONSUMPTION = "heating.power.consumption";
     const SENSORS_TEMPERATURE_ROOM = "sensors.temperature.room";
     const ACTIVE_OPERATING_MODE = "operating.modes.active";
     const OPERATING_MODES = "operating.modes.active";
@@ -362,6 +363,59 @@ final class ViessmannAPI
     {
         return $this->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_HOTWATERSTORAGE)->getProperty("value")["value"];
     }
+
+
+
+    /**
+     * Return the Heating Solar Power production. A period is needed amongs day(default),week,month,year. 
+     * currently only day is returned
+     * Currently the number 
+     * are not the same that displayed on heating device
+     * @param string $period amongst enume "day","week","month","year
+     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+     *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
+     *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
+     *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSolarPowerProduction($period = "day")
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SOLAR_POWER_PRODUCTION)->getProperty($period)["value"];
+    }
+
+
+
+
+    /**
+     * @param null $circuit
+     * @return string heating solar sensors temperature collector
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSolarSensorsTemperatureCollector($circuit = NULL): string
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SOLAR_SENSORS_TEMPERATURE_COLLECTOR)->getProperty("value")["value"];
+    }
+
+
+
+
+
+    /**
+     * Return the Gas consumption for DHW. A period is needeed amongs day(default),week,month,year. Currently the number 
+     * are not the same that displayed on heating device
+     * @param string $period amongst enume "day","week","month","year
+     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+     *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
+     *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
+     *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
+     * @throws ViessmannApiException
+     */
+    public function getHeatingPowerConsumption($period = "day")
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_POWER_CONSUMPTION)->getProperty($period)["value"];
+    }
+
+
 
     /**
      * Return the Gas consumption for DHW. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
