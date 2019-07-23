@@ -21,6 +21,7 @@ final class ViessmannOauthService extends AbstractService
     private $authorizeURL = 'https://iam.viessmann.com/idp/v1/authorize';
     private $token_url = 'https://iam.viessmann.com/idp/v1/token';
     protected $redirect_uri = "vicare://oauth-callback/everest";
+    const X_API_KEY = '38c97795ed8ae0ec139409d785840113bb0f5479893a72997932d447bd1178c8';
 
     /**
      * ViessmannOauthClient constructor.
@@ -120,12 +121,8 @@ final class ViessmannOauthService extends AbstractService
 
     public function request($path, $method = 'GET', $body = null, array $extraHeaders = array())
     {
-        $viessmanHeader = array(
-            'Accept' => 'application/vnd.siren+json',
-            'x-api-key' => 'token 38c97795ed8ae0ec139409d785840113bb0f5479893a72997932d447bd1178c8'
-        );
-
-        return parent::request($path, $method, $body, $viessmanHeader);
+        $extraHeaders ['x-api-key'] = 'token ' . self::X_API_KEY . '';
+        return parent::request($path, $method, $body, $extraHeaders);
     }
 
 }

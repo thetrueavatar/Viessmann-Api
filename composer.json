@@ -23,7 +23,7 @@
     "extra": {
         "phar-builder": {
             "compression": "GZip",
-            "name": "Viessmann-Api-1.1-SNAPSHOT.phar",
+            "name": "Viessmann-Api-1.2.0-SNAPSHOT.phar",
             "output-dir": "./example",
             "entry-point": "./index.php",
             "include": "php",
