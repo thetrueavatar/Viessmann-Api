@@ -118,4 +118,7 @@ final class ViessmannFeature
     const HEATING_SERVICE = "heating.service";
     const HEATING_SERVICE_TIMEBASED = "heating.service.timeBased";
     const HEATING = "heating";
+    const HEATING_POWER_CONSUMPTION = "heating.power.consumption";
+    const HEATING_SOLAR_POWER_PRODUCTION = "heating.solar.power.production";
+    const HEATING_SOLAR_SENSORS_TEMPERATURE_COLLECTOR = "heating.solar.sensors.temperature.collector"; 
 }
