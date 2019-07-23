@@ -11,7 +11,6 @@ final class ViessmannAPI
     const HEATING_BURNER = "heating.burner";
     const HEATING_CIRCUITS = "heating.circuits";
     const HEATING_CURVE = "heating.curve";
-//    const HEATING_POWER_CONSUMPTION = "heating.power.consumption";
     const SENSORS_TEMPERATURE_ROOM = "sensors.temperature.room";
     const ACTIVE_OPERATING_MODE = "operating.modes.active";
     const OPERATING_MODES = "operating.modes.active";
@@ -401,7 +400,7 @@ final class ViessmannAPI
 
 
     /**
-     * Return the Gas consumption for DHW. A period is needeed amongs day(default),week,month,year. Currently the number 
+     * Return the Heating consumption. A period is needeed amongs day(default),week,month,year. Currently the number
      * are not the same that displayed on heating device
      * @param string $period amongst enume "day","week","month","year
      * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
