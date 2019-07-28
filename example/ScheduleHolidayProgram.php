@@ -1,3 +1,3 @@
 <?php
 include __DIR__.'/bootstrap.php';
-$viessmannApi->scheduleHolidayProgram("2020-01-01","2021-01-01");//not sure of the format.
+$viessmannApi->scheduleHolidayProgram("2019-08-02","2019-08-08");//not sure of the format.

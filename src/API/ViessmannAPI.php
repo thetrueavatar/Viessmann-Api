@@ -229,9 +229,23 @@ final class ViessmannAPI
     }
 
     /**
+     * get scheduled holiday program
+     * json object contains a property start and end. date are in format yyyy-MM-dd
+     * @param null $circuitId
+     * @return a json object containing a property start and a property end
+     * @throws ViessmannApiException
+     */
+    public function getScheduledHolidayProgram($circuitId = NULL) : string {
+        $data=$this->getEntity($this->buildFeature($circuitId, self::HOLIDAY_PROGRAM));
+        $schedule['start']=$data->getProperty("start")["value"];
+        $schedule['end']=$data->getProperty("end")["value"];
+        return json_encode($schedule);
+
+    }
+    /**
      * schedule holiday program
      * start en end are in xml datetime format. See https://www.w3schools.com/xml/schema_dtypes_date.asp form more details
-     * @param $start of holiday in xml datetime format
+     * @param $start of holiday in xml datetime format but seems to effectively only store date part(yyyy-MM-dd)
      * @param $end of holiday in datetime xml format
      * @param null $circuitId
      * @throws ViessmannApiException
