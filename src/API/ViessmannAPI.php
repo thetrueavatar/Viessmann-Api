@@ -29,7 +29,7 @@ final class ViessmannAPI
     const HOLIDAY_PROGRAM = "operating.programs.holiday";
     const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
     const CIRCULATION_SCHEDULE = "circulation.schedule";
-    const DHW_SCHEDULE = "dhw.schedule";
+    const DHW_SCHEDULE = "heating.dhw.schedule";
     const HEATING_SCHEDULE = "heating.schedule";
     const CIRCULATION_PUMP = "circulation.pump";
     private $viessmanAuthClient;
@@ -553,7 +553,7 @@ final class ViessmannAPI
     public function setRawDhwSchedule($schedule, $circuitId = NULL)
     {
         $data = "{\"newSchedule\": $schedule}";
-        $this->setRawJsonData($this->buildFeature($circuitId, self::DHW_SCHEDULE), "setSchedule", $data);
+        $this->setRawJsonData(self::DHW_SCHEDULE, "setSchedule", $data);
     }
 
     /**
