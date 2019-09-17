@@ -15,7 +15,7 @@ class ViessmannMockClient implements ViessmannOauthClient
 {
     private $resourcesDir;
 
-    public function __construct($resourcesDir = __DIR__ . "/resources/features/")
+    public function __construct($resourcesDir = __DIR__ . "/resources/features/heating/")
     {
         $this->resourcesDir = $resourcesDir;
     }
@@ -32,7 +32,7 @@ class ViessmannMockClient implements ViessmannOauthClient
 
     public function readData($feature): string
     {
-        return file_get_contents($this->resourcesDir . $feature . ".siren.json");
+        return file_get_contents($this->resourcesDir . $feature . ".json");
     }
 
     public function setData($feature, $action, $data)

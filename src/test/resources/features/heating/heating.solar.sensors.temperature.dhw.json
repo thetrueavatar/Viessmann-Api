@@ -1,0 +1,29 @@
+{
+    "apiVersion": 1,
+    "isEnabled": true,
+    "isReady": true,
+    "gatewayId": "7123456789123456",
+    "timestamp": "2017-12-22T12:19:05.613Z",
+    "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.solar.sensors.temperature.dhw",
+    "feature": "heating.solar.sensors.temperature.dhw",
+    "properties": {
+        "value": {
+            "value": 17,
+            "type": "number"
+        },
+        "status": {
+            "value": "connected",
+            "type": "string",
+            "description": {
+                "general": "Shows the status of sensor",
+                "statuses": {
+                    "connected": ""
+                }
+            }
+        }
+    },
+    "commands": {},
+    "components": [],
+    "deviceId": "0",
+    "description": "Shows solar dhw temperature in °C"
+}

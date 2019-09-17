@@ -1,0 +1,18 @@
+{
+  "apiVersion": 1,
+  "isEnabled": true,
+  "isReady": true,
+  "gatewayId": "7123456789123456",
+  "timestamp": "2017-12-22T12:19:05.613Z",
+  "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.modes.standby",
+  "feature": "heating.circuits.1.operating.modes.standby",
+  "properties": {
+    "active": {
+      "value": false,
+      "type": "boolean"
+    }
+  },
+  "commands": {},
+  "components": [],
+  "deviceId": "0"
+}
