@@ -1,0 +1,141 @@
+{
+  "apiVersion": 1,
+  "isEnabled": true,
+  "isReady": true,
+  "gatewayId": "7123456789123456",
+  "timestamp": "2017-12-22T12:19:05.613Z",
+  "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.circuits.0.heating.schedule",
+  "feature": "heating.circuits.0.heating.schedule",
+  "properties": {
+    "active": {
+      "value": true,
+      "type": "boolean"
+    },
+    "entries": {
+      "value": {
+        "mon": [
+          {
+            "position": 0,
+            "start": "06:00",
+            "end": "08:00",
+            "mode": "normal"
+          },
+          {
+            "position": 1,
+            "start": "17:00",
+            "end": "23:00",
+            "mode": "normal"
+          }
+        ],
+        "tue": [
+          {
+            "position": 0,
+            "start": "06:00",
+            "end": "08:00",
+            "mode": "normal"
+          },
+          {
+            "position": 1,
+            "start": "17:00",
+            "end": "23:00",
+            "mode": "normal"
+          }
+        ],
+        "wed": [
+          {
+            "mode": "normal",
+            "start": "06:00",
+            "end": "08:00",
+            "position": 0
+          },
+          {
+            "mode": "normal",
+            "start": "17:00",
+            "end": "23:00",
+            "position": 1
+          }
+        ],
+        "thu": [
+          {
+            "mode": "normal",
+            "start": "06:00",
+            "end": "08:00",
+            "position": 0
+          },
+          {
+            "mode": "normal",
+            "start": "17:00",
+            "end": "23:00",
+            "position": 1
+          }
+        ],
+        "fri": [
+          {
+            "mode": "normal",
+            "start": "06:00",
+            "end": "08:00",
+            "position": 0
+          },
+          {
+            "mode": "normal",
+            "start": "17:00",
+            "end": "23:00",
+            "position": 1
+          }
+        ],
+        "sat": [
+          {
+            "mode": "normal",
+            "start": "06:00",
+            "end": "08:00",
+            "position": 0
+          },
+          {
+            "mode": "normal",
+            "start": "17:00",
+            "end": "23:00",
+            "position": 1
+          }
+        ],
+        "sun": [
+          {
+            "mode": "normal",
+            "start": "06:00",
+            "end": "08:00",
+            "position": 0
+          },
+          {
+            "mode": "normal",
+            "start": "17:00",
+            "end": "23:00",
+            "position": 1
+          }
+        ]
+      },
+      "type": "Schedule"
+    }
+  },
+  "commands": {
+    "setSchedule": {
+      "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.circuits.0.heating.schedule/commands/setSchedule",
+      "name": "setSchedule",
+      "isExecutable": true,
+      "params": {
+        "newSchedule": {
+          "type": "Schedule",
+          "required": true,
+          "constraints": {
+            "maxEntries": 4,
+            "resolution": 10,
+            "modes": [
+              "normal"
+            ],
+            "defaultMode": "reduced"
+          }
+        }
+      }
+    }
+  },
+  "components": [],
+  "deviceId": "0"
+}

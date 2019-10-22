@@ -1,0 +1,51 @@
+{
+  "apiVersion": 1,
+  "isEnabled": true,
+  "isReady": true,
+  "gatewayId": "7123456789123456",
+  "timestamp": "2017-12-22T12:19:05.613Z",
+  "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.programs.comfort",
+  "feature": "heating.circuits.1.operating.programs.comfort",
+  "properties": {
+    "active": {
+      "value": false,
+      "type": "boolean"
+    },
+    "temperature": {
+      "value": 23,
+      "type": "number"
+    }
+  },
+  "commands": {
+    "setTemperature": {
+      "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.programs.comfort/commands/setTemperature",
+      "name": "setTemperature",
+      "isExecutable": true,
+      "params": {
+        "targetTemperature": {
+          "type": "number",
+          "required": true,
+          "constraints": {
+            "min": 3,
+            "max": 37,
+            "stepping": 1
+          }
+        }
+      }
+    },
+    "activate": {
+      "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.programs.comfort/commands/activate",
+      "name": "activate",
+      "isExecutable": true,
+      "params": {}
+    },
+    "deactivate": {
+      "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.circuits.1.operating.programs.comfort/commands/deactivate",
+      "name": "deactivate",
+      "isExecutable": true,
+      "params": {}
+    }
+  },
+  "components": [],
+  "deviceId": "0"
+}

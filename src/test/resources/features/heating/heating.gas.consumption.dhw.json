@@ -1,0 +1,114 @@
+{
+  "apiVersion": 1,
+  "feature": "heating.gas.consumption.dhw",
+  "isEnabled": true,
+  "isReady": true,
+  "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.gas.consumption.dhw",
+  "deviceId": "0",
+  "gatewayId": "7123456789123456",
+  "properties": {
+    "unit": {
+      "type": "string",
+      "value": "kilowattHour"
+    },
+    "week": {
+      "type": "array",
+      "value": [
+        84,
+        128,
+        132,
+        114,
+        120,
+        122,
+        108,
+        122,
+        121,
+        110,
+        106,
+        126,
+        98,
+        113,
+        92,
+        104,
+        105,
+        93,
+        85,
+        92,
+        88,
+        74,
+        74,
+        70,
+        57,
+        82,
+        87,
+        83,
+        82,
+        71,
+        83,
+        84,
+        78,
+        85,
+        90,
+        94,
+        98,
+        89,
+        94,
+        124,
+        96,
+        116,
+        104,
+        108,
+        114,
+        120,
+        111,
+        119,
+        116,
+        115,
+        122,
+        124
+      ]
+    },
+    "month": {
+      "type": "array",
+      "value": [
+        480,
+        444,
+        413,
+        360,
+        310,
+        245,
+        210,
+        232,
+        308,
+        337,
+        380,
+        424,
+        462
+      ]
+    },
+    "year": {
+      "type": "array",
+      "value": [
+        1080,
+        4456,
+        4380
+      ]
+    },
+    "day": {
+      "type": "array",
+      "value": [
+        6.4,
+        12.4,
+        9,
+        8.6,
+        12.4,
+        9.6,
+        14,
+        11.6
+      ]
+    }
+  },
+  "commands": {},
+  "components": [],
+  "timestamp": "2017-12-22T12:19:05.613Z"
+}

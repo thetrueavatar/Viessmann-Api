@@ -1,0 +1,99 @@
+{
+  "apiVersion": 1,
+  "isEnabled": true,
+  "isReady": true,
+  "gatewayId": "7123456789123456",
+  "timestamp": "2017-12-22T12:19:05.613Z",
+  "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.dhw.schedule",
+  "feature": "heating.dhw.schedule",
+  "properties": {
+    "active": {
+      "value": true,
+      "type": "boolean"
+    },
+    "entries": {
+      "value": {
+        "mon": [
+          {
+            "start": "03:00",
+            "end": "24:00",
+            "mode": "on",
+            "position": 1
+          }
+        ],
+        "tue": [
+          {
+            "start": "03:00",
+            "end": "24:00",
+            "mode": "on",
+            "position": 3
+          }
+        ],
+        "wed": [
+          {
+            "start": "02:00",
+            "end": "24:00",
+            "mode": "on",
+            "position": 2
+          }
+        ],
+        "thu": [
+          {
+            "start": "03:00",
+            "end": "24:00",
+            "mode": "on",
+            "position": 0
+          }
+        ],
+        "fri": [
+          {
+            "start": "03:00",
+            "end": "24:00",
+            "mode": "on",
+            "position": 3
+          }
+        ],
+        "sat": [
+          {
+            "start": "03:00",
+            "end": "24:00",
+            "mode": "on",
+            "position": 0
+          }
+        ],
+        "sun": [
+          {
+            "start": "03:00",
+            "end": "24:00",
+            "mode": "on",
+            "position": 0
+          }
+        ]
+      },
+      "type": "Schedule"
+    }
+  },
+  "commands": {
+    "setSchedule": {
+      "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.dhw.schedule/commands/setSchedule",
+      "name": "setSchedule",
+      "isExecutable": true,
+      "params": {
+        "newSchedule": {
+          "type": "Schedule",
+          "required": true,
+          "constraints": {
+            "maxEntries": 4,
+            "resolution": 10,
+            "modes": [
+              "on"
+            ],
+            "defaultMode": "off"
+          }
+        }
+      }
+    }
+  },
+  "components": [],
+  "deviceId": "0"
+}

@@ -1,0 +1,33 @@
+{
+  "apiVersion": 1,
+  "feature": "heating.dhw.oneTimeCharge",
+  "isEnabled": true,
+  "isReady": true,
+  "name": "deactivate",
+  "isExecutable": true,
+  "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.dhw.oneTimeCharge",
+  "deviceId": "0",
+  "gatewayId": "7123456789123456",
+  "properties": {
+    "active": {
+      "type": "boolean",
+      "value": false
+    }
+  },
+  "commands": {
+    "activate": {
+      "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.dhw.oneTimeCharge/commands/activate",
+      "name": "activate",
+      "isExecutable": true,
+      "params": {}
+    },
+    "deactivate": {
+      "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.dhw.oneTimeCharge/commands/deactivate",
+      "name": "deactivate",
+      "isExecutable": true,
+      "params": {}
+    }
+  },
+  "components": [],
+  "timestamp": "2017-12-22T12:19:05.613Z"
+}
