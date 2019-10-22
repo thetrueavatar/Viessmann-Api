@@ -19,6 +19,7 @@ final class ViessmannFeature
     const GATEWAY_STATUS = "gateway.status";
     const GATEWAY_WIFI = "gateway.wifi";
     const HEATING_BOILER_SENSORS = "heating.boiler.sensors";
+    const HEATING_COMPRESSORS = "heating.compressors";
     const HEATING_BOILER_SENSORS_TEMPERATURE_COMMONSUPPLY = "heating.boiler.sensors.temperature.commonSupply";
     const HEATING_BOILER_SENSORS_TEMPERATURE_MAIN = "heating.boiler.sensors.temperature.main";
     const HEATING_BOILER_SERIAL = "heating.boiler.serial";

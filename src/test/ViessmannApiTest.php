@@ -181,5 +181,12 @@ class ViessmannApiTest extends TestCase
         self::assertNotNull($activeMonthSinceService);
     }
 
+    public function testGetHeatingCompressorsStatistics(){
+        $heatingCompressorStatistics=$this->viessmannApi->getHeatingCompressorsStatistics();
+        echo "\nHeating compressorStatistics  ";
+        echo $heatingCompressorStatistics;
+        self::assertNotNull($heatingCompressorStatistics);
+    }
+
 
 }

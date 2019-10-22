@@ -34,6 +34,7 @@ final class ViessmannAPI
     const CIRCULATION_PUMP = "circulation.pump";
     private $viessmanAuthClient;
     private $circuitId;
+    const STATISTICS = "statistics";
 
     /**
      * ViessmannAPI constructor.
@@ -162,6 +163,15 @@ final class ViessmannAPI
     public function isHeatingBurnerActive(): bool
     {
         return $this->getEntity(ViessmannFeature::HEATING_BURNER)->getProperty("active")["value"];
+    }
+
+    /**
+     * @return bool true if heating compressor is active. False otherwise
+     * @throws ViessmannApiException
+     */
+    public function getHeatingCompressorsStatistics(): string
+    {
+        return json_encode($this->getEntity(ViessmannFeature::HEATING_COMPRESSORS.".".$this->circuitId.".".self::STATISTICS . "")->getProperties());
     }
 
     /**
