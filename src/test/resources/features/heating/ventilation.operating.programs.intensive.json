@@ -1,0 +1,27 @@
+{
+  "class": [
+    "ventilation.operating.programs.intensive",
+    "feature"
+  ],
+  "properties": "",
+  "entities": [
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#feature-meta-information",
+        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+      ],
+      "properties": {
+        "apiVersion": 1,
+        "uri": "/v1/gateways/XXXXXXXXXXXXXXXX/devices/0/features/ventilation.operating.programs.intensive",
+        "gatewayId": "XXXXXXXXXXXXXXXX",
+        "feature": "ventilation.operating.programs.intensive",
+        "timestamp": "2019-10-15T05:28:07.504Z",
+        "isEnabled": false,
+        "isReady": true,
+        "deviceId": "0"
+      }
+    }
+  ],
+  "actions": []
+}

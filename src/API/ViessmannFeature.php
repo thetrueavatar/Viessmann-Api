@@ -60,6 +60,8 @@ final class ViessmannFeature
     const HEATING_CIRCUITS_0_SENSORS_TEMPERATURE_ROOM = "heating.circuits.0.sensors.temperature.room";
     const HEATING_CIRCUITS_0_SENSORS_TEMPERATURE = "heating.circuits.0.sensors.temperature";
     const HEATING_CIRCUITS_0_SENSORS_TEMPERATURE_SUPPLY = "heating.circuits.0.sensors.temperature.supply";
+    const HEATING_SENSORS_TEMPERATURE_RETURN = "heating.sensors.temperature.return";
+    const HEATING_CONFIGURATION_COOLING = "heating.configuration.cooling";
     const HEATING_CIRCUITS_0 = "heating.circuits.0";
     const HEATING_CIRCUITS_1_CIRCULATION_PUMP = "heating.circuits.1.circulation.pump";
     const HEATING_CIRCUITS_1_CIRCULATION_SCHEDULE = "heating.circuits.1.circulation.schedule";

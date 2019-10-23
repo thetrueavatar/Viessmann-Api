@@ -27,6 +27,7 @@ final class ViessmannAPI
     const REDUCED_PROGRAM = "operating.programs.reduced";
     const STANDBY_PROGRAM = "operating.programs.standby";
     const HOLIDAY_PROGRAM = "operating.programs.holiday";
+    const FIXED_PROGRAM = "operating.programs.fixed";
     const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
     const CIRCULATION_SCHEDULE = "circulation.schedule";
     const DHW_SCHEDULE = "heating.dhw.schedule";
@@ -378,6 +379,16 @@ final class ViessmannAPI
     public function isInStandbyMode($circuitId = NULL): bool
     {
         return $this->getEntity($this->buildFeature($circuitId, self::STANDBY_PROGRAM))->getProperty("active")["value"];
+    }
+
+    /**
+     * @param null $circuitId
+     * @return bool true if is Fixed. False otherwise
+     * @throws ViessmannApiException
+     */
+    public function isInFixedPrograms($circuitId = NULL): bool
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::FIXED_PROGRAM))->getProperty("active")["value"];
     }
 
     public function getSupplyProgramTemperature($circuitId = NULL): string
@@ -934,12 +945,38 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_DHW_TEMPERATURE)->getProperty("value")["value"];
     }
 
+    /**
+     * @return String temperature of the return to the heating
+     *
+     */
+    public function getHeatingTemperatureReturn(): String
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SENSORS_TEMPERATURE_RETURN)->getProperty("value")["value"];
+    }
+
     public function setDhwTemperature($temperature)
     {
         $data = "{\"temperature\": $temperature}";
         $this->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
     }
 
+    /**
+     * @return String cooling mode
+     */
+    public function getHeatingConfigurationCoolingMode():String{
+        return $this->getEntity(ViessmannFeature::HEATING_CONFIGURATION_COOLING)->getProperty("mode")["value"];
+    }
+
+    /**
+     * @param $mode mode to set among 3 value: "none","natural","natural-mixer"
+     * @return mixed
+     */
+    public function setHeatingConfigurationCoolingMode($mode){
+        {
+            $data = "{\"mode\": $mode}";
+            $this->setRawJsonData(ViessmannFeature::HEATING_CONFIGURATION_COOLING, "setMode", $data);
+        }
+    }
     /**
      * @return string last service if available
      * @throws ViessmannApiException

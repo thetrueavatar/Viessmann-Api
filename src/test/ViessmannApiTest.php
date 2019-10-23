@@ -195,5 +195,12 @@ class ViessmannApiTest extends TestCase
         self::assertNotNull($isHeatingCompressorActive);
     }
 
+    public function testGetHeatingTemperatureReturn(){
+        $heatingTemperatureReturn=$this->viessmannApi->getHeatingTemperatureReturn();
+        echo "\nHeating temperature return  ";
+        echo $heatingTemperatureReturn;
+        self::assertNotNull($heatingTemperatureReturn);
+    }
+
 
 }
