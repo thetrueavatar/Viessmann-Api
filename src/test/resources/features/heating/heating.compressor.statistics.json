@@ -1,22 +1,82 @@
 {
-  "apiVersion": 1,
-  "feature": "heating.compressor.statistics",
-  "isEnabled": true,
-  "isReady": true,
-  "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.compressor.statistics",
-  "deviceId": "0",
-  "gatewayId": "7123456789123456",
-  "properties": {
-    "hours": {
-      "type": "number",
-      "value": 1270
+  "rel": [
+    "http://schema.viessmann.com/link-relations#feature",
+    "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature",
+    "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+  ],
+  "links": [
+    {
+      "rel": [
+        "self"
+      ],
+      "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.compressors.0.statistics"
     },
+    {
+      "rel": [
+        "up"
+      ],
+      "href": "https://api.viessmann-platform.io/operational-data/v1/installations/XXXXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features"
+    },
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#live-updates",
+        "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"
+      ],
+      "href": "/operational-data/installations/XXXXXX/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.compressors.0.statistics"
+    }
+  ],
+  "class": [
+    "heating.compressors.0.statistics",
+    "feature"
+  ],
+  "properties": {
     "starts": {
-      "type": "number",
-      "value": 512
+      "value": 64,
+      "type": "number"
+    },
+    "hours": {
+      "value": 44.6,
+      "type": "number"
+    },
+    "hoursLoadClassOne": {
+      "value": 21,
+      "type": "number"
+    },
+    "hoursLoadClassTwo": {
+      "value": 13,
+      "type": "number"
+    },
+    "hoursLoadClassThree": {
+      "value": 4,
+      "type": "number"
+    },
+    "hoursLoadClassFour": {
+      "value": 0,
+      "type": "number"
+    },
+    "hoursLoadClassFive": {
+      "value": 0,
+      "type": "number"
     }
   },
-  "commands": {},
-  "components": [],
-  "timestamp": "2017-12-22T12:19:05.613Z"
+  "entities": [
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#feature-meta-information",
+        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+      ],
+      "properties": {
+        "apiVersion": 1,
+        "uri": "/v1/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.compressors.0.statistics",
+        "gatewayId": "XXXXXXXXXXXXXXXX",
+        "feature": "heating.compressors.0.statistics",
+        "timestamp": "2019-10-22T15:29:38.961Z",
+        "isEnabled": true,
+        "isReady": true,
+        "deviceId": "0"
+      }
+    }
+  ],
+  "actions": []
 }

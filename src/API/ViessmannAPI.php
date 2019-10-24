@@ -170,9 +170,12 @@ final class ViessmannAPI
      * @return bool true if heating compressor is active. False otherwise
      * @throws ViessmannApiException
      */
-    public function isHeatingCompressorsActive(): bool
+    public function isHeatingCompressorsActive($circuitId= NULL): bool
     {
-        return $this->getEntity(ViessmannFeature::HEATING_COMPRESSORS)->getProperty("enabled")["value"][0];
+        if ($circuitId == NULL) {
+            $circuitId = $this->circuitId;
+        }
+        return $this->getEntity(ViessmannFeature::HEATING_COMPRESSORS.".".$circuitId)->getProperty("active")["value"];
     }
 
     /**

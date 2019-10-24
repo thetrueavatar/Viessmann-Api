@@ -182,9 +182,9 @@ class ViessmannApiTest extends TestCase
     }
 
     public function testGetHeatingCompressorsStatistics(){
-        $heatingCompressorStatistics=$this->viessmannApi->getHeatingCompressorsStatistics();
+        $heatingCompressorStatistics=json_decode($this->viessmannApi->getHeatingCompressorsStatistics(),true);
         echo "\nHeating compressorStatistics  ";
-        echo $heatingCompressorStatistics;
+        echo $heatingCompressorStatistics["starts"]["value"];
         self::assertNotNull($heatingCompressorStatistics);
     }
 
