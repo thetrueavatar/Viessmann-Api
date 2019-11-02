@@ -85,10 +85,10 @@ class ControllerResolver implements ArgumentResolverInterface, ControllerResolve
             }
         }
 
-        $callable = $this->createController($controller);
-
-        if (!\is_callable($callable)) {
-            throw new \InvalidArgumentException(sprintf('The controller for URI "%s" is not callable. %s', $request->getPathInfo(), $this->getControllerError($callable)));
+        try {
+            $callable = $this->createController($controller);
+        } catch (\InvalidArgumentException $e) {
+            throw new \InvalidArgumentException(sprintf('The controller for URI "%s" is not callable. %s', $request->getPathInfo(), $e->getMessage()));
         }
 
         return $callable;
@@ -116,7 +116,6 @@ class ControllerResolver implements ArgumentResolverInterface, ControllerResolve
     }
 
     /**
-     * @param Request                $request
      * @param callable               $controller
      * @param \ReflectionParameter[] $parameters
      *
@@ -129,9 +128,9 @@ class ControllerResolver implements ArgumentResolverInterface, ControllerResolve
         @trigger_error(sprintf('The "%s()" method is deprecated as of 3.1 and will be removed in 4.0. Implement the %s and inject it in the HttpKernel instead.', __METHOD__, ArgumentResolverInterface::class), E_USER_DEPRECATED);
 
         $attributes = $request->attributes->all();
-        $arguments = array();
+        $arguments = [];
         foreach ($parameters as $param) {
-            if (array_key_exists($param->name, $attributes)) {
+            if (\array_key_exists($param->name, $attributes)) {
                 if ($this->supportsVariadic && $param->isVariadic() && \is_array($attributes[$param->name])) {
                     $arguments = array_merge($arguments, array_values($attributes[$param->name]));
                 } else {
@@ -166,7 +165,7 @@ class ControllerResolver implements ArgumentResolverInterface, ControllerResolve
      *
      * @return callable A PHP callable
      *
-     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException When the controller cannot be created
      */
     protected function createController($controller)
     {
@@ -180,7 +179,13 @@ class ControllerResolver implements ArgumentResolverInterface, ControllerResolve
             throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
         }
 
-        return array($this->instantiateController($class), $method);
+        $controller = [$this->instantiateController($class), $method];
+
+        if (!\is_callable($controller)) {
+            throw new \InvalidArgumentException($this->getControllerError($controller));
+        }
+
+        return $controller;
     }
 
     /**
@@ -216,7 +221,7 @@ class ControllerResolver implements ArgumentResolverInterface, ControllerResolve
         }
 
         if (2 !== \count($callable)) {
-            return 'Invalid format for controller, expected array(controller, method) or controller::method.';
+            return 'Invalid format for controller, expected [controller, method] or controller::method.';
         }
 
         list($controller, $method) = $callable;
@@ -233,7 +238,7 @@ class ControllerResolver implements ArgumentResolverInterface, ControllerResolve
 
         $collection = get_class_methods($controller);
 
-        $alternatives = array();
+        $alternatives = [];
 
         foreach ($collection as $item) {
             $lev = levenshtein($method, $item);

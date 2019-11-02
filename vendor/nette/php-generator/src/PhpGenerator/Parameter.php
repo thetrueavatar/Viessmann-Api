@@ -55,20 +55,16 @@ final class Parameter
 
 
 	/**
-	 * @param  string|null  $hint
 	 * @return static
 	 */
-	public function setTypeHint($hint): self
+	public function setTypeHint(?string $hint): self
 	{
-		$this->typeHint = $hint ? (string) $hint : null;
+		$this->typeHint = $hint;
 		return $this;
 	}
 
 
-	/**
-	 * @return string|null
-	 */
-	public function getTypeHint()
+	public function getTypeHint(): ?string
 	{
 		return $this->typeHint;
 	}
@@ -80,18 +76,9 @@ final class Parameter
 	 */
 	public function setOptional(bool $state = true): self
 	{
+		trigger_error(__METHOD__ . '() is deprecated, use setDefaultValue()', E_USER_DEPRECATED);
 		$this->hasDefaultValue = $state;
 		return $this;
-	}
-
-
-	/**
-	 * @deprecated  use hasDefaultValue()
-	 */
-	public function isOptional(): bool
-	{
-		trigger_error(__METHOD__ . '() is deprecated, use hasDefaultValue()', E_USER_DEPRECATED);
-		return $this->hasDefaultValue;
 	}
 
 

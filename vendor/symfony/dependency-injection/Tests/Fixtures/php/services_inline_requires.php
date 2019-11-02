@@ -16,8 +16,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
  */
 class ProjectServiceContainer extends Container
 {
-    private $parameters;
-    private $targetDirs = array();
+    private $parameters = [];
+    private $targetDirs = [];
 
     public function __construct()
     {
@@ -27,24 +27,24 @@ class ProjectServiceContainer extends Container
         }
         $this->parameters = $this->getDefaultParameters();
 
-        $this->services = array();
-        $this->normalizedIds = array(
+        $this->services = [];
+        $this->normalizedIds = [
             'symfony\\component\\dependencyinjection\\tests\\fixtures\\includes\\hotpath\\c1' => 'Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C1',
             'symfony\\component\\dependencyinjection\\tests\\fixtures\\includes\\hotpath\\c2' => 'Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C2',
             'symfony\\component\\dependencyinjection\\tests\\fixtures\\includes\\hotpath\\c3' => 'Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C3',
             'symfony\\component\\dependencyinjection\\tests\\fixtures\\parentnotexists' => 'Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\ParentNotExists',
-        );
-        $this->methodMap = array(
+        ];
+        $this->methodMap = [
             'Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\ParentNotExists' => 'getParentNotExistsService',
             'Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C1' => 'getC1Service',
             'Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C2' => 'getC2Service',
             'Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C3' => 'getC3Service',
-        );
-        $this->privates = array(
+        ];
+        $this->privates = [
             'Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C3' => true,
-        );
+        ];
 
-        $this->aliases = array();
+        $this->aliases = [];
 
         $this->privates['service_container'] = function () {
             include_once $this->targetDirs[1].'/includes/HotPath/I1.php';
@@ -56,11 +56,11 @@ class ProjectServiceContainer extends Container
 
     public function getRemovedIds()
     {
-        return array(
+        return [
             'Psr\\Container\\ContainerInterface' => true,
             'Symfony\\Component\\DependencyInjection\\ContainerInterface' => true,
             'Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C3' => true,
-        );
+        ];
     }
 
     public function compile()
@@ -87,7 +87,7 @@ class ProjectServiceContainer extends Container
      */
     protected function getParentNotExistsService()
     {
-        return $this->services['Symfony\Component\DependencyInjection\Tests\Fixtures\ParentNotExists'] = new \Symfony\Component\DependencyInjection\Tests\Fixtures\ParentNotExists();
+        return $this->services['Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\ParentNotExists'] = new \Symfony\Component\DependencyInjection\Tests\Fixtures\ParentNotExists();
     }
 
     /**
@@ -97,7 +97,7 @@ class ProjectServiceContainer extends Container
      */
     protected function getC1Service()
     {
-        return $this->services['Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C1'] = new \Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C1();
+        return $this->services['Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C1'] = new \Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C1();
     }
 
     /**
@@ -110,7 +110,7 @@ class ProjectServiceContainer extends Container
         include_once $this->targetDirs[1].'/includes/HotPath/C2.php';
         include_once $this->targetDirs[1].'/includes/HotPath/C3.php';
 
-        return $this->services['Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C2'] = new \Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C2(${($_ = isset($this->services['Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C3']) ? $this->services['Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C3'] : $this->services['Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C3'] = new \Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C3()) && false ?: '_'});
+        return $this->services['Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C2'] = new \Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C2(${($_ = isset($this->services['Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C3']) ? $this->services['Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C3'] : ($this->services['Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C3'] = new \Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C3())) && false ?: '_'});
     }
 
     /**
@@ -122,7 +122,7 @@ class ProjectServiceContainer extends Container
     {
         include_once $this->targetDirs[1].'/includes/HotPath/C3.php';
 
-        return $this->services['Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C3'] = new \Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C3();
+        return $this->services['Symfony\\Component\\DependencyInjection\\Tests\\Fixtures\\includes\\HotPath\\C3'] = new \Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\C3();
     }
 
     public function getParameter($name)
@@ -168,13 +168,13 @@ class ProjectServiceContainer extends Container
         return $this->parameterBag;
     }
 
-    private $loadedDynamicParameters = array();
-    private $dynamicParameters = array();
+    private $loadedDynamicParameters = [];
+    private $dynamicParameters = [];
 
     /**
      * Computes a dynamic parameter.
      *
-     * @param string The name of the dynamic parameter to load
+     * @param string $name The name of the dynamic parameter to load
      *
      * @return mixed The value of the dynamic parameter
      *
@@ -185,7 +185,7 @@ class ProjectServiceContainer extends Container
         throw new InvalidArgumentException(sprintf('The dynamic parameter "%s" must be defined.', $name));
     }
 
-    private $normalizedParameterNames = array();
+    private $normalizedParameterNames = [];
 
     private function normalizeParameterName($name)
     {
@@ -208,8 +208,8 @@ class ProjectServiceContainer extends Container
      */
     protected function getDefaultParameters()
     {
-        return array(
+        return [
             'inline_requires' => true,
-        );
+        ];
     }
 }

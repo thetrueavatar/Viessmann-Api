@@ -28,7 +28,7 @@ class ServiceReferenceGraph
     /**
      * @var ServiceReferenceGraphNode[]
      */
-    private $nodes = array();
+    private $nodes = [];
 
     /**
      * Checks if the graph has a specific node.
@@ -78,7 +78,7 @@ class ServiceReferenceGraph
         foreach ($this->nodes as $node) {
             $node->clear();
         }
-        $this->nodes = array();
+        $this->nodes = [];
     }
 
     /**
@@ -89,13 +89,12 @@ class ServiceReferenceGraph
      * @param string $destId
      * @param mixed  $destValue
      * @param string $reference
-     * @param bool   $lazy
-     * @param bool   $weak
      */
-    public function connect($sourceId, $sourceValue, $destId, $destValue = null, $reference = null/*, bool $lazy = false, bool $weak = false*/)
+    public function connect($sourceId, $sourceValue, $destId, $destValue = null, $reference = null/*, bool $lazy = false, bool $weak = false, bool $byConstructor = false*/)
     {
         $lazy = \func_num_args() >= 6 ? func_get_arg(5) : false;
         $weak = \func_num_args() >= 7 ? func_get_arg(6) : false;
+        $byConstructor = \func_num_args() >= 8 ? func_get_arg(7) : false;
 
         if (null === $sourceId || null === $destId) {
             return;
@@ -103,7 +102,7 @@ class ServiceReferenceGraph
 
         $sourceNode = $this->createNode($sourceId, $sourceValue);
         $destNode = $this->createNode($destId, $destValue);
-        $edge = new ServiceReferenceGraphEdge($sourceNode, $destNode, $reference, $lazy, $weak);
+        $edge = new ServiceReferenceGraphEdge($sourceNode, $destNode, $reference, $lazy, $weak, $byConstructor);
 
         $sourceNode->addOutEdge($edge);
         $destNode->addInEdge($edge);

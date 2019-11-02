@@ -24,12 +24,12 @@ class ResolveFactoryClassPassTest extends TestCase
         $container = new ContainerBuilder();
 
         $factory = $container->register('factory', 'Foo\Bar');
-        $factory->setFactory(array(null, 'create'));
+        $factory->setFactory([null, 'create']);
 
         $pass = new ResolveFactoryClassPass();
         $pass->process($container);
 
-        $this->assertSame(array('Foo\Bar', 'create'), $factory->getFactory());
+        $this->assertSame(['Foo\Bar', 'create'], $factory->getFactory());
     }
 
     public function testInlinedDefinitionFactoryIsProcessed()
@@ -37,21 +37,21 @@ class ResolveFactoryClassPassTest extends TestCase
         $container = new ContainerBuilder();
 
         $factory = $container->register('factory');
-        $factory->setFactory(array((new Definition('Baz\Qux'))->setFactory(array(null, 'getInstance')), 'create'));
+        $factory->setFactory([(new Definition('Baz\Qux'))->setFactory([null, 'getInstance']), 'create']);
 
         $pass = new ResolveFactoryClassPass();
         $pass->process($container);
 
-        $this->assertSame(array('Baz\Qux', 'getInstance'), $factory->getFactory()[0]->getFactory());
+        $this->assertSame(['Baz\Qux', 'getInstance'], $factory->getFactory()[0]->getFactory());
     }
 
     public function provideFulfilledFactories()
     {
-        return array(
-            array(array('Foo\Bar', 'create')),
-            array(array(new Reference('foo'), 'create')),
-            array(array(new Definition('Baz'), 'create')),
-        );
+        return [
+            [['Foo\Bar', 'create']],
+            [[new Reference('foo'), 'create']],
+            [[new Definition('Baz'), 'create']],
+        ];
     }
 
     /**
@@ -71,16 +71,14 @@ class ResolveFactoryClassPassTest extends TestCase
         $this->assertSame($factory, $container->getDefinition('factory')->getFactory());
     }
 
-    /**
-     * @expectedException \Symfony\Component\DependencyInjection\Exception\RuntimeException
-     * @expectedExceptionMessage The "factory" service is defined to be created by a factory, but is missing the factory class. Did you forget to define the factory or service class?
-     */
     public function testNotAnyClassThrowsException()
     {
+        $this->expectException('Symfony\Component\DependencyInjection\Exception\RuntimeException');
+        $this->expectExceptionMessage('The "factory" service is defined to be created by a factory, but is missing the factory class. Did you forget to define the factory or service class?');
         $container = new ContainerBuilder();
 
         $factory = $container->register('factory');
-        $factory->setFactory(array(null, 'create'));
+        $factory->setFactory([null, 'create']);
 
         $pass = new ResolveFactoryClassPass();
         $pass->process($container);

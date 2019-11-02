@@ -39,8 +39,8 @@ class ClientTest extends TestCase
         $this->assertEquals('Request: /', $client->getResponse()->getContent(), '->doRequest() uses the request handler to make the request');
         $this->assertEquals('www.example.com', $client->getRequest()->getHost(), '->doRequest() uses the request handler to make the request');
 
-        $client->request('GET', 'http://www.example.com/?parameter=http://google.com');
-        $this->assertEquals('http://www.example.com/?parameter='.urlencode('http://google.com'), $client->getRequest()->getUri(), '->doRequest() uses the request handler to make the request');
+        $client->request('GET', 'http://www.example.com/?parameter=http://example.com');
+        $this->assertEquals('http://www.example.com/?parameter='.urlencode('http://example.com'), $client->getRequest()->getUri(), '->doRequest() uses the request handler to make the request');
     }
 
     public function testGetScript()
@@ -70,7 +70,7 @@ class ClientTest extends TestCase
         $response->headers->setCookie($cookie2 = new Cookie('foo1', 'bar1', \DateTime::createFromFormat('j-M-Y H:i:s T', '15-Feb-2009 20:00:00 GMT')->format('U'), '/foo', 'http://example.com', true, true));
         $domResponse = $m->invoke($client, $response);
         $this->assertSame((string) $cookie1, $domResponse->getHeader('Set-Cookie'));
-        $this->assertSame(array((string) $cookie1, (string) $cookie2), $domResponse->getHeader('Set-Cookie', false));
+        $this->assertSame([(string) $cookie1, (string) $cookie2], $domResponse->getHeader('Set-Cookie', false));
     }
 
     public function testFilterResponseSupportsStreamedResponses()
@@ -99,14 +99,14 @@ class ClientTest extends TestCase
         $kernel = new TestHttpKernel();
         $client = new Client($kernel);
 
-        $files = array(
-            array('tmp_name' => $source, 'name' => 'original', 'type' => 'mime/original', 'size' => 1, 'error' => UPLOAD_ERR_OK),
+        $files = [
+            ['tmp_name' => $source, 'name' => 'original', 'type' => 'mime/original', 'size' => 1, 'error' => UPLOAD_ERR_OK],
             new UploadedFile($source, 'original', 'mime/original', 1, UPLOAD_ERR_OK, true),
-        );
+        ];
 
         $file = null;
         foreach ($files as $file) {
-            $client->request('POST', '/', array(), array('foo' => $file));
+            $client->request('POST', '/', [], ['foo' => $file]);
 
             $files = $client->getRequest()->files->all();
 
@@ -131,9 +131,9 @@ class ClientTest extends TestCase
         $kernel = new TestHttpKernel();
         $client = new Client($kernel);
 
-        $file = array('tmp_name' => '', 'name' => '', 'type' => '', 'size' => 0, 'error' => UPLOAD_ERR_NO_FILE);
+        $file = ['tmp_name' => '', 'name' => '', 'type' => '', 'size' => 0, 'error' => UPLOAD_ERR_NO_FILE];
 
-        $client->request('POST', '/', array(), array('foo' => $file));
+        $client->request('POST', '/', [], ['foo' => $file]);
 
         $files = $client->getRequest()->files->all();
 
@@ -150,17 +150,17 @@ class ClientTest extends TestCase
 
         $file = $this
             ->getMockBuilder('Symfony\Component\HttpFoundation\File\UploadedFile')
-            ->setConstructorArgs(array($source, 'original', 'mime/original', 123, UPLOAD_ERR_OK, true))
-            ->setMethods(array('getSize'))
+            ->setConstructorArgs([$source, 'original', 'mime/original', 123, UPLOAD_ERR_OK, true])
+            ->setMethods(['getSize'])
             ->getMock()
         ;
 
         $file->expects($this->once())
             ->method('getSize')
-            ->will($this->returnValue(INF))
+            ->willReturn(INF)
         ;
 
-        $client->request('POST', '/', array(), array($file));
+        $client->request('POST', '/', [], [$file]);
 
         $files = $client->getRequest()->files->all();
 

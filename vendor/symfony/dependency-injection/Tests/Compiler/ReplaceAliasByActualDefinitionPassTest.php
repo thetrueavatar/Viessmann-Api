@@ -26,7 +26,7 @@ class ReplaceAliasByActualDefinitionPassTest extends TestCase
         $container = new ContainerBuilder();
 
         $aDefinition = $container->register('a', '\stdClass');
-        $aDefinition->setFactory(array(new Reference('b'), 'createA'));
+        $aDefinition->setFactory([new Reference('b'), 'createA']);
 
         $bDefinition = new Definition('\stdClass');
         $bDefinition->setPublic(false);
@@ -53,11 +53,9 @@ class ReplaceAliasByActualDefinitionPassTest extends TestCase
         $this->assertSame('b_alias', (string) $resolvedFactory[0]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testProcessWithInvalidAlias()
     {
+        $this->expectException('InvalidArgumentException');
         $container = new ContainerBuilder();
         $container->setAlias('a_alias', 'a');
         $this->process($container);

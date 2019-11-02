@@ -20,20 +20,16 @@ trait CommentAware
 
 
 	/**
-	 * @param  string|null  $val
 	 * @return static
 	 */
-	public function setComment($val): self
+	public function setComment(?string $val): self
 	{
-		$this->comment = $val ? (string) $val : null;
+		$this->comment = $val;
 		return $this;
 	}
 
 
-	/**
-	 * @return string|null
-	 */
-	public function getComment()
+	public function getComment(): ?string
 	{
 		return $this->comment;
 	}

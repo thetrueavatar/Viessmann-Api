@@ -16,24 +16,24 @@ use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
  */
 class ProjectServiceContainer extends Container
 {
-    private $parameters;
-    private $targetDirs = array();
+    private $parameters = [];
+    private $targetDirs = [];
 
     public function __construct()
     {
         $this->parameters = $this->getDefaultParameters();
 
-        $this->services = array();
+        $this->services = [];
 
-        $this->aliases = array();
+        $this->aliases = [];
     }
 
     public function getRemovedIds()
     {
-        return array(
+        return [
             'Psr\\Container\\ContainerInterface' => true,
             'Symfony\\Component\\DependencyInjection\\ContainerInterface' => true,
-        );
+        ];
     }
 
     public function compile()
@@ -96,13 +96,13 @@ class ProjectServiceContainer extends Container
         return $this->parameterBag;
     }
 
-    private $loadedDynamicParameters = array();
-    private $dynamicParameters = array();
+    private $loadedDynamicParameters = [];
+    private $dynamicParameters = [];
 
     /**
      * Computes a dynamic parameter.
      *
-     * @param string The name of the dynamic parameter to load
+     * @param string $name The name of the dynamic parameter to load
      *
      * @return mixed The value of the dynamic parameter
      *
@@ -113,7 +113,7 @@ class ProjectServiceContainer extends Container
         throw new InvalidArgumentException(sprintf('The dynamic parameter "%s" must be defined.', $name));
     }
 
-    private $normalizedParameterNames = array();
+    private $normalizedParameterNames = [];
 
     private function normalizeParameterName($name)
     {
@@ -136,12 +136,12 @@ class ProjectServiceContainer extends Container
      */
     protected function getDefaultParameters()
     {
-        return array(
+        return [
             'foo' => 'bar',
             'baz' => 'bar',
             'bar' => 'foo is %foo bar',
             'escape' => '@escapeme',
-            'values' => array(
+            'values' => [
                 0 => true,
                 1 => false,
                 2 => NULL,
@@ -150,7 +150,7 @@ class ProjectServiceContainer extends Container
                 5 => 'true',
                 6 => 'false',
                 7 => 'null',
-            ),
-        );
+            ],
+        ];
     }
 }

@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace Nette\PhpGenerator;
 
 use Nette;
-use Nette\Utils\Strings;
 
 
 /**
@@ -28,6 +27,9 @@ final class PhpFile
 
 	/** @var PhpNamespace[] */
 	private $namespaces = [];
+
+	/** @var bool */
+	private $strictTypes = false;
 
 
 	public function addClass(string $name): ClassType
@@ -58,21 +60,56 @@ final class PhpFile
 	{
 		if (!isset($this->namespaces[$name])) {
 			$this->namespaces[$name] = new PhpNamespace($name);
+			foreach ($this->namespaces as $namespace) {
+				$namespace->setBracketedSyntax(count($this->namespaces) > 1 && isset($this->namespaces['']));
+			}
 		}
 		return $this->namespaces[$name];
 	}
 
 
+	/**
+	 * @return PhpNamespace[]
+	 */
+	public function getNamespaces(): array
+	{
+		return $this->namespaces;
+	}
+
+
+	/**
+	 * @return static
+	 */
+	public function addUse(string $name, string $alias = null): self
+	{
+		$this->addNamespace('')->addUse($name, $alias);
+		return $this;
+	}
+
+
+	/**
+	 * Adds declare(strict_types=1) to output.
+	 * @return static
+	 */
+	public function setStrictTypes(bool $on = true): self
+	{
+		$this->strictTypes = $on;
+		return $this;
+	}
+
+
+	public function getStrictTypes(): bool
+	{
+		return $this->strictTypes;
+	}
+
+
 	public function __toString(): string
 	{
-		foreach ($this->namespaces as $namespace) {
-			$namespace->setBracketedSyntax(count($this->namespaces) > 1 && isset($this->namespaces['']));
+		try {
+			return (new Printer)->printFile($this);
+		} catch (\Throwable $e) {
+			trigger_error('Exception in ' . __METHOD__ . "(): {$e->getMessage()} in {$e->getFile()}:{$e->getLine()}", E_USER_ERROR);
 		}
-
-		return Strings::normalize(
-			"<?php\n"
-			. ($this->comment ? "\n" . Helpers::formatDocComment($this->comment . "\n") . "\n" : '')
-			. implode("\n\n", $this->namespaces)
-		) . "\n";
 	}
 }

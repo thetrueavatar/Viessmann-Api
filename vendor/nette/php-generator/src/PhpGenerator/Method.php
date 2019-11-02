@@ -44,64 +44,31 @@ final class Method
 	 */
 	public static function from($method): self
 	{
-		if ($method instanceof \ReflectionMethod) {
-			trigger_error(__METHOD__ . '() accepts only method name.', E_USER_DEPRECATED);
-		} else {
-			$method = Nette\Utils\Callback::toReflection($method);
-		}
-		return (new Factory)->fromMethodReflection($method);
-	}
-
-
-	public function __construct(string $name)
-	{
-		if (!Helpers::isIdentifier($name)) {
-			throw new Nette\InvalidArgumentException("Value '$name' is not valid name.");
-		}
-		$this->name = $name;
+		return (new Factory)->fromMethodReflection(Nette\Utils\Callback::toReflection($method));
 	}
 
 
 	public function __toString(): string
 	{
-		return Helpers::formatDocComment($this->comment . "\n")
-			. ($this->abstract ? 'abstract ' : '')
-			. ($this->final ? 'final ' : '')
-			. ($this->visibility ? $this->visibility . ' ' : '')
-			. ($this->static ? 'static ' : '')
-			. 'function '
-			. ($this->returnReference ? '&' : '')
-			. $this->name
-			. ($params = $this->parametersToString())
-			. $this->returnTypeToString()
-			. ($this->abstract || $this->body === null
-				? ';'
-				: (strpos($params, "\n") === false ? "\n" : ' ')
-					. "{\n"
-					. Nette\Utils\Strings::indent(ltrim(rtrim($this->body) . "\n"))
-					. '}');
+		try {
+			return (new Printer)->printMethod($this);
+		} catch (\Throwable $e) {
+			trigger_error('Exception in ' . __METHOD__ . "(): {$e->getMessage()} in {$e->getFile()}:{$e->getLine()}", E_USER_ERROR);
+		}
 	}
 
 
 	/**
-	 * @param  string|null  $code
 	 * @return static
 	 */
-	public function setBody($code, array $args = null): self
+	public function setBody(?string $code, array $args = null): self
 	{
-		if ($code === false) {
-			$code = null;
-			trigger_error(__METHOD__ . '() use null instead of false', E_USER_DEPRECATED);
-		}
-		$this->body = $args === null || $code === null ? $code : Helpers::formatArgs($code, $args);
+		$this->body = $args === null || $code === null ? $code : Helpers::format($code, ...$args);
 		return $this;
 	}
 
 
-	/**
-	 * @return string|null
-	 */
-	public function getBody()
+	public function getBody(): ?string
 	{
 		return $this->body;
 	}
@@ -152,5 +119,16 @@ final class Method
 	public function isAbstract(): bool
 	{
 		return $this->abstract;
+	}
+
+
+	/**
+	 * @throws Nette\InvalidStateException
+	 */
+	public function validate(): void
+	{
+		if ($this->abstract && ($this->final || $this->visibility === ClassType::VISIBILITY_PRIVATE)) {
+			throw new Nette\InvalidStateException('Method cannot be abstract and final or private.');
+		}
 	}
 }

@@ -19,13 +19,13 @@ final class Helpers
 {
 	use Nette\StaticClass;
 
-	const PHP_IDENT = '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*';
+	public const PHP_IDENT = '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*';
 
-	const WRAP_LENGTH = 100;
+	public const WRAP_LENGTH = 100;
 
-	const INDENT_LENGTH = 4;
+	public const INDENT_LENGTH = 4;
 
-	const MAX_DEPTH = 50;
+	private const MAX_DEPTH = 50;
 
 
 	/**
@@ -43,11 +43,7 @@ final class Helpers
 			return (string) $var;
 
 		} elseif (is_float($var)) {
-			if (is_finite($var)) {
-				$var = var_export($var, true);
-				return strpos($var, '.') === false ? $var . '.0' : $var; // workaround for PHP < 7.0.2
-			}
-			return str_replace('.0', '', var_export($var, true)); // workaround for PHP 7.0.2
+			return var_export($var, true);
 
 		} elseif ($var === null) {
 			return 'null';
@@ -114,7 +110,7 @@ final class Helpers
 				throw new Nette\InvalidArgumentException('Cannot dump anonymous class.');
 
 			} elseif (in_array($class, ['DateTime', 'DateTimeImmutable'], true)) {
-				return self::formatArgs("new $class(?, new DateTimeZone(?))", [$var->format('Y-m-d H:i:s.u'), $var->getTimeZone()->getName()]);
+				return self::format("new $class(?, new DateTimeZone(?))", $var->format('Y-m-d H:i:s.u'), $var->getTimeZone()->getName());
 			}
 
 			$arr = (array) $var;

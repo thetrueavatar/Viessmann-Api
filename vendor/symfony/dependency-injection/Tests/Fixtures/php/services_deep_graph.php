@@ -16,26 +16,26 @@ use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
  */
 class Symfony_DI_PhpDumper_Test_Deep_Graph extends Container
 {
-    private $parameters;
-    private $targetDirs = array();
+    private $parameters = [];
+    private $targetDirs = [];
 
     public function __construct()
     {
-        $this->services = array();
-        $this->methodMap = array(
+        $this->services = [];
+        $this->methodMap = [
             'bar' => 'getBarService',
             'foo' => 'getFooService',
-        );
+        ];
 
-        $this->aliases = array();
+        $this->aliases = [];
     }
 
     public function getRemovedIds()
     {
-        return array(
+        return [
             'Psr\\Container\\ContainerInterface' => true,
             'Symfony\\Component\\DependencyInjection\\ContainerInterface' => true,
-        );
+        ];
     }
 
     public function compile()
@@ -81,8 +81,8 @@ class Symfony_DI_PhpDumper_Test_Deep_Graph extends Container
         if (isset($this->services['foo'])) {
             return $this->services['foo'];
         }
-
         $b = new \stdClass();
+
         $c = new \stdClass();
         $c->p3 = new \stdClass();
 

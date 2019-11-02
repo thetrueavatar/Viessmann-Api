@@ -2,8 +2,8 @@
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Tests\Fixtures\FooForCircularWithAddCalls;
 
 $public = 'public' === $visibility;
 $container = new ContainerBuilder();
@@ -14,7 +14,7 @@ $container->register('foo', FooCircular::class)->setPublic(true)
    ->addArgument(new Reference('bar'));
 
 $container->register('bar', BarCircular::class)->setPublic($public)
-    ->addMethodCall('addFoobar', array(new Reference('foobar')));
+    ->addMethodCall('addFoobar', [new Reference('foobar')]);
 
 $container->register('foobar', FoobarCircular::class)->setPublic($public)
     ->addArgument(new Reference('foo'));
@@ -25,7 +25,7 @@ $container->register('foo2', FooCircular::class)->setPublic(true)
    ->addArgument(new Reference('bar2'));
 
 $container->register('bar2', BarCircular::class)->setPublic(!$public)
-    ->addMethodCall('addFoobar', array(new Reference('foobar2')));
+    ->addMethodCall('addFoobar', [new Reference('foobar2')]);
 
 $container->register('foobar2', FoobarCircular::class)->setPublic($public)
     ->addArgument(new Reference('foo2'));
@@ -33,7 +33,7 @@ $container->register('foobar2', FoobarCircular::class)->setPublic($public)
 // simple inline setter with internal reference
 
 $container->register('bar3', BarCircular::class)->setPublic(true)
-    ->addMethodCall('addFoobar', array(new Reference('foobar3'), new Reference('foobar3')));
+    ->addMethodCall('addFoobar', [new Reference('foobar3'), new Reference('foobar3')]);
 
 $container->register('foobar3', FoobarCircular::class)->setPublic($public);
 
@@ -101,6 +101,35 @@ $container->register('dispatcher2', 'stdClass')->setPublic($public)
 $container->register('subscriber2', 'stdClass')->setPublic(false)
     ->addArgument(new Reference('manager2'));
 
+// doctrine-like event system with listener
+
+$container->register('manager3', 'stdClass')
+    ->setLazy(true)
+    ->setPublic(true)
+    ->addArgument(new Reference('connection3'));
+
+$container->register('connection3', 'stdClass')
+    ->setPublic($public)
+    ->setProperty('listener', [new Reference('listener3')]);
+
+$container->register('listener3', 'stdClass')
+    ->setPublic(true)
+    ->setProperty('manager', new Reference('manager3'));
+
+// doctrine-like event system with small differences
+
+$container->register('manager4', 'stdClass')
+    ->setLazy(true)
+    ->addArgument(new Reference('connection4'));
+
+$container->register('connection4', 'stdClass')
+    ->setPublic($public)
+    ->setProperty('listener', [new Reference('listener4')]);
+
+$container->register('listener4', 'stdClass')
+    ->setPublic(true)
+    ->addArgument(new Reference('manager4'));
+
 // private service involved in a loop
 
 $container->register('foo6', 'stdClass')
@@ -114,5 +143,34 @@ $container->register('bar6', 'stdClass')
 $container->register('baz6', 'stdClass')
     ->setPublic(true)
     ->setProperty('bar6', new Reference('bar6'));
+
+// provided by Christian Schiffler
+
+$container
+    ->register('root', 'stdClass')
+    ->setArguments([new Reference('level2'), new Reference('multiuse1')])
+    ->setPublic(true);
+
+$container
+    ->register('level2', FooForCircularWithAddCalls::class)
+    ->addMethodCall('call', [new Reference('level3')]);
+
+$container->register('multiuse1', 'stdClass');
+
+$container
+    ->register('level3', 'stdClass')
+    ->addArgument(new Reference('level4'));
+
+$container
+    ->register('level4', 'stdClass')
+    ->setArguments([new Reference('multiuse1'), new Reference('level5')]);
+
+$container
+    ->register('level5', 'stdClass')
+    ->addArgument(new Reference('level6'));
+
+$container
+    ->register('level6', FooForCircularWithAddCalls::class)
+    ->addMethodCall('call', [new Reference('level5')]);
 
 return $container;

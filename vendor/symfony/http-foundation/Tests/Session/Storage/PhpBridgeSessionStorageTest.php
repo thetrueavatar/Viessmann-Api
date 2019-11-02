@@ -29,16 +29,16 @@ class PhpBridgeSessionStorageTest extends TestCase
 {
     private $savePath;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->iniSet('session.save_handler', 'files');
-        $this->iniSet('session.save_path', $this->savePath = sys_get_temp_dir().'/sf2test');
+        $this->iniSet('session.save_path', $this->savePath = sys_get_temp_dir().'/sftest');
         if (!is_dir($this->savePath)) {
             mkdir($this->savePath);
         }
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         session_write_close();
         array_map('unlink', glob($this->savePath.'/*'));
@@ -86,10 +86,10 @@ class PhpBridgeSessionStorageTest extends TestCase
         $_SESSION['drak'] = 'loves symfony';
         $storage->getBag('attributes')->set('symfony', 'greatness');
         $key = $storage->getBag('attributes')->getStorageKey();
-        $this->assertEquals($_SESSION[$key], array('symfony' => 'greatness'));
+        $this->assertEquals($_SESSION[$key], ['symfony' => 'greatness']);
         $this->assertEquals($_SESSION['drak'], 'loves symfony');
         $storage->clear();
-        $this->assertEquals($_SESSION[$key], array());
+        $this->assertEquals($_SESSION[$key], []);
         $this->assertEquals($_SESSION['drak'], 'loves symfony');
     }
 }

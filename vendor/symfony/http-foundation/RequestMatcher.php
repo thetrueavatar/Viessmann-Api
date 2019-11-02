@@ -29,40 +29,43 @@ class RequestMatcher implements RequestMatcherInterface
     private $host;
 
     /**
-     * @var string[]
+     * @var int|null
      */
-    private $methods = array();
+    private $port;
 
     /**
      * @var string[]
      */
-    private $ips = array();
+    private $methods = [];
+
+    /**
+     * @var string[]
+     */
+    private $ips = [];
 
     /**
      * @var array
      */
-    private $attributes = array();
+    private $attributes = [];
 
     /**
      * @var string[]
      */
-    private $schemes = array();
+    private $schemes = [];
 
     /**
-     * @param string|null          $path
-     * @param string|null          $host
      * @param string|string[]|null $methods
      * @param string|string[]|null $ips
-     * @param array                $attributes
      * @param string|string[]|null $schemes
      */
-    public function __construct(string $path = null, string $host = null, $methods = null, $ips = null, array $attributes = array(), $schemes = null)
+    public function __construct(string $path = null, string $host = null, $methods = null, $ips = null, array $attributes = [], $schemes = null, int $port = null)
     {
         $this->matchPath($path);
         $this->matchHost($host);
         $this->matchMethod($methods);
         $this->matchIps($ips);
         $this->matchScheme($schemes);
+        $this->matchPort($port);
 
         foreach ($attributes as $k => $v) {
             $this->matchAttribute($k, $v);
@@ -76,7 +79,7 @@ class RequestMatcher implements RequestMatcherInterface
      */
     public function matchScheme($scheme)
     {
-        $this->schemes = null !== $scheme ? array_map('strtolower', (array) $scheme) : array();
+        $this->schemes = null !== $scheme ? array_map('strtolower', (array) $scheme) : [];
     }
 
     /**
@@ -87,6 +90,16 @@ class RequestMatcher implements RequestMatcherInterface
     public function matchHost($regexp)
     {
         $this->host = $regexp;
+    }
+
+    /**
+     * Adds a check for the the URL port.
+     *
+     * @param int|null $port The port number to connect to
+     */
+    public function matchPort(?int $port)
+    {
+        $this->port = $port;
     }
 
     /**
@@ -116,7 +129,7 @@ class RequestMatcher implements RequestMatcherInterface
      */
     public function matchIps($ips)
     {
-        $this->ips = null !== $ips ? (array) $ips : array();
+        $this->ips = null !== $ips ? (array) $ips : [];
     }
 
     /**
@@ -126,7 +139,7 @@ class RequestMatcher implements RequestMatcherInterface
      */
     public function matchMethod($method)
     {
-        $this->methods = null !== $method ? array_map('strtoupper', (array) $method) : array();
+        $this->methods = null !== $method ? array_map('strtoupper', (array) $method) : [];
     }
 
     /**
@@ -164,6 +177,10 @@ class RequestMatcher implements RequestMatcherInterface
         }
 
         if (null !== $this->host && !preg_match('{'.$this->host.'}i', $request->getHost())) {
+            return false;
+        }
+
+        if (null !== $this->port && 0 < $this->port && $request->getPort() !== $this->port) {
             return false;
         }
 

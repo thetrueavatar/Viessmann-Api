@@ -70,14 +70,12 @@ class YamlReferenceDumper
     }
 
     /**
-     * @param NodeInterface      $node
-     * @param NodeInterface|null $parentNode
-     * @param int                $depth
-     * @param bool               $prototypedArray
+     * @param int  $depth
+     * @param bool $prototypedArray
      */
     private function writeNode(NodeInterface $node, NodeInterface $parentNode = null, $depth = 0, $prototypedArray = false)
     {
-        $comments = array();
+        $comments = [];
         $default = '';
         $defaultArray = null;
         $children = null;
@@ -215,8 +213,6 @@ class YamlReferenceDumper
     }
 
     /**
-     * @param PrototypedArrayNode $node
-     *
      * @return array
      */
     private function getPrototypeChildren(PrototypedArrayNode $node)
@@ -251,6 +247,6 @@ class YamlReferenceDumper
         }
         $keyNode->setInfo($info);
 
-        return array($key => $keyNode);
+        return [$key => $keyNode];
     }
 }

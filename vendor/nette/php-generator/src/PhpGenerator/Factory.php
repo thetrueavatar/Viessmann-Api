@@ -24,13 +24,13 @@ final class Factory
 		$class = $from->isAnonymous()
 			? new ClassType
 			: new ClassType($from->getShortName(), new PhpNamespace($from->getNamespaceName()));
-		$class->setType($from->isInterface() ? 'interface' : ($from->isTrait() ? 'trait' : 'class'));
-		$class->setFinal($from->isFinal() && $class->getType() === 'class');
-		$class->setAbstract($from->isAbstract() && $class->getType() === 'class');
+		$class->setType($from->isInterface() ? $class::TYPE_INTERFACE : ($from->isTrait() ? $class::TYPE_TRAIT : $class::TYPE_CLASS));
+		$class->setFinal($from->isFinal() && $class->getType() === $class::TYPE_CLASS);
+		$class->setAbstract($from->isAbstract() && $class->getType() === $class::TYPE_CLASS);
 
 		$ifaces = $from->getInterfaceNames();
 		foreach ($ifaces as $iface) {
-			$ifaces = array_filter($ifaces, function ($item) use ($iface) {
+			$ifaces = array_filter($ifaces, function (string $item) use ($iface): bool {
 				return !is_subclass_of($iface, $item);
 			});
 		}
@@ -50,7 +50,7 @@ final class Factory
 		$class->setProperties($props);
 		foreach ($from->getMethods() as $method) {
 			if ($method->getDeclaringClass()->getName() === $from->getName()) {
-				$methods[] = $this->fromMethodReflection($method)->setNamespace($class->getNamespace());
+				$methods[] = $this->fromMethodReflection($method);
 			}
 		}
 		$class->setMethods($methods);
@@ -65,7 +65,10 @@ final class Factory
 		$method->setParameters(array_map([$this, 'fromParameterReflection'], $from->getParameters()));
 		$method->setStatic($from->isStatic());
 		$isInterface = $from->getDeclaringClass()->isInterface();
-		$method->setVisibility($from->isPrivate() ? 'private' : ($from->isProtected() ? 'protected' : ($isInterface ? null : 'public')));
+		$method->setVisibility($from->isPrivate()
+			? ClassType::VISIBILITY_PRIVATE
+			: ($from->isProtected() ? ClassType::VISIBILITY_PROTECTED : ($isInterface ? null : ClassType::VISIBILITY_PUBLIC))
+		);
 		$method->setFinal($from->isFinal());
 		$method->setAbstract($from->isAbstract() && !$isInterface);
 		$method->setBody($from->isAbstract() ? null : '');
@@ -73,7 +76,7 @@ final class Factory
 		$method->setVariadic($from->isVariadic());
 		$method->setComment(Helpers::unformatDocComment((string) $from->getDocComment()));
 		if ($from->hasReturnType()) {
-			$method->setReturnType((string) $from->getReturnType());
+			$method->setReturnType($from->getReturnType()->getName());
 			$method->setReturnNullable($from->getReturnType()->allowsNull());
 		}
 		return $method;
@@ -93,7 +96,7 @@ final class Factory
 			$function->setComment(Helpers::unformatDocComment((string) $from->getDocComment()));
 		}
 		if ($from->hasReturnType()) {
-			$function->setReturnType((string) $from->getReturnType());
+			$function->setReturnType($from->getReturnType()->getName());
 			$function->setReturnNullable($from->getReturnType()->allowsNull());
 		}
 		return $function;
@@ -104,7 +107,7 @@ final class Factory
 	{
 		$param = new Parameter($from->getName());
 		$param->setReference($from->isPassedByReference());
-		$param->setTypeHint($from->hasType() ? (string) $from->getType() : null);
+		$param->setTypeHint($from->hasType() ? $from->getType()->getName() : null);
 		$param->setNullable($from->hasType() && $from->getType()->allowsNull());
 		if ($from->isDefaultValueAvailable()) {
 			$param->setDefaultValue($from->isDefaultValueConstant()
@@ -121,7 +124,10 @@ final class Factory
 		$prop = new Property($from->getName());
 		$prop->setValue($from->getDeclaringClass()->getDefaultProperties()[$prop->getName()] ?? null);
 		$prop->setStatic($from->isStatic());
-		$prop->setVisibility($from->isPrivate() ? 'private' : ($from->isProtected() ? 'protected' : 'public'));
+		$prop->setVisibility($from->isPrivate()
+			? ClassType::VISIBILITY_PRIVATE
+			: ($from->isProtected() ? ClassType::VISIBILITY_PROTECTED : ClassType::VISIBILITY_PUBLIC)
+		);
 		$prop->setComment(Helpers::unformatDocComment((string) $from->getDocComment()));
 		return $prop;
 	}

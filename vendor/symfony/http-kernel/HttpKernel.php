@@ -202,8 +202,7 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
      * operations such as {@link RequestStack::getParentRequest()} can lead to
      * weird results.
      *
-     * @param Request $request
-     * @param int     $type
+     * @param int $type
      */
     private function finishRequest(Request $request, $type)
     {
@@ -263,6 +262,9 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
         }
     }
 
+    /**
+     * Returns a human-readable string for the specified variable.
+     */
     private function varToString($var)
     {
         if (\is_object($var)) {
@@ -270,7 +272,7 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
         }
 
         if (\is_array($var)) {
-            $a = array();
+            $a = [];
             foreach ($var as $k => $v) {
                 $a[] = sprintf('%s => %s', $k, $this->varToString($v));
             }

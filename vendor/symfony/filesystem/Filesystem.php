@@ -53,13 +53,13 @@ class Filesystem
         }
 
         if ($doCopy) {
-            // https://bugs.php.net/bug.php?id=64634
+            // https://bugs.php.net/64634
             if (false === $source = @fopen($originFile, 'r')) {
                 throw new IOException(sprintf('Failed to copy "%s" to "%s" because source file could not be opened for reading.', $originFile, $targetFile), 0, null, $originFile);
             }
 
             // Stream context created to allow files overwrite when using FTP stream wrapper - disabled by default
-            if (false === $target = @fopen($targetFile, 'w', null, stream_context_create(array('ftp' => array('overwrite' => true))))) {
+            if (false === $target = @fopen($targetFile, 'w', null, stream_context_create(['ftp' => ['overwrite' => true]]))) {
                 throw new IOException(sprintf('Failed to copy "%s" to "%s" because target file could not be opened for writing.', $originFile, $targetFile), 0, null, $originFile);
             }
 
@@ -138,8 +138,8 @@ class Filesystem
      * Sets access and modification time of file.
      *
      * @param string|iterable $files A filename, an array of files, or a \Traversable instance to create
-     * @param int             $time  The touch time as a Unix timestamp
-     * @param int             $atime The access time as a Unix timestamp
+     * @param int|null        $time  The touch time as a Unix timestamp, if not supplied the current system time is used
+     * @param int|null        $atime The access time as a Unix timestamp, if not supplied the current system time is used
      *
      * @throws IOException When touch fails
      */
@@ -165,7 +165,7 @@ class Filesystem
         if ($files instanceof \Traversable) {
             $files = iterator_to_array($files, false);
         } elseif (!\is_array($files)) {
-            $files = array($files);
+            $files = [$files];
         }
         $files = array_reverse($files);
         foreach ($files as $file) {
@@ -194,7 +194,7 @@ class Filesystem
      * @param int             $umask     The mode mask (octal)
      * @param bool            $recursive Whether change the mod recursively or not
      *
-     * @throws IOException When the change fail
+     * @throws IOException When the change fails
      */
     public function chmod($files, $mode, $umask = 0000, $recursive = false)
     {
@@ -215,7 +215,7 @@ class Filesystem
      * @param string          $user      The new owner user name
      * @param bool            $recursive Whether change the owner recursively or not
      *
-     * @throws IOException When the change fail
+     * @throws IOException When the change fails
      */
     public function chown($files, $user, $recursive = false)
     {
@@ -242,7 +242,7 @@ class Filesystem
      * @param string          $group     The group name
      * @param bool            $recursive Whether change the group recursively or not
      *
-     * @throws IOException When the change fail
+     * @throws IOException When the change fails
      */
     public function chgrp($files, $group, $recursive = false)
     {
@@ -281,8 +281,8 @@ class Filesystem
 
         if (true !== @rename($origin, $target)) {
             if (is_dir($origin)) {
-                // See https://bugs.php.net/bug.php?id=54097 & http://php.net/manual/en/function.rename.php#113943
-                $this->mirror($origin, $target, null, array('override' => $overwrite, 'delete' => $overwrite));
+                // See https://bugs.php.net/54097 & https://php.net/rename#113943
+                $this->mirror($origin, $target, null, ['override' => $overwrite, 'delete' => $overwrite]);
                 $this->remove($origin);
 
                 return;
@@ -414,12 +414,12 @@ class Filesystem
     public function readlink($path, $canonicalize = false)
     {
         if (!$canonicalize && !is_link($path)) {
-            return;
+            return null;
         }
 
         if ($canonicalize) {
             if (!$this->exists($path)) {
-                return;
+                return null;
             }
 
             if ('\\' === \DIRECTORY_SEPARATOR) {
@@ -476,7 +476,7 @@ class Filesystem
         $endPathArr = explode('/', trim($endPath, '/'));
 
         $normalizePathArray = function ($pathSegments) {
-            $result = array();
+            $result = [];
 
             foreach ($pathSegments as $segment) {
                 if ('..' === $segment) {
@@ -524,22 +524,26 @@ class Filesystem
      *  - existing files in the target directory will be overwritten, except if they are newer (see the `override` option)
      *  - files in the target directory that do not exist in the source directory will not be deleted (see the `delete` option)
      *
-     * @param string       $originDir The origin directory
-     * @param string       $targetDir The target directory
-     * @param \Traversable $iterator  Iterator that filters which files and directories to copy
-     * @param array        $options   An array of boolean options
-     *                                Valid options are:
-     *                                - $options['override'] If true, target files newer than origin files are overwritten (see copy(), defaults to false)
-     *                                - $options['copy_on_windows'] Whether to copy files instead of links on Windows (see symlink(), defaults to false)
-     *                                - $options['delete'] Whether to delete files that are not in the source directory (defaults to false)
+     * @param string            $originDir The origin directory
+     * @param string            $targetDir The target directory
+     * @param \Traversable|null $iterator  Iterator that filters which files and directories to copy, if null a recursive iterator is created
+     * @param array             $options   An array of boolean options
+     *                                     Valid options are:
+     *                                     - $options['override'] If true, target files newer than origin files are overwritten (see copy(), defaults to false)
+     *                                     - $options['copy_on_windows'] Whether to copy files instead of links on Windows (see symlink(), defaults to false)
+     *                                     - $options['delete'] Whether to delete files that are not in the source directory (defaults to false)
      *
      * @throws IOException When file type is unknown
      */
-    public function mirror($originDir, $targetDir, \Traversable $iterator = null, $options = array())
+    public function mirror($originDir, $targetDir, \Traversable $iterator = null, $options = [])
     {
         $targetDir = rtrim($targetDir, '/\\');
         $originDir = rtrim($originDir, '/\\');
         $originDirLen = \strlen($originDir);
+
+        if (!$this->exists($originDir)) {
+            throw new IOException(sprintf('The origin directory specified "%s" was not found.', $originDir), 0, null, $originDir);
+        }
 
         // Iterate in destination folder to remove obsolete entries
         if ($this->exists($targetDir) && isset($options['delete']) && $options['delete']) {
@@ -557,41 +561,32 @@ class Filesystem
             }
         }
 
-        $copyOnWindows = false;
-        if (isset($options['copy_on_windows'])) {
-            $copyOnWindows = $options['copy_on_windows'];
-        }
+        $copyOnWindows = $options['copy_on_windows'] ?? false;
 
         if (null === $iterator) {
             $flags = $copyOnWindows ? \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::FOLLOW_SYMLINKS : \FilesystemIterator::SKIP_DOTS;
             $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($originDir, $flags), \RecursiveIteratorIterator::SELF_FIRST);
         }
 
-        if ($this->exists($originDir)) {
-            $this->mkdir($targetDir);
-        }
+        $this->mkdir($targetDir);
+        $filesCreatedWhileMirroring = [];
 
         foreach ($iterator as $file) {
-            $target = $targetDir.substr($file->getPathname(), $originDirLen);
+            if ($file->getPathname() === $targetDir || $file->getRealPath() === $targetDir || isset($filesCreatedWhileMirroring[$file->getRealPath()])) {
+                continue;
+            }
 
-            if ($copyOnWindows) {
-                if (is_file($file)) {
-                    $this->copy($file, $target, isset($options['override']) ? $options['override'] : false);
-                } elseif (is_dir($file)) {
-                    $this->mkdir($target);
-                } else {
-                    throw new IOException(sprintf('Unable to guess "%s" file type.', $file), 0, null, $file);
-                }
+            $target = $targetDir.substr($file->getPathname(), $originDirLen);
+            $filesCreatedWhileMirroring[$target] = true;
+
+            if (!$copyOnWindows && is_link($file)) {
+                $this->symlink($file->getLinkTarget(), $target);
+            } elseif (is_dir($file)) {
+                $this->mkdir($target);
+            } elseif (is_file($file)) {
+                $this->copy($file, $target, isset($options['override']) ? $options['override'] : false);
             } else {
-                if (is_link($file)) {
-                    $this->symlink($file->getLinkTarget(), $target);
-                } elseif (is_dir($file)) {
-                    $this->mkdir($target);
-                } elseif (is_file($file)) {
-                    $this->copy($file, $target, isset($options['override']) ? $options['override'] : false);
-                } else {
-                    throw new IOException(sprintf('Unable to guess "%s" file type.', $file), 0, null, $file);
-                }
+                throw new IOException(sprintf('Unable to guess "%s" file type.', $file), 0, null, $file);
             }
         }
     }
@@ -669,13 +664,17 @@ class Filesystem
     /**
      * Atomically dumps content into a file.
      *
-     * @param string $filename The file to be written to
-     * @param string $content  The data to write into the file
+     * @param string          $filename The file to be written to
+     * @param string|resource $content  The data to write into the file
      *
      * @throws IOException if the file cannot be written to
      */
     public function dumpFile($filename, $content)
     {
+        if (\is_array($content)) {
+            @trigger_error(sprintf('Calling "%s()" with an array in the $content argument is deprecated since Symfony 4.3.', __METHOD__), E_USER_DEPRECATED);
+        }
+
         $dir = \dirname($filename);
 
         if (!is_dir($dir)) {
@@ -702,13 +701,17 @@ class Filesystem
     /**
      * Appends content to an existing file.
      *
-     * @param string $filename The file to which to append content
-     * @param string $content  The content to append
+     * @param string          $filename The file to which to append content
+     * @param string|resource $content  The content to append
      *
      * @throws IOException If the file is not writable
      */
     public function appendToFile($filename, $content)
     {
+        if (\is_array($content)) {
+            @trigger_error(sprintf('Calling "%s()" with an array in the $content argument is deprecated since Symfony 4.3.', __METHOD__), E_USER_DEPRECATED);
+        }
+
         $dir = \dirname($filename);
 
         if (!is_dir($dir)) {
@@ -726,32 +729,36 @@ class Filesystem
 
     private function toIterable($files): iterable
     {
-        return \is_array($files) || $files instanceof \Traversable ? $files : array($files);
+        return \is_array($files) || $files instanceof \Traversable ? $files : [$files];
     }
 
     /**
-     * Gets a 2-tuple of scheme (may be null) and hierarchical part of a filename (e.g. file:///tmp -> array(file, tmp)).
+     * Gets a 2-tuple of scheme (may be null) and hierarchical part of a filename (e.g. file:///tmp -> [file, tmp]).
      */
     private function getSchemeAndHierarchy(string $filename): array
     {
         $components = explode('://', $filename, 2);
 
-        return 2 === \count($components) ? array($components[0], $components[1]) : array(null, $components[0]);
+        return 2 === \count($components) ? [$components[0], $components[1]] : [null, $components[0]];
     }
 
+    /**
+     * @param callable $func
+     *
+     * @return mixed
+     */
     private static function box($func)
     {
         self::$lastError = null;
-        \set_error_handler(__CLASS__.'::handleError');
+        set_error_handler(__CLASS__.'::handleError');
         try {
-            $result = \call_user_func_array($func, \array_slice(\func_get_args(), 1));
-            \restore_error_handler();
+            $result = $func(...\array_slice(\func_get_args(), 1));
+            restore_error_handler();
 
             return $result;
         } catch (\Throwable $e) {
-        } catch (\Exception $e) {
         }
-        \restore_error_handler();
+        restore_error_handler();
 
         throw $e;
     }

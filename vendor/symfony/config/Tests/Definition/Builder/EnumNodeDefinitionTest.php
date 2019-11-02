@@ -19,54 +19,50 @@ class EnumNodeDefinitionTest extends TestCase
     public function testWithOneValue()
     {
         $def = new EnumNodeDefinition('foo');
-        $def->values(array('foo'));
+        $def->values(['foo']);
 
         $node = $def->getNode();
-        $this->assertEquals(array('foo'), $node->getValues());
+        $this->assertEquals(['foo'], $node->getValues());
     }
 
     public function testWithOneDistinctValue()
     {
         $def = new EnumNodeDefinition('foo');
-        $def->values(array('foo', 'foo'));
+        $def->values(['foo', 'foo']);
 
         $node = $def->getNode();
-        $this->assertEquals(array('foo'), $node->getValues());
+        $this->assertEquals(['foo'], $node->getValues());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage You must call ->values() on enum nodes.
-     */
     public function testNoValuesPassed()
     {
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('You must call ->values() on enum nodes.');
         $def = new EnumNodeDefinition('foo');
         $def->getNode();
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage ->values() must be called with at least one value.
-     */
     public function testWithNoValues()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('->values() must be called with at least one value.');
         $def = new EnumNodeDefinition('foo');
-        $def->values(array());
+        $def->values([]);
     }
 
     public function testGetNode()
     {
         $def = new EnumNodeDefinition('foo');
-        $def->values(array('foo', 'bar'));
+        $def->values(['foo', 'bar']);
 
         $node = $def->getNode();
-        $this->assertEquals(array('foo', 'bar'), $node->getValues());
+        $this->assertEquals(['foo', 'bar'], $node->getValues());
     }
 
     public function testSetDeprecated()
     {
         $def = new EnumNodeDefinition('foo');
-        $def->values(array('foo', 'bar'));
+        $def->values(['foo', 'bar']);
         $def->setDeprecated('The "%path%" node is deprecated.');
 
         $node = $def->getNode();

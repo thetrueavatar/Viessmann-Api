@@ -25,20 +25,19 @@ class FragmentRendererPassTest extends TestCase
     /**
      * Tests that content rendering not implementing FragmentRendererInterface
      * triggers an exception.
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testContentRendererWithoutInterface()
     {
+        $this->expectException('InvalidArgumentException');
         $builder = new ContainerBuilder();
         $fragmentHandlerDefinition = $builder->register('fragment.handler');
         $builder->register('my_content_renderer', 'Symfony\Component\DependencyInjection\Definition')
-            ->addTag('kernel.fragment_renderer', array('alias' => 'foo'));
+            ->addTag('kernel.fragment_renderer', ['alias' => 'foo']);
 
         $pass = new FragmentRendererPass();
         $pass->process($builder);
 
-        $this->assertEquals(array(array('addRendererService', array('foo', 'my_content_renderer'))), $fragmentHandlerDefinition->getMethodCalls());
+        $this->assertEquals([['addRendererService', ['foo', 'my_content_renderer']]], $fragmentHandlerDefinition->getMethodCalls());
     }
 
     public function testValidContentRenderer()
@@ -47,20 +46,20 @@ class FragmentRendererPassTest extends TestCase
         $fragmentHandlerDefinition = $builder->register('fragment.handler')
             ->addArgument(null);
         $builder->register('my_content_renderer', 'Symfony\Component\HttpKernel\Tests\DependencyInjection\RendererService')
-            ->addTag('kernel.fragment_renderer', array('alias' => 'foo'));
+            ->addTag('kernel.fragment_renderer', ['alias' => 'foo']);
 
         $pass = new FragmentRendererPass();
         $pass->process($builder);
 
         $serviceLocatorDefinition = $builder->getDefinition((string) $fragmentHandlerDefinition->getArgument(0));
         $this->assertSame(ServiceLocator::class, $serviceLocatorDefinition->getClass());
-        $this->assertEquals(array('foo' => new ServiceClosureArgument(new Reference('my_content_renderer'))), $serviceLocatorDefinition->getArgument(0));
+        $this->assertEquals(['foo' => new ServiceClosureArgument(new Reference('my_content_renderer'))], $serviceLocatorDefinition->getArgument(0));
     }
 }
 
 class RendererService implements FragmentRendererInterface
 {
-    public function render($uri, Request $request = null, array $options = array())
+    public function render($uri, Request $request = null, array $options = [])
     {
     }
 

@@ -24,7 +24,7 @@ class Psr6CacheClearerTest extends TestCase
             ->expects($this->once())
             ->method('clear');
 
-        (new Psr6CacheClearer(array('pool' => $pool)))->clear('');
+        (new Psr6CacheClearer(['pool' => $pool]))->clear('');
     }
 
     public function testClearPool()
@@ -34,15 +34,13 @@ class Psr6CacheClearerTest extends TestCase
             ->expects($this->once())
             ->method('clear');
 
-        (new Psr6CacheClearer(array('pool' => $pool)))->clearPool('pool');
+        (new Psr6CacheClearer(['pool' => $pool]))->clearPool('pool');
     }
 
-    /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionMessage Cache pool not found: unknown
-     */
     public function testClearPoolThrowsExceptionOnUnreferencedPool()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('Cache pool not found: unknown');
         (new Psr6CacheClearer())->clearPool('unknown');
     }
 
@@ -62,7 +60,7 @@ class Psr6CacheClearerTest extends TestCase
             ->expects($this->once())
             ->method('clear');
 
-        $clearer = new Psr6CacheClearer(array('pool1' => $pool1));
+        $clearer = new Psr6CacheClearer(['pool1' => $pool1]);
         $clearer->addPool($pool2);
         $clearer->clear('');
     }

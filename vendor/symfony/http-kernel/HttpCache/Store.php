@@ -40,7 +40,7 @@ class Store implements StoreInterface
             throw new \RuntimeException(sprintf('Unable to create the store directory (%s).', $this->root));
         }
         $this->keyCache = new \SplObjectStorage();
-        $this->locks = array();
+        $this->locks = [];
     }
 
     /**
@@ -54,7 +54,7 @@ class Store implements StoreInterface
             fclose($lock);
         }
 
-        $this->locks = array();
+        $this->locks = [];
     }
 
     /**
@@ -134,7 +134,7 @@ class Store implements StoreInterface
         $key = $this->getCacheKey($request);
 
         if (!$entries = $this->getMetadata($key)) {
-            return;
+            return null;
         }
 
         // find a cached entry that matches the request.
@@ -148,7 +148,7 @@ class Store implements StoreInterface
         }
 
         if (null === $match) {
-            return;
+            return null;
         }
 
         $headers = $match[1];
@@ -159,6 +159,7 @@ class Store implements StoreInterface
         // TODO the metaStore referenced an entity that doesn't exist in
         // the entityStore. We definitely want to return nil but we should
         // also purge the entry from the meta-store when this is detected.
+        return null;
     }
 
     /**
@@ -180,7 +181,7 @@ class Store implements StoreInterface
         if (!$response->headers->has('X-Content-Digest')) {
             $digest = $this->generateContentDigest($response);
 
-            if (false === $this->save($digest, $response->getContent())) {
+            if (!$this->save($digest, $response->getContent())) {
                 throw new \RuntimeException('Unable to store the entity.');
             }
 
@@ -192,11 +193,11 @@ class Store implements StoreInterface
         }
 
         // read existing cache entries, remove non-varying, and add this one to the list
-        $entries = array();
+        $entries = [];
         $vary = $response->headers->get('vary');
         foreach ($this->getMetadata($key) as $entry) {
             if (!isset($entry[1]['vary'][0])) {
-                $entry[1]['vary'] = array('');
+                $entry[1]['vary'] = [''];
             }
 
             if ($entry[1]['vary'][0] != $vary || !$this->requestsMatch($vary, $entry[0], $storedEnv)) {
@@ -207,9 +208,9 @@ class Store implements StoreInterface
         $headers = $this->persistResponse($response);
         unset($headers['age']);
 
-        array_unshift($entries, array($storedEnv, $headers));
+        array_unshift($entries, [$storedEnv, $headers]);
 
-        if (false === $this->save($key, serialize($entries))) {
+        if (!$this->save($key, serialize($entries))) {
             throw new \RuntimeException('Unable to store the metadata.');
         }
 
@@ -236,19 +237,19 @@ class Store implements StoreInterface
         $modified = false;
         $key = $this->getCacheKey($request);
 
-        $entries = array();
+        $entries = [];
         foreach ($this->getMetadata($key) as $entry) {
             $response = $this->restoreResponse($entry[1]);
             if ($response->isFresh()) {
                 $response->expire();
                 $modified = true;
-                $entries[] = array($entry[0], $this->persistResponse($response));
+                $entries[] = [$entry[0], $this->persistResponse($response)];
             } else {
                 $entries[] = $entry;
             }
         }
 
-        if ($modified && false === $this->save($key, serialize($entries))) {
+        if ($modified && !$this->save($key, serialize($entries))) {
             throw new \RuntimeException('Unable to store the metadata.');
         }
     }
@@ -293,7 +294,7 @@ class Store implements StoreInterface
     private function getMetadata($key)
     {
         if (!$entries = $this->load($key)) {
-            return array();
+            return [];
         }
 
         return unserialize($entries);
@@ -349,13 +350,13 @@ class Store implements StoreInterface
      *
      * @param string $key The store key
      *
-     * @return string The data associated with the key
+     * @return string|null The data associated with the key
      */
     private function load($key)
     {
         $path = $this->getPath($key);
 
-        return file_exists($path) ? file_get_contents($path) : false;
+        return file_exists($path) && false !== ($contents = file_get_contents($path)) ? $contents : null;
     }
 
     /**
@@ -408,6 +409,8 @@ class Store implements StoreInterface
         }
 
         @chmod($path, 0666 & ~umask());
+
+        return true;
     }
 
     public function getPath($key)
@@ -464,7 +467,7 @@ class Store implements StoreInterface
     private function persistResponse(Response $response)
     {
         $headers = $response->headers->all();
-        $headers['X-Status'] = array($response->getStatusCode());
+        $headers['X-Status'] = [$response->getStatusCode()];
 
         return $headers;
     }
@@ -483,7 +486,7 @@ class Store implements StoreInterface
         unset($headers['X-Status']);
 
         if (null !== $body) {
-            $headers['X-Body-File'] = array($body);
+            $headers['X-Body-File'] = [$body];
         }
 
         return new Response($body, $status, $headers);

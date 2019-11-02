@@ -26,7 +26,7 @@ final class PhpNamespace
 {
 	use Nette\SmartObject;
 
-	private static $keywords = [
+	private const KEYWORDS = [
 		'string' => 1, 'int' => 1, 'float' => 1, 'bool' => 1, 'array' => 1, 'object' => 1,
 		'callable' => 1, 'iterable' => 1, 'void' => 1, 'self' => 1, 'parent' => 1,
 	];
@@ -50,15 +50,6 @@ final class PhpNamespace
 			throw new Nette\InvalidArgumentException("Value '$name' is not valid name.");
 		}
 		$this->name = $name;
-	}
-
-
-	/** @deprecated */
-	public function setName($name)
-	{
-		trigger_error(__METHOD__ . '() is deprecated, use constructor.', E_USER_DEPRECATED);
-		$this->__construct($name);
-		return $this;
 	}
 
 
@@ -131,7 +122,7 @@ final class PhpNamespace
 
 	public function unresolveName(string $name): string
 	{
-		if (isset(self::$keywords[strtolower($name)]) || $name === '') {
+		if (isset(self::KEYWORDS[strtolower($name)]) || $name === '') {
 			return $name;
 		}
 		$name = ltrim($name, '\\');
@@ -154,14 +145,25 @@ final class PhpNamespace
 	}
 
 
-	public function addClass(string $name): ClassType
+	/**
+	 * @return static
+	 */
+	public function add(ClassType $class): self
 	{
-		if (isset($this->classes[$name])) {
-			trigger_error(__METHOD__ . "() class $name was already added.", E_USER_DEPRECATED);
-			return $this->classes[$name];
+		$name = $class->getName();
+		if ($name === null) {
+			throw new Nette\InvalidArgumentException('Class does not have a name.');
 		}
 		$this->addUse($this->name . '\\' . $name);
-		return $this->classes[$name] = new ClassType($name, $this);
+		$this->classes[$name] = $class;
+		return $this;
+	}
+
+
+	public function addClass(string $name): ClassType
+	{
+		$this->add($class = new ClassType($name, $this));
+		return $class;
 	}
 
 
@@ -188,30 +190,10 @@ final class PhpNamespace
 
 	public function __toString(): string
 	{
-		$uses = [];
-		foreach ($this->uses as $alias => $original) {
-			$useNamespace = Helpers::extractNamespace($original);
-
-			if ($this->name !== $useNamespace) {
-				if ($alias === $original || substr($original, -(strlen($alias) + 1)) === '\\' . $alias) {
-					$uses[] = "use $original;";
-				} else {
-					$uses[] = "use $original as $alias;";
-				}
-			}
-		}
-
-		$body = ($uses ? implode("\n", $uses) . "\n\n" : '')
-			. implode("\n", $this->classes);
-
-		if ($this->bracketedSyntax) {
-			return 'namespace' . ($this->name ? " $this->name" : '') . " {\n\n"
-				. Strings::indent($body)
-				. "\n}\n";
-
-		} else {
-			return ($this->name ? "namespace $this->name;\n\n" : '')
-				. $body;
+		try {
+			return (new Printer)->printNamespace($this);
+		} catch (\Throwable $e) {
+			trigger_error('Exception in ' . __METHOD__ . "(): {$e->getMessage()} in {$e->getFile()}:{$e->getLine()}", E_USER_ERROR);
 		}
 	}
 }

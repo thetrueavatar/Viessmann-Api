@@ -16,24 +16,24 @@ use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
  */
 class Symfony_DI_PhpDumper_Test_Base64Parameters extends Container
 {
-    private $parameters;
-    private $targetDirs = array();
+    private $parameters = [];
+    private $targetDirs = [];
 
     public function __construct()
     {
         $this->parameters = $this->getDefaultParameters();
 
-        $this->services = array();
+        $this->services = [];
 
-        $this->aliases = array();
+        $this->aliases = [];
     }
 
     public function getRemovedIds()
     {
-        return array(
+        return [
             'Psr\\Container\\ContainerInterface' => true,
             'Symfony\\Component\\DependencyInjection\\ContainerInterface' => true,
-        );
+        ];
     }
 
     public function compile()
@@ -96,15 +96,15 @@ class Symfony_DI_PhpDumper_Test_Base64Parameters extends Container
         return $this->parameterBag;
     }
 
-    private $loadedDynamicParameters = array(
+    private $loadedDynamicParameters = [
         'hello' => false,
-    );
-    private $dynamicParameters = array();
+    ];
+    private $dynamicParameters = [];
 
     /**
      * Computes a dynamic parameter.
      *
-     * @param string The name of the dynamic parameter to load
+     * @param string $name The name of the dynamic parameter to load
      *
      * @return mixed The value of the dynamic parameter
      *
@@ -121,7 +121,7 @@ class Symfony_DI_PhpDumper_Test_Base64Parameters extends Container
         return $this->dynamicParameters[$name] = $value;
     }
 
-    private $normalizedParameterNames = array();
+    private $normalizedParameterNames = [];
 
     private function normalizeParameterName($name)
     {
@@ -144,8 +144,8 @@ class Symfony_DI_PhpDumper_Test_Base64Parameters extends Container
      */
     protected function getDefaultParameters()
     {
-        return array(
+        return [
             'env(foo)' => 'd29ybGQ=',
-        );
+        ];
     }
 }

@@ -18,20 +18,18 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class DefinitionErrorExceptionPassTest extends TestCase
 {
-    /**
-     * @expectedException \Symfony\Component\DependencyInjection\Exception\RuntimeException
-     * @expectedExceptionMessage Things went wrong!
-     */
     public function testThrowsException()
     {
+        $this->expectException('Symfony\Component\DependencyInjection\Exception\RuntimeException');
+        $this->expectExceptionMessage('Things went wrong!');
         $container = new ContainerBuilder();
         $def = new Definition();
         $def->addError('Things went wrong!');
         $def->addError('Now something else!');
         $container->register('foo_service_id')
-            ->setArguments(array(
+            ->setArguments([
                 $def,
-            ));
+            ]);
 
         $pass = new DefinitionErrorExceptionPass();
         $pass->process($container);
@@ -42,9 +40,9 @@ class DefinitionErrorExceptionPassTest extends TestCase
         $container = new ContainerBuilder();
         $def = new Definition();
         $container->register('foo_service_id')
-            ->setArguments(array(
+            ->setArguments([
                 $def,
-            ));
+            ]);
 
         $pass = new DefinitionErrorExceptionPass();
         $pass->process($container);

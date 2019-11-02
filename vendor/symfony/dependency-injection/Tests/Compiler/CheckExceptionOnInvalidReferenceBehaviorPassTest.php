@@ -35,11 +35,9 @@ class CheckExceptionOnInvalidReferenceBehaviorPassTest extends TestCase
         $this->addToAssertionCount(1);
     }
 
-    /**
-     * @expectedException \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
-     */
     public function testProcessThrowsExceptionOnInvalidReference()
     {
+        $this->expectException('Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException');
         $container = new ContainerBuilder();
 
         $container
@@ -50,11 +48,9 @@ class CheckExceptionOnInvalidReferenceBehaviorPassTest extends TestCase
         $this->process($container);
     }
 
-    /**
-     * @expectedException \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
-     */
     public function testProcessThrowsExceptionOnInvalidReferenceFromInlinedDefinition()
     {
+        $this->expectException('Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException');
         $container = new ContainerBuilder();
 
         $def = new Definition();
@@ -74,7 +70,7 @@ class CheckExceptionOnInvalidReferenceBehaviorPassTest extends TestCase
 
         $container
             ->register('b')
-            ->setBindings(array(new BoundArgument(new Reference('a'))))
+            ->setBindings([new BoundArgument(new Reference('a'))])
         ;
 
         $this->process($container);

@@ -119,7 +119,7 @@ class TreeBuilderTest extends TestCase
         $builder = new TreeBuilder();
 
         $builder->root('test')
-            ->example(array('key' => 'value'))
+            ->example(['key' => 'value'])
             ->children()
                 ->node('child', 'variable')->info('child info')->defaultValue('default')->example('example')
             ->end()
@@ -128,7 +128,7 @@ class TreeBuilderTest extends TestCase
         $tree = $builder->buildTree();
         $children = $tree->getChildren();
 
-        $this->assertInternalType('array', $tree->getExample());
+        $this->assertIsArray($tree->getExample());
         $this->assertEquals('example', $children['child']->getExample());
     }
 }

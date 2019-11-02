@@ -7,6 +7,7 @@ namespace PhpParser;
  * turn is based on work by Masato Bito.
  */
 use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\Cast\Double;
 use PhpParser\Node\Name;
 use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\Encapsed;
@@ -680,6 +681,20 @@ abstract class ParserAbstract implements Parser
         return $this->startAttributeStack[$pos] + $this->endAttributeStack[$pos];
     }
 
+    protected function getFloatCastKind(string $cast): int
+    {
+        $cast = strtolower($cast);
+        if (strpos($cast, 'float') !== false) {
+            return Double::KIND_FLOAT;
+        }
+
+        if (strpos($cast, 'real') !== false) {
+            return Double::KIND_REAL;
+        }
+
+        return Double::KIND_DOUBLE;
+    }
+
     protected function parseLNumber($str, $attributes, $allowInvalidOctal = false) {
         try {
             return LNumber::fromString($str, $attributes, $allowInvalidOctal);
@@ -822,6 +837,26 @@ abstract class ParserAbstract implements Parser
             }
             return new Encapsed($newContents, $attributes);
         }
+    }
+
+    /**
+     * Create attributes for a zero-length node with the given start attributes.
+     *
+     * @param array $startAttributes
+     * @return array
+     */
+    protected function createZeroLengthAttributes(array $startAttributes) {
+        $attributes = $startAttributes;
+        if (isset($startAttributes['startLine'])) {
+            $attributes['endLine'] = $startAttributes['startLine'];
+        }
+        if (isset($startAttributes['startTokenPos'])) {
+            $attributes['endTokenPos'] = $startAttributes['startTokenPos'] - 1;
+        }
+        if (isset($startAttributes['startFilePos'])) {
+            $attributes['endFilePos'] = $startAttributes['startFilePos'] - 1;
+        }
+        return $attributes;
     }
 
     protected function checkModifier($a, $b, $modifierPos) {

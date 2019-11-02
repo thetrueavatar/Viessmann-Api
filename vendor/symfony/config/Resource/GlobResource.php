@@ -73,15 +73,21 @@ class GlobResource implements \IteratorAggregate, SelfCheckingResourceInterface,
         return $this->hash === $hash;
     }
 
+    /**
+     * @internal
+     */
     public function serialize()
     {
         if (null === $this->hash) {
             $this->hash = $this->computeHash();
         }
 
-        return serialize(array($this->prefix, $this->pattern, $this->recursive, $this->hash));
+        return serialize([$this->prefix, $this->pattern, $this->recursive, $this->hash]);
     }
 
+    /**
+     * @internal
+     */
     public function unserialize($serialized)
     {
         list($this->prefix, $this->pattern, $this->recursive, $this->hash) = unserialize($serialized);
@@ -94,7 +100,9 @@ class GlobResource implements \IteratorAggregate, SelfCheckingResourceInterface,
         }
 
         if (0 !== strpos($this->prefix, 'phar://') && false === strpos($this->pattern, '/**/') && (\defined('GLOB_BRACE') || false === strpos($this->pattern, '{'))) {
-            foreach (glob($this->prefix.$this->pattern, \defined('GLOB_BRACE') ? GLOB_BRACE : 0) as $path) {
+            $paths = glob($this->prefix.$this->pattern, GLOB_NOSORT | (\defined('GLOB_BRACE') ? GLOB_BRACE : 0));
+            sort($paths);
+            foreach ($paths as $path) {
                 if ($this->recursive && is_dir($path)) {
                     $files = iterator_to_array(new \RecursiveIteratorIterator(
                         new \RecursiveCallbackFilterIterator(

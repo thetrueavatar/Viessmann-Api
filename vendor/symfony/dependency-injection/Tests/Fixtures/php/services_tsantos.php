@@ -16,29 +16,29 @@ use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
  */
 class ProjectServiceContainer extends Container
 {
-    private $parameters;
-    private $targetDirs = array();
+    private $parameters = [];
+    private $targetDirs = [];
 
     public function __construct()
     {
-        $this->services = array();
-        $this->normalizedIds = array(
+        $this->services = [];
+        $this->normalizedIds = [
             'tsantos\\serializer\\serializerinterface' => 'TSantos\\Serializer\\SerializerInterface',
-        );
-        $this->methodMap = array(
+        ];
+        $this->methodMap = [
             'tsantos_serializer' => 'getTsantosSerializerService',
-        );
-        $this->aliases = array(
+        ];
+        $this->aliases = [
             'TSantos\\Serializer\\SerializerInterface' => 'tsantos_serializer',
-        );
+        ];
     }
 
     public function getRemovedIds()
     {
-        return array(
+        return [
             'Psr\\Container\\ContainerInterface' => true,
             'Symfony\\Component\\DependencyInjection\\ContainerInterface' => true,
-        );
+        ];
     }
 
     public function compile()
@@ -67,22 +67,20 @@ class ProjectServiceContainer extends Container
     {
         $a = new \TSantos\Serializer\NormalizerRegistry();
 
-        $d = new \TSantos\Serializer\EventDispatcher\EventDispatcher();
-        $d->addSubscriber(new \TSantos\SerializerBundle\EventListener\StopwatchListener(new \Symfony\Component\Stopwatch\Stopwatch(true)));
-
-        $this->services['tsantos_serializer'] = $instance = new \TSantos\Serializer\EventEmitterSerializer(new \TSantos\Serializer\Encoder\JsonEncoder(), $a, $d);
-
         $b = new \TSantos\Serializer\Normalizer\CollectionNormalizer();
 
+        $c = new \TSantos\Serializer\EventDispatcher\EventDispatcher();
+        $c->addSubscriber(new \TSantos\SerializerBundle\EventListener\StopwatchListener(new \Symfony\Component\Stopwatch\Stopwatch(true)));
+
+        $this->services['tsantos_serializer'] = $instance = new \TSantos\Serializer\EventEmitterSerializer(new \TSantos\Serializer\Encoder\JsonEncoder(), $a, $c);
+
         $b->setSerializer($instance);
-
-        $c = new \TSantos\Serializer\Normalizer\JsonNormalizer();
-
-        $c->setSerializer($instance);
+        $d = new \TSantos\Serializer\Normalizer\JsonNormalizer();
+        $d->setSerializer($instance);
 
         $a->add(new \TSantos\Serializer\Normalizer\ObjectNormalizer(new \TSantos\SerializerBundle\Serializer\CircularReferenceHandler()));
         $a->add($b);
-        $a->add($c);
+        $a->add($d);
 
         return $instance;
     }

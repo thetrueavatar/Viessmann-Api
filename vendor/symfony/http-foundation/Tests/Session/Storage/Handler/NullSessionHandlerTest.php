@@ -28,7 +28,7 @@ class NullSessionHandlerTest extends TestCase
 {
     public function testSaveHandlers()
     {
-        $storage = $this->getStorage();
+        $this->getStorage();
         $this->assertEquals('user', ini_get('session.save_handler'));
     }
 
@@ -54,6 +54,6 @@ class NullSessionHandlerTest extends TestCase
 
     public function getStorage()
     {
-        return new NativeSessionStorage(array(), new NullSessionHandler());
+        return new NativeSessionStorage([], new NullSessionHandler());
     }
 }

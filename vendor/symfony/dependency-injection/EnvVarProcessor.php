@@ -32,7 +32,7 @@ class EnvVarProcessor implements EnvVarProcessorInterface
      */
     public static function getProvidedTypes()
     {
-        return array(
+        return [
             'base64' => 'string',
             'bool' => 'bool',
             'const' => 'bool|int|float|string|array',
@@ -42,7 +42,7 @@ class EnvVarProcessor implements EnvVarProcessorInterface
             'json' => 'array',
             'resolve' => 'string',
             'string' => 'string',
-        );
+        ];
     }
 
     /**
@@ -65,7 +65,7 @@ class EnvVarProcessor implements EnvVarProcessorInterface
 
         if (false !== $i || 'string' !== $prefix) {
             if (null === $env = $getEnv($name)) {
-                return;
+                return null;
             }
         } elseif (isset($_ENV[$name])) {
             $env = $_ENV[$name];
@@ -77,7 +77,7 @@ class EnvVarProcessor implements EnvVarProcessorInterface
             }
 
             if (null === $env = $this->container->getParameter("env($name)")) {
-                return;
+                return null;
             }
         }
 

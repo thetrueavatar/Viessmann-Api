@@ -16,31 +16,31 @@ use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
  */
 class ProjectServiceContainer extends Container
 {
-    private $parameters;
-    private $targetDirs = array();
+    private $parameters = [];
+    private $targetDirs = [];
 
     public function __construct()
     {
-        $this->services = array();
-        $this->methodMap = array(
+        $this->services = [];
+        $this->methodMap = [
             'bar_service' => 'getBarServiceService',
             'baz_service' => 'getBazServiceService',
             'foo_service' => 'getFooServiceService',
-        );
-        $this->privates = array(
+        ];
+        $this->privates = [
             'baz_service' => true,
-        );
+        ];
 
-        $this->aliases = array();
+        $this->aliases = [];
     }
 
     public function getRemovedIds()
     {
-        return array(
+        return [
             'Psr\\Container\\ContainerInterface' => true,
             'Symfony\\Component\\DependencyInjection\\ContainerInterface' => true,
             'baz_service' => true,
-        );
+        ];
     }
 
     public function compile()
@@ -67,7 +67,7 @@ class ProjectServiceContainer extends Container
      */
     protected function getBarServiceService()
     {
-        return $this->services['bar_service'] = new \stdClass(${($_ = isset($this->services['baz_service']) ? $this->services['baz_service'] : $this->services['baz_service'] = new \stdClass()) && false ?: '_'});
+        return $this->services['bar_service'] = new \stdClass(${($_ = isset($this->services['baz_service']) ? $this->services['baz_service'] : ($this->services['baz_service'] = new \stdClass())) && false ?: '_'});
     }
 
     /**
@@ -77,7 +77,7 @@ class ProjectServiceContainer extends Container
      */
     protected function getFooServiceService()
     {
-        return $this->services['foo_service'] = new \stdClass(${($_ = isset($this->services['baz_service']) ? $this->services['baz_service'] : $this->services['baz_service'] = new \stdClass()) && false ?: '_'});
+        return $this->services['foo_service'] = new \stdClass(${($_ = isset($this->services['baz_service']) ? $this->services['baz_service'] : ($this->services['baz_service'] = new \stdClass())) && false ?: '_'});
     }
 
     /**

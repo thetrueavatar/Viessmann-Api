@@ -12,7 +12,6 @@ namespace Nette\PhpGenerator\Traits;
 use Nette;
 use Nette\PhpGenerator\Helpers;
 use Nette\PhpGenerator\Parameter;
-use Nette\PhpGenerator\PhpNamespace;
 
 
 /**
@@ -38,16 +37,13 @@ trait FunctionLike
 	/** @var bool */
 	private $returnNullable = false;
 
-	/** @var PhpNamespace|null */
-	private $namespace;
-
 
 	/**
 	 * @return static
 	 */
 	public function setBody(string $code, array $args = null): self
 	{
-		$this->body = $args === null ? $code : Helpers::formatArgs($code, $args);
+		$this->body = $args === null ? $code : Helpers::format($code, ...$args);
 		return $this;
 	}
 
@@ -63,7 +59,7 @@ trait FunctionLike
 	 */
 	public function addBody(string $code, array $args = null): self
 	{
-		$this->body .= ($args === null ? $code : Helpers::formatArgs($code, $args)) . "\n";
+		$this->body .= ($args === null ? $code : Helpers::format($code, ...$args)) . "\n";
 		return $this;
 	}
 
@@ -108,6 +104,17 @@ trait FunctionLike
 
 
 	/**
+	 * @param  string  $name without $
+	 * @return static
+	 */
+	public function removeParameter(string $name): self
+	{
+		unset($this->parameters[$name]);
+		return $this;
+	}
+
+
+	/**
 	 * @return static
 	 */
 	public function setVariadic(bool $state = true): self
@@ -124,20 +131,16 @@ trait FunctionLike
 
 
 	/**
-	 * @param  string|null  $val
 	 * @return static
 	 */
-	public function setReturnType($val): self
+	public function setReturnType(?string $val): self
 	{
-		$this->returnType = $val ? (string) $val : null;
+		$this->returnType = $val;
 		return $this;
 	}
 
 
-	/**
-	 * @return string|null
-	 */
-	public function getReturnType()
+	public function getReturnType(): ?string
 	{
 		return $this->returnType;
 	}
@@ -176,38 +179,11 @@ trait FunctionLike
 
 
 	/**
-	 * @return static
+	 * @deprecated
 	 */
 	public function setNamespace(PhpNamespace $val = null): self
 	{
-		$this->namespace = $val;
+		trigger_error(__METHOD__ . '() is deprecated', E_USER_DEPRECATED);
 		return $this;
-	}
-
-
-	protected function parametersToString(): string
-	{
-		$params = [];
-		foreach ($this->parameters as $param) {
-			$variadic = $this->variadic && $param === end($this->parameters);
-			$hint = $param->getTypeHint();
-			$params[] = ($hint ? ($param->isNullable() ? '?' : '') . ($this->namespace ? $this->namespace->unresolveName($hint) : $hint) . ' ' : '')
-				. ($param->isReference() ? '&' : '')
-				. ($variadic ? '...' : '')
-				. '$' . $param->getName()
-				. ($param->hasDefaultValue() && !$variadic ? ' = ' . Helpers::dump($param->getDefaultValue()) : '');
-		}
-
-		return strlen($tmp = implode(', ', $params)) > Helpers::WRAP_LENGTH && count($params) > 1
-			? "(\n\t" . implode(",\n\t", $params) . "\n)"
-			: "($tmp)";
-	}
-
-
-	protected function returnTypeToString(): string
-	{
-		return $this->returnType
-			? ': ' . ($this->returnNullable ? '?' : '') . ($this->namespace ? $this->namespace->unresolveName($this->returnType) : $this->returnType)
-			: '';
 	}
 }

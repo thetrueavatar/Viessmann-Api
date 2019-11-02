@@ -31,16 +31,16 @@ class EnvVarProcessorTest extends TestCase
 
     public function validStrings()
     {
-        return array(
-            array('hello', 'hello'),
-            array('true', 'true'),
-            array('false', 'false'),
-            array('null', 'null'),
-            array('1', '1'),
-            array('0', '0'),
-            array('1.1', '1.1'),
-            array('1e1', '1e1'),
-        );
+        return [
+            ['hello', 'hello'],
+            ['true', 'true'],
+            ['false', 'false'],
+            ['null', 'null'],
+            ['1', '1'],
+            ['0', '0'],
+            ['1.1', '1.1'],
+            ['1e1', '1e1'],
+        ];
     }
 
     /**
@@ -61,15 +61,15 @@ class EnvVarProcessorTest extends TestCase
 
     public function validBools()
     {
-        return array(
-            array('true', true),
-            array('false', false),
-            array('null', false),
-            array('1', true),
-            array('0', false),
-            array('1.1', true),
-            array('1e1', true),
-        );
+        return [
+            ['true', true],
+            ['false', false],
+            ['null', false],
+            ['1', true],
+            ['0', false],
+            ['1.1', true],
+            ['1e1', true],
+        ];
     }
 
     /**
@@ -90,20 +90,20 @@ class EnvVarProcessorTest extends TestCase
 
     public function validInts()
     {
-        return array(
-            array('1', 1),
-            array('1.1', 1),
-            array('1e1', 10),
-        );
+        return [
+            ['1', 1],
+            ['1.1', 1],
+            ['1e1', 10],
+        ];
     }
 
     /**
-     * @expectedException \Symfony\Component\DependencyInjection\Exception\RuntimeException
-     * @expectedExceptionMessage Non-numeric env var
      * @dataProvider invalidInts
      */
     public function testGetEnvIntInvalid($value)
     {
+        $this->expectException('Symfony\Component\DependencyInjection\Exception\RuntimeException');
+        $this->expectExceptionMessage('Non-numeric env var');
         $processor = new EnvVarProcessor(new Container());
 
         $processor->getEnv('int', 'foo', function ($name) use ($value) {
@@ -115,11 +115,11 @@ class EnvVarProcessorTest extends TestCase
 
     public function invalidInts()
     {
-        return array(
-            array('foo'),
-            array('true'),
-            array('null'),
-        );
+        return [
+            ['foo'],
+            ['true'],
+            ['null'],
+        ];
     }
 
     /**
@@ -140,20 +140,20 @@ class EnvVarProcessorTest extends TestCase
 
     public function validFloats()
     {
-        return array(
-            array('1', 1.0),
-            array('1.1', 1.1),
-            array('1e1', 10.0),
-        );
+        return [
+            ['1', 1.0],
+            ['1.1', 1.1],
+            ['1e1', 10.0],
+        ];
     }
 
     /**
-     * @expectedException \Symfony\Component\DependencyInjection\Exception\RuntimeException
-     * @expectedExceptionMessage Non-numeric env var
      * @dataProvider invalidFloats
      */
     public function testGetEnvFloatInvalid($value)
     {
+        $this->expectException('Symfony\Component\DependencyInjection\Exception\RuntimeException');
+        $this->expectExceptionMessage('Non-numeric env var');
         $processor = new EnvVarProcessor(new Container());
 
         $processor->getEnv('float', 'foo', function ($name) use ($value) {
@@ -165,11 +165,11 @@ class EnvVarProcessorTest extends TestCase
 
     public function invalidFloats()
     {
-        return array(
-            array('foo'),
-            array('true'),
-            array('null'),
-        );
+        return [
+            ['foo'],
+            ['true'],
+            ['null'],
+        ];
     }
 
     /**
@@ -190,19 +190,19 @@ class EnvVarProcessorTest extends TestCase
 
     public function validConsts()
     {
-        return array(
-            array('Symfony\Component\DependencyInjection\Tests\EnvVarProcessorTest::TEST_CONST', self::TEST_CONST),
-            array('E_ERROR', E_ERROR),
-        );
+        return [
+            ['Symfony\Component\DependencyInjection\Tests\EnvVarProcessorTest::TEST_CONST', self::TEST_CONST],
+            ['E_ERROR', E_ERROR],
+        ];
     }
 
     /**
-     * @expectedException \Symfony\Component\DependencyInjection\Exception\RuntimeException
-     * @expectedExceptionMessage undefined constant
      * @dataProvider invalidConsts
      */
     public function testGetEnvConstInvalid($value)
     {
+        $this->expectException('Symfony\Component\DependencyInjection\Exception\RuntimeException');
+        $this->expectExceptionMessage('undefined constant');
         $processor = new EnvVarProcessor(new Container());
 
         $processor->getEnv('const', 'foo', function ($name) use ($value) {
@@ -214,10 +214,10 @@ class EnvVarProcessorTest extends TestCase
 
     public function invalidConsts()
     {
-        return array(
-            array('Symfony\Component\DependencyInjection\Tests\EnvVarProcessorTest::UNDEFINED_CONST'),
-            array('UNDEFINED_CONST'),
-        );
+        return [
+            ['Symfony\Component\DependencyInjection\Tests\EnvVarProcessorTest::UNDEFINED_CONST'],
+            ['UNDEFINED_CONST'],
+        ];
     }
 
     public function testGetEnvBase64()
@@ -240,18 +240,16 @@ class EnvVarProcessorTest extends TestCase
         $result = $processor->getEnv('json', 'foo', function ($name) {
             $this->assertSame('foo', $name);
 
-            return json_encode(array(1));
+            return json_encode([1]);
         });
 
-        $this->assertSame(array(1), $result);
+        $this->assertSame([1], $result);
     }
 
-    /**
-     * @expectedException \Symfony\Component\DependencyInjection\Exception\RuntimeException
-     * @expectedExceptionMessage Syntax error
-     */
     public function testGetEnvInvalidJson()
     {
+        $this->expectException('Symfony\Component\DependencyInjection\Exception\RuntimeException');
+        $this->expectExceptionMessage('Syntax error');
         $processor = new EnvVarProcessor(new Container());
 
         $processor->getEnv('json', 'foo', function ($name) {
@@ -262,12 +260,12 @@ class EnvVarProcessorTest extends TestCase
     }
 
     /**
-     * @expectedException \Symfony\Component\DependencyInjection\Exception\RuntimeException
-     * @expectedExceptionMessage Invalid JSON env var
      * @dataProvider otherJsonValues
      */
     public function testGetEnvJsonOther($value)
     {
+        $this->expectException('Symfony\Component\DependencyInjection\Exception\RuntimeException');
+        $this->expectExceptionMessage('Invalid JSON env var');
         $processor = new EnvVarProcessor(new Container());
 
         $processor->getEnv('json', 'foo', function ($name) use ($value) {
@@ -279,20 +277,18 @@ class EnvVarProcessorTest extends TestCase
 
     public function otherJsonValues()
     {
-        return array(
-            array(1),
-            array(1.1),
-            array(true),
-            array(false),
-        );
+        return [
+            [1],
+            [1.1],
+            [true],
+            [false],
+        ];
     }
 
-    /**
-     * @expectedException \Symfony\Component\DependencyInjection\Exception\RuntimeException
-     * @expectedExceptionMessage Unsupported env var prefix
-     */
     public function testGetEnvUnknown()
     {
+        $this->expectException('Symfony\Component\DependencyInjection\Exception\RuntimeException');
+        $this->expectExceptionMessage('Unsupported env var prefix');
         $processor = new EnvVarProcessor(new Container());
 
         $processor->getEnv('unknown', 'foo', function ($name) {

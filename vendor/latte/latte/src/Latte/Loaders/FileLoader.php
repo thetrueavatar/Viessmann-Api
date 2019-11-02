@@ -5,6 +5,8 @@
  * Copyright (c) 2008 David Grudl (https://davidgrudl.com)
  */
 
+declare(strict_types=1);
+
 namespace Latte\Loaders;
 
 use Latte;
@@ -29,9 +31,8 @@ class FileLoader implements Latte\ILoader
 
 	/**
 	 * Returns template source code.
-	 * @return string
 	 */
-	public function getContent($fileName)
+	public function getContent($fileName): string
 	{
 		$file = $this->baseDir . $fileName;
 		if ($this->baseDir && !Latte\Helpers::startsWith($this->normalizePath($file), $this->baseDir)) {
@@ -49,20 +50,17 @@ class FileLoader implements Latte\ILoader
 	}
 
 
-	/**
-	 * @return bool
-	 */
-	public function isExpired($file, $time)
+	public function isExpired($file, $time): bool
 	{
-		return @filemtime($this->baseDir . $file) > $time; // @ - stat may fail
+		$mtime = @filemtime($this->baseDir . $file); // @ - stat may fail
+		return !$mtime || $mtime > $time;
 	}
 
 
 	/**
 	 * Returns referred template name.
-	 * @return string
 	 */
-	public function getReferredName($file, $referringFile)
+	public function getReferredName($file, $referringFile): string
 	{
 		if ($this->baseDir || !preg_match('#/|\\\\|[a-z][a-z0-9+.-]*:#iA', $file)) {
 			$file = $this->normalizePath($referringFile . '/../' . $file);
@@ -73,18 +71,14 @@ class FileLoader implements Latte\ILoader
 
 	/**
 	 * Returns unique identifier for caching.
-	 * @return string
 	 */
-	public function getUniqueId($file)
+	public function getUniqueId($file): string
 	{
 		return $this->baseDir . strtr($file, '/', DIRECTORY_SEPARATOR);
 	}
 
 
-	/**
-	 * @return string
-	 */
-	private static function normalizePath($path)
+	private static function normalizePath(string $path): string
 	{
 		$res = [];
 		foreach (explode('/', strtr($path, '\\', '/')) as $part) {

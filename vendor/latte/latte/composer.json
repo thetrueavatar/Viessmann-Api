@@ -15,13 +15,14 @@
 		}
 	],
 	"require": {
-		"php": ">=5.4.4",
+		"php": ">=7.1",
 		"ext-json": "*",
 		"ext-tokenizer": "*"
 	},
 	"require-dev": {
-		"nette/tester": "~1.7",
-		"tracy/tracy": "^2.3"
+		"nette/tester": "~2.0",
+		"tracy/tracy": "^2.3",
+		"nette/utils": "^3.0"
 	},
 	"suggest": {
 		"ext-mbstring": "to use filters like lower, upper, capitalize, ...",
@@ -37,7 +38,7 @@
 	"minimum-stability": "dev",
 	"extra": {
 		"branch-alias": {
-			"dev-master": "2.4-dev"
+			"dev-master": "2.5-dev"
 		}
 	}
 }

@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
 
 /**
  * This class tests the integration of the different compiler passes.
@@ -42,7 +43,7 @@ class IntegrationTest extends TestCase
             ->addArgument(new Reference('c'))
         ;
 
-        $b = $container
+        $container
             ->register('b', '\stdClass')
             ->addArgument(new Reference('c'))
             ->setPublic(false)
@@ -96,7 +97,7 @@ class IntegrationTest extends TestCase
         $container
             ->register('a', '\stdClass')
             ->addArgument(new Reference('b'))
-            ->addMethodCall('setC', array(new Reference('c')))
+            ->addMethodCall('setC', [new Reference('c')])
         ;
 
         $container
@@ -115,6 +116,21 @@ class IntegrationTest extends TestCase
         $this->assertTrue($container->hasDefinition('a'));
         $this->assertFalse($container->hasDefinition('b'));
         $this->assertFalse($container->hasDefinition('c'), 'Service C was not inlined.');
+    }
+
+    public function testCanDecorateServiceSubscriber()
+    {
+        $container = new ContainerBuilder();
+        $container->register(ServiceSubscriberStub::class)
+            ->addTag('container.service_subscriber')
+            ->setPublic(true);
+
+        $container->register(DecoratedServiceSubscriber::class)
+            ->setDecoratedService(ServiceSubscriberStub::class);
+
+        $container->compile();
+
+        $this->assertInstanceOf(DecoratedServiceSubscriber::class, $container->get(ServiceSubscriberStub::class));
     }
 
     /**
@@ -139,8 +155,8 @@ class IntegrationTest extends TestCase
         $expectedService = $container->getDefinition($expectedServiceId);
 
         // reset changes, we don't care if these differ
-        $actualService->setChanges(array());
-        $expectedService->setChanges(array());
+        $actualService->setChanges([]);
+        $expectedService->setChanges([]);
 
         $this->assertEquals($expectedService, $actualService);
     }
@@ -149,62 +165,74 @@ class IntegrationTest extends TestCase
     {
         $container = new ContainerBuilder();
         $container->registerForAutoconfiguration(IntegrationTestStub::class);
-        yield array(
+        yield [
             'autoconfigure_child_not_applied',
             'child_service',
             'child_service_expected',
             $container,
-        );
+        ];
 
         $container = new ContainerBuilder();
         $container->registerForAutoconfiguration(IntegrationTestStub::class);
-        yield array(
+        yield [
             'autoconfigure_parent_child',
             'child_service',
             'child_service_expected',
             $container,
-        );
+        ];
 
         $container = new ContainerBuilder();
         $container->registerForAutoconfiguration(IntegrationTestStub::class)
             ->addTag('from_autoconfigure');
-        yield array(
+        yield [
             'autoconfigure_parent_child_tags',
             'child_service',
             'child_service_expected',
             $container,
-        );
+        ];
 
-        yield array(
+        yield [
             'child_parent',
             'child_service',
             'child_service_expected',
-        );
+        ];
 
-        yield array(
+        yield [
             'defaults_child_tags',
             'child_service',
             'child_service_expected',
-        );
+        ];
 
-        yield array(
+        yield [
             'defaults_instanceof_importance',
             'main_service',
             'main_service_expected',
-        );
+        ];
 
-        yield array(
+        yield [
             'defaults_parent_child',
             'child_service',
             'child_service_expected',
-        );
+        ];
 
-        yield array(
+        yield [
             'instanceof_parent_child',
             'child_service',
             'child_service_expected',
-        );
+        ];
     }
+}
+
+class ServiceSubscriberStub implements ServiceSubscriberInterface
+{
+    public static function getSubscribedServices()
+    {
+        return [];
+    }
+}
+
+class DecoratedServiceSubscriber
+{
 }
 
 class IntegrationTestStub extends IntegrationTestStubParent

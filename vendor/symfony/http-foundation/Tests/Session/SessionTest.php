@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionBagProxy;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 /**
@@ -36,13 +37,13 @@ class SessionTest extends TestCase
      */
     protected $session;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->storage = new MockArraySessionStorage();
         $this->session = new Session($this->storage, new AttributeBag(), new FlashBag());
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->storage = null;
         $this->session = null;
@@ -127,10 +128,10 @@ class SessionTest extends TestCase
 
     public function testReplace()
     {
-        $this->session->replace(array('happiness' => 'be good', 'symfony' => 'awesome'));
-        $this->assertEquals(array('happiness' => 'be good', 'symfony' => 'awesome'), $this->session->all());
-        $this->session->replace(array());
-        $this->assertEquals(array(), $this->session->all());
+        $this->session->replace(['happiness' => 'be good', 'symfony' => 'awesome']);
+        $this->assertEquals(['happiness' => 'be good', 'symfony' => 'awesome'], $this->session->all());
+        $this->session->replace([]);
+        $this->assertEquals([], $this->session->all());
     }
 
     /**
@@ -150,16 +151,16 @@ class SessionTest extends TestCase
         $this->session->set('hi', 'fabien');
         $this->session->set($key, $value);
         $this->session->clear();
-        $this->assertEquals(array(), $this->session->all());
+        $this->assertEquals([], $this->session->all());
     }
 
     public function setProvider()
     {
-        return array(
-            array('foo', 'bar', array('foo' => 'bar')),
-            array('foo.bar', 'too much beer', array('foo.bar' => 'too much beer')),
-            array('great', 'symfony is great', array('great' => 'symfony is great')),
-        );
+        return [
+            ['foo', 'bar', ['foo' => 'bar']],
+            ['foo.bar', 'too much beer', ['foo.bar' => 'too much beer']],
+            ['great', 'symfony is great', ['great' => 'symfony is great']],
+        ];
     }
 
     /**
@@ -170,14 +171,14 @@ class SessionTest extends TestCase
         $this->session->set('hi.world', 'have a nice day');
         $this->session->set($key, $value);
         $this->session->remove($key);
-        $this->assertEquals(array('hi.world' => 'have a nice day'), $this->session->all());
+        $this->assertEquals(['hi.world' => 'have a nice day'], $this->session->all());
     }
 
     public function testInvalidate()
     {
         $this->session->set('invalidate', 123);
         $this->session->invalidate();
-        $this->assertEquals(array(), $this->session->all());
+        $this->assertEquals([], $this->session->all());
     }
 
     public function testMigrate()
@@ -216,7 +217,7 @@ class SessionTest extends TestCase
 
     public function testGetIterator()
     {
-        $attributes = array('hello' => 'world', 'symfony' => 'rocks');
+        $attributes = ['hello' => 'world', 'symfony' => 'rocks'];
         foreach ($attributes as $key => $val) {
             $this->session->set($key, $val);
         }
@@ -259,5 +260,29 @@ class SessionTest extends TestCase
 
         $flash->get('hello');
         $this->assertTrue($this->session->isEmpty());
+    }
+
+    public function testGetBagWithBagImplementingGetBag()
+    {
+        $bag = new AttributeBag();
+        $bag->setName('foo');
+
+        $storage = new MockArraySessionStorage();
+        $storage->registerBag($bag);
+
+        $this->assertSame($bag, (new Session($storage))->getBag('foo'));
+    }
+
+    public function testGetBagWithBagNotImplementingGetBag()
+    {
+        $data = [];
+
+        $bag = new AttributeBag();
+        $bag->setName('foo');
+
+        $storage = new MockArraySessionStorage();
+        $storage->registerBag(new SessionBagProxy($bag, $data, $usageIndex));
+
+        $this->assertSame($bag, (new Session($storage))->getBag('foo'));
     }
 }

@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
  */
 abstract class Extension implements ExtensionInterface, ConfigurationExtensionInterface
 {
-    private $processedConfigs = array();
+    private $processedConfigs = [];
 
     /**
      * {@inheritdoc}
@@ -84,11 +84,12 @@ abstract class Extension implements ExtensionInterface, ConfigurationExtensionIn
         $class = $container->getReflectionClass($class);
         $constructor = $class ? $class->getConstructor() : null;
 
-        if ($class && (!$constructor || !$constructor->getNumberOfRequiredParameters())) {
-            return $class->newInstance();
-        }
+        return $class && (!$constructor || !$constructor->getNumberOfRequiredParameters()) ? $class->newInstance() : null;
     }
 
+    /**
+     * @return array
+     */
     final protected function processConfiguration(ConfigurationInterface $configuration, array $configs)
     {
         $processor = new Processor();
@@ -104,7 +105,7 @@ abstract class Extension implements ExtensionInterface, ConfigurationExtensionIn
         try {
             return $this->processedConfigs;
         } finally {
-            $this->processedConfigs = array();
+            $this->processedConfigs = [];
         }
     }
 
@@ -115,7 +116,7 @@ abstract class Extension implements ExtensionInterface, ConfigurationExtensionIn
      */
     protected function isConfigEnabled(ContainerBuilder $container, array $config)
     {
-        if (!array_key_exists('enabled', $config)) {
+        if (!\array_key_exists('enabled', $config)) {
             throw new InvalidArgumentException("The config array has no 'enabled' key.");
         }
 
