@@ -25,4 +25,4 @@ De toute façon, cmme on dit dans l'open-source "Please contribute" ;-)
 
 Pour voir les explications sur l'utilisation voir wiki: https://github.com/thetrueavatar/Viessmann-Api/wiki/French ou le code de example/Main.php
 
-Voici la doc des méthodes de l'api [**Viessmann API**](http://htmlpreview.github.com/?https://github.com/thetrueavatar/Viessmann-Api/blob/develop/docs/namespace-Viessmann.API.html):
+Voici la doc des méthodes de l'api [**Viessmann API**](http://htmlpreview.github.com/?https://github.com/thetrueavatar/Viessmann-Api/blob/develop/docs/index.html):
