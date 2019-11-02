@@ -13,4 +13,4 @@ This api is implemented in php and is package as a phar(php archive). This phar 
 
 More explanation cand be found on the wiki https://github.com/thetrueavatar/Viessmann-Api/wiki/english
 
-Full API documentation based on code can be found here [**Viessmann API**](http://htmlpreview.github.com/?https://github.com/thetrueavatar/Viessmann-Api/blob/develop/docs/namespace-Viessmann.API.html):
+Full API documentation based on code can be found here [**Viessmann API**](https://htmlpreview.github.io/?https://raw.githubusercontent.com/thetrueavatar/Viessmann-Api/develop/docs/classes/Viessmann.API.ViessmannAPI.html):
