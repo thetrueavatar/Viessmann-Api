@@ -32,7 +32,6 @@
         }
     },
     "require-dev": {
-        "apigen/apigen": "dev-master",
         "roave/better-reflection": "dev-master"
     }
 }
