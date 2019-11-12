@@ -14,3 +14,6 @@ This api is implemented in php and is package as a phar(php archive). This phar 
 More explanation cand be found on the wiki https://github.com/thetrueavatar/Viessmann-Api/wiki/english
 
 Full API documentation based on code can be found here [**Viessmann API**](https://htmlpreview.github.io/?https://raw.githubusercontent.com/thetrueavatar/Viessmann-Api/develop/docs/classes/Viessmann.API.ViessmannAPI.html):
+
+Missing Feature ? You can add it by yourself. Have a look at this guide:
+[How to add new feature by yourself](https://github.com/thetrueavatar/Viessmann-Api/wiki/How-to-add-you-own-feature-to-the-api):
