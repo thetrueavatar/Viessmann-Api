@@ -1,5 +1,42 @@
-Modifications applied to API version 1.2.0:
-===========================================
+1.2.0.4
+======= 
+a) based on develop branch 2019-11-17
+b) add the following file in resources:
+   - heating.power.consumption.total.siren.json
+c) add the following file in example:
+   - GetHeatingPowerConsumptionTotal.php
+d) update the phar file
+e) ToDo: documentation update should be made
+
+
+1.2.0.3
+=======
+a) add the following files in resources:
+   - heating.solar.pumps.circuit.siren.json
+   - heating.solar.statistics.siren.json
+   - heating.solar.sensors.temperature.dhw.siren.json
+   - heating.solar.power.cumulativeProduced.siren.json
+   - heating.solar.rechargeSuppression.siren.json
+b) add the following files in  example
+   - GetHeatingSolarPumpsCircuit.php *
+   - GetHeatingSolarStatistics.php *
+   - GetHeatingSolarSensorsTemperatureDhw.php *
+   - GetHeatingSolarPowerCumulativeProduced.php *
+   - GetHeatingSolarRechargeSuppression.php *
+
+
+1.2.0.2
+=======
+a) add the following file in resources:
+   - heating.boiler.sensors.temperature.commonSupply.siren.json
+b) add the folowing file in example:
+   - GetHeatingBoilerSensorsTemperatureCommonSupply.php
+
+
+1.2.0.1
+=======
+a) Modifications applied to API version 1.2.0:
+
 Added three new functions:
 
 function getHeatingSolarPowerProduction($period = "day")
