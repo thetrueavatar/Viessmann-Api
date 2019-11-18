@@ -1,0 +1,32 @@
+{
+  "class": [
+    "heating.circuits.0.operating.programs.fixed",
+    "feature"
+  ],
+  "properties": {
+    "active": {
+      "value": false,
+      "type": "boolean"
+    }
+  },
+  "entities": [
+    {
+      "rel": [
+        "http://schema.viessmann.com/link-relations#feature-meta-information",
+        "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+      ],
+      "properties": {
+        "apiVersion": 1,
+        "uri": "/v1/gateways/XXXXXXXXXXXXXXXX/devices/0/features/heating.circuits.0.operating.programs.fixed",
+        "gatewayId": "XXXXXXXXXXXXXXXX",
+        "feature": "heating.circuits.0.operating.programs.fixed",
+        "timestamp": "2019-10-15T05:28:10.041Z",
+        "isEnabled": true,
+        "isReady": true,
+        "deviceId": "0"
+      }
+    }
+  ],
+  "actions": []
+}

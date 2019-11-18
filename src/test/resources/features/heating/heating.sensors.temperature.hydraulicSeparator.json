@@ -1,0 +1,30 @@
+{
+  "apiVersion": 1,
+  "feature": "heating.sensors.temperature.hydraulicSeparator",
+  "isEnabled": true,
+  "isReady": true,
+  "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.sensors.temperature.hydraulicSeparator",
+  "deviceId": "0",
+  "gatewayId": "7123456789123456",
+  "properties": {
+    "value": {
+      "type": "number",
+      "value": 55
+    },
+    "status": {
+      "type": "string",
+      "value": "connected",
+      "description": {
+        "general": "Shows the status of sensor",
+        "statuses": {
+          "connected": "",
+          "notConnected": "",
+          "error": ""
+        }
+      }
+    }
+  },
+  "commands": {},
+  "components": [],
+  "timestamp": "2017-12-22T12:19:05.613Z"
+}

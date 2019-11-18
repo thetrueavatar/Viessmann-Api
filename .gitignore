@@ -2,3 +2,4 @@ example/credentials.properties
 *.properties
 NotesPerso.txt
 .idea
+vendor/**/*

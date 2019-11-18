@@ -1,0 +1,18 @@
+{
+  "apiVersion": 1,
+  "feature": "heating.dhw.pumps.primary",
+  "isEnabled": true,
+  "isReady": true,
+  "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.dhw.pumps.primary",
+  "deviceId": "0",
+  "gatewayId": "7123456789123456",
+  "properties": {
+    "status": {
+      "value": "on",
+      "type": "string"
+    }
+  },
+  "commands": {},
+  "components": [],
+  "timestamp": "2017-12-22T12:19:05.613Z"
+}

@@ -1,3 +1,3 @@
 <?php
-include __DIR__ . '/bootstrap.php';
-$viessmannApi->setActiveMode("dhwAndHeating");
+include __DIR__.'/bootstrap.php';
+$viessmannApi->setActiveMode("dhw");

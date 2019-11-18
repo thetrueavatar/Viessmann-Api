@@ -27,13 +27,15 @@ final class ViessmannAPI
     const REDUCED_PROGRAM = "operating.programs.reduced";
     const STANDBY_PROGRAM = "operating.programs.standby";
     const HOLIDAY_PROGRAM = "operating.programs.holiday";
+    const FIXED_PROGRAM = "operating.programs.fixed";
     const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
     const CIRCULATION_SCHEDULE = "circulation.schedule";
-    const DHW_SCHEDULE = "dhw.schedule";
+    const DHW_SCHEDULE = "heating.dhw.schedule";
     const HEATING_SCHEDULE = "heating.schedule";
     const CIRCULATION_PUMP = "circulation.pump";
     private $viessmanAuthClient;
     private $circuitId;
+    const STATISTICS = "statistics";
 
     /**
      * ViessmannAPI constructor.
@@ -165,6 +167,26 @@ final class ViessmannAPI
     }
 
     /**
+     * @return bool true if heating compressor is active. False otherwise
+     * @throws ViessmannApiException
+     */
+    public function isHeatingCompressorsActive($circuitId= NULL): bool
+    {
+        if ($circuitId == NULL) {
+            $circuitId = $this->circuitId;
+        }
+        return $this->getEntity(ViessmannFeature::HEATING_COMPRESSORS.".".$circuitId)->getProperty("active")["value"];
+    }
+
+    /**
+     * @return string statistics of the compressors
+     */
+    public function getHeatingCompressorsStatistics(): string
+    {
+        return json_encode($this->getEntity(ViessmannFeature::HEATING_COMPRESSORS.".".$this->circuitId.".".self::STATISTICS . "")->getProperties());
+    }
+
+    /**
      * @return bool true if DhwMode is active. False otherwise
      * @throws ViessmannApiException
      */
@@ -229,9 +251,23 @@ final class ViessmannAPI
     }
 
     /**
+     * get scheduled holiday program
+     * json object contains a property start and end. date are in format yyyy-MM-dd
+     * @param null $circuitId
+     * @return a json object containing a property start and a property end
+     * @throws ViessmannApiException
+     */
+    public function getScheduledHolidayProgram($circuitId = NULL) : string {
+        $data=$this->getEntity($this->buildFeature($circuitId, self::HOLIDAY_PROGRAM));
+        $schedule['start']=$data->getProperty("start")["value"];
+        $schedule['end']=$data->getProperty("end")["value"];
+        return json_encode($schedule);
+
+    }
+    /**
      * schedule holiday program
      * start en end are in xml datetime format. See https://www.w3schools.com/xml/schema_dtypes_date.asp form more details
-     * @param $start of holiday in xml datetime format
+     * @param $start of holiday in xml datetime format but seems to effectively only store date part(yyyy-MM-dd)
      * @param $end of holiday in datetime xml format
      * @param null $circuitId
      * @throws ViessmannApiException
@@ -348,6 +384,16 @@ final class ViessmannAPI
         return $this->getEntity($this->buildFeature($circuitId, self::STANDBY_PROGRAM))->getProperty("active")["value"];
     }
 
+    /**
+     * @param null $circuitId
+     * @return bool true if is Fixed. False otherwise
+     * @throws ViessmannApiException
+     */
+    public function isInFixedPrograms($circuitId = NULL): bool
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::FIXED_PROGRAM))->getProperty("active")["value"];
+    }
+
     public function getSupplyProgramTemperature($circuitId = NULL): string
     {
         return $this->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_SUPPLY))->getProperty("value")["value"];
@@ -362,6 +408,59 @@ final class ViessmannAPI
     {
         return $this->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_HOTWATERSTORAGE)->getProperty("value")["value"];
     }
+
+
+
+    /**
+     * Return the Heating Solar Power production. A period is needed amongs day(default),week,month,year. 
+     * currently only day is returned
+     * Currently the number 
+     * are not the same that displayed on heating device
+     * @param string $period amongst enume "day","week","month","year
+     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+     *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
+     *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
+     *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSolarPowerProduction($period = "day")
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SOLAR_POWER_PRODUCTION)->getProperty($period)["value"];
+    }
+
+
+
+
+    /**
+     * @param null $circuit
+     * @return string heating solar sensors temperature collector
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSolarSensorsTemperatureCollector($circuit = NULL): string
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SOLAR_SENSORS_TEMPERATURE_COLLECTOR)->getProperty("value")["value"];
+    }
+
+
+
+
+
+    /**
+     * Return the Heating consumption. A period is needeed amongs day(default),week,month,year. Currently the number
+     * are not the same that displayed on heating device
+     * @param string $period amongst enume "day","week","month","year
+     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+     *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
+     *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
+     *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
+     * @throws ViessmannApiException
+     */
+    public function getHeatingPowerConsumption($period = "day")
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_POWER_CONSUMPTION)->getProperty($period)["value"];
+    }
+
+
 
     /**
      * Return the Gas consumption for DHW. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
@@ -486,7 +585,7 @@ final class ViessmannAPI
     public function setRawDhwSchedule($schedule, $circuitId = NULL)
     {
         $data = "{\"newSchedule\": $schedule}";
-        $this->setRawJsonData($this->buildFeature($circuitId, self::DHW_SCHEDULE), "setSchedule", $data);
+        $this->setRawJsonData(self::DHW_SCHEDULE, "setSchedule", $data);
     }
 
     /**
@@ -849,12 +948,38 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_DHW_TEMPERATURE)->getProperty("value")["value"];
     }
 
+    /**
+     * @return String temperature of the return to the heating
+     *
+     */
+    public function getHeatingTemperatureReturn(): String
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SENSORS_TEMPERATURE_RETURN)->getProperty("value")["value"];
+    }
+
     public function setDhwTemperature($temperature)
     {
         $data = "{\"temperature\": $temperature}";
         $this->setRawJsonData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
     }
 
+    /**
+     * @return String cooling mode
+     */
+    public function getHeatingConfigurationCoolingMode():String{
+        return $this->getEntity(ViessmannFeature::HEATING_CONFIGURATION_COOLING)->getProperty("mode")["value"];
+    }
+
+    /**
+     * @param $mode mode to set among 3 value: "none","natural","natural-mixer"
+     * @return mixed
+     */
+    public function setHeatingConfigurationCoolingMode($mode){
+        {
+            $data = "{\"mode\": $mode}";
+            $this->setRawJsonData(ViessmannFeature::HEATING_CONFIGURATION_COOLING, "setMode", $data);
+        }
+    }
     /**
      * @return string last service if available
      * @throws ViessmannApiException

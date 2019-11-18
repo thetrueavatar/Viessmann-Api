@@ -181,5 +181,26 @@ class ViessmannApiTest extends TestCase
         self::assertNotNull($activeMonthSinceService);
     }
 
+    public function testGetHeatingCompressorsStatistics(){
+        $heatingCompressorStatistics=json_decode($this->viessmannApi->getHeatingCompressorsStatistics(),true);
+        echo "\nHeating compressorStatistics  ";
+        echo $heatingCompressorStatistics["starts"]["value"];
+        self::assertNotNull($heatingCompressorStatistics);
+    }
+
+    public function testIsHeatingCompressorsActive(){
+        $isHeatingCompressorActive=(int)$this->viessmannApi->isHeatingCompressorsActive();
+        echo "\nHeating compressorStatistics  ";
+        echo $isHeatingCompressorActive;
+        self::assertNotNull($isHeatingCompressorActive);
+    }
+
+    public function testGetHeatingTemperatureReturn(){
+        $heatingTemperatureReturn=$this->viessmannApi->getHeatingTemperatureReturn();
+        echo "\nHeating temperature return  ";
+        echo $heatingTemperatureReturn;
+        self::assertNotNull($heatingTemperatureReturn);
+    }
+
 
 }

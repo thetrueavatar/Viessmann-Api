@@ -19,6 +19,7 @@ final class ViessmannFeature
     const GATEWAY_STATUS = "gateway.status";
     const GATEWAY_WIFI = "gateway.wifi";
     const HEATING_BOILER_SENSORS = "heating.boiler.sensors";
+    const HEATING_COMPRESSORS = "heating.compressors";
     const HEATING_BOILER_SENSORS_TEMPERATURE_COMMONSUPPLY = "heating.boiler.sensors.temperature.commonSupply";
     const HEATING_BOILER_SENSORS_TEMPERATURE_MAIN = "heating.boiler.sensors.temperature.main";
     const HEATING_BOILER_SERIAL = "heating.boiler.serial";
@@ -59,6 +60,8 @@ final class ViessmannFeature
     const HEATING_CIRCUITS_0_SENSORS_TEMPERATURE_ROOM = "heating.circuits.0.sensors.temperature.room";
     const HEATING_CIRCUITS_0_SENSORS_TEMPERATURE = "heating.circuits.0.sensors.temperature";
     const HEATING_CIRCUITS_0_SENSORS_TEMPERATURE_SUPPLY = "heating.circuits.0.sensors.temperature.supply";
+    const HEATING_SENSORS_TEMPERATURE_RETURN = "heating.sensors.temperature.return";
+    const HEATING_CONFIGURATION_COOLING = "heating.configuration.cooling";
     const HEATING_CIRCUITS_0 = "heating.circuits.0";
     const HEATING_CIRCUITS_1_CIRCULATION_PUMP = "heating.circuits.1.circulation.pump";
     const HEATING_CIRCUITS_1_CIRCULATION_SCHEDULE = "heating.circuits.1.circulation.schedule";
@@ -118,4 +121,7 @@ final class ViessmannFeature
     const HEATING_SERVICE = "heating.service";
     const HEATING_SERVICE_TIMEBASED = "heating.service.timeBased";
     const HEATING = "heating";
+    const HEATING_POWER_CONSUMPTION = "heating.power.consumption";
+    const HEATING_SOLAR_POWER_PRODUCTION = "heating.solar.power.production";
+    const HEATING_SOLAR_SENSORS_TEMPERATURE_COLLECTOR = "heating.solar.sensors.temperature.collector"; 
 }
