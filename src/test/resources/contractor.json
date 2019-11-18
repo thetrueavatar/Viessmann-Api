@@ -1,0 +1,27 @@
+{
+  "id": "Fachhandwerker",
+  "companyName": "Mein Fachhandwerker GmbH",
+  "addressFirstLine": "Musterstraße 12",
+  "addressSecondLine": "34567 Musterhausen",
+  "latitude": 0.0,
+  "longitude": 0.0,
+  "distance": 1.0,
+  "website": "www.meinfachhandwerker.de",
+  "certifications": [],
+  "contact": {
+    "phoneNumbers": [
+      {
+        "value": "01234-5678",
+        "favorite": true
+      }
+
+    ],
+    "emails": [
+      {
+        "value": "info@meinfachhandwerker.de",
+        "favorite": true
+      }
+    ]
+  },
+  "status": "Accepted"
+}

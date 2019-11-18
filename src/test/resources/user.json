@@ -1,0 +1,37 @@
+{
+  "loginId": "info@viessmann.de",
+  "name": {
+    "firstName": "Max",
+    "familyName": "Mustermann"
+  },
+  "address": {
+    "addressline1": "Meine Straße",
+    "addressline2": "12",
+    "postalCode": "12345",
+    "city": "Mein Ort",
+    "street": "Meine Straße",
+    "houseNumber": "12",
+    "countryCode": "de",
+    "locality": null,
+    "postOfficeBoxText": "pobt",
+    "postOfficeBoxNumber": "4711",
+    "dwellingNumber": "33"
+  },
+  "sex": "MALE",
+  "clientExtId": "100",
+  "languageCode": "de",
+  "birthDate": "1999-01-01+0100",
+  "userState": "ACTIVE",
+  "contacts": {
+    "telephone": "012345678",
+    "telefax": "+49 0611 1234560",
+    "mobile": "+49 0151 1234567",
+    "email": "info@viessmann.de"
+  },
+  "properties": [
+    {
+      "name": "IdentityType",
+      "value": "EK"
+    }
+  ]
+}

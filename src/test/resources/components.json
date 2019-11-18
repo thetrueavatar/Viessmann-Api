@@ -1,0 +1,81 @@
+{
+  "_links": [
+    {
+      "_rel": [
+        "self"
+      ],
+      "_href": "https://api-integration.viessmann-platform.io/equipment/installations/4/components"
+    }
+  ],
+  "installations": [
+    {
+      "componentType": "installation",
+      "status": "Online",
+      "lastEditTimestamp": "2018-02-13T12:50:49.501Z",
+      "_class": [
+        "model.installation"
+      ],
+      "_rel": [
+        "https://wiki.viessmann.com/display/VPL/Relations#Relations-installation",
+        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+      ],
+      "gateways": [
+        {
+          "status": "Online",
+          "serial": "7123456789123456",
+          "marketingName": "Vitoconnect",
+          "lastEditTimestamp": "2018-02-13T12:50:30.756Z",
+          "componentType": "gateway",
+          "_class": [
+            "model.gateway"
+          ],
+          "_rel": [
+            "https://wiki.viessmann.com/display/VPL/Relations#Relations-gateway",
+            "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+          ],
+          "devices": [
+            {
+              "id": "0",
+              "boilerSerial": "7452947314722106",
+              "_class": [
+                "model.device"
+              ],
+              "_rel": [
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-device",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+              ],
+              "_actions": [
+                {
+                  "_name": "updateDevice",
+                  "_method": "PUT",
+                  "_href": "https://api-integration.viessmann-platform.io/equipment/installations/4/gateways/7571381500458105/devices/0",
+                  "_title": "Sets the BMU- and/or boiler-serial of the device. This can only be done once per serial.",
+                  "_fields": [
+                    {
+                      "_name": "bmuSerial",
+                      "_type": "text"
+                    }
+                  ]
+                }
+              ],
+              "boiler": {
+                "status": "Online",
+                "serial": "6789123456789123",
+                "marketingName": "Vitodens 200",
+                "lastEditTimestamp": "2018-02-13T12:50:49.501Z",
+                "componentType": "boiler",
+                "_class": [
+                  "model.boiler"
+                ],
+                "_rel": [
+                  "https://wiki.viessmann.com/display/VPL/Relations#Relations-boiler",
+                  "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "serial": "7571381500043103",
+  "average": 8.2,
+  "currentTemperature": 10,
+  "numValues": 8,
+  "max":
+  {
+    "day":"2017-02-27", "value": 20.4
+  },
+  "min":
+  {
+    "day":"2017-02-25", "value": -0.2
+  },
+  "days": [
+    {
+      "day": "2017-02-21",
+      "max": 7.4,
+      "min": 3
+    },
+    {
+      "day": "2017-02-22",
+      "max": 16.3,
+      "min": 1.4
+    },
+    {
+      "day": "2017-02-23",
+      "max": 5.4,
+      "min": 1.4
+    },
+    {
+      "day": "2017-02-24",
+      "max": 4.8,
+      "min": 1.5
+    },
+    {
+      "day": "2017-02-25",
+      "max": 16.6,
+      "min": -0.2
+    },
+    {
+      "day": "2017-02-26",
+      "max": 19.2,
+      "min": 7.4
+    },
+    {
+      "day": "2017-02-27",
+      "max": 20.4,
+      "min": 6.6
+    },
+    {
+      "day": "2017-02-28",
+      "max": 13.4,
+      "min": 7
+    }
+  ],
+  "_class": [
+    "outsideTemperature"
+  ],
+  "_links": [
+    {
+      "_rel": [
+        "self"
+      ],
+      "_href": "https://api-integration.viessmann-platform.io/analytics/gateways/7571381500458105/outside-temperature"
+    }
+  ]
+}
