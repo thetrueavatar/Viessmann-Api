@@ -1,0 +1,18 @@
+{
+  "properties": {
+    "heatingContractor": true,
+    "forceAppUpdate": false,
+    "requiredAppVersion": null,
+    "familyAndFriends": false,
+    "webviewLogin": false,
+    "defaultEnvironment": "demo"
+  },
+  "links": [
+    {
+      "rel": [
+        "self"
+      ],
+      "href": "https://api-integration.viessmann-platform.io/remote-config/fetch?appId=aef716d7-02a4-4774-807c-d7a776109c22"
+    }
+  ]
+}

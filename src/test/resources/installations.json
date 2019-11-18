@@ -1,0 +1,125 @@
+{
+  "_actions": [
+    {
+      "_name": "createInstallation",
+      "_method": "POST",
+      "_href": "http://52.169.79.192:18092/general-management/users/856de2fc-1d33-46ab-ae57-90c0ae0f6cac/installations",
+      "_fields": [
+        {
+          "_name": "description",
+          "_type": "text"
+        },
+        {
+          "_name": "gateway.serial",
+          "_type": "text"
+        },
+        {
+          "_name": "gateway.password",
+          "_type": "text"
+        },
+        {
+          "_name": "address.street",
+          "_type": "text"
+        },
+        {
+          "_name": "address.houseNumber",
+          "_type": "text"
+        },
+        {
+          "_name": "address.zip",
+          "_type": "text"
+        },
+        {
+          "_name": "address.city",
+          "_type": "text"
+        },
+        {
+          "_name": "address.region",
+          "_type": "text"
+        },
+        {
+          "_name": "address.country",
+          "_type": "text"
+        },
+        {
+          "_name": "address.phoneNumber",
+          "_type": "text"
+        },
+        {
+          "_name": "address.faxNumber",
+          "_type": "text"
+        }
+      ]
+    }
+  ],
+  "_links": [
+    {
+      "_rel": [
+        "self"
+      ],
+      "_href": "http://52.169.79.192:18092/general-management/users/856de2fc-1d33-46ab-ae57-90c0ae0f6cac/installations?expanded=true&limit=100&offset=0"
+    },
+    {
+      "_rel": [
+        "first"
+      ],
+      "_href": "http://52.169.79.192:18092/general-management/users/856de2fc-1d33-46ab-ae57-90c0ae0f6cac/installations?expanded=true&limit=100&offset=0"
+    },
+    {
+      "_rel": [
+        "last"
+      ],
+      "_href": "http://52.169.79.192:18092/general-management/users/856de2fc-1d33-46ab-ae57-90c0ae0f6cac/installations?expanded=true&limit=100&offset=0"
+    }
+  ],
+  "installations": [
+    {
+      "id": "demo",
+      "description": null,
+      "_class": [
+        "model.installation"
+      ],
+      "_rel": [
+        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection",
+        "https://wiki.viessmann.com/display/VPL/Relations#Relations-installation"
+      ],
+      "gateways": [
+        {
+          "serial": "7123456789123456",
+          "createdAt": "2017-03-23T13:47:47.0233333Z",
+          "producedAt": "2017-02-15T08:23:51Z",
+          "lastStatusChangedAt": "2017-12-07T19:43:43.754Z",
+          "aggregatedStatus": "Online",
+          "gatewayType": "VitoconnectOptolink",
+          "_class": [
+            "model.gateway"
+          ],
+          "_rel": [
+            "https://wiki.viessmann.com/display/VPL/Relations#Relations-gateway",
+            "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+          ]
+        }
+      ],
+      "postalAddress": {
+        "street": "Meine Straße",
+        "houseNumber": "12",
+        "zip": "12345",
+        "city": "Mein Ort",
+        "region": null,
+        "country": "DE",
+        "phoneNumber": "012345678",
+        "faxNumber": null,
+        "latitude": 51.1194025,
+        "longitude": 16.983142,
+        "timeZone": "Europe/Warsaw",
+        "_class": [
+          "model.postalAddress"
+        ],
+        "_rel": [
+          "https://wiki.viessmann.com/display/VPL/Relations#Relations-postalAddress",
+          "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+        ]
+      }
+    }
+  ]
+}
