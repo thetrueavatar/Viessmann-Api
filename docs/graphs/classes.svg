@@ -24,11 +24,23 @@
 <path fill="none" stroke="#c0c0c0" d="M173.4913,-24C173.4913,-24 323.4913,-24 323.4913,-24 329.4913,-24 335.4913,-30 335.4913,-36 335.4913,-36 335.4913,-192 335.4913,-192 335.4913,-198 329.4913,-204 323.4913,-204 323.4913,-204 173.4913,-204 173.4913,-204 167.4913,-204 161.4913,-198 161.4913,-192 161.4913,-192 161.4913,-36 161.4913,-36 161.4913,-30 167.4913,-24 173.4913,-24"/>
 <text text-anchor="middle" x="248.4913" y="-191.2" font-family="Times,serif" font-size="11.00" fill="#c0c0c0">API</text>
 </g>
-<!-- \\Viessmann\\API\\ViessmannFeature -->
+<!-- \\Viessmann\\API\\ViessmannApiException -->
 <g id="node1" class="node">
-<title>\\Viessmann\\API\\ViessmannFeature</title>
-<polygon fill="none" stroke="#000000" points="310.9913,-176 185.9913,-176 185.9913,-140 310.9913,-140 310.9913,-176"/>
-<text text-anchor="middle" x="248.4913" y="-155.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannFeature</text>
+<title>\\Viessmann\\API\\ViessmannApiException</title>
+<polygon fill="none" stroke="#000000" points="327.4913,-176 169.4913,-176 169.4913,-140 327.4913,-140 327.4913,-176"/>
+<text text-anchor="middle" x="248.4913" y="-155.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannApiException</text>
+</g>
+<!-- \\Exception -->
+<g id="node4" class="node">
+<title>\\Exception</title>
+<ellipse fill="none" stroke="#000000" cx="48.7457" cy="-158" rx="48.9926" ry="18"/>
+<text text-anchor="middle" x="48.7457" y="-154.3" font-family="Times,serif" font-size="14.00" fill="#c0c0c0">\Exception</text>
+</g>
+<!-- \\Viessmann\\API\\ViessmannApiException&#45;&gt;\\Exception -->
+<g id="edge1" class="edge">
+<title>\\Viessmann\\API\\ViessmannApiException&#45;&gt;\\Exception</title>
+<path fill="none" stroke="#000000" d="M169.2597,-158C148.7629,-158 127.0532,-158 107.7911,-158"/>
+<polygon fill="none" stroke="#000000" points="107.6639,-154.5001 97.6639,-158 107.6639,-161.5001 107.6639,-154.5001"/>
 </g>
 <!-- \\Viessmann\\API\\ViessmannAPI -->
 <g id="node2" class="node">
@@ -36,23 +48,11 @@
 <polygon fill="none" stroke="#000000" points="297.4913,-122 199.4913,-122 199.4913,-86 297.4913,-86 297.4913,-122"/>
 <text text-anchor="middle" x="248.4913" y="-101.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannAPI</text>
 </g>
-<!-- \\Viessmann\\API\\ViessmannApiException -->
+<!-- \\Viessmann\\API\\ViessmannFeature -->
 <g id="node3" class="node">
-<title>\\Viessmann\\API\\ViessmannApiException</title>
-<polygon fill="none" stroke="#000000" points="327.4913,-68 169.4913,-68 169.4913,-32 327.4913,-32 327.4913,-68"/>
-<text text-anchor="middle" x="248.4913" y="-47.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannApiException</text>
-</g>
-<!-- \\Exception -->
-<g id="node4" class="node">
-<title>\\Exception</title>
-<ellipse fill="none" stroke="#000000" cx="48.7457" cy="-50" rx="48.9926" ry="18"/>
-<text text-anchor="middle" x="48.7457" y="-46.3" font-family="Times,serif" font-size="14.00" fill="#c0c0c0">\Exception</text>
-</g>
-<!-- \\Viessmann\\API\\ViessmannApiException&#45;&gt;\\Exception -->
-<g id="edge1" class="edge">
-<title>\\Viessmann\\API\\ViessmannApiException&#45;&gt;\\Exception</title>
-<path fill="none" stroke="#000000" d="M169.2597,-50C148.7629,-50 127.0532,-50 107.7911,-50"/>
-<polygon fill="none" stroke="#000000" points="107.6639,-46.5001 97.6639,-50 107.6639,-53.5001 107.6639,-46.5001"/>
+<title>\\Viessmann\\API\\ViessmannFeature</title>
+<polygon fill="none" stroke="#000000" points="310.9913,-68 185.9913,-68 185.9913,-32 310.9913,-32 310.9913,-68"/>
+<text text-anchor="middle" x="248.4913" y="-47.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannFeature</text>
 </g>
 </g>
 </svg>

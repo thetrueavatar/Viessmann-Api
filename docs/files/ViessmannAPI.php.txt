@@ -917,14 +917,14 @@ final class ViessmannAPI
 
     public function startOneTimeDhwCharge()
     {
-        $data = "{\"mode\": \"activate\"}";
+        $data = "{}";
         $this->setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "activate", $data);
     }
 
     public function stopOneTimeDhwCharge()
     {
 
-        $data = "{\"mode\": \"deactivate\"}";
+        $data = "{}";
         $this->setRawJsonData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "deactivate", $data);
     }
 
