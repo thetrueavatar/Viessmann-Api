@@ -10,7 +10,10 @@ final class ViessmannAPI
 {
     const HEATING_BURNER = "heating.burner";
     const HEATING_CIRCUITS = "heating.circuits";
+    const HEATING_COMPRESSORS = "heating.compressors";
     const HEATING_CURVE = "heating.curve";
+    const HEATING_FROSTPROTECTION = "frostprotection";
+    const HEATING_COMPRESSOR_STATISTICS = "statistics";
     const SENSORS_TEMPERATURE_ROOM = "sensors.temperature.room";
     const ACTIVE_OPERATING_MODE = "operating.modes.active";
     const OPERATING_MODES = "operating.modes.active";
@@ -129,6 +132,74 @@ final class ViessmannAPI
 
     /**
      * @param null $circuitId
+     * @return string the frostprotection configured
+     * @throws ViessmannApiException
+     */
+    public function getFrostprotection($circuitId = NULL): string
+    {
+        return $this->getEntity($this->buildFeature($circuitId, self::HEATING_FROSTPROTECTION))->getProperty("status")["value"];
+    }
+
+    /**
+     * @param null $circuitId
+     * @return int the statistics for starts compressor
+     * @throws ViessmannApiException
+     */
+    public function getHeatingCompressorStarts($circuitId = NULL): int
+    {
+        return $this->getEntity($this->buildFeatureCompressors($circuitId, self::HEATING_COMPRESSOR_STATISTICS))->getProperty("starts")["value"];
+    }
+
+    /**
+     * @param null $circuitId
+     * @return double the statistics for hours run compressor
+     * @throws ViessmannApiException
+     */
+    public function getHeatingCompressorHours($circuitId = NULL): float
+    {
+        return $this->getEntity($this->buildFeatureCompressors($circuitId, self::HEATING_COMPRESSOR_STATISTICS))->getProperty("hours")["value"];
+    }
+
+    /**
+     * @param null $circuitId
+     * @param null $classNumber (possible 1-5)
+     * @return int the statistics for load classes 1-5
+     * @throws ViessmannApiException
+     */
+    public function getHeatingCompressorLoadClassHours($circuitId = NULL, $classNumber = NULL): int
+    {
+        return $this->getEntity($this->buildFeatureCompressors($circuitId, self::HEATING_COMPRESSOR_STATISTICS))->getProperty($this->buildHeatingCompressorLoadCassParameter($classNumber))["value"];
+    }
+
+    /**
+     * @return float the result for primary circuit sensor Temperature supply
+     * @throws ViessmannApiException
+     */
+    public function getHeatingPrimaryCircuitTemperatureSupply(): float
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_PRIMARYCIRCUIT_SENSORS_TEMPERATURE_SUPPLY)->getProperty("value")["value"];
+    }
+
+    /**
+     * @return float the result for secondary circuit sensor Temperature supply
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSecondaryCircuitTemperatureSupply(): float
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SECONDARYCIRCUIT_SENSORS_TEMPERATURE_SUPPLY)->getProperty("value")["value"];
+    }
+
+    /**
+     * @return float the result for secondary circuit sensor Temperature return
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSecondaryCircuitTemperatureReturn(): float
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_SECONDARYCIRCUIT_SENSORS_TEMPERATURE_RETURN)->getProperty("value")["value"];
+    }
+
+    /**
+     * @param null $circuitId
      * @return string the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
      * @throws ViessmannApiException
      */
@@ -156,6 +227,7 @@ final class ViessmannAPI
     {
         return $this->getEntity($this->buildFeature($circuitId, self::ACTIVE_PROGRAM))->getProperty("value")["value"];
     }
+
 
     /**
      * @return bool true if heating burner is active. False otherwise
@@ -398,6 +470,7 @@ final class ViessmannAPI
     {
         return $this->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_SUPPLY))->getProperty("value")["value"];
     }
+
 
     /**
      * @param null $circuit
@@ -949,6 +1022,16 @@ final class ViessmannAPI
     }
 
     /**
+     * @return String see https://en.wikipedia.org/wiki/Hysteresis
+     * @throws ViessmannApiException
+     */
+    public function getDhwTemperatureHysteresis(): String
+    {
+        return $this->getEntity(ViessmannFeature::HEATING_DHW_TEMPERATURE_HYSTERESIS)->getProperty("value")["value"];
+    }
+
+
+    /**
      * @return String temperature of the return to the heating
      *
      */
@@ -1007,7 +1090,6 @@ final class ViessmannAPI
         return $this->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED)->getProperty("activeMonthSinceLastService")["value"];
     }
 
-
     public function setRawJsonData($feature, $action, $data)
     {
         try {
@@ -1041,6 +1123,26 @@ final class ViessmannAPI
 
     }
 
+    private function buildHeatingCompressorLoadCassParameter($classNumber)
+    {
+        switch ($classNumber) {
+            case 1:
+                return "hoursLoadClassOne";
+            case 2:
+                return "hoursLoadClassTwo";
+            case 3:
+                return "hoursLoadClassThree";
+            case 4:
+                return "hoursLoadClassFour";
+            case 5:
+                return "hoursLoadClassFive";
+            default:
+                return NULL;
+        }
+
+    }
+
+
 
     private function buildFeature($circuitId, $feature)
     {
@@ -1048,6 +1150,14 @@ final class ViessmannAPI
             $circuitId = $this->circuitId;
         }
         return self::HEATING_CIRCUITS . "." . $circuitId . "." . $feature;
+    }
+
+    private function buildFeatureCompressors($circuitId, $feature)
+    {
+        if ($circuitId == NULL) {
+            $circuitId = $this->circuitId;
+        }
+        return self::HEATING_COMPRESSORS . "." . $circuitId . "." . $feature;
     }
 
 }
