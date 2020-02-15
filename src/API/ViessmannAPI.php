@@ -473,11 +473,11 @@ final class ViessmannAPI
 
 
     /**
-     * @param null $circuit
+     * @param null $circuitId
      * @return string Hot Water storage temperature
      * @throws ViessmannApiException
      */
-    public function getHotWaterStorageTemperature($circuit = NULL): string
+    public function getHotWaterStorageTemperature($circuitId = NULL): string
     {
         return $this->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_HOTWATERSTORAGE)->getProperty("value")["value"];
     }
@@ -505,11 +505,11 @@ final class ViessmannAPI
 
 
     /**
-     * @param null $circuit
+     * @param null $circuitId
      * @return string heating solar sensors temperature collector
      * @throws ViessmannApiException
      */
-    public function getHeatingSolarSensorsTemperatureCollector($circuit = NULL): string
+    public function getHeatingSolarSensorsTemperatureCollector($circuitId = NULL): string
     {
         return $this->getEntity(ViessmannFeature::HEATING_SOLAR_SENSORS_TEMPERATURE_COLLECTOR)->getProperty("value")["value"];
     }
