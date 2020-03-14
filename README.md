@@ -44,6 +44,9 @@ the best!
 Your
 Viessmann Developer Portal Team_
 
+News
+-----
+
 New Version(previous phar was corrupted) 1.2.1 available here ! : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.2.1
 
 Translated documentation can be found here:
