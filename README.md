@@ -3,6 +3,7 @@ Attention:
 Depuis quelques jours, Viessmann a activé une protection de son serveur pour éviter que des outils non-autorisés n'accèdent à leur api. Il est probable que le code ici ne fonctionne plus chez bon nombre d'entre vous.  
 Je ne ferai aucun modification permettent de contourner cela car il est dans le droit de viessmann de contrôler qui peut accéder à leur serveur.
 Cette api-ci a toujours été un projet personnel officieux sans support officiel de Viessmann.
+
 Warning:
 ----------
 Since a few days, Viessmann as set a protection on their server to avoid unofficial thir-party tools to use their api. It's more than likely that the code here won't work for most of you. I won't do any modification to avoid this since it's their right to control the access to their service.
