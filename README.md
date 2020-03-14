@@ -6,7 +6,7 @@ Cette api-ci a toujours été un projet personnel officieux sans support officie
 
 Warning:
 ----------
-Since a few days, Viessmann as set a protection on their server to avoid unofficial thir-party tools to use their api. It's more than likely that the code here won't work for most of you. I won't do any modification to avoid this since it's their right to control the access to their service.
+Since a few days, Viessmann as set a protection on their server to avoid unofficial third-party tools to use their api. It's more than likely that the code here won't work for most of you. I won't do any modification to avoid this since it's their right to control the access to their service.
 This api as always been a personal project I have shared but has neve receive the consent/support from Viessman.
 
 
