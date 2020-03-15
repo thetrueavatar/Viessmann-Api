@@ -1,6 +1,5 @@
 Version 1.1.0 available !
 
-If you wish, you can support me or thanks me with a paypal donation [![paypal](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5DYHHLWWLVYQN)
 
 Implementation of an API to get data that are expose through the viessmann service.
 This service is available through oauth2 autorization and use HATEOAS approach. 
