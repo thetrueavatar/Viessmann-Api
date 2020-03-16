@@ -1,14 +1,19 @@
 Attention:
 ----------
-Depuis quelques jours, Viessmann a activé une protection de son serveur pour éviter que des outils non-autorisés n'accèdent à leur api. Il est probable que le code ici ne fonctionne plus chez bon nombre d'entre vous.  
+Depuis quelques jours, Viessmann a activé une protection de son serveur pour éviter que des outils non-autorisés n'accèdent à leur api trop souvent. Il est probable que le code ici ne fonctionne plus chez bon nombre d'entre vous.  
 Je ne ferai aucun modification permettent de contourner cela car il est dans le droit de viessmann de contrôler qui peut accéder à leur serveur.
 Cette api-ci a toujours été un projet personnel officieux sans support officiel de Viessmann.
+Toutefois, Viessmann a indiqué sur son site qu'il limitait au pire à un appel toutes les 15 minutes. Pensez à augmenter l'interval entre 2 appels donc.
+Toutes les informations sont disponibles sur le fil de discussion suivant chez Viessmann:
+https://www.viessmann-community.com/t5/Experten-fragen/Q-amp-A-Viessmann-API/qaq-p/127660/comment-id/117597#M117597
 
 Warning:
 ----------
-Since a few days, Viessmann as set a protection on their server to avoid unofficial third-party tools to use their api. It's more than likely that the code here won't work for most of you. I won't do any modification to avoid this since it's their right to control the access to their service.
+Since a few days, Viessmann as set a protection on their server to avoid unofficial third-party tools to overload their api . It's more than likely that the code here won't work for most of you. I won't do any modification to avoid this since it's their right to control the access to their service.
 This api as always been a personal project I have shared but has nevre received any official consent/support from Viessman.
-
+According to Viessmann site, the treshold should be 15 minutes between 2 call. Please update your polling interval to more than 15 minutes.
+All information are available on this feed:
+https://www.viessmann-community.com/t5/Experten-fragen/Q-amp-A-Viessmann-API/qaq-p/127660/comment-id/117597#M117597
 
 Here is the official communication you'll receive
 
