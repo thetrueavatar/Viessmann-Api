@@ -10,13 +10,12 @@ Voici ce qu'ils indiquent:
 * 1450 calls for a time window of 24 hours
 
 Par contre, la limite semble un peu buggée et le ban spécialement long(24h). Il est préférable pour le moment de désactiver son cron sous peine d'avoir le ViCare bloqué pendant 24h
+
 > I’m happy to provide you and all other user more concrete information on how the current restriction works:
 We have a rate limit with sliding window. Whenever the first request arrives, we open a time window and count all request in that window. If the number of requests reach the limitation, we block all incoming user request until the time window ends. Then, with the next user request, a new time window opens.
 Currently, we have two limits active:
-
-* 120 calls for a time window of 10 minutes
-* 1450 calls for a time window of 24 hours
-
+120 calls for a time window of 10 minutes
+1450 calls for a time window of 24 hours
 We see these limitations reasonable, also based on your great explanation concerning cloud based services. So thank you for that!
 Also, we decided against HATEOAS as it is deprecated and will sooner or later be switched off.
 
@@ -28,9 +27,11 @@ Warning:
 Since a few days, Viessmann as set a protection on their server to avoid unofficial third-party tools to overload their api . It's more than likely that the code here won't work for most of you. I won't do any modification to avoid this since it's their right to control the access to their service.
 This api as always been a personal project I have shared but has nevre received any official consent/support from Viessman.
 According to Viessmann site, is defined such as:
-120 calls for a time window of 10 minutes
-1450 calls for a time window of 24 hours
-HOWEVER, currently the treshold seems to be buggy so please be carreful since the ban last 24h?
+
+* 120 calls for a time window of 10 minutes
+* 1450 calls for a time window of 24 hours
+
+HOWEVER, currently the treshold seems to be buggy so please be carreful since the ban last 24h
 
 > I’m happy to provide you and all other user more concrete information on how the current restriction works:
 We have a rate limit with sliding window. Whenever the first request arrives, we open a time window and count all request in that window. If the number of requests reach the limitation, we block all incoming user request until the time window ends. Then, with the next user request, a new time window opens.
@@ -39,6 +40,7 @@ Currently, we have two limits active:
 1450 calls for a time window of 24 hours
 We see these limitations reasonable, also based on your great explanation concerning cloud based services. So thank you for that!
 Also, we decided against HATEOAS as it is deprecated and will sooner or later be switched off.
+
 All information are available on this feed:
 https://www.viessmann-community.com/t5/Experten-fragen/Q-amp-A-Viessmann-API/qaq-p/127660/comment-id/117597#M117597
 
