@@ -5,9 +5,9 @@ Attention, la cache fonctionne à condition que vous fassiez tout vos appels sur
 Exemple:
 
 `$viessmannApi->getOutsideTemperature());
-`$viessmannApi->getBoilerTemperature());
-`$viessmannApi->getSlope());
-`$viessmannApi->getShift());
+$viessmannApi->getBoilerTemperature());
+$viessmannApi->getSlope());
+$viessmannApi->getShift());
 
 News EN
 ----
@@ -17,9 +17,9 @@ This cache only works if you do all the call in the same php file.
 Example:
 
 `$viessmannApi->getOutsideTemperature());
-`$viessmannApi->getBoilerTemperature());
-`$viessmannApi->getSlope());
-`$viessmannApi->getShift());
+$viessmannApi->getBoilerTemperature());
+$viessmannApi->getSlope());
+$viessmannApi->getShift());
 
 Attention:
 ----------
