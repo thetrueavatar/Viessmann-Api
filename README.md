@@ -3,7 +3,19 @@ Attention:
 Depuis quelques jours, Viessmann a activé une protection de son serveur pour éviter que des outils non-autorisés n'accèdent à leur api trop souvent. Il est probable que le code ici ne fonctionne plus chez bon nombre d'entre vous.  
 Je ne ferai aucun modification permettent de contourner cela car il est dans le droit de viessmann de contrôler qui peut accéder à leur serveur.
 Cette api-ci a toujours été un projet personnel officieux sans support officiel de Viessmann.
-Toutefois, Viessmann a indiqué sur son site qu'il limitait au pire à un appel toutes les 15 minutes. Pensez à augmenter l'interval entre 2 appels donc.
+Toutefois, Viessmann a indiqué sur son site qu'il limitait juste le nombre d'appel
+Voici ce qu'ils indiquent:
+120 calls for a time window of 10 minutes
+1450 calls for a time window of 24 hours
+Par contre, la limite semble un peu buggée et le ban spécialement long(24h). Il est préférable pour le moment de désactiver son cron sous peine d'avoir le ViCare bloqué pendant 24h
+> I’m happy to provide you and all other user more concrete information on how the current restriction works:
+We have a rate limit with sliding window. Whenever the first request arrives, we open a time window and count all request in that window. If the number of requests reach the limitation, we block all incoming user request until the time window ends. Then, with the next user request, a new time window opens.
+Currently, we have two limits active:
+120 calls for a time window of 10 minutes
+1450 calls for a time window of 24 hours
+We see these limitations reasonable, also based on your great explanation concerning cloud based services. So thank you for that!
+Also, we decided against HATEOAS as it is deprecated and will sooner or later be switched off.
+
 Toutes les informations sont disponibles sur le fil de discussion suivant chez Viessmann:
 https://www.viessmann-community.com/t5/Experten-fragen/Q-amp-A-Viessmann-API/qaq-p/127660/comment-id/117597#M117597
 
@@ -11,7 +23,18 @@ Warning:
 ----------
 Since a few days, Viessmann as set a protection on their server to avoid unofficial third-party tools to overload their api . It's more than likely that the code here won't work for most of you. I won't do any modification to avoid this since it's their right to control the access to their service.
 This api as always been a personal project I have shared but has nevre received any official consent/support from Viessman.
-According to Viessmann site, the treshold should be 15 minutes between 2 call. Please update your polling interval to more than 15 minutes.
+According to Viessmann site, is defined such as:
+120 calls for a time window of 10 minutes
+1450 calls for a time window of 24 hours
+HOWEVER, currently the treshold seems to be buggy so please be carreful since the ban last 24h?
+
+> I’m happy to provide you and all other user more concrete information on how the current restriction works:
+We have a rate limit with sliding window. Whenever the first request arrives, we open a time window and count all request in that window. If the number of requests reach the limitation, we block all incoming user request until the time window ends. Then, with the next user request, a new time window opens.
+Currently, we have two limits active:
+120 calls for a time window of 10 minutes
+1450 calls for a time window of 24 hours
+We see these limitations reasonable, also based on your great explanation concerning cloud based services. So thank you for that!
+Also, we decided against HATEOAS as it is deprecated and will sooner or later be switched off.
 All information are available on this feed:
 https://www.viessmann-community.com/t5/Experten-fragen/Q-amp-A-Viessmann-API/qaq-p/127660/comment-id/117597#M117597
 
