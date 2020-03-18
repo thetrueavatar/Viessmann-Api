@@ -7,7 +7,7 @@ Exemple:
 `$viessmannApi->getOutsideTemperature());
 $viessmannApi->getBoilerTemperature());
 $viessmannApi->getSlope());
-$viessmannApi->getShift());
+$viessmannApi->getShift());`
 
 News EN
 ----
@@ -19,7 +19,7 @@ Example:
 `$viessmannApi->getOutsideTemperature());
 $viessmannApi->getBoilerTemperature());
 $viessmannApi->getSlope());
-$viessmannApi->getShift());
+$viessmannApi->getShift());`
 
 Attention:
 ----------
