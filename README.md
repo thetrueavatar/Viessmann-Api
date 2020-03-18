@@ -4,7 +4,7 @@ Une nouvelle version utilisant une cache et évitant un nombre trop important d'
 Attention, la cache fonctionne à condition que vous fassiez tout vos appels sur le même objet viessmannApi.
 Exemple:
 
-`$viessmannApi->getOutsideTemperature());
+ $viessmannApi->getOutsideTemperature());
 
  $viessmannApi->getBoilerTemperature());
  
@@ -20,7 +20,7 @@ A new version is available in snaphost that provide a caching to avoid account t
 This cache only works if you do all the call in the same php file.
 Example:
 
-`$viessmannApi->getOutsideTemperature());
+ $viessmannApi->getOutsideTemperature());
 
  $viessmannApi->getBoilerTemperature());
  
