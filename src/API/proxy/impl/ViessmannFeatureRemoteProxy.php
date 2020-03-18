@@ -8,6 +8,7 @@
 
 namespace Viessmann\API\proxy\impl;
 
+use DateTime;
 use Viessmann\Oauth\ViessmannOauthClient;
 use TomPHP\Siren\Entity;
 class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
@@ -31,7 +32,14 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
 
         $data = json_decode($this->getRawJsonData($resources), true);
         if (isset($data["statusCode"])) {
-            throw new ViessmannApiException("Unable to get data for feature " . $resources . "\nReason: " . $data["message"], 1);
+            if($data["statusCode"]=="429"){
+                $epochtime=(int)($response["extendedPayload"]["limitReset"]/1000);
+                $dt = new DateTime("@$epochtime");
+                $resetDate=$dt->format(DateTime::RSS);
+                throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: ". $data["message"]." Limit will be reset on ".$resetDate, 2);
+            }else{
+                throw new ViessmannApiException("Unable to get data for feature " . $resources . "\nReason: " . $data["message"], 1);
+            }
         }
 
         return Entity::fromArray($data, true);

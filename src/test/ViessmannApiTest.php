@@ -18,7 +18,7 @@ class ViessmannApiTest extends TestCase
      */
     public function setUp()
     {
-        $this->viessmannApi = new ViessmannAPI(array(),$useCache = true, new ViessmannMockClient());
+        $this->viessmannApi = new ViessmannAPI(array(),$useCache = false, new ViessmannMockClient());
     }
 
     public function testGetHeatingGasConsumption()
