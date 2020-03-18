@@ -32,6 +32,9 @@ class ViessmannMockClient implements ViessmannOauthClient
 
     public function readData($feature): string
     {
+        if ($feature==""){
+            $feature="features";
+        }
         return file_get_contents($this->resourcesDir . $feature . ".json");
     }
 

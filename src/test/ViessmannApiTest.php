@@ -5,6 +5,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
 use Viessmann\API\ViessmannAPI;
+use Viessmann\API\ViessmannFeatureRemoteProxy;
 use Viessmann\test\ViessmannMockClient;
 
 
@@ -12,14 +13,12 @@ class ViessmannApiTest extends TestCase
 {
 
     private $viessmannApi;
-
     /**
      * ViessmannApiTest constructor.
      */
     public function setUp()
     {
-
-        $this->viessmannApi = new ViessmannAPI(array(), new ViessmannMockClient());
+        $this->viessmannApi = new ViessmannAPI(array(),$useCache = true, new ViessmannMockClient());
     }
 
     public function testGetHeatingGasConsumption()
@@ -296,6 +295,11 @@ class ViessmannApiTest extends TestCase
         self::assertNotNull($getHeatingSecondaryCircuitTemperatureReturn);
     }
 
+    public function testGetAllFeaturesInformation()
+    {
+        echo $this->viessmannApi->getSlope();
+        self::assertTrue();
+    }
 
 
 }

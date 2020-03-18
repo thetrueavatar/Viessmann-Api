@@ -48,6 +48,7 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
         $this->pwd = $params["pwd"];
         $this->serviceFactory = new ServiceFactory();
         $httpClient = new CurlClient();
+        $httpClient->setCurlParameters([CURLOPT_SSL_VERIFYPEER => false]);
         $this->serviceFactory->setHttpClient($httpClient);
         $this->serviceFactory->registerService("Viessmann", "Viessmann\Oauth\ViessmannOauthService");
         $this->storage = new Session();
