@@ -5,14 +5,18 @@ Je ne ferai aucun modification permettent de contourner cela car il est dans le 
 Cette api-ci a toujours été un projet personnel officieux sans support officiel de Viessmann.
 Toutefois, Viessmann a indiqué sur son site qu'il limitait juste le nombre d'appel
 Voici ce qu'ils indiquent:
+
 120 calls for a time window of 10 minutes
 1450 calls for a time window of 24 hours
+
 Par contre, la limite semble un peu buggée et le ban spécialement long(24h). Il est préférable pour le moment de désactiver son cron sous peine d'avoir le ViCare bloqué pendant 24h
 > I’m happy to provide you and all other user more concrete information on how the current restriction works:
 We have a rate limit with sliding window. Whenever the first request arrives, we open a time window and count all request in that window. If the number of requests reach the limitation, we block all incoming user request until the time window ends. Then, with the next user request, a new time window opens.
 Currently, we have two limits active:
+
 120 calls for a time window of 10 minutes
 1450 calls for a time window of 24 hours
+
 We see these limitations reasonable, also based on your great explanation concerning cloud based services. So thank you for that!
 Also, we decided against HATEOAS as it is deprecated and will sooner or later be switched off.
 
