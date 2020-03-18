@@ -1,3 +1,33 @@
+News FR
+----
+Une nouvelle version utilisant une cache et évitant un nombre trop important d'appel est disponible en snapshot. Cette version a été développé à l'aveulge(mon compte est bloqué) mais fonctionne en test local. Faites-moi le plus de retour possible ! 
+Attention, la cache fonctionne à condition que vous fassiez tout vos appels sur le même objet viessmannApi.
+Exemple:
+
+ $viessmannApi->getOutsideTemperature());
+
+ $viessmannApi->getBoilerTemperature());
+ 
+ $viessmannApi->getSlope());
+ 
+ $viessmannApi->getShift());
+ `
+
+News EN
+----
+A new version is available in snaphost that provide a caching to avoid account to be blocked. This version has been developed while I don't have access to my own account so please provide me feedback asap.
+
+This cache only works if you do all the call in the same php file.
+Example:
+
+ $viessmannApi->getOutsideTemperature());
+
+ $viessmannApi->getBoilerTemperature());
+ 
+ $viessmannApi->getSlope());
+ 
+ $viessmannApi->getShift());
+
 Attention:
 ----------
 Depuis quelques jours, Viessmann a activé une protection de son serveur pour éviter que des outils non-autorisés n'accèdent à leur api trop souvent. Il est probable que le code ici ne fonctionne plus chez bon nombre d'entre vous.  
