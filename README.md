@@ -2,7 +2,7 @@ Version 1.3.1
 --------------
 Addded caching to reduced load is available here : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.1
 It's also possible to define gatewayId(3rd line) and installationId(4th line) in the credentials.properties
-This would redude to 3 the request.
+This would reduce the total of request to 3. Moreover authentication(2 request) seems to not be taken into account so it will result in only 1 request counting in the quota.
 
 As mentionned, Viessmann as set 2 limit to their API:
 120 calls for a time window of 10 minutes
