@@ -42,14 +42,6 @@ function jeedom_post($cmd_id, $value)
     return $result;
 }
 
-jeedom_post("" . CMD_ID . "", $viessmannApi->getOutsideTemperature());
-
-jeedom_post("" . CMD_ID1 . "", $viessmannApi->getBoilerTemperature());
-
-jeedom_post("" . CMD_ID2 . "", $viessmannApi->getSlope());
-
-jeedom_post("" . CMD_ID3 . "", $viessmannApi->getShift());
-
 $res = $viessmannApi->getActiveMode();
 if ($res == "standby"):
     $res = "Arret";

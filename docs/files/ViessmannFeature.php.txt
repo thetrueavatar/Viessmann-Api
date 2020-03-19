@@ -93,6 +93,9 @@ final class ViessmannFeature
     const HEATING_CIRCUITS_1_SENSORS_TEMPERATURE_ROOM = "heating.circuits.1.sensors.temperature.room";
     const HEATING_CIRCUITS_1_SENSORS_TEMPERATURE = "heating.circuits.1.sensors.temperature";
     const HEATING_CIRCUITS_1_SENSORS_TEMPERATURE_SUPPLY = "heating.circuits.1.sensors.temperature.supply";
+    const HEATING_PRIMARYCIRCUIT_SENSORS_TEMPERATURE_SUPPLY = "heating.primaryCircuit.sensors.temperature.supply";
+    const HEATING_SECONDARYCIRCUIT_SENSORS_TEMPERATURE_SUPPLY = "heating.secondaryCircuit.sensors.temperature.supply";
+    const HEATING_SECONDARYCIRCUIT_SENSORS_TEMPERATURE_RETURN = "heating.secondaryCircuit.sensors.temperature.return";
     const HEATING_CIRCUITS_1 = "heating.circuits.1";
     const HEATING_CIRCUITS = "heating.circuits";
     const HEATING_CONTROLLER_SERIAL = "heating.controller.serial";
@@ -110,6 +113,7 @@ final class ViessmannFeature
     const HEATING_DHW_SENSORS_TEMPERATURE_OUTLET = "heating.dhw.sensors.temperature.outlet";
     const HEATING_DHW = "heating.dhw";
     const HEATING_DHW_TEMPERATURE = "heating.dhw.temperature";
+    const HEATING_DHW_TEMPERATURE_HYSTERESIS = "heating.dhw.temperature.hysteresis";
     const HEATING_ERRORS_ACTIVE = "heating.errors.active";
     const HEATING_ERRORS_HISTORY = "heating.errors.history";
     const HEATING_ERRORS = "heating.errors";

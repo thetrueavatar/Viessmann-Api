@@ -1,0 +1,50 @@
+<?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: clibois
+ * Date: 17/03/20
+ * Time: 18:06
+ */
+
+namespace Viessmann\API\proxy\impl;
+
+use DateTime;
+use Viessmann\Oauth\ViessmannOauthClient;
+use TomPHP\Siren\Entity;
+class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
+
+{
+    public function __construct($viessmannClient)
+    {
+        parent::__construct($viessmannClient);
+    }
+
+    private function getRawJsonData($resources): string
+    {
+        try {
+            return $this->viessmannClient->readData($resources);
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("Unable to get data for feature" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
+        }
+    }
+    public function getEntity($resources): Entity
+    {
+
+        $data = json_decode($this->getRawJsonData($resources), true);
+        if (isset($data["statusCode"])) {
+            if($data["statusCode"]=="429"){
+                $epochtime=(int)($response["extendedPayload"]["limitReset"]/1000);
+                $dt = new DateTime("@$epochtime");
+                $resetDate=$dt->format(DateTime::RSS);
+                throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: ". $data["message"]." Limit will be reset on ".$resetDate, 2);
+            }else{
+                throw new ViessmannApiException("Unable to get data for feature " . $resources . "\nReason: " . $data["message"], 1);
+            }
+        }
+
+        return Entity::fromArray($data, true);
+
+    }
+
+
+}
