@@ -1,0 +1,32 @@
+<?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: clibois
+ * Date: 17/03/20
+ * Time: 18:06
+ */
+
+namespace Viessmann\API;
+
+use Viessmann\Oauth\ViessmannOauthClient;
+class ViessmannFeatureRemoteReader implements ViessmannFeatureReader
+
+{
+
+    private $viessmannClient;
+    public function __construct($viessmannClient)
+    {
+        $this->viessmannClient = $viessmannClient;
+    }
+
+
+    public function getRawJsonData($resources): string
+    {
+        try {
+            return $this->viessmannClient->readData($resources);
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("Unable to get data for feature" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
+        }
+    }
+
+}

@@ -1,0 +1,16 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: thetrueavatar
+ * Date: 8/10/18
+ * Time: 15:14
+ */
+
+namespace Viessmann\API;
+
+
+interface  ViessmannFeatureReader {
+
+    public function getRawJsonData($resources): string;
+
+}

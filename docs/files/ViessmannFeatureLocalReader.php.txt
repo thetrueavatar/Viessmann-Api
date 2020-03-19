@@ -1,0 +1,28 @@
+<?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: clibois
+ * Date: 17/03/20
+ * Time: 18:06
+ */
+
+namespace Viessmann\API;
+
+
+class ViessmannFeatureLocalReader implements ViessmannFeatureReader
+
+{
+    private $features;
+
+    public function __construct($features)
+    {
+        $this->features=$features;
+    }
+
+
+    public function getRawJsonData($resources): string
+    {
+            return $this->features[$resources];
+    }
+
+}
