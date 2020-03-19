@@ -57,11 +57,17 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
         $this->viessmannOauthService = $this->serviceFactory->createService('Viessmann', $this->credentials, $this->storage, $this->scope, new Uri('https://api.viessmann-platform.io'));
         $code = $this->getCode();
         $this->getToken($code);
+        if (!empty($params["installationId"]) && !empty($params["gatewayId"])) {
+            $this->installationId = $params["installationId"];
+            $this->gatewayId = $params["gatewayId"];
+        } else {
         $installationEntity = $this->getInstallationEntity();
         $modelInstallationEntity = $installationEntity->getEntities()[0];
         $this->installationId = $modelInstallationEntity->getProperty('id');
         $modelDevice = $modelInstallationEntity->getEntities()[0];
         $this->gatewayId = $modelDevice->getProperty('serial');
+
+        }
         $this->featureHeatingBaseUrl = "operational-data/installations/" . $this->installationId . "/gateways/" . $this->gatewayId . "/devices/" . ($params["deviceId"] ?? 0) . "/features";
     }
 

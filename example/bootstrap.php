@@ -3,13 +3,15 @@
 use Viessmann\API\ViessmannAPI;
 use Viessmann\API\ViessmannApiException;
 
-include 'phar://' . __DIR__ . '/Viessmann-Api-1.3.0-SNAPSHOT.phar/index.php';
+include 'phar://' . __DIR__ . '/Viessmann-Api-1.4.0-SNAPSHOT.phar/index.php';
 
 
 $credentials = file(__DIR__ . "/credentials.properties");
 $params = [
     "user" => trim("$credentials[0]"),
     "pwd" => trim("$credentials[1]"),
+    "gatewayId" =>trim("$credentials[2]"),
+    "installationId" =>trim("$credentials[3]"),
     "deviceId" => "0",
     "circuitId" => "0"
 ];
