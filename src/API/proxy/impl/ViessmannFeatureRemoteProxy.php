@@ -9,6 +9,7 @@
 namespace Viessmann\API\proxy\impl;
 
 use DateTime;
+use Viessmann\API\ViessmannApiException;
 use Viessmann\Oauth\ViessmannOauthClient;
 use TomPHP\Siren\Entity;
 class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
