@@ -1,3 +1,31 @@
+Version 1.3.0
+--------------
+Addded caching to reduced load is available here : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.0
+As mentionned, Viessmann as set 2 limit to their API:
+120 calls for a time window of 10 minutes
+1450 calls for a time window of 24 hours
+
+I have done a refactoring to add cache. Once you are creating the ViessmanApi object it will do only 4 request and subsequent call on method will use cache. 
+So it's highly recommanded that you merge all your php file in a single one!!!!
+For instance doing in one php file those method call will result in a total of 4 request.
+
+> \<?php
+  include __DIR__ . '/bootstrap.php';
+ echo "Température extérieure " . $viessmannApi->getOutsideTemperature() . “\n”;
+echo "Température boiler " . $viessmannApi->getBoilerTemperature() . “\n”;
+echo "Pente " . $viessmannApi->getSlope() . “\n”;
+echo "Parallèle " . $viessmannApi->getShift() . “\n”;
+echo "Mode chaudière " . $viessmannApi->getActiveMode() . “\n”;
+echo "Programme actif " . $viessmannApi->getActiveProgram() . “\n”;
+echo "Is Heating Burner active ? " . $viessmannApi->isHeatingBurnerActive() . “\n”;//in php false bool is converted into empty string
+echo "Is Dhw mode active ? " . $viessmannApi->isDhwModeActive() . “\n”;
+echo "Température de confort " . $viessmannApi->getComfortProgramTemperature() . “\n”;
+echo "Température écho " . $viessmannApi->getEcoProgramTemperature() . “\n”;
+echo "Température externe " . $viessmannApi->getExternalProgramTemperature() . “\n”;
+echo "Température réduit " . $viessmannApi->getReducedProgramTemperature() . “\n”;
+echo "Est en veille ? " . $viessmannApi->isInStandbyMode() . “\n”;
+echo "Température eau chaude " . $viessmannApi->getHotWaterStorageTemperature() . “\n”;
+
 News FR
 ----
 Une nouvelle version utilisant une cache et évitant un nombre trop important d'appel est disponible en snapshot. Cette version a été développé à l'aveulge(mon compte est bloqué) mais fonctionne en test local. Faites-moi le plus de retour possible ! 
