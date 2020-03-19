@@ -1,6 +1,9 @@
-Version 1.3.0
+Version 1.3.1
 --------------
-Addded caching to reduced load is available here : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.0
+Addded caching to reduced load is available here : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.1
+It's also possible to define gatewayId(3rd line) and installationId(4th line) in the credentials.properties
+This would redude to 3 the request.
+
 As mentionned, Viessmann as set 2 limit to their API:
 120 calls for a time window of 10 minutes
 1450 calls for a time window of 24 hours
