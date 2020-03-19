@@ -34,12 +34,36 @@
 <path fill="none" stroke="#c0c0c0" d="M274,-228C274,-228 749,-228 749,-228 755,-228 761,-234 761,-240 761,-240 761,-342 761,-342 761,-348 755,-354 749,-354 749,-354 274,-354 274,-354 268,-354 262,-348 262,-342 262,-342 262,-240 262,-240 262,-234 268,-228 274,-228"/>
 <text text-anchor="middle" x="511.5" y="-341.2" font-family="Times,serif" font-size="11.00" fill="#c0c0c0">impl</text>
 </g>
-<!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy -->
+<!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureLocalProxy -->
 <g id="node1" class="node">
+<title>\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureLocalProxy</title>
+<polygon fill="none" stroke="#000000" points="749.5,-326 557.5,-326 557.5,-290 749.5,-290 749.5,-326"/>
+<text text-anchor="middle" x="653.5" y="-305.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannFeatureLocalProxy</text>
+</g>
+<!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy -->
+<g id="node3" class="node">
 <title>\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy</title>
 <polygon fill="none" stroke="#000000" points="482,-299 270,-299 270,-263 482,-263 482,-299"/>
 <text text-anchor="start" x="342" y="-284.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">«abstract»</text>
 <text text-anchor="start" x="278" y="-272.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannFeatureAbstractProxy</text>
+</g>
+<!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureLocalProxy&#45;&gt;\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy -->
+<g id="edge1" class="edge">
+<title>\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureLocalProxy&#45;&gt;\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy</title>
+<path fill="none" stroke="#000000" d="M557.2228,-298.6325C536.2763,-296.5945 513.9007,-294.4174 492.2735,-292.3131"/>
+<polygon fill="none" stroke="#000000" points="492.355,-288.8046 482.0631,-291.3196 491.6771,-295.7717 492.355,-288.8046"/>
+</g>
+<!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureRemoteProxy -->
+<g id="node2" class="node">
+<title>\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureRemoteProxy</title>
+<polygon fill="none" stroke="#000000" points="753,-272 554,-272 554,-236 753,-236 753,-272"/>
+<text text-anchor="middle" x="653.5" y="-251.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannFeatureRemoteProxy</text>
+</g>
+<!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureRemoteProxy&#45;&gt;\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy -->
+<g id="edge3" class="edge">
+<title>\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureRemoteProxy&#45;&gt;\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy</title>
+<path fill="none" stroke="#000000" d="M553.7082,-263.7095C533.9022,-265.6365 512.9437,-267.6757 492.6341,-269.6518"/>
+<polygon fill="none" stroke="#000000" points="492.0185,-266.1951 482.4045,-270.6471 492.6965,-273.1622 492.0185,-266.1951"/>
 </g>
 <!-- \\Viessmann\\API\\proxy\\ViessmannFeatureProxy -->
 <g id="node4" class="node">
@@ -48,34 +72,10 @@
 <text text-anchor="middle" x="119" y="-278.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannFeatureProxy</text>
 </g>
 <!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy&#45;&gt;\\Viessmann\\API\\proxy\\ViessmannFeatureProxy -->
-<g id="edge2" class="edge">
+<g id="edge4" class="edge">
 <title>\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy&#45;&gt;\\Viessmann\\API\\proxy\\ViessmannFeatureProxy</title>
 <path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M269.9845,-281C249.497,-281 228.2224,-281 208.3322,-281"/>
 <polygon fill="none" stroke="#000000" points="208.0686,-277.5001 198.0686,-281 208.0685,-284.5001 208.0686,-277.5001"/>
-</g>
-<!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureLocalProxy -->
-<g id="node2" class="node">
-<title>\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureLocalProxy</title>
-<polygon fill="none" stroke="#000000" points="749.5,-326 557.5,-326 557.5,-290 749.5,-290 749.5,-326"/>
-<text text-anchor="middle" x="653.5" y="-305.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannFeatureLocalProxy</text>
-</g>
-<!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureLocalProxy&#45;&gt;\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy -->
-<g id="edge3" class="edge">
-<title>\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureLocalProxy&#45;&gt;\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy</title>
-<path fill="none" stroke="#000000" d="M557.2228,-298.6325C536.2763,-296.5945 513.9007,-294.4174 492.2735,-292.3131"/>
-<polygon fill="none" stroke="#000000" points="492.355,-288.8046 482.0631,-291.3196 491.6771,-295.7717 492.355,-288.8046"/>
-</g>
-<!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureRemoteProxy -->
-<g id="node3" class="node">
-<title>\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureRemoteProxy</title>
-<polygon fill="none" stroke="#000000" points="753,-272 554,-272 554,-236 753,-236 753,-272"/>
-<text text-anchor="middle" x="653.5" y="-251.2" font-family="Courier,monospace" font-size="11.00" fill="#000000">ViessmannFeatureRemoteProxy</text>
-</g>
-<!-- \\Viessmann\\API\\proxy\\impl\\ViessmannFeatureRemoteProxy&#45;&gt;\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy -->
-<g id="edge4" class="edge">
-<title>\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureRemoteProxy&#45;&gt;\\Viessmann\\API\\proxy\\impl\\ViessmannFeatureAbstractProxy</title>
-<path fill="none" stroke="#000000" d="M553.7082,-263.7095C533.9022,-265.6365 512.9437,-267.6757 492.6341,-269.6518"/>
-<polygon fill="none" stroke="#000000" points="492.0185,-266.1951 482.4045,-270.6471 492.6965,-273.1622 492.0185,-266.1951"/>
 </g>
 <!-- \\Viessmann\\API\\ViessmannApiException -->
 <g id="node5" class="node">
@@ -90,7 +90,7 @@
 <text text-anchor="middle" x="376" y="-14.3" font-family="Times,serif" font-size="14.00" fill="#c0c0c0">\Exception</text>
 </g>
 <!-- \\Viessmann\\API\\ViessmannApiException&#45;&gt;\\Exception -->
-<g id="edge1" class="edge">
+<g id="edge2" class="edge">
 <title>\\Viessmann\\API\\ViessmannApiException&#45;&gt;\\Exception</title>
 <path fill="none" stroke="#000000" d="M574.3453,-175.9429C567.3103,-173.322 560.4267,-170.3537 554,-167 491.1541,-134.205 430.6357,-76.1326 398.9166,-43.002"/>
 <polygon fill="none" stroke="#000000" points="401.2721,-40.399 391.8568,-35.5407 396.1874,-45.2101 401.2721,-40.399"/>
