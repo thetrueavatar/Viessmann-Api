@@ -57,11 +57,17 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
         $this->viessmannOauthService = $this->serviceFactory->createService('Viessmann', $this->credentials, $this->storage, $this->scope, new Uri('https://api.viessmann-platform.io'));
         $code = $this->getCode();
         $this->getToken($code);
-        $installationEntity = $this->getInstallationEntity();
-        $modelInstallationEntity = $installationEntity->getEntities()[0];
-        $this->installationId = $modelInstallationEntity->getProperty('id');
-        $modelDevice = $modelInstallationEntity->getEntities()[0];
-        $this->gatewayId = $modelDevice->getProperty('serial');
+        if (!empty($params["installationId"]) && !empty($params["gatewayId"])) {
+            $this->installationId = $params["installationId"];
+            $this->gatewayId = $params["gatewayId"];
+        } else {
+            $installationEntity = $this->getInstallationEntity();
+            $modelInstallationEntity = $installationEntity->getEntities()[0];
+            $this->installationId = $modelInstallationEntity->getProperty('id');
+            $modelDevice = $modelInstallationEntity->getEntities()[0];
+            $this->gatewayId = $modelDevice->getProperty('serial');
+
+        }
         $this->featureHeatingBaseUrl = "operational-data/installations/" . $this->installationId . "/gateways/" . $this->gatewayId . "/devices/" . ($params["deviceId"] ?? 0) . "/features";
     }
 
@@ -122,14 +128,13 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
         try {
             $response = json_decode($this->readData("general-management/installations"), true);
             if (isset($response["statusCode"])) {
-                if($response["statusCode"]=="429"){
-                    $epochtime=(int)($response["extendedPayload"]["limitReset"]/1000);
+                if ($response["statusCode"] == "429") {
+                    $epochtime = (int)($response["extendedPayload"]["limitReset"] / 1000);
                     $dt = new DateTime("@$epochtime");
-                    $resetDate=$dt->format(DateTime::RSS);
-                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: ". $response["message"]." Limit will be reset on ".$resetDate, 2);
-                }
-                else{
-                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: ". $response["message"], 2);
+                    $resetDate = $dt->format(DateTime::RSS);
+                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: " . $response["message"] . " Limit will be reset on " . $resetDate, 2);
+                } else {
+                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: " . $response["message"], 2);
 
                 }
             }

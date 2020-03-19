@@ -1,5 +1,5 @@
 <?php
-const JEEDOM_IP = "192.168.0.2";
+const JEEDOM_IP = "192.168.0.6:32080";
 const JEEDOM_API_KEY = "";
 const CMD_ID = "1022";
 const CMD_ID1 = "1024";
@@ -70,6 +70,6 @@ elseif ($res == "forcedReduced"):
 elseif ($res == "forcedNormal"):
     $res = "ForceNormal";
 endif;
-jeedom_post("" . CMD_ID5 . "", $res);
-jeedom_post("" . CMD_ID6 . "", (int)$viessmannApi->isHeatingBurnerActive());
-jeedom_post("" . CMD_ID7 . "", $viessmannApi->getHotWaterStorageTemperature());
+jeedom_post( CMD_ID5, $res);
+jeedom_post(CMD_ID6, (int)$viessmannApi->isHeatingBurnerActive());
+jeedom_post(CMD_ID7, $viessmannApi->getHotWaterStorageTemperature());

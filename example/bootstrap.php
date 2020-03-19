@@ -10,6 +10,8 @@ $credentials = file(__DIR__ . "/credentials.properties");
 $params = [
     "user" => trim("$credentials[0]"),
     "pwd" => trim("$credentials[1]"),
+    "gatewayId" =>trim("$credentials[2]"),
+    "installationId" =>trim("$credentials[3]"),
     "deviceId" => "0",
     "circuitId" => "0"
 ];
