@@ -23,7 +23,7 @@ abstract class ViessmannFeatureAbstractProxy implements ViessmannFeatureProxy
             $this->viessmannClient = $viessmannClient;
     }
 
-    public function setRawJsonData($feature, $action, $data)
+    public function setData($feature, $action, $data)
     {
         try {
             $response = json_decode($this->viessmannClient->setData($feature, $action, $data), true);

@@ -1,3 +1,3 @@
 <?php
 include __DIR__.'/bootstrap.php';
-echo $viessmannApi->setCurve("-3", "0.7");
+echo $viessmannApi->setCurve("-2", "0.7");
