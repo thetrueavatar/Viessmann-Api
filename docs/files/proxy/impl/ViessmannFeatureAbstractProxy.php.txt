@@ -11,6 +11,7 @@ namespace Viessmann\API\proxy\impl;
 
 use TomPHP\Siren\Entity;
 use Viessmann\API\proxy\ViessmannFeatureProxy;
+use Viessmann\API\ViessmannApiException;
 
 abstract class ViessmannFeatureAbstractProxy implements ViessmannFeatureProxy
 
