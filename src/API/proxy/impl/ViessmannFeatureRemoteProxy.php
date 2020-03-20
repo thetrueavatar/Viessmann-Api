@@ -15,15 +15,16 @@ use TomPHP\Siren\Entity;
 class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
 
 {
-    public function __construct($viessmannClient)
+    public function __construct($viessmannClient,$installationId,$gatewayId)
     {
-        parent::__construct($viessmannClient);
+        parent::__construct($viessmannClient,$installationId,$gatewayId);
+
     }
 
     public function getRawJsonData($resources): string
     {
         try {
-            return $this->viessmannClient->readData($resources);
+            return $this->viessmannClient->readData($this->featureHeatingBaseUrl . "/" . $resources);
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("Unable to get data for feature" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
         }

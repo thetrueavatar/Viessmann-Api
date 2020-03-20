@@ -9,13 +9,11 @@
 namespace Viessmann\Oauth;
 
 
-use DateTime;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Http\Client\CurlClient;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Storage\Session;
 use OAuth\ServiceFactory;
-use TomPHP\Siren\Entity;
 use Viessmann\API\ViessmannApiException;
 
 
@@ -28,9 +26,7 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
     private $scope = ["openid"];
     private $user;
     private $pwd;
-    private $installationId;
-    private $gatewayId;
-    private $featureHeatingBaseUrl;
+
     /**
      * ViessmannOauthClient constructor.
      * @param $viessmannOauthService
@@ -43,10 +39,10 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
 
     const VICARE_OAUTH_CALLBACK_EVEREST = "vicare://oauth-callback/everest";
 
-    public function __construct($params)
+    public function __construct($username,$password)
     {
-        $this->user = $params["user"];
-        $this->pwd = $params["pwd"];
+        $this->user = $username;
+        $this->pwd = $password;
         $this->serviceFactory = new ServiceFactory();
         $httpClient = new CurlClient();
         $httpClient->setCurlParameters([CURLOPT_SSL_VERIFYPEER => false]);
@@ -57,18 +53,6 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
         $this->viessmannOauthService = $this->serviceFactory->createService('Viessmann', $this->credentials, $this->storage, $this->scope, new Uri('https://api.viessmann-platform.io'));
         $code = $this->getCode();
         $this->getToken($code);
-        if (!empty($params["installationId"]) && !empty($params["gatewayId"])) {
-            $this->installationId = $params["installationId"];
-            $this->gatewayId = $params["gatewayId"];
-        } else {
-            $installationEntity = $this->getInstallationEntity();
-            $modelInstallationEntity = $installationEntity->getEntities()[0];
-            $this->installationId = $modelInstallationEntity->getProperty('id');
-            $modelDevice = $modelInstallationEntity->getEntities()[0];
-            $this->gatewayId = $modelDevice->getProperty('serial');
-
-        }
-        $this->featureHeatingBaseUrl = "operational-data/installations/" . $this->installationId . "/gateways/" . $this->gatewayId . "/devices/" . ($params["deviceId"] ?? 0) . "/features";
     }
 
     function getToken($code)
@@ -108,39 +92,17 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
 
     public function readData($resourceUrl): string
     {
-        return $this->viessmannOauthService->request($this->featureHeatingBaseUrl . "/" . $resourceUrl);
+        return $this->viessmannOauthService->request($resourceUrl);
     }
 
-    public function setData($feature, $action, $data)
+    public function setData($url, $data)
     {
         $headers = [
             "Content-Type" => "application/json",
             "Accept" => "application/vnd.siren+json"
         ];
-        return $this->viessmannOauthService->request($this->featureHeatingBaseUrl . "/" . $feature . "/" . $action, 'POST', $data, $headers);
+        return $this->viessmannOauthService->request($url, 'POST', $data, $headers);
     }
 
-    /**
-     * @return string
-     */
-    public function getInstallationEntity(): Entity
-    {
-        try {
-            $response = json_decode($this->readData("general-management/installations"), true);
-            if (isset($response["statusCode"])) {
-                if ($response["statusCode"] == "429") {
-                    $epochtime = (int)($response["extendedPayload"]["limitReset"] / 1000);
-                    $dt = new DateTime("@$epochtime");
-                    $resetDate = $dt->format(DateTime::RSS);
-                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: " . $response["message"] . " Limit will be reset on " . $resetDate, 2);
-                } else {
-                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: " . $response["message"], 2);
 
-                }
-            }
-            return Entity::fromArray($response);
-        } catch (TokenResponseException $e) {
-            throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
-        }
-    }
 }

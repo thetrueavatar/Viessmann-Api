@@ -8,5 +8,5 @@ interface ViessmannOauthClient
 
     public function readData($resourceUrl): string;
 
-    public function setData($feature, $action, $data);
+    public function setData($resourceUrl, $data);
 }
