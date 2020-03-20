@@ -6,7 +6,7 @@ Translated documentation can be found here:
 Ajout d'une cache et refactoring pour réduire la charge sur le serveur Viessmann https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.2
 Il est désormais possible de définir dans le credentials.properties son installationId(3ème ligne) et son gatewayid(4ème ligne) ce qui réduit le nombre de requêtes nécessaire.
 Ces valeurs peuvent être obtenues en appelant les méthodes getGatewayId and getInstallationId avec juste le user/pwd dans credentials.properties.
-Cela réduira le nombre de requête à 3 dont 2 pour l'authentification qui ne compte pas dans le quota.
+Cela réduira le nombre de requête à 3 dont 2 pour l'authentification qui ne comptent pas dans le quota.
 La cache est utilisée pour tout appelle sur l'objet ViessmannApi.
 Le code suivant ne fait donc qu'un seul appel au total:
 
