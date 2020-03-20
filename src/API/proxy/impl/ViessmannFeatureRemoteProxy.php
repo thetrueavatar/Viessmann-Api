@@ -20,7 +20,7 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
         parent::__construct($viessmannClient);
     }
 
-    private function getRawJsonData($resources): string
+    public function getRawJsonData($resources): string
     {
         try {
             return $this->viessmannClient->readData($resources);
@@ -28,7 +28,7 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
             throw new ViessmannApiException("Unable to get data for feature" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
         }
     }
-    public function getEntity($resources): Entity
+    public function getEntity($resources): ?Entity
     {
 
         $data = json_decode($this->getRawJsonData($resources), true);
