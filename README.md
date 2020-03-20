@@ -1,11 +1,24 @@
 Version 1.3.2
 --------------
-Addded caching to reduced load is available here : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.2
-It's also possible to define installationId(3rd line) and gatewayId(4th line) in the credentials.properties.
-To get those value please use the getGatewayId and getInstallationid method.
-This would reduce the total of request to 3. Moreover authentication(2 request) seems to not be taken into account so it will result in only 1 request counting in the quota.
+Ajout d'une cache et refactirubg pour réduire la chargee sur le serveur Viessmann https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.2
+Il est désormais possible de définir dans le credentials.properties son installationId(3ème ligne) et son gatewayid(4ème ligne) ce qui réduit le nombre de requêtes nécessaire.
+Ces valeurs peuvent être obtenues en appelant les méthodes getGatewayId and getInstallationId avec juste le user/pwd dans credentials.properties.
+Cela réduira le nombre de requête à 3 dont 2 pour l'authentification qui ne compte pas dans le quota.
+La cache est utilisée pour tout appelle sur l'objet ViessmannApi.
+Le code suivant ne fait donc qu'un seul appel au total:
+    <?php
 
-As mentionned, Viessmann as set 2 limit to their API:
+ include __DIR__ . '/bootstrap.php';
+
+ $viessmannApi->getOutsideTemperature());
+
+ $viessmannApi->getBoilerTemperature());
+ 
+ $viessmannApi->getSlope());
+ 
+ $viessmannApi->getShift());
+
+Comme déjà expliqué Viessmann limite désormais le nombre de requête sur son service:
 * 120 calls for a time window of 10 minutes
 * 1450 calls for a time window of 24 hours
 
