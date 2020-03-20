@@ -9,6 +9,8 @@ As mentionned, Viessmann as set 2 limit to their API:
 * 120 calls for a time window of 10 minutes
 * 1450 calls for a time window of 24 hours
 
+Translated documentation can be found here:
+- English: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/README-en.md 
 
 If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
 
@@ -44,10 +46,8 @@ Example:
 
 If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
 
-Generail info
+General info
 -----
-
-New Version(previous phar was corrupted) 1.2.1 available here ! : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.2.1
 
 Translated documentation can be found here:
 - English: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/README-en.md 
