@@ -14,21 +14,9 @@ So it's highly recommanded that you merge all your php file in a single one!!!!
 For instance doing in one php file those method call will result in a total of 4 request.
 
 > \<?php
-  include __DIR__ . '/bootstrap.php';
- echo "Température extérieure " . $viessmannApi->getOutsideTemperature() . “\n”;
-echo "Température boiler " . $viessmannApi->getBoilerTemperature() . “\n”;
-echo "Pente " . $viessmannApi->getSlope() . “\n”;
-echo "Parallèle " . $viessmannApi->getShift() . “\n”;
-echo "Mode chaudière " . $viessmannApi->getActiveMode() . “\n”;
-echo "Programme actif " . $viessmannApi->getActiveProgram() . “\n”;
-echo "Is Heating Burner active ? " . $viessmannApi->isHeatingBurnerActive() . “\n”;//in php false bool is converted into empty string
-echo "Is Dhw mode active ? " . $viessmannApi->isDhwModeActive() . “\n”;
-echo "Température de confort " . $viessmannApi->getComfortProgramTemperature() . “\n”;
-echo "Température écho " . $viessmannApi->getEcoProgramTemperature() . “\n”;
-echo "Température externe " . $viessmannApi->getExternalProgramTemperature() . “\n”;
-echo "Température réduit " . $viessmannApi->getReducedProgramTemperature() . “\n”;
-echo "Est en veille ? " . $viessmannApi->isInStandbyMode() . “\n”;
-echo "Température eau chaude " . $viessmannApi->getHotWaterStorageTemperature() . “\n”;
+>  include __DIR__ . '/bootstrap.php';
+> echo "Température extérieure " . $viessmannApi->getOutsideTemperature() . “\n”;
+> echo "Température boiler " . $viessmannApi->getBoilerTemperature() . “\n”;
 
 News FR
 ----
