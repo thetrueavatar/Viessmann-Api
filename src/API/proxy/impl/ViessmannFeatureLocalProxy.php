@@ -46,7 +46,7 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
     {
         $entity = $this->getEntity($resources);
         if ($entity) {
-            return json_encode($entity);
+            return $entity->toJson();
         } else {
             return "{\"statusCode\":404,\"error\":\"Not Found\",\"message\":\"FEATURE_NOT_FOUND\"}";
         }

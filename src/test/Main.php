@@ -3,7 +3,7 @@ include __DIR__ . '/bootstrap.php';
 
 use Viessmann\API\ViessmannFeature;
 
-echo $viessmannApi->getRawJsonData(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW);
+echo $viessmannApi->getRawJsonData(ViessmannFeature::HEATING_BOILER_TEMPERATURE);
 echo $viessmannApi->getRawJsonData(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING);
 echo "Température extérieure " . $viessmannApi->getOutsideTemperature() . "\n";
 echo "Température boiler " . $viessmannApi->getBoilerTemperature() . "\n";
