@@ -9,24 +9,27 @@
 namespace Viessmann\API\proxy\impl;
 
 
-use Viessmann\Oauth\ViessmannOauthClientImpl;
-use Viessmann\API\proxy\ViessmannFeatureProxy;
 use TomPHP\Siren\Entity;
+use Viessmann\API\proxy\ViessmannFeatureProxy;
+
 abstract class ViessmannFeatureAbstractProxy implements ViessmannFeatureProxy
 
 {
 
+    protected $featureHeatingBaseUrl;
     protected $viessmannClient;
 
-    public function __construct($viessmannClient)
+    public function __construct($viessmannClient,$installationId,$gatewayId,$deviceId=0)
     {
-            $this->viessmannClient = $viessmannClient;
+        $this->viessmannClient = $viessmannClient;
+
+        $this->featureHeatingBaseUrl = "operational-data/installations/" . $installationId . "/gateways/" . $gatewayId . "/devices/" . $deviceId . "/features";
     }
 
     public function setData($feature, $action, $data)
     {
         try {
-            $response = json_decode($this->viessmannClient->setData($feature, $action, $data), true);
+            $response = json_decode($this->viessmannClient->setData($this->featureHeatingBaseUrl . "/" . $feature . "/" . $action, $data), true);
             if (isset($response["statusCode"])) {
                 throw new ViessmannApiException("\n\t Unable to set data for feature" . $feature . " and action " . $action . " and data" . $data . "\n\t Reason: " . $response["message"], 1);
             }
@@ -34,5 +37,4 @@ abstract class ViessmannFeatureAbstractProxy implements ViessmannFeatureProxy
             throw new ViessmannApiException("\n\t Unable to set data for feature" . $feature . " and action " . $action . " and data" . $data . " \n\t Reason: " . $e->getMessage(), 1, $e);
         }
     }
-
 }

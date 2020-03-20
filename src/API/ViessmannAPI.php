@@ -2,6 +2,7 @@
 
 namespace Viessmann\API;
 
+use TomPHP\Siren\Entity;
 use Viessmann\API\proxy\impl\ViessmannFeatureLocalProxy;
 use Viessmann\API\proxy\impl\ViessmannFeatureRemoteProxy;
 use Viessmann\Oauth\ViessmannOauthClientImpl;
@@ -39,25 +40,79 @@ final class ViessmannAPI
     private $circuitId;
     private $viessmannFeatureProxy;
     const STATISTICS = "statistics";
-
+    private $viessmannOauthClient;
+    const OPERATIONAL_DATA_INSTALLATIONS = "operational-data/installations/";
+    private $installationId;
+    private $gatewayId;
     /**
      * ViessmannAPI constructor.
      */
     public function __construct($params, $useCache = true, $viessmannOauthClient = NULL)
     {
         $this->circuitId = $params["circuitId"] ?? 0;
-        $viessmannOauthClient = $viessmannOauthClient ?? new ViessmannOauthClientImpl($params);
-        $this->viessmannFeatureProxy = new ViessmannFeatureRemoteProxy($viessmannOauthClient);
+        $this->viessmannOauthClient = $viessmannOauthClient ?? new ViessmannOauthClientImpl($params["user"],$params["pwd"]);
+        if (!empty($params["installationId"]) && !empty($params["gatewayId"])) {
+            $this->installationId = $params["installationId"];
+            $this->gatewayId = $params["gatewayId"];
+        } else {
+            $installationEntity = $this->getInstallationEntity();
+            $modelInstallationEntity = $installationEntity->getEntities()[0];
+            $this->installationId = $modelInstallationEntity->getProperty('id');
+            $modelDevice = $modelInstallationEntity->getEntities()[0];
+            $this->gatewayId = $modelDevice->getProperty('serial');
+
+        }
+        $this->viessmannFeatureProxy = new ViessmannFeatureRemoteProxy($this->viessmannOauthClient,$this->installationId,$this->gatewayId);
+
         if ($useCache) {
             $features = $this->viessmannFeatureProxy->getEntity("");
-            $this->viessmannFeatureProxy = new ViessmannFeatureLocalProxy($features, $viessmannOauthClient);
+            $this->viessmannFeatureProxy = new ViessmannFeatureLocalProxy($features, $this->viessmannOauthClient,$this->installationId,$this->gatewayId);
         }
     }
+    /**
+     * @return string
+     */
+    public function getInstallationEntity(): ?Entity
+    {
+        try {
+            $response = json_decode($this->viessmannOauthClient->readData("general-management/installations"), true);
+            if (isset($response["statusCode"])) {
+                if($response["statusCode"]=="429"){
+                    $epochtime=(int)($response["extendedPayload"]["limitReset"]/1000);
+                    $dt = new DateTime("@$epochtime");
+                    $resetDate=$dt->format(DateTime::RSS);
+                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: ". $response["message"]." Limit will be reset on ".$resetDate, 2);
+                }
+                else{
+                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: ". $response["message"], 2);
 
+                }
+            }
+            return Entity::fromArray($response);
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
+        }
+    }
     public function setRawJsonData($feature, $action, $data)
     {
         $this->viessmannFeatureProxy->setData($feature, $action, $data);
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInstallationId()
+    {
+        return $this->installationId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGatewayId()
+    {
+        return $this->gatewayId;
     }
 
     public function getRawJsonData($resources): string
