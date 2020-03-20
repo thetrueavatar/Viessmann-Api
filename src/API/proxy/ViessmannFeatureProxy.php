@@ -11,7 +11,7 @@ namespace Viessmann\API\proxy;
 use TomPHP\Siren\Entity;
 
 interface  ViessmannFeatureProxy {
-
-    public function getEntity($resources): Entity;
+    public function getRawJsonData($resources);
+    public function getEntity($resources): ?Entity;
     public function setData($feature, $action, $data);
 }

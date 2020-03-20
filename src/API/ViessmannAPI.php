@@ -2,12 +2,10 @@
 
 namespace Viessmann\API;
 
-use OAuth\Common\Http\Exception\TokenResponseException;
-use TomPHP\Siren\Entity;
-use Viessmann\Oauth\ViessmannOauthClientImpl;
 use Viessmann\API\proxy\impl\ViessmannFeatureLocalProxy;
 use Viessmann\API\proxy\impl\ViessmannFeatureRemoteProxy;
-use Viessmann\API\proxy\ViessmannFeatureProxy;
+use Viessmann\Oauth\ViessmannOauthClientImpl;
+
 final class ViessmannAPI
 {
     const HEATING_BURNER = "heating.burner";
@@ -52,11 +50,20 @@ final class ViessmannAPI
         $this->viessmannFeatureProxy = new ViessmannFeatureRemoteProxy($viessmannOauthClient);
         if ($useCache) {
             $features = $this->viessmannFeatureProxy->getEntity("");
-            $this->viessmannFeatureProxy = new ViessmannFeatureLocalProxy($features,$viessmannOauthClient);
+            $this->viessmannFeatureProxy = new ViessmannFeatureLocalProxy($features, $viessmannOauthClient);
         }
     }
 
+    public function setRawJsonData($feature, $action, $data)
+    {
+        $this->viessmannFeatureProxy->setData($feature, $action, $data);
 
+    }
+
+    public function getRawJsonData($resources): string
+    {
+        return $this->viessmannFeatureProxy->getRawJsonData($resources);
+    }
 
     /**
      * @return String containing a list of all the features having either a property either an action on it

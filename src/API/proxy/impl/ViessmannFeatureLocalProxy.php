@@ -7,6 +7,7 @@
  */
 
 namespace Viessmann\API\proxy\impl;
+
 use TomPHP\Siren\Entity;
 
 class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
@@ -14,24 +15,40 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
 {
     private $features;
 
-    public function __construct($features,$viessmannOauthClient)
+    public function __construct($features, $viessmannOauthClient)
     {
         parent::__construct($viessmannOauthClient);
-        $this->features=$this->getAllFeaturesInformation($features);
+        $this->features = $this->getAllFeaturesInformation($features);
     }
+
     private function getAllFeaturesInformation($features): array
     {
-        $classes=array();
+        $classes = array();
         foreach ($features->getEntities() as $feature) {
-            if ($feature->getProperties()!=NULL){
-                $classes[$feature->getClasses()[0]]= $feature;
+            if ($feature->getProperties() != NULL) {
+                $classes[$feature->getClasses()[0]] = $feature;
             }
         }
         return $classes;
     }
 
-    public function getEntity($resources): Entity
+    public function getEntity($resources): ?Entity
     {
-        return $this->features[$resources];
+        if (!empty($this->features[$resources])) {
+            return $this->features[$resources];
+        } else {
+            return NULL;
+        }
+
+    }
+
+    public function getRawJsonData($resources)
+    {
+        $entity = $this->getEntity($resources);
+        if ($entity) {
+            return json_encode($entity);
+        } else {
+            return "{\"statusCode\":404,\"error\":\"Not Found\",\"message\":\"FEATURE_NOT_FOUND\"}";
+        }
     }
 }
