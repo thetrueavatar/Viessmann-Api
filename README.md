@@ -1,5 +1,8 @@
 Version 1.3.2
 --------------
+Translated documentation can be found here:
+- English: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/README-en.md 
+
 Ajout d'une cache et refactoring pour réduire la chargee sur le serveur Viessmann https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.2
 Il est désormais possible de définir dans le credentials.properties son installationId(3ème ligne) et son gatewayid(4ème ligne) ce qui réduit le nombre de requêtes nécessaire.
 Ces valeurs peuvent être obtenues en appelant les méthodes getGatewayId and getInstallationId avec juste le user/pwd dans credentials.properties.
@@ -22,9 +25,6 @@ Le code suivant ne fait donc qu'un seul appel au total:
 Comme déjà expliqué Viessmann limite désormais le nombre de requête sur son service:
 * 120 calls for a time window of 10 minutes
 * 1450 calls for a time window of 24 hours
-
-Translated documentation can be found here:
-- English: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/README-en.md 
 
 If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
 
