@@ -6,6 +6,7 @@ Ces valeurs peuvent être obtenues en appelant les méthodes getGatewayId and ge
 Cela réduira le nombre de requête à 3 dont 2 pour l'authentification qui ne compte pas dans le quota.
 La cache est utilisée pour tout appelle sur l'objet ViessmannApi.
 Le code suivant ne fait donc qu'un seul appel au total:
+
     <?php
 
  include __DIR__ . '/bootstrap.php';
