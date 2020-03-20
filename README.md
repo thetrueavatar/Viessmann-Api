@@ -6,8 +6,8 @@ To get those value please use the getGatewayId and getInstallationid method.
 This would reduce the total of request to 3. Moreover authentication(2 request) seems to not be taken into account so it will result in only 1 request counting in the quota.
 
 As mentionned, Viessmann as set 2 limit to their API:
-120 calls for a time window of 10 minutes
-1450 calls for a time window of 24 hours
+* 120 calls for a time window of 10 minutes
+* 1450 calls for a time window of 24 hours
 
 News FR
 ----
