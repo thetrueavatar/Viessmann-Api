@@ -11,16 +11,11 @@ La cache est utilisée pour tout appelle sur l'objet ViessmannApi.
 Le code suivant ne fait donc qu'un seul appel au total:
 
     <?php
-
- include __DIR__ . '/bootstrap.php';
-
- $viessmannApi->getOutsideTemperature());
-
- $viessmannApi->getBoilerTemperature());
- 
- $viessmannApi->getSlope());
- 
- $viessmannApi->getShift());
+    include __DIR__ . '/bootstrap.php';
+    $viessmannApi->getOutsideTemperature());
+    $viessmannApi->getBoilerTemperature());
+    $viessmannApi->getSlope());
+    $viessmannApi->getShift());
 
 Comme déjà expliqué Viessmann limite désormais le nombre de requête sur son service:
 * 120 calls for a time window of 10 minutes
@@ -42,24 +37,6 @@ Exemple:
  
  $viessmannApi->getShift());
  `
-
-News EN
-----
-A new version is available in snaphost that provide a caching to avoid account to be blocked. This version has been developed while I don't have access to my own account so please provide me feedback asap.
-
-This cache only works if you do all the call in the same php file.
-Example:
-
- $viessmannApi->getOutsideTemperature());
-
- $viessmannApi->getBoilerTemperature());
- 
- $viessmannApi->getSlope());
- 
- $viessmannApi->getShift());
-
-If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
-
 General info
 -----
 
