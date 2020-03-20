@@ -19,54 +19,7 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
-    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->    <script type="text/javascript">
-        function loadExternalCodeSnippets() {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-                var src = pre.getAttribute('data-src');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
-
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
-
-                pre.textContent = '';
-
-                code.textContent = 'Loading…';
-
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-
-                            Prism.highlightElement(code);
-                        }
-                        else if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                        }
-                        else {
-                            code.textContent = '✖ Error: File does not exist or is empty';
-                        }
-                    }
-                };
-
-                xhr.send(null);
-            });
-        }
-
-        $(document).ready(function(){
-            loadExternalCodeSnippets();
-        });
-        $('#source-view').on('shown', function () {
-            loadExternalCodeSnippets();
-        })
-    </script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -131,29 +84,29 @@
 <div id="___" class="container-fluid">    <section class="row-fluid">
         <div class="span2 sidebar">    <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
-            <div class="accordion-heading">                    <a class="accordion-toggle" data-toggle="collapse" data-target="#namespace-247546332"></a>                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            <div class="accordion-heading">                    <a class="accordion-toggle" data-toggle="collapse" data-target="#namespace-2121236833"></a>                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-247546332" class="accordion-body collapsein">
+            <div id="namespace-2121236833" class="accordion-body collapsein">
                 <div class="accordion-inner">    <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
-            <div class="accordion-heading">                    <a class="accordion-togglecollapsed" data-toggle="collapse" data-target="#namespace-1467199532"></a>                <a href="../namespaces/Viessmann.html" style="margin-left: 30px; padding-left: 0">Viessmann</a>
+            <div class="accordion-heading">                    <a class="accordion-togglecollapsed" data-toggle="collapse" data-target="#namespace-517114060"></a>                <a href="../namespaces/Viessmann.html" style="margin-left: 30px; padding-left: 0">Viessmann</a>
             </div>
-            <div id="namespace-1467199532" class="accordion-body collapse">
+            <div id="namespace-517114060" class="accordion-body collapse">
                 <div class="accordion-inner">    <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
-            <div class="accordion-heading">                    <a class="accordion-togglecollapsed" data-toggle="collapse" data-target="#namespace-126916441"></a>                <a href="../namespaces/Viessmann.API.html" style="margin-left: 30px; padding-left: 0">API</a>
+            <div class="accordion-heading">                    <a class="accordion-togglecollapsed" data-toggle="collapse" data-target="#namespace-564088666"></a>                <a href="../namespaces/Viessmann.API.html" style="margin-left: 30px; padding-left: 0">API</a>
             </div>
-            <div id="namespace-126916441" class="accordion-body collapse">
+            <div id="namespace-564088666" class="accordion-body collapse">
                 <div class="accordion-inner">    <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
-            <div class="accordion-heading">                    <a class="accordion-togglecollapsed" data-toggle="collapse" data-target="#namespace-1351038526"></a>                <a href="../namespaces/Viessmann.API.proxy.html" style="margin-left: 30px; padding-left: 0">proxy</a>
+            <div class="accordion-heading">                    <a class="accordion-togglecollapsed" data-toggle="collapse" data-target="#namespace-1618360272"></a>                <a href="../namespaces/Viessmann.API.proxy.html" style="margin-left: 30px; padding-left: 0">proxy</a>
             </div>
-            <div id="namespace-1351038526" class="accordion-body collapse">
+            <div id="namespace-1618360272" class="accordion-body collapse">
                 <div class="accordion-inner">    <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
-            <div class="accordion-heading">                    <a class="accordion-togglecollapsed" data-toggle="collapse" data-target="#namespace-1302276795"></a>                <a href="../namespaces/Viessmann.API.proxy.impl.html" style="margin-left: 30px; padding-left: 0">impl</a>
+            <div class="accordion-heading">                    <a class="accordion-togglecollapsed" data-toggle="collapse" data-target="#namespace-1345297484"></a>                <a href="../namespaces/Viessmann.API.proxy.impl.html" style="margin-left: 30px; padding-left: 0">impl</a>
             </div>
-            <div id="namespace-1302276795" class="accordion-body collapse">
+            <div id="namespace-1345297484" class="accordion-body collapse">
                 <div class="accordion-inner">
                     <ul>                            <li class="class"><a href="../classes/Viessmann.API.proxy.impl.ViessmannFeatureAbstractProxy.html">ViessmannFeatureAbstractProxy</a></li>                    </ul>
                 </div>
@@ -185,40 +138,28 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content file">
-                    <nav>                    </nav>
-
-                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
-                    <h1><small></small>ViessmannFeature.php</h1>
-                    <p><em>Created by PhpStorm.</em></p><p>User: thetrueavatar
-Date: 8/10/18
-Time: 15:14</p>                    <h2>Classes</h2>
+                <div class="span8 content namespace">
+                    <nav><a href="../namespaces/Viessmann.API.proxy.html">\Viessmann\API\proxy</a>                    </nav>
+                    <h1><small>\Viessmann\API\proxy</small>impl</h1>                    <h2>Classes</h2>
                     <table class="table table-hover">                        <tr>
-                            <td><a href="../classes/Viessmann.API.ViessmannFeature.html">ViessmannFeature</a></td>
+                            <td><a href="../classes/Viessmann.API.proxy.impl.ViessmannFeatureAbstractProxy.html">ViessmannFeatureAbstractProxy</a></td>
                             <td><em></em></td>
                         </tr>                    </table>                </div>
 
                 <aside class="span4 detailsbar">
-                    <dl>                            <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                    <dl>
+                        <dt>Namespace hierarchy</dt>
+                        <dd class="hierarchy">
+                                    <div class="namespace-wrapper"><a href="../namespaces/default.html">\</a></div>
+                                    <div class="namespace-wrapper"><a href="../namespaces/Viessmann.html">\Viessmann</a></div>
+                                    <div class="namespace-wrapper"><a href="../namespaces/Viessmann.API.html">\Viessmann\API</a></div>
+                                    <div class="namespace-wrapper"><a href="../namespaces/Viessmann.API.proxy.html">\Viessmann\API\proxy</a></div>                            <div class="namespace-wrapper">\Viessmann\API\proxy\impl</div>
+                        </dd>
                     </dl>
-                    <h2>Tags</h2>
-                    <table class="table table-condensed">                            <tr><td colspan="2"><em>None found</em></td></tr>                    </table>
-
                 </aside>
             </div>
         </div>
     </section>
-
-    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label"></h3>
-        </div>
-        <div class="modal-body">
-            <pre data-src="../files/ViessmannFeature.php.txt" class="language-php line-numbers"></pre>
-        </div>
-    </div>
     <footer class="row-fluid">
         <section class="span10 offset2">
             <section class="row-fluid">
