@@ -37,7 +37,8 @@ Exemple:
  $viessmannApi->getSlope());
  
  $viessmannApi->getShift());
- `
+ 
+
 General info
 -----
 
