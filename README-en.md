@@ -1,5 +1,6 @@
 Version 1.3.2
 --------------
+Warning. This version requires php and php-curl 7.1 to support "?".
 Added caching to reduced load is available here : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.2
 It's also possible to define installationId(3rd line) and gatewayId(4th line) in the credentials.properties.
 To get those value please use the getGatewayId and getInstallationid method.
