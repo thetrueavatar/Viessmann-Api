@@ -573,13 +573,62 @@ final class ViessmannAPI
 
 
     /**
-     * @param null $circuitId
      * @return string heating solar sensors temperature collector
      * @throws ViessmannApiException
      */
-    public function getHeatingSolarSensorsTemperatureCollector($circuitId = NULL): string
+    public function getHeatingSolarSensorsTemperatureCollector(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_SENSORS_TEMPERATURE_COLLECTOR)->getProperty("value")["value"];
+    }
+
+
+    /**
+     * @return string heating solar power cumulative produced in kWh
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSolarPowerCumulativeProduced(): string
+    {
+        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_POWER_CUMULATIVEPRODUCED)->getProperty("value")["value"];
+    }
+
+
+    /**
+     * @return string heating solar sensors temperature dhw
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSolarSensorsTemperatureDhw(): string
+    {
+        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_SENSORS_TEMPERATURE_DHW)->getProperty("value")["value"];
+    }
+
+
+    /**
+     * @return string heating solar system operational hours
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSolarStatistics(): string
+    {
+        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_STATISTICS)->getProperty("hours")["value"];
+    }
+
+
+    /**
+     * @return string off/on for recharge suppression
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSolarRechargesuppression(): string
+    {
+        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_RECHARGESUPPRESSION)->getProperty("status")["value"];
+    }
+
+    
+    /**
+     * @return string off/on for solar pump circuit
+     * @throws ViessmannApiException
+     */
+    public function getHeatingSolarPumpsCircuit(): string
+    {
+        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_PUMPS_CIRCUIT)->getProperty("status")["value"];
     }
 
 

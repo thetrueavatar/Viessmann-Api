@@ -1,29 +1,32 @@
 {
-    "apiVersion": 1,
-    "isEnabled": true,
-    "isReady": true,
-    "gatewayId": "7123456789123456",
-    "timestamp": "2017-12-22T12:19:05.613Z",
-    "uri": "/v1/gateways/7123456789123456/devices/0/features/heating.solar.sensors.temperature.dhw",
-    "feature": "heating.solar.sensors.temperature.dhw",
-    "properties": {
-        "value": {
-            "value": 17,
-            "type": "number"
-        },
-        "status": {
-            "value": "connected",
-            "type": "string",
-            "description": {
-                "general": "Shows the status of sensor",
-                "statuses": {
-                    "connected": ""
-                }
+    "links": [
+        {"rel": ["self"], "href": "https://api.viessmann-platform.io/operational-data/v1/installations/123456/gateways/1234567890123456/devices/0/features/heating.solar.sensors.temperature.dhw"},
+        {"rel": ["up"], "href": "https://api.viessmann-platform.io/operational-data/v1/installations/123456/gateways/1234567890123456/devices/0/features"},
+        {
+            "rel": ["http://schema.viessmann.com/link-relations#live-updates", "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates"],
+            "href": "/operational-data/installations/123456/gateways/1234567890123456/devices/0/features/heating.solar.sensors.temperature.dhw"
+        }
+    ],
+    "class": ["heating.solar.sensors.temperature.dhw", "feature"],
+    "properties": {"value": {"type": "number", "value": 20.8}, "status": {"type": "string", "value": "connected"}},
+    "entities": [
+        {
+            "rel": [
+                "http://schema.viessmann.com/link-relations#feature-meta-information",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-feature-meta-information",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+            ],
+            "properties": {
+                "apiVersion": 1,
+                "isEnabled": true,
+                "isReady": true,
+                "gatewayId": "1234567890123456",
+                "feature": "heating.solar.sensors.temperature.dhw",
+                "uri": "/v1/gateways/1234567890123456/devices/0/features/heating.solar.sensors.temperature.dhw",
+                "deviceId": "0",
+                "timestamp": "2020-03-21T13:38:09.938Z"
             }
         }
-    },
-    "commands": {},
-    "components": [],
-    "deviceId": "0",
-    "description": "Shows solar dhw temperature in °C"
+    ],
+    "actions": []
 }
