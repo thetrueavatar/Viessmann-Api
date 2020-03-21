@@ -1,5 +1,6 @@
 Version 1.3.2
 --------------
+Attention, cette version nécessite php et php-curl 7.1 pour supporter l'utilisation du "?".
 Translated documentation can be found here:
 - English: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/README-en.md 
 
