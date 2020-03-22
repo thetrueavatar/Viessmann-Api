@@ -128,5 +128,10 @@ final class ViessmannFeature
     const HEATING_POWER_CONSUMPTION = "heating.power.consumption";
     const HEATING_SOLAR_POWER_PRODUCTION = "heating.solar.power.production";
     const HEATING_SOLAR_SENSORS_TEMPERATURE_COLLECTOR = "heating.solar.sensors.temperature.collector"; 
+    const HEATING_SOLAR_PUMPS_CIRCUIT = "heating.solar.pumps.circuit";
+    const HEATING_SOLAR_STATISTICS = "heating.solar.statistics";
+    const HEATING_SOLAR_SENSORS_TEMPERATURE_DHW = "heating.solar.sensors.temperature.dhw";
+    const HEATING_SOLAR_POWER_CUMULATIVEPRODUCED = "heating.solar.power.cumulativeProduced";
+    const HEATING_SOLAR_RECHARGESUPPRESSION = "heating.solar.rechargeSuppression";
 }
 

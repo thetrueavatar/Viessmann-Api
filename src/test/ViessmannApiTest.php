@@ -6,6 +6,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 use PHPUnit\Framework\TestCase;
 use Viessmann\API\ViessmannAPI;
 use Viessmann\API\ViessmannFeatureRemoteProxy;
+use Viessmann\test\ViessmannFeatureRemoteMockProxy;
 use Viessmann\test\ViessmannMockClient;
 
 
@@ -18,7 +19,8 @@ class ViessmannApiTest extends TestCase
      */
     public function setUp()
     {
-        $this->viessmannApi = new ViessmannAPI(array(),$useCache = false, new ViessmannMockClient());
+        $param=["user"=>"user","pwd"=>"pwd","installationId"=>"installationId","gatewayId"=>"gatewayId"];
+        $this->viessmannApi = new ViessmannAPI($param,$useCache = false, new ViessmannFeatureRemoteMockProxy(),new ViessmannMockClient());
     }
 
     public function testGetHeatingGasConsumption()
@@ -295,10 +297,13 @@ class ViessmannApiTest extends TestCase
         self::assertNotNull($getHeatingSecondaryCircuitTemperatureReturn);
     }
 
-    public function testGetAllFeaturesInformation()
+    public function testGetgetHeatingSolarMethods()
     {
-        echo $this->viessmannApi->getSlope();
-        self::assertTrue();
+        self::assertNotEmpty($this->viessmannApi->getHeatingSolarPumpsCircuit());
+        self::assertNotEmpty($this->viessmannApi->getHeatingSolarRechargesuppression());
+        self::assertNotEmpty($this->viessmannApi->getHeatingSolarStatistics());
+        self::assertNotEmpty($this->viessmannApi->getHeatingSolarSensorsTemperatureDhw());
+        self::assertNotEmpty($this->viessmannApi->getHeatingSolarPowerCumulativeProduced());
     }
 
 

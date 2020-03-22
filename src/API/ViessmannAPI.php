@@ -47,10 +47,10 @@ final class ViessmannAPI
     /**
      * ViessmannAPI constructor.
      */
-    public function __construct($params, $useCache = true, $viessmannOauthClient = NULL)
+    public function __construct($params, $useCache = true, $viessmannRemoteFeatureProxy = NULL,$viessmannOauthClient=NULL)
     {
         $this->circuitId = $params["circuitId"] ?? 0;
-        $this->viessmannOauthClient = $viessmannOauthClient ?? new ViessmannOauthClientImpl($params["user"],$params["pwd"]);
+        $this->viessmannOauthClient =$viessmannOauthClient??  new ViessmannOauthClientImpl($params["user"],$params["pwd"]);
         if (!empty($params["installationId"]) && !empty($params["gatewayId"])) {
             $this->installationId = $params["installationId"];
             $this->gatewayId = $params["gatewayId"];
@@ -62,7 +62,7 @@ final class ViessmannAPI
             $this->gatewayId = $modelDevice->getProperty('serial');
 
         }
-        $this->viessmannFeatureProxy = new ViessmannFeatureRemoteProxy($this->viessmannOauthClient,$this->installationId,$this->gatewayId);
+        $this->viessmannFeatureProxy = $viessmannRemoteFeatureProxy??new ViessmannFeatureRemoteProxy($this->viessmannOauthClient,$this->installationId,$this->gatewayId);
 
         if ($useCache) {
             $features = $this->viessmannFeatureProxy->getEntity("");
