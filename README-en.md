@@ -1,3 +1,9 @@
+Version 1.3.3
+--------------
+
+Added missing DateTime import.
+https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.3
+
 Version 1.3.2
 --------------
 Warning. This version requires php and php-curl 7.1 to support "?".
