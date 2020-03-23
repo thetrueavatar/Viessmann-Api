@@ -1,3 +1,7 @@
+Version 1.3.3
+--------------
+Ajout d'un import DateTime manquant créant une erreur lors du traitement du message de ban de Viessmann:
+https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.3
 Version 1.3.2
 --------------
 Attention, cette version nécessite php et php-curl 7.1 pour supporter l'utilisation du "?".
