@@ -2,6 +2,7 @@
 
 namespace Viessmann\API;
 
+use DateTime;
 use TomPHP\Siren\Entity;
 use Viessmann\API\proxy\impl\ViessmannFeatureLocalProxy;
 use Viessmann\API\proxy\impl\ViessmannFeatureRemoteProxy;
