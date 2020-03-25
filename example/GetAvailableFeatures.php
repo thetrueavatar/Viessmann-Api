@@ -1,4 +1,4 @@
 <?php
-include __DIR__.'/bootstrap-dev.php';
+include __DIR__.'/bootstrap.php';
 echo $viessmannApi->getAvailableFeatures();
 
