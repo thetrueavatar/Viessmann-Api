@@ -12,6 +12,6 @@ use TomPHP\Siren\Entity;
 
 interface  ViessmannFeatureProxy {
     public function getRawJsonData($resources);
-    public function getEntity($resources): ?Entity;
+    public function getEntity($resources);
     public function setData($feature, $action, $data);
 }

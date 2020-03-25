@@ -26,7 +26,7 @@ class ViessmannFeatureRemoteMockProxy implements ViessmannFeatureProxy
         return file_get_contents($this->resourcesDir . $resources . ".json");
 
     }
-    public function getEntity($resources): ?Entity
+    public function getEntity($resources)
     {
 
         $data = json_decode($this->getRawJsonData($resources), true);
