@@ -29,7 +29,7 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
             throw new ViessmannApiException("Unable to get data for feature" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
         }
     }
-    public function getEntity($resources): ?Entity
+    public function getEntity($resources)
     {
 
         $data = json_decode($this->getRawJsonData($resources), true);
