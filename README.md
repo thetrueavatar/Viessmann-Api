@@ -1,3 +1,8 @@
+Version 1.3.4
+-------------
+Suppression de la dépendance sur php 7.1 et fix de GetAvailableFeatures
+https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.4
+
 Version 1.3.3
 --------------
 
