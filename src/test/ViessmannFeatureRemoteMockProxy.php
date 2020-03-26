@@ -6,28 +6,25 @@
  * Time: 18:06
  */
 
-namespace Viessmann\API\proxy\impl;
+namespace Viessmann\test;
 
 use DateTime;
+use Viessmann\API\proxy\ViessmannFeatureProxy;
 use Viessmann\API\ViessmannApiException;
 use Viessmann\Oauth\ViessmannOauthClient;
 use TomPHP\Siren\Entity;
-class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
+class ViessmannFeatureRemoteMockProxy implements ViessmannFeatureProxy
 
 {
-    public function __construct($viessmannClient,$installationId,$gatewayId)
+    public function __construct($resourcesDir = __DIR__ . "/resources/features/heating/")
     {
-        parent::__construct($viessmannClient,$installationId,$gatewayId);
-
+        $this->resourcesDir = $resourcesDir;
     }
 
     public function getRawJsonData($resources): string
     {
-        try {
-            return $this->viessmannClient->readData($this->featureHeatingBaseUrl . "/" . $resources);
-        } catch (TokenResponseException $e) {
-            throw new ViessmannApiException("Unable to get data for feature" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
-        }
+        return file_get_contents($this->resourcesDir . $resources . ".json");
+
     }
     public function getEntity($resources)
     {
@@ -35,7 +32,7 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
         $data = json_decode($this->getRawJsonData($resources), true);
         if (isset($data["statusCode"])) {
             if($data["statusCode"]=="429"){
-                $epochtime=(int)($response["extendedPayload"]["limitReset"]/1000);
+                $epochtime=(int)($resources["extendedPayload"]["limitReset"]/1000);
                 $dt = new DateTime("@$epochtime");
                 $resetDate=$dt->format(DateTime::RSS);
                 throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: ". $data["message"]." Limit will be reset on ".$resetDate, 2);
@@ -49,4 +46,8 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
     }
 
 
+    public function setData($feature, $action, $data)
+    {
+        throw new ViessmannApiException("Not implmented for test");
+    }
 }

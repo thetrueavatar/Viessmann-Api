@@ -3,6 +3,7 @@
 namespace Viessmann\API;
 
 use DateTime;
+use function MongoDB\BSON\toJSON;
 use TomPHP\Siren\Entity;
 use Viessmann\API\proxy\impl\ViessmannFeatureLocalProxy;
 use Viessmann\API\proxy\impl\ViessmannFeatureRemoteProxy;
@@ -73,7 +74,7 @@ final class ViessmannAPI
     /**
      * @return string
      */
-    public function getInstallationEntity(): ?Entity
+    public function getInstallationEntity()
     {
         try {
             $response = json_decode($this->viessmannOauthClient->readData("general-management/installations"), true);
@@ -125,16 +126,10 @@ final class ViessmannAPI
      * @return String containing a list of all the features having either a property either an action on it
      */
     public function getAvailableFeatures(): String
-    {
-        $features = $this->viessmannFeatureProxy->getEntity("");
-        $classes = "";
 
-        foreach ($features->getEntities() as $feature) {
-            if ($feature->getActions() != NULL || $feature->getProperties() != NULL) {
-                $classes = $classes . ($feature->getClasses()[0]) . "\n";
-            }
-        }
-        return $classes;
+    {
+        $features= json_decode($this->viessmannFeatureProxy->getRawJsonData(""),true);
+        return implode(",\n", $features);
     }
 
 

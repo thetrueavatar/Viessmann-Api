@@ -3,7 +3,7 @@
 use Viessmann\API\ViessmannAPI;
 use Viessmann\API\ViessmannApiException;
 
-include 'phar://' . __DIR__ . '/Viessmann-Api-1.3.3.phar/index.php';
+include 'phar://' . __DIR__ . '/Viessmann-Api-1.3.4.phar/index.php';
 
 
 $credentials = file(__DIR__ . "/credentials.properties");
