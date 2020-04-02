@@ -3,7 +3,6 @@
 namespace Viessmann\API;
 
 use DateTime;
-use function MongoDB\BSON\toJSON;
 use TomPHP\Siren\Entity;
 use Viessmann\API\proxy\impl\ViessmannFeatureLocalProxy;
 use Viessmann\API\proxy\impl\ViessmannFeatureRemoteProxy;
@@ -46,13 +45,14 @@ final class ViessmannAPI
     const OPERATIONAL_DATA_INSTALLATIONS = "operational-data/installations/";
     private $installationId;
     private $gatewayId;
+
     /**
      * ViessmannAPI constructor.
      */
-    public function __construct($params, $useCache = true, $viessmannRemoteFeatureProxy = NULL,$viessmannOauthClient=NULL)
+    public function __construct($params, $useCache = true, $viessmannRemoteFeatureProxy = NULL, $viessmannOauthClient = NULL)
     {
         $this->circuitId = $params["circuitId"] ?? 0;
-        $this->viessmannOauthClient =$viessmannOauthClient??  new ViessmannOauthClientImpl($params["user"],$params["pwd"]);
+        $this->viessmannOauthClient = $viessmannOauthClient ?? new ViessmannOauthClientImpl($params["user"], $params["pwd"]);
         if (!empty($params["installationId"]) && !empty($params["gatewayId"])) {
             $this->installationId = $params["installationId"];
             $this->gatewayId = $params["gatewayId"];
@@ -64,13 +64,14 @@ final class ViessmannAPI
             $this->gatewayId = $modelDevice->getProperty('serial');
 
         }
-        $this->viessmannFeatureProxy = $viessmannRemoteFeatureProxy??new ViessmannFeatureRemoteProxy($this->viessmannOauthClient,$this->installationId,$this->gatewayId);
+        $this->viessmannFeatureProxy = $viessmannRemoteFeatureProxy ?? new ViessmannFeatureRemoteProxy($this->viessmannOauthClient, $this->installationId, $this->gatewayId);
 
         if ($useCache) {
             $features = $this->viessmannFeatureProxy->getEntity("");
-            $this->viessmannFeatureProxy = new ViessmannFeatureLocalProxy($features, $this->viessmannOauthClient,$this->installationId,$this->gatewayId);
+            $this->viessmannFeatureProxy = new ViessmannFeatureLocalProxy($features, $this->viessmannOauthClient, $this->installationId, $this->gatewayId);
         }
     }
+
     /**
      * @return string
      */
@@ -79,14 +80,13 @@ final class ViessmannAPI
         try {
             $response = json_decode($this->viessmannOauthClient->readData("general-management/installations"), true);
             if (isset($response["statusCode"])) {
-                if($response["statusCode"]=="429"){
-                    $epochtime=(int)($response["extendedPayload"]["limitReset"]/1000);
+                if ($response["statusCode"] == "429") {
+                    $epochtime = (int)($response["extendedPayload"]["limitReset"] / 1000);
                     $dt = new DateTime("@$epochtime");
-                    $resetDate=$dt->format(DateTime::RSS);
-                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: ". $response["message"]." Limit will be reset on ".$resetDate, 2);
-                }
-                else{
-                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: ". $response["message"], 2);
+                    $resetDate = $dt->format(DateTime::RSS);
+                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: " . $response["message"] . " Limit will be reset on " . $resetDate, 2);
+                } else {
+                    throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: " . $response["message"], 2);
 
                 }
             }
@@ -95,7 +95,59 @@ final class ViessmannAPI
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
         }
     }
-    public function setRawJsonData($feature, $action, $data)
+
+    /**
+     * @return string
+     */
+    public function getGatewayWifi()
+    {
+        try {
+            return $this->viessmannOauthClient->readData("operational-data/installations/".$this->getInstallationId()."/gateways/".$this->getGatewayId()."/features/gateway.wifi" );
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
+
+        }
+    }
+    public function getGatewayFirmware()
+    {
+        try {
+            return $this->viessmannOauthClient->readData("operational-data/installations/".$this->getInstallationId()."/gateways/".$this->getGatewayId()."/features/gateway.firmware" );
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
+
+        }
+    }
+    public function getGatewayStatus()
+    {
+        try {
+            return $this->viessmannOauthClient->readData("operational-data/installations/".$this->getInstallationId()."/gateways/".$this->getGatewayId()."/features/gateway.status" );
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
+
+        }
+    }
+    public function getGatewayBmuconnection()
+    {
+        try {
+            return $this->viessmannOauthClient->readData("operational-data/installations/".$this->getInstallationId()."/gateways/".$this->getGatewayId()."/features/gateway.bmuconnection" );
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
+
+        }
+    }
+    public function getGatewayDevices()
+    {
+        try {
+            return $this->viessmannOauthClient->readData("operational-data/installations/".$this->getInstallationId()."/gateways/".$this->getGatewayId()."/features/gateway.devices" );
+        } catch (TokenResponseException $e) {
+            throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
+
+        }
+    }
+
+
+    public
+    function setRawJsonData($feature, $action, $data)
     {
         $this->viessmannFeatureProxy->setData($feature, $action, $data);
 
@@ -104,7 +156,8 @@ final class ViessmannAPI
     /**
      * @return mixed
      */
-    public function getInstallationId()
+    public
+    function getInstallationId()
     {
         return $this->installationId;
     }
@@ -112,12 +165,14 @@ final class ViessmannAPI
     /**
      * @return mixed
      */
-    public function getGatewayId()
+    public
+    function getGatewayId()
     {
         return $this->gatewayId;
     }
 
-    public function getRawJsonData($resources): string
+    public
+    function getRawJsonData($resources): string
     {
         return $this->viessmannFeatureProxy->getRawJsonData($resources);
     }
@@ -125,11 +180,18 @@ final class ViessmannAPI
     /**
      * @return String containing a list of all the features having either a property either an action on it
      */
-    public function getAvailableFeatures(): String
-
+    public
+    function getAvailableFeatures(): String
     {
-        $features= json_decode($this->viessmannFeatureProxy->getRawJsonData(""),true);
-        return implode(",\n", $features);
+        $features = $this->viessmannFeatureProxy->getEntity("");
+        $classes = "";
+
+        foreach ($features->getEntities() as $feature) {
+            if ($feature->getActions() != NULL || $feature->getProperties() != NULL) {
+                $classes = $classes . ($feature->getClasses()[0]) . "\n";
+            }
+        }
+        return $classes;
     }
 
 
@@ -137,7 +199,8 @@ final class ViessmannAPI
      * @return string the outside temperature if available
      * @throws ViessmannApiException
      */
-    public function getOutsideTemperature(): string
+    public
+    function getOutsideTemperature(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SENSORS_TEMPERATURE_OUTSIDE)->getProperty("value")["value"];
     }
@@ -146,7 +209,8 @@ final class ViessmannAPI
      * @return string the current Boiler Temperature
      * @throws ViessmannApiException
      */
-    public function getBoilerTemperature(): string
+    public
+    function getBoilerTemperature(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BOILER_SENSORS_TEMPERATURE_MAIN)->getProperty("value")["value"];
     }
@@ -156,7 +220,8 @@ final class ViessmannAPI
      * @return string the Room temperature
      * @throws ViessmannApiException
      */
-    public function getRoomTemperature($circuitId = NULL): string
+    public
+    function getRoomTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_ROOM))->getProperty("value")["value"];
     }
@@ -166,7 +231,8 @@ final class ViessmannAPI
      * @return string the slope configured
      * @throws ViessmannApiException
      */
-    public function getSlope($circuitId = NULL, $features = NULL): string
+    public
+    function getSlope($circuitId = NULL, $features = NULL): string
     {
         if ($features) {
             return $features[$this->buildFeature($circuitId, self::HEATING_CURVE)]->getProperty("slope")["value"];
@@ -180,7 +246,8 @@ final class ViessmannAPI
      * @return string the shift configured
      * @throws ViessmannApiException
      */
-    public function getShift($circuitId = NULL): string
+    public
+    function getShift($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::HEATING_CURVE))->getProperty("shift")["value"];
     }
@@ -190,7 +257,8 @@ final class ViessmannAPI
      * @param $slope the new slope to set
      * @param null $circuitId
      */
-    public function setCurve($shift, $slope, $circuitId = NULL)
+    public
+    function setCurve($shift, $slope, $circuitId = NULL)
     {
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::HEATING_CURVE), "setCurve", "{\"shift\":" . $shift . ",\"slope\":" . $slope . "}");
     }
@@ -200,7 +268,8 @@ final class ViessmannAPI
      * @return string the frostprotection configured
      * @throws ViessmannApiException
      */
-    public function getFrostprotection($circuitId = NULL): string
+    public
+    function getFrostprotection($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::HEATING_FROSTPROTECTION))->getProperty("status")["value"];
     }
@@ -210,7 +279,8 @@ final class ViessmannAPI
      * @return int the statistics for starts compressor
      * @throws ViessmannApiException
      */
-    public function getHeatingCompressorStarts($circuitId = NULL): int
+    public
+    function getHeatingCompressorStarts($circuitId = NULL): int
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeatureCompressors($circuitId, self::HEATING_COMPRESSOR_STATISTICS))->getProperty("starts")["value"];
     }
@@ -220,7 +290,8 @@ final class ViessmannAPI
      * @return double the statistics for hours run compressor
      * @throws ViessmannApiException
      */
-    public function getHeatingCompressorHours($circuitId = NULL): float
+    public
+    function getHeatingCompressorHours($circuitId = NULL): float
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeatureCompressors($circuitId, self::HEATING_COMPRESSOR_STATISTICS))->getProperty("hours")["value"];
     }
@@ -231,7 +302,8 @@ final class ViessmannAPI
      * @return int the statistics for load classes 1-5
      * @throws ViessmannApiException
      */
-    public function getHeatingCompressorLoadClassHours($circuitId = NULL, $classNumber = NULL): int
+    public
+    function getHeatingCompressorLoadClassHours($circuitId = NULL, $classNumber = NULL): int
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeatureCompressors($circuitId, self::HEATING_COMPRESSOR_STATISTICS))->getProperty($this->buildHeatingCompressorLoadCassParameter($classNumber))["value"];
     }
@@ -240,7 +312,8 @@ final class ViessmannAPI
      * @return float the result for primary circuit sensor Temperature supply
      * @throws ViessmannApiException
      */
-    public function getHeatingPrimaryCircuitTemperatureSupply(): float
+    public
+    function getHeatingPrimaryCircuitTemperatureSupply(): float
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_PRIMARYCIRCUIT_SENSORS_TEMPERATURE_SUPPLY)->getProperty("value")["value"];
     }
@@ -249,7 +322,8 @@ final class ViessmannAPI
      * @return float the result for secondary circuit sensor Temperature supply
      * @throws ViessmannApiException
      */
-    public function getHeatingSecondaryCircuitTemperatureSupply(): float
+    public
+    function getHeatingSecondaryCircuitTemperatureSupply(): float
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SECONDARYCIRCUIT_SENSORS_TEMPERATURE_SUPPLY)->getProperty("value")["value"];
     }
@@ -258,7 +332,8 @@ final class ViessmannAPI
      * @return float the result for secondary circuit sensor Temperature return
      * @throws ViessmannApiException
      */
-    public function getHeatingSecondaryCircuitTemperatureReturn(): float
+    public
+    function getHeatingSecondaryCircuitTemperatureReturn(): float
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SECONDARYCIRCUIT_SENSORS_TEMPERATURE_RETURN)->getProperty("value")["value"];
     }
@@ -268,7 +343,8 @@ final class ViessmannAPI
      * @return string the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
      * @throws ViessmannApiException
      */
-    public function getActiveMode($circuitId = NULL): string
+    public
+    function getActiveMode($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::ACTIVE_OPERATING_MODE))->getProperty("value")["value"];
     }
@@ -278,7 +354,8 @@ final class ViessmannAPI
      * @param $mode the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
      * @param null $circuitId
      */
-    public function setActiveMode($mode, $circuitId = NULL)
+    public
+    function setActiveMode($mode, $circuitId = NULL)
     {
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::OPERATING_MODES), "setMode", "{\"mode\":\"" . $mode . "\"}");
     }
@@ -288,7 +365,8 @@ final class ViessmannAPI
      * @return string the active program("comfort","eco","external","holiday","normal","reduced", "standby")
      * @throws ViessmannApiException
      */
-    public function getActiveProgram($circuitId = NULL): string
+    public
+    function getActiveProgram($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::ACTIVE_PROGRAM))->getProperty("value")["value"];
     }
@@ -298,7 +376,8 @@ final class ViessmannAPI
      * @return bool true if heating burner is active. False otherwise
      * @throws ViessmannApiException
      */
-    public function isHeatingBurnerActive(): bool
+    public
+    function isHeatingBurnerActive(): bool
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER)->getProperty("active")["value"];
     }
@@ -307,7 +386,8 @@ final class ViessmannAPI
      * @return bool true if heating compressor is active. False otherwise
      * @throws ViessmannApiException
      */
-    public function isHeatingCompressorsActive($circuitId = NULL): bool
+    public
+    function isHeatingCompressorsActive($circuitId = NULL): bool
     {
         if ($circuitId == NULL) {
             $circuitId = $this->circuitId;
@@ -318,7 +398,8 @@ final class ViessmannAPI
     /**
      * @return string statistics of the compressors
      */
-    public function getHeatingCompressorsStatistics(): string
+    public
+    function getHeatingCompressorsStatistics(): string
     {
         return json_encode($this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_COMPRESSORS . "." . $this->circuitId . "." . self::STATISTICS . "")->getProperties());
     }
@@ -327,7 +408,8 @@ final class ViessmannAPI
      * @return bool true if DhwMode is active. False otherwise
      * @throws ViessmannApiException
      */
-    public function isDhwModeActive($circuitId = NULL): bool
+    public
+    function isDhwModeActive($circuitId = NULL): bool
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::DHW_MODE))->getProperty("active")["value"];
     }
@@ -337,7 +419,8 @@ final class ViessmannAPI
      * @return string Comfort program temperature programmed
      * @throws ViessmannApiException
      */
-    public function getComfortProgramTemperature($circuitId = NULL): string
+    public
+    function getComfortProgramTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::COMFORT_PROGRAM))->getProperty("temperature")["value"];
     }
@@ -346,7 +429,8 @@ final class ViessmannAPI
      * @param $temperature Comfort program temperature to program
      * @param null $circuitId
      */
-    public function setComfortProgramTemperature($temperature, $circuitId = NULL)
+    public
+    function setComfortProgramTemperature($temperature, $circuitId = NULL)
     {
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::COMFORT_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
     }
@@ -356,7 +440,8 @@ final class ViessmannAPI
      * @return string Eco program temperature insntruction
      * @throws ViessmannApiException
      */
-    public function getEcoProgramTemperature($circuitId = NULL): string
+    public
+    function getEcoProgramTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::ECO_PROGRAM))->getProperty("temperature")["value"];
     }
@@ -367,7 +452,8 @@ final class ViessmannAPI
      * @param null $circuitId
      * @throws ViessmannApiException
      */
-    public function activateEcoProgram($temperature = NULL, $circuitId = NULL)
+    public
+    function activateEcoProgram($temperature = NULL, $circuitId = NULL)
     {
         $data = NULL;
         if (isset($temperature)) {
@@ -382,7 +468,8 @@ final class ViessmannAPI
      * @param null $circuitId
      * @throws ViessmannApiException
      */
-    public function deActivateEcoProgram($circuitId = NULL)
+    public
+    function deActivateEcoProgram($circuitId = NULL)
     {
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::ECO_PROGRAM), "deactivate", "{}");
     }
@@ -394,7 +481,8 @@ final class ViessmannAPI
      * @return a json object containing a property start and a property end
      * @throws ViessmannApiException
      */
-    public function getScheduledHolidayProgram($circuitId = NULL): string
+    public
+    function getScheduledHolidayProgram($circuitId = NULL): string
     {
         $data = $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::HOLIDAY_PROGRAM));
         $schedule['start'] = $data->getProperty("start")["value"];
@@ -411,7 +499,8 @@ final class ViessmannAPI
      * @param null $circuitId
      * @throws ViessmannApiException
      */
-    public function scheduleHolidayProgram($start, $end, $circuitId = NULL)
+    public
+    function scheduleHolidayProgram($start, $end, $circuitId = NULL)
     {
         $data = "{\"start\":\"" . $start . "\", \"end\":\"" . $end . "\"}";
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::HOLIDAY_PROGRAM), "schedule", $data);
@@ -421,7 +510,8 @@ final class ViessmannAPI
      * @param null $circuitId
      * @throws ViessmannApiException
      */
-    public function unscheduleHolidayProgram($circuitId = NULL)
+    public
+    function unscheduleHolidayProgram($circuitId = NULL)
     {
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::HOLIDAY_PROGRAM), "unschedule", "{}");
     }
@@ -432,7 +522,8 @@ final class ViessmannAPI
      * @param null $circuitId
      * @throws ViessmannApiException
      */
-    public function activateComfortProgram($temperature = NULL, $circuitId = NULL)
+    public
+    function activateComfortProgram($temperature = NULL, $circuitId = NULL)
     {
         $data = NULL;
         if (isset($temperature)) {
@@ -448,7 +539,8 @@ final class ViessmannAPI
      * @param null $circuitId
      * @throws ViessmannApiException
      */
-    public function deActivateComfortProgram($circuitId = NULL)
+    public
+    function deActivateComfortProgram($circuitId = NULL)
     {
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::COMFORT_PROGRAM), "deactivate", "{}");
     }
@@ -458,7 +550,8 @@ final class ViessmannAPI
      * @return string External program temperature programmed
      * @throws ViessmannApiException
      */
-    public function getExternalProgramTemperature($circuitId = NULL): string
+    public
+    function getExternalProgramTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::EXTERNAL_PROGRAM))->getProperty("temperature")["value"];
     }
@@ -468,7 +561,8 @@ final class ViessmannAPI
      * @return string External program temperature to program
      * @throws ViessmannApiException
      */
-    public function setExternalProgramTemperature($temperature, $circuitId = NULL)
+    public
+    function setExternalProgramTemperature($temperature, $circuitId = NULL)
     {
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::EXTERNAL_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
     }
@@ -478,7 +572,8 @@ final class ViessmannAPI
      * @return string Normal program temperature insntruction
      * @throws ViessmannApiException
      */
-    public function getNormalProgramTemperature($circuitId = NULL): string
+    public
+    function getNormalProgramTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::NORMAL_PROGRAM))->getProperty("temperature")["value"];
     }
@@ -488,7 +583,8 @@ final class ViessmannAPI
      * @return string Normal program temperature insntruction
      * @throws ViessmannApiException
      */
-    public function setNormalProgramTemperature($temperature, $circuitId = NULL)
+    public
+    function setNormalProgramTemperature($temperature, $circuitId = NULL)
     {
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::NORMAL_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
     }
@@ -498,7 +594,8 @@ final class ViessmannAPI
      * @return string Reduced program temperature insntruction
      * @throws ViessmannApiException
      */
-    public function getReducedProgramTemperature($circuitId = NULL): string
+    public
+    function getReducedProgramTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::REDUCED_PROGRAM))->getProperty("temperature")["value"];
     }
@@ -508,7 +605,8 @@ final class ViessmannAPI
      * @return string Reduced program temperature insntruction
      * @throws ViessmannApiException
      */
-    public function setReducedProgramTemperature($temperature, $circuitId = NULL)
+    public
+    function setReducedProgramTemperature($temperature, $circuitId = NULL)
     {
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::REDUCED_PROGRAM), "setTemperature", "{\"targetTemperature\":" . $temperature . "}");
     }
@@ -518,7 +616,8 @@ final class ViessmannAPI
      * @return bool true if is standy. False otherwise
      * @throws ViessmannApiException
      */
-    public function isInStandbyMode($circuitId = NULL): bool
+    public
+    function isInStandbyMode($circuitId = NULL): bool
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::STANDBY_PROGRAM))->getProperty("active")["value"];
     }
@@ -528,12 +627,14 @@ final class ViessmannAPI
      * @return bool true if is Fixed. False otherwise
      * @throws ViessmannApiException
      */
-    public function isInFixedPrograms($circuitId = NULL): bool
+    public
+    function isInFixedPrograms($circuitId = NULL): bool
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::FIXED_PROGRAM))->getProperty("active")["value"];
     }
 
-    public function getSupplyProgramTemperature($circuitId = NULL): string
+    public
+    function getSupplyProgramTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_SUPPLY))->getProperty("value")["value"];
     }
@@ -544,7 +645,8 @@ final class ViessmannAPI
      * @return string Hot Water storage temperature
      * @throws ViessmannApiException
      */
-    public function getHotWaterStorageTemperature($circuitId = NULL): string
+    public
+    function getHotWaterStorageTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_HOTWATERSTORAGE)->getProperty("value")["value"];
     }
@@ -562,7 +664,8 @@ final class ViessmannAPI
      *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
      * @throws ViessmannApiException
      */
-    public function getHeatingSolarPowerProduction($period = "day")
+    public
+    function getHeatingSolarPowerProduction($period = "day")
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_POWER_PRODUCTION)->getProperty($period)["value"];
     }
@@ -572,7 +675,8 @@ final class ViessmannAPI
      * @return string heating solar sensors temperature collector
      * @throws ViessmannApiException
      */
-    public function getHeatingSolarSensorsTemperatureCollector(): string
+    public
+    function getHeatingSolarSensorsTemperatureCollector(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_SENSORS_TEMPERATURE_COLLECTOR)->getProperty("value")["value"];
     }
@@ -582,7 +686,8 @@ final class ViessmannAPI
      * @return string heating solar power cumulative produced in kWh
      * @throws ViessmannApiException
      */
-    public function getHeatingSolarPowerCumulativeProduced(): string
+    public
+    function getHeatingSolarPowerCumulativeProduced(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_POWER_CUMULATIVEPRODUCED)->getProperty("value")["value"];
     }
@@ -592,7 +697,8 @@ final class ViessmannAPI
      * @return string heating solar sensors temperature dhw
      * @throws ViessmannApiException
      */
-    public function getHeatingSolarSensorsTemperatureDhw(): string
+    public
+    function getHeatingSolarSensorsTemperatureDhw(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_SENSORS_TEMPERATURE_DHW)->getProperty("value")["value"];
     }
@@ -602,7 +708,8 @@ final class ViessmannAPI
      * @return string heating solar system operational hours
      * @throws ViessmannApiException
      */
-    public function getHeatingSolarStatistics(): string
+    public
+    function getHeatingSolarStatistics(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_STATISTICS)->getProperty("hours")["value"];
     }
@@ -612,17 +719,19 @@ final class ViessmannAPI
      * @return string off/on for recharge suppression
      * @throws ViessmannApiException
      */
-    public function getHeatingSolarRechargesuppression(): string
+    public
+    function getHeatingSolarRechargesuppression(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_RECHARGESUPPRESSION)->getProperty("status")["value"];
     }
 
-    
+
     /**
      * @return string off/on for solar pump circuit
      * @throws ViessmannApiException
      */
-    public function getHeatingSolarPumpsCircuit(): string
+    public
+    function getHeatingSolarPumpsCircuit(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SOLAR_PUMPS_CIRCUIT)->getProperty("status")["value"];
     }
@@ -638,7 +747,8 @@ final class ViessmannAPI
      *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
      * @throws ViessmannApiException
      */
-    public function getHeatingPowerConsumption($period = "day")
+    public
+    function getHeatingPowerConsumption($period = "day")
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_POWER_CONSUMPTION)->getProperty($period)["value"];
     }
@@ -653,7 +763,8 @@ final class ViessmannAPI
      *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
      * @throws ViessmannApiException
      */
-    public function getDhwGasConsumption($period = "day")
+    public
+    function getDhwGasConsumption($period = "day")
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
     }
@@ -667,7 +778,8 @@ final class ViessmannAPI
      *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
      * @throws ViessmannApiException
      */
-    public function getHeatingGasConsumption($period = "day")
+    public
+    function getHeatingGasConsumption($period = "day")
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
     }
@@ -677,7 +789,8 @@ final class ViessmannAPI
      * @return mixed number of hours or number of starts
      * @throws ViessmannApiException
      */
-    public function getHeatingBurnerStatistics($type = "hours")
+    public
+    function getHeatingBurnerStatistics($type = "hours")
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER_STATISTICS)->getProperty($type)["value"];
     }
@@ -695,7 +808,8 @@ final class ViessmannAPI
      * ]
      * @throws ViessmannApiException
      */
-    public function getDhwSchedule(): string
+    public
+    function getDhwSchedule(): string
     {
         return json_encode($this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_SCHEDULE)->getProperties());
     }
@@ -764,7 +878,8 @@ final class ViessmannAPI
      * @return array
      * @throws ViessmannApiException
      */
-    public function setRawDhwSchedule($schedule, $circuitId = NULL)
+    public
+    function setRawDhwSchedule($schedule, $circuitId = NULL)
     {
         $data = "{\"newSchedule\": $schedule}";
         $this->viessmannFeatureProxy->setData(self::DHW_SCHEDULE, "setSchedule", $data);
@@ -783,7 +898,8 @@ final class ViessmannAPI
      * ]
      * @throws ViessmannApiException
      */
-    public function getCirculationSchedule($circuitId = NULL): string
+    public
+    function getCirculationSchedule($circuitId = NULL): string
     {
         return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::CIRCULATION_SCHEDULE))->getProperties());
     }
@@ -960,7 +1076,8 @@ final class ViessmannAPI
      * @param $schedule the schedule(see format above
      * @param null $circuitId
      */
-    public function setRawCirculationSchedule($schedule, $circuitId = NULL)
+    public
+    function setRawCirculationSchedule($schedule, $circuitId = NULL)
     {
         $data = "{\"newSchedule\": $schedule}";
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::CIRCULATION_SCHEDULE), "setSchedule", $data);
@@ -979,7 +1096,8 @@ final class ViessmannAPI
      * ]
      * @throws ViessmannApiException
      */
-    public function getHeatingSchedule($circuitId = NULL)
+    public
+    function getHeatingSchedule($circuitId = NULL)
     {
         return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::HEATING_SCHEDULE))->getProperties());
     }
@@ -1061,71 +1179,84 @@ final class ViessmannAPI
      * @return array
      * @throws ViessmannApiException
      */
-    public function setRawHeatingSchedule($schedule, $circuitId = NULL)
+    public
+    function setRawHeatingSchedule($schedule, $circuitId = NULL)
     {
         $data = "{\"newSchedule\": $schedule}";
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::HEATING_SCHEDULE), "setSchedule", $data);
     }
 
-    public function getHeatingBurnerCurrentPower()
+    public
+    function getHeatingBurnerCurrentPower()
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER_CURRENT_POWER)->getProperty("value")["value"];
     }
 
-    public function getHeatingBurnerModulation()
+    public
+    function getHeatingBurnerModulation()
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER_MODULATION)->getProperty("value")["value"];
     }
 
-    public function getCirculationPumpStatus($circuitId = NULL)
+    public
+    function getCirculationPumpStatus($circuitId = NULL)
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::CIRCULATION_PUMP))->getProperty("status")["value"];
     }
 
-    public function isDhwCharging(): bool
+    public
+    function isDhwCharging(): bool
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_CHARGING)->getProperty("active")["value"];
     }
 
-    public function getDhwChargingLevel(): String
+    public
+    function getDhwChargingLevel(): String
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_CHARGING_LEVEL)->getProperty("value")["value"];
     }
 
-    public function isOneTimeDhwCharge(): bool
+    public
+    function isOneTimeDhwCharge(): bool
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_ONETIMECHARGE)->getProperty("active")["value"];
     }
 
-    public function startOneTimeDhwCharge()
+    public
+    function startOneTimeDhwCharge()
     {
         $data = "{}";
         $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "activate", $data);
     }
 
-    public function stopOneTimeDhwCharge()
+    public
+    function stopOneTimeDhwCharge()
     {
 
         $data = "{}";
         $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "deactivate", $data);
     }
 
-    public function getDhwPumpsCirculation(): String
+    public
+    function getDhwPumpsCirculation(): String
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_CIRCULATION)->getProperty("status")["value"];
     }
 
-    public function getDhwPumpsPrimary(): String
+    public
+    function getDhwPumpsPrimary(): String
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_PRIMARY)->getProperty("status")["value"];
     }
 
-    public function getDhwTemperatureOutlet(): String
+    public
+    function getDhwTemperatureOutlet(): String
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_OUTLET)->getProperty("value")["value"];
     }
 
-    public function getDhwTemperature(): String
+    public
+    function getDhwTemperature(): String
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_TEMPERATURE)->getProperty("value")["value"];
     }
@@ -1134,7 +1265,8 @@ final class ViessmannAPI
      * @return String see https://en.wikipedia.org/wiki/Hysteresis
      * @throws ViessmannApiException
      */
-    public function getDhwTemperatureHysteresis(): String
+    public
+    function getDhwTemperatureHysteresis(): String
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_TEMPERATURE_HYSTERESIS)->getProperty("value")["value"];
     }
@@ -1144,12 +1276,14 @@ final class ViessmannAPI
      * @return String temperature of the return to the heating
      *
      */
-    public function getHeatingTemperatureReturn(): String
+    public
+    function getHeatingTemperatureReturn(): String
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SENSORS_TEMPERATURE_RETURN)->getProperty("value")["value"];
     }
 
-    public function setDhwTemperature($temperature)
+    public
+    function setDhwTemperature($temperature)
     {
         $data = "{\"temperature\": $temperature}";
         $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
@@ -1158,7 +1292,8 @@ final class ViessmannAPI
     /**
      * @return String cooling mode
      */
-    public function getHeatingConfigurationCoolingMode(): String
+    public
+    function getHeatingConfigurationCoolingMode(): String
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_CONFIGURATION_COOLING)->getProperty("mode")["value"];
     }
@@ -1167,7 +1302,8 @@ final class ViessmannAPI
      * @param $mode mode to set among 3 value: "none","natural","natural-mixer"
      * @return mixed
      */
-    public function setHeatingConfigurationCoolingMode($mode)
+    public
+    function setHeatingConfigurationCoolingMode($mode)
     {
         {
             $data = "{\"mode\": $mode}";
@@ -1179,7 +1315,8 @@ final class ViessmannAPI
      * @return string last service if available
      * @throws ViessmannApiException
      */
-    public function getLastServiceDate(): string
+    public
+    function getLastServiceDate(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED)->getProperty("lastService")["value"];
     }
@@ -1188,7 +1325,8 @@ final class ViessmannAPI
      * @return number of month beetween service if available
      * @throws ViessmannApiException
      */
-    public function getServiceInterval(): int
+    public
+    function getServiceInterval(): int
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED)->getProperty("serviceIntervalMonths")["value"];
     }
@@ -1197,13 +1335,15 @@ final class ViessmannAPI
      * @return number of month since service if available
      * @throws ViessmannApiException
      */
-    public function getActiveMonthSinceService(): int
+    public
+    function getActiveMonthSinceService(): int
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SERVICE_TIMEBASED)->getProperty("activeMonthSinceLastService")["value"];
     }
 
 
-    private function buildHeatingCompressorLoadCassParameter($classNumber)
+    private
+    function buildHeatingCompressorLoadCassParameter($classNumber)
     {
         switch ($classNumber) {
             case 1:
@@ -1223,7 +1363,8 @@ final class ViessmannAPI
     }
 
 
-    private function buildFeature($circuitId, $feature)
+    private
+    function buildFeature($circuitId, $feature)
     {
         if ($circuitId == NULL) {
             $circuitId = $this->circuitId;
@@ -1231,7 +1372,8 @@ final class ViessmannAPI
         return self::HEATING_CIRCUITS . "." . $circuitId . "." . $feature;
     }
 
-    private function buildFeatureCompressors($circuitId, $feature)
+    private
+    function buildFeatureCompressors($circuitId, $feature)
     {
         if ($circuitId == NULL) {
             $circuitId = $this->circuitId;

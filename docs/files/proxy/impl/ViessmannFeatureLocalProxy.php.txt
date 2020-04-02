@@ -32,8 +32,9 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
         return $classes;
     }
 
-    public function getEntity($resources): ?Entity
+    public function getEntity($resources)
     {
+
         if (!empty($this->features[$resources])) {
             return $this->features[$resources];
         } else {
@@ -44,6 +45,9 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
 
     public function getRawJsonData($resources)
     {
+        if(empty($resources)){
+            return json_encode(array_keys($this->features));
+        }
         $entity = $this->getEntity($resources);
         if ($entity) {
             return $entity->toJson();
