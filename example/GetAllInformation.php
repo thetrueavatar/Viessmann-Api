@@ -1,6 +1,6 @@
 <?php
 const JEEDOM_IP = "192.168.0.2";
-const JEEDOM_API_KEY = "";
+const JEEDOM_API_KEY = "";  // Clé API Virtuel
 const CMD_ID = "1022";
 const CMD_ID1 = "1024";
 const CMD_ID2 = "1027";
@@ -36,7 +36,7 @@ function post_request($url, array $params)
 
 function jeedom_post($cmd_id, $value)
 {
-    $jeedom_url_retour = "http://" . JEEDOM_API . "/core/api/jeeApi.php?plugin=virtual&apikey={" . JEEDOM_API_KEY . "}&type=virtual&id={$cmd_id}&value={$value}";
+    $jeedom_url_retour = "http://" . JEEDOM_IP . "/core/api/jeeApi.php?plugin=virtual&apikey=" . JEEDOM_API_KEY . "&type=virtual&id={$cmd_id}&value={$value}";
     $jeedom_params = array('key1' => '', 'key2' => '');
     $result = post_request($jeedom_url_retour, $jeedom_params);
     return $result;

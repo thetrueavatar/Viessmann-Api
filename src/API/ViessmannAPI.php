@@ -216,6 +216,26 @@ final class ViessmannAPI
     }
 
     /**
+     * @return string the current CC1 supply Temperature
+     * @throws ViessmannApiException
+     */
+    public
+    function getCC1SupplyTemperature(): string
+    {
+        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_CIRCUITS_0_SENSORS_TEMPERATURE_SUPPLY)->getProperty("value")["value"];
+    }
+
+    /**
+     * @return string the current CC2 supply Temperature
+     * @throws ViessmannApiException
+     */
+    public
+    function getCC2SupplyTemperature(): string
+    {
+        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_CIRCUITS_1_SENSORS_TEMPERATURE_SUPPLY)->getProperty("value")["value"];
+    }
+
+    /**
      * @param null $circuitId
      * @return string the Room temperature
      * @throws ViessmannApiException
