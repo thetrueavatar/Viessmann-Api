@@ -183,15 +183,8 @@ final class ViessmannAPI
     public
     function getAvailableFeatures(): String
     {
-        $features = $this->viessmannFeatureProxy->getEntity("");
-        $classes = "";
-
-        foreach ($features->getEntities() as $feature) {
-            if ($feature->getActions() != NULL || $feature->getProperties() != NULL) {
-                $classes = $classes . ($feature->getClasses()[0]) . "\n";
-            }
-        }
-        return $classes;
+        $features= json_decode($this->viessmannFeatureProxy->getRawJsonData(""),true);
+        return implode(",\n", $features);
     }
 
 
