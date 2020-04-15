@@ -627,7 +627,7 @@ final class ViessmannAPI
     }
 
     public
-    function getSupplyProgramTemperature($circuitId = NULL): string
+    function getSupplyTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_SUPPLY))->getProperty("value")["value"];
     }
