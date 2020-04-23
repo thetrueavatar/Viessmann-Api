@@ -183,15 +183,8 @@ final class ViessmannAPI
     public
     function getAvailableFeatures(): String
     {
-        $features = $this->viessmannFeatureProxy->getEntity("");
-        $classes = "";
-
-        foreach ($features->getEntities() as $feature) {
-            if ($feature->getActions() != NULL || $feature->getProperties() != NULL) {
-                $classes = $classes . ($feature->getClasses()[0]) . "\n";
-            }
-        }
-        return $classes;
+        $features= json_decode($this->viessmannFeatureProxy->getRawJsonData(""),true);
+        return implode(",\n", $features);
     }
 
 
@@ -213,26 +206,6 @@ final class ViessmannAPI
     function getBoilerTemperature(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BOILER_SENSORS_TEMPERATURE_MAIN)->getProperty("value")["value"];
-    }
-
-    /**
-     * @return string the current CC1 supply Temperature
-     * @throws ViessmannApiException
-     */
-    public
-    function getCC1SupplyTemperature(): string
-    {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_CIRCUITS_0_SENSORS_TEMPERATURE_SUPPLY)->getProperty("value")["value"];
-    }
-
-    /**
-     * @return string the current CC2 supply Temperature
-     * @throws ViessmannApiException
-     */
-    public
-    function getCC2SupplyTemperature(): string
-    {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_CIRCUITS_1_SENSORS_TEMPERATURE_SUPPLY)->getProperty("value")["value"];
     }
 
     /**
@@ -654,7 +627,7 @@ final class ViessmannAPI
     }
 
     public
-    function getSupplyProgramTemperature($circuitId = NULL): string
+    function getSupplyTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_SUPPLY))->getProperty("value")["value"];
     }
