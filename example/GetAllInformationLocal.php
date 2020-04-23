@@ -1,13 +1,14 @@
 <?php
 require_once '/var/www/html/core/php/core.inc.php';
 
-const CMD_TEMP_EXT = "1021";
+const ID_VIRTUEL = "239"; //indiquer ici l'ID du virtuel, exemple : http://jeedom/index.php?v=d&m=virtual&p=virtual&id=239
+const CMD_TEMP_EXT = "1021"; //indiquer l'ID de chaque info/commande comme listé dans http://jeedom/index.php?v=d&m=virtual&p=virtual&id=239#commandtab
 const CMD_TEMP_BOIL = "1022";
 const CMD_MODE = "1023";
 
 include __DIR__ . '/bootstrap.php';
 
-$virtual = eqLogic::byId(239);
+$virtual = eqLogic::byId(ID_VIRTUEL);
 
 $cmd = cmd::byId(CMD_TEMP_EXT);
 $virtual->checkAndUpdateCmd($cmd, $viessmannApi->getOutsideTemperature());
@@ -23,9 +24,9 @@ elseif ($res == "dhw"):
 elseif ($res == "dhwAndHeating"):
     $res = "Eau Chaude + Chauffage";
 elseif ($res == "forcedReduced"):
-    $res = "Réduit";
+    $res = "Nuit";
 elseif ($res == "forcedNormal"):
-    $res = "Forcé";
+    $res = "Jour";
 else:
     $res = "Erreur";
 endif;
