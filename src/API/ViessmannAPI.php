@@ -1374,4 +1374,17 @@ final class ViessmannAPI
         return self::HEATING_COMPRESSORS . "." . $circuitId . "." . $feature;
     }
 
+    public
+    function getGenericFeaturePropertyAsJSON($feature, $properties = "value"): string
+    {
+        if(is_array($properties)) {
+            $res = array();
+            foreach($properties as $prop){
+                $res[$prop] = $this->viessmannFeatureProxy->getEntity($feature)->getProperty($prop)["value"];
+            }
+        } else 
+            $res = $this->viessmannFeatureProxy->getEntity($feature)->getProperty($properties)["value"];
+        return json_encode($res);
+    }
+
 }
