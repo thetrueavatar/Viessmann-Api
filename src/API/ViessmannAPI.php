@@ -145,6 +145,13 @@ final class ViessmannAPI
         }
     }
 
+    /**
+     * @throws ViessmannApiException
+     * @param $feature The feature to set
+     * @param $action The action to execute
+     * @param $data The data to pass to action
+     *   // Exposes all setters. Less amount of code = less errors.
+     */
 
     public
     function setRawJsonData($feature, $action, $data)
@@ -1374,6 +1381,13 @@ final class ViessmannAPI
         return self::HEATING_COMPRESSORS . "." . $circuitId . "." . $feature;
     }
 
+    /**
+     * @return generic feature and property/properties as JSON
+     * @throws ViessmannApiException
+     * @param $feature The feature to query
+     * @param mixed $properties string or array describing properties to query
+     *   // Exposes all getters. Less amount of code = less errors.
+     */
     public
     function getGenericFeaturePropertyAsJSON($feature, $properties = "value"): string
     {
