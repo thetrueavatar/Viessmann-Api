@@ -145,6 +145,13 @@ final class ViessmannAPI
         }
     }
 
+    /**
+     * @throws ViessmannApiException
+     * @param $feature The feature to set
+     * @param $action The action to execute
+     * @param $data The data to pass to action
+     *   // Exposes all setters. Less amount of code = less errors.
+     */
 
     public
     function setRawJsonData($feature, $action, $data)
@@ -183,15 +190,8 @@ final class ViessmannAPI
     public
     function getAvailableFeatures(): String
     {
-        $features = $this->viessmannFeatureProxy->getEntity("");
-        $classes = "";
-
-        foreach ($features->getEntities() as $feature) {
-            if ($feature->getActions() != NULL || $feature->getProperties() != NULL) {
-                $classes = $classes . ($feature->getClasses()[0]) . "\n";
-            }
-        }
-        return $classes;
+        $features= json_decode($this->viessmannFeatureProxy->getRawJsonData(""),true);
+        return implode(",\n", $features);
     }
 
 
@@ -634,7 +634,7 @@ final class ViessmannAPI
     }
 
     public
-    function getSupplyProgramTemperature($circuitId = NULL): string
+    function getSupplyTemperature($circuitId = NULL): string
     {
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::SENSORS_TEMPERATURE_SUPPLY))->getProperty("value")["value"];
     }
@@ -764,9 +764,16 @@ final class ViessmannAPI
      * @throws ViessmannApiException
      */
     public
-    function getDhwGasConsumption($period = "day")
+    function getDhwGasConsumption($period = "day",$addUnit = false)
     {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
+        if($addUnit){
+            $data['unit']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty("unit")["value"];
+            $data['value']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
+            return json_encode($data);
+        }else{
+            return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
+
+        }
     }
 
     /**
@@ -779,9 +786,16 @@ final class ViessmannAPI
      * @throws ViessmannApiException
      */
     public
-    function getHeatingGasConsumption($period = "day")
+    function getHeatingGasConsumption($period = "day",$addUnit = false)
     {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
+        if($addUnit){
+            $data['unit']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty("unit")["value"];
+            $data['value']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
+            return json_encode($data);
+        }else{
+            return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
+
+        }
     }
 
     /**
@@ -1379,6 +1393,26 @@ final class ViessmannAPI
             $circuitId = $this->circuitId;
         }
         return self::HEATING_COMPRESSORS . "." . $circuitId . "." . $feature;
+    }
+
+    /**
+     * @return generic feature and property/properties as JSON
+     * @throws ViessmannApiException
+     * @param $feature The feature to query
+     * @param mixed $properties string or array describing properties to query
+     *   // Exposes all getters. Less amount of code = less errors.
+     */
+    public
+    function getGenericFeaturePropertyAsJSON($feature, $properties = "value"): string
+    {
+        if(is_array($properties)) {
+            $res = array();
+            foreach($properties as $prop){
+                $res[$prop] = $this->viessmannFeatureProxy->getEntity($feature)->getProperty($prop)["value"];
+            }
+        } else 
+            $res = $this->viessmannFeatureProxy->getEntity($feature)->getProperty($properties)["value"];
+        return json_encode($res);
     }
 
 }

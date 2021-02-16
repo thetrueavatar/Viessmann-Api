@@ -756,6 +756,7 @@ final class ViessmannAPI
 
     /**
      * Return the Gas consumption for DHW. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
+     * if addUnit is true then the return will be a json object with unit and value
      * @param string $period amongst enume "day","week","month","year
      * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
      *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
@@ -764,24 +765,40 @@ final class ViessmannAPI
      * @throws ViessmannApiException
      */
     public
-    function getDhwGasConsumption($period = "day")
+    function getDhwGasConsumption($period = "day",$addUnit = false)
     {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
+        if($addUnit){
+            $data['unit']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty("unit")["value"];
+            $data['value']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
+            return json_encode($data);
+        }else{
+            return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
+
+        }
     }
 
     /**
      * Return the Gas consumption for Heating. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
+     * if addUnit is true then the return will be a json object with unit and value
      * @param string $period amongst enume "day","week","month","year
      * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
      *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
      *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
      *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
+     *
      * @throws ViessmannApiException
      */
     public
-    function getHeatingGasConsumption($period = "day")
+    function getHeatingGasConsumption($period = "day",$addUnit = false)
     {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
+        if($addUnit){
+            $data['unit']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty("unit")["value"];
+            $data['value']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
+            return json_encode($data);
+        }else{
+            return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
+
+        }
     }
 
     /**

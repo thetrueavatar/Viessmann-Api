@@ -25,7 +25,7 @@ class ViessmannApiTest extends TestCase
 
     public function testGetHeatingGasConsumption()
     {
-        $heatingGasComsumption = $this->viessmannApi->getHeatingGasConsumption("day");
+        $heatingGasComsumption = $this->viessmannApi->getHeatingGasConsumption("day",true);
         print_r($heatingGasComsumption);
         $heatingGasComsumption = $this->viessmannApi->getHeatingGasConsumption("week");
         print_r($heatingGasComsumption);
@@ -42,15 +42,15 @@ class ViessmannApiTest extends TestCase
 
     public function testGetDhwGasConsumption()
     {
-        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("day");
+        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("day",true);
         print_r($heatingGasComsumption);
-        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("week");
-        print_r($heatingGasComsumption);
-        echo "\n";
-        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("month");
+        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("week",false);
         print_r($heatingGasComsumption);
         echo "\n";
-        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("year");
+        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("month",false);
+        print_r($heatingGasComsumption);
+        echo "\n";
+        $heatingGasComsumption = $this->viessmannApi->getDhwGasConsumption("year",false);
         print_r($heatingGasComsumption);
         echo "\n";
         self::assertNotNull($heatingGasComsumption);
