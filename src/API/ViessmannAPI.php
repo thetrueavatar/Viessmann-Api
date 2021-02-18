@@ -1418,4 +1418,15 @@ final class ViessmannAPI
         return json_encode($res);
     }
 
+    /**
+     * @return generic feature and property/properties as JSON
+     * @throws ViessmannApiException
+     * @param $feature The feature to query
+     */
+    public
+    function getProperties($feature): string
+    {
+        return json_encode($this->viessmannFeatureProxy->getEntity($feature)->getProperties());
+    }
+
 }
