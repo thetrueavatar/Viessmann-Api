@@ -756,6 +756,7 @@ final class ViessmannAPI
 
     /**
      * Return the Gas consumption for DHW. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
+     * if addUnit is true then the return will be a json object with unit and value
      * @param string $period amongst enume "day","week","month","year
      * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
      *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
@@ -778,11 +779,13 @@ final class ViessmannAPI
 
     /**
      * Return the Gas consumption for Heating. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
+     * if addUnit is true then the return will be a json object with unit and value
      * @param string $period amongst enume "day","week","month","year
      * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
      *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
      *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
      *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
+     *
      * @throws ViessmannApiException
      */
     public
@@ -1413,6 +1416,17 @@ final class ViessmannAPI
         } else 
             $res = $this->viessmannFeatureProxy->getEntity($feature)->getProperty($properties)["value"];
         return json_encode($res);
+    }
+
+    /**
+     * @return generic feature and property/properties as JSON
+     * @throws ViessmannApiException
+     * @param $feature The feature to query
+     */ 
+    public
+    function getProperties($feature): string
+    {
+        return json_encode($this->viessmannFeatureProxy->getEntity($feature)->getProperties());
     }
 
 }
