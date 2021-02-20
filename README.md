@@ -1,3 +1,7 @@
+Version 1.4.0
+-------------
+Basculement sur la version v2 du service Oauth Viessmann. Plusieurs autres modifications voir release note https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.4.0
+
 Version 1.3.4
 -------------
 Suppression de la dépendance sur php 7.1 et fix de GetAvailableFeatures
