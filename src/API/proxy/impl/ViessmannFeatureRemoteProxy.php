@@ -35,7 +35,7 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
         $data = json_decode($this->getRawJsonData($resources), true);
         if (isset($data["statusCode"])) {
             if($data["statusCode"]=="429"){
-                $epochtime=(int)($response["extendedPayload"]["limitReset"]/1000);
+                $epochtime=(int)($data["extendedPayload"]["limitReset"]/1000);
                 $dt = new DateTime("@$epochtime");
                 $resetDate=$dt->format(DateTime::RSS);
                 throw new ViessmannApiException("\n\t Unable to read installation basic information \n\t Reason: ". $data["message"]." Limit will be reset on ".$resetDate, 2);

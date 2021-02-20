@@ -17,9 +17,9 @@ use OAuth\OAuth2\Token\StdOAuth2Token;
 final class ViessmannOauthService extends AbstractService
 {
 
-    const SCOPE_USAGE_GET = 'openid';
-    private $authorizeURL = 'https://iam.viessmann.com/idp/v1/authorize';
-    private $token_url = 'https://iam.viessmann.com/idp/v1/token';
+    const SCOPE_USAGE_GET = 'IoT%20User';
+    private $authorizeURL = 'https://iam.viessmann.com/idp/v2/authorize';
+    private $token_url = 'https://iam.viessmann.com/idp/v2/token';
     protected $redirect_uri = "vicare://oauth-callback/everest";
     const X_API_KEY = '38c97795ed8ae0ec139409d785840113bb0f5479893a72997932d447bd1178c8';
 

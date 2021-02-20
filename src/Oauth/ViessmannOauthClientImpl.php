@@ -23,7 +23,7 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
     private $storage;
     private $credentials;
     private $serviceFactory;
-    private $scope = ["openid"];
+    private $scope = ["IoT%20User"];
     private $user;
     private $pwd;
 
@@ -35,7 +35,7 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
 
     const CONSUMERSECRET = "8ad97aceb92c5892e102b093c7c083fa";
 
-    const HTTPS_IAM_VIESSMANN_COM_IDP_V_1_AUTHORIZE = 'https://iam.viessmann.com/idp/v1/authorize';
+    const HTTPS_IAM_VIESSMANN_COM_IDP_V_1_AUTHORIZE = 'https://iam.viessmann.com/idp/v2/authorize';
 
     const VICARE_OAUTH_CALLBACK_EVEREST = "vicare://oauth-callback/everest";
 
@@ -50,7 +50,7 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
         $this->serviceFactory->registerService("Viessmann", "Viessmann\Oauth\ViessmannOauthService");
         $this->storage = new Session();
         $this->credentials = new Credentials("" . self::CONSUMERID, "" . self::CONSUMERSECRET, self::VICARE_OAUTH_CALLBACK_EVEREST);
-        $this->viessmannOauthService = $this->serviceFactory->createService('Viessmann', $this->credentials, $this->storage, $this->scope, new Uri('https://api.viessmann-platform.io'));
+        $this->viessmannOauthService = $this->serviceFactory->createService('Viessmann', $this->credentials, $this->storage, $this->scope, new Uri('https://api.viessmann.com'));
         $code = $this->getCode();
         $this->getToken($code);
     }

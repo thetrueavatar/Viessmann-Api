@@ -1,55 +1,25 @@
-Warning:
-----------
-Since a few days, Viessmann as set a protection on their server to avoid unofficial third-party tools to overload their api. It's more than likely that the code here won't work for most of you. I won't do any modification to avoid this since it's their right to control the access to their service.
-This api as always been a personal project I have shared but has nevre received any official consent/support from Viessman.
-According to Viessmann site, the treshold should be 15 minutes between 2 call. Please update your polling interval to more than 15 minutes.
-All information are available on this feed:
-https://www.viessmann-community.com/t5/Experten-fragen/Q-amp-A-Viessmann-API/qaq-p/127660/comment-id/117597#M117597
+Version 1.3.3
+--------------
 
-Here is the official communication you'll receive
+Added missing DateTime import.
+https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.3
 
->_Dear
->{{ insert first_name 'default=default' }} {{ insert last_name 'default=default' }},
->
->an
->evaluation has shown that you have used the web interface to Viessmann IoT Services very frequently in recent days.
->
->On
->the one hand, we are delighted to know you are taking a closer look at our products and solutions. Especially since you have >(apparently) found a solution for your specific use case without a description or our support from our side.
->On
->the other hand, it challenges us to check and channel the method and frequency of requests to our IoT Services in order to >keep those stable and available for all our users.
->
->That’s
->why we have now taken the decision to limit access to our API. From the coming week on, a threshold will become active that >prevents from unauthorized use of the API.
->This will affect all third-party solutions, which can thereby no longer be used.
->
->We
->are aware that the demand for APIs to our technologies for integration into other solutions and third-party systems is >increasing. To provide you with an opportunity for this, we will launch a portal
->in the next two
->months for all developers to get access
->to our API. With the Viessmann Developer Portal, we intend to open ourselves up, release a documentation of the interface >and co-develop new solutions together with you. In addition, we are planning to provide you with useful information around
->our heating systems you need for your development and to offer you a first-level support concerning our APIs.
->
->As one of the users who is already working with our API, we would like to invite you to an early access to the Developer >Portal. If you are interested, please fill out this
->short form. The access to the pre-version of the Portal will be sent to you within the next weeks.
->
->We
->hope you understand the decision that we have to take. If you are interested to support us, on further development on the >API and to explore new possibilities, we are very happy to welcome you to our Developer Portal soon!
->
->In
->the meantime in case you have any questions, feel free to contact us under developer@viessmann.com.
->
->Thank
->you for your understanding.
->
->All
->the best!
->
->Your
->Viessmann Developer Portal Team_
+Version 1.3.2
+--------------
+Warning. This version requires php and php-curl 7.1 to support "?".
+Added caching to reduced load is available here : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.2
+It's also possible to define installationId(3rd line) and gatewayId(4th line) in the credentials.properties.
+To get those value please use the getGatewayId and getInstallationid method.
+This would reduce the total of request to 3. Moreover authentication(2 request) seems to not be taken into account so it will result in only 1 request counting in the quota.
+
+As mentionned, Viessmann as set 2 limit to their API:
+* 120 calls for a time window of 10 minutes
+* 1450 calls for a time window of 24 hours
+
+If you wish to contribute or thanks me [![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
 
 Version 1.1.0 available !
-
+-------------------------
 
 Implementation of an API to get data that are expose through the viessmann service.
 This service is available through oauth2 autorization and use HATEOAS approach. 
