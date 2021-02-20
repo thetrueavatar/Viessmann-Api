@@ -23,7 +23,7 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
     private $storage;
     private $credentials;
     private $serviceFactory;
-    private $scope = ["openid"];
+    private $scope = ["IoT%20User"];
     private $user;
     private $pwd;
 
