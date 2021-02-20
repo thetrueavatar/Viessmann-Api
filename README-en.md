@@ -1,3 +1,11 @@
+Version 1.4.0
+--------------
+Switch to version 2 of Oauth Viessmann servuce. Many other small improvements. See release note https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.4.0
+
+Version 1.3.4
+--------------
+Suppress dep on php 7.1 and fix  GetAvailableFeatures https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.4
+
 Version 1.3.3
 --------------
 
