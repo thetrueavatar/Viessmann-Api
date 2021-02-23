@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/bootstrap-dev.php';
+include __DIR__ . '/bootstrap.php';
 
 use Viessmann\API\ViessmannFeature;
 echo "All datas". $viessmannApi->getRawJsonData("");
