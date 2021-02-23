@@ -121,7 +121,7 @@ final class ViessmannOauthService extends AbstractService
 
     public function request($path, $method = 'GET', $body = null, array $extraHeaders = array())
     {
-        $extraHeaders ['x-api-key'] = 'token ' . self::X_API_KEY . '';
+//        $extraHeaders ['x-api-key'] = 'token ' . self::X_API_KEY . '';
         return parent::request($path, $method, $body, $extraHeaders);
     }
 

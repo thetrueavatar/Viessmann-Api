@@ -9,6 +9,7 @@
 namespace Viessmann\API\proxy\impl;
 
 use TomPHP\Siren\Entity;
+use TomPHP\Siren\EntityBuilder;
 
 class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
 
@@ -24,9 +25,12 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
     private function getAllFeaturesInformation($features): array
     {
         $classes = array();
-        foreach ($features->getEntities() as $feature) {
-            if ($feature->getProperties() != NULL) {
-                $classes[$feature->getClasses()[0]] = $feature;
+        foreach ($features['data'] as $feature) {
+            if ($feature["properties"] != NULL) {
+                $entityBuilder=new EntityBuilder();
+                $entityBuilder->addClass($feature['feature']);
+                $entityBuilder->addProperties($feature['properties']);
+                $classes[$feature['feature']] = $entityBuilder->build();
             }
         }
         return $classes;

@@ -32,6 +32,6 @@
         }
     },
     "require-dev": {
-        "roave/better-reflection": "dev-master"
+        "roave/better-reflection": "3.4.*"
     }
 }

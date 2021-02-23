@@ -44,7 +44,7 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
             }
         }
 
-        return Entity::fromArray($data, true);
+        return $data;
 
     }
 

@@ -17,6 +17,7 @@ abstract class ViessmannFeatureAbstractProxy implements ViessmannFeatureProxy
 
 {
 
+    const OPERATIONAL_DATA_INSTALLATIONS = "iot/v1/equipment/installations/";
     protected $featureHeatingBaseUrl;
     protected $viessmannClient;
 
@@ -24,7 +25,7 @@ abstract class ViessmannFeatureAbstractProxy implements ViessmannFeatureProxy
     {
         $this->viessmannClient = $viessmannClient;
 
-        $this->featureHeatingBaseUrl = "operational-data/installations/" . $installationId . "/gateways/" . $gatewayId . "/devices/" . $deviceId . "/features";
+        $this->featureHeatingBaseUrl = self::OPERATIONAL_DATA_INSTALLATIONS . $installationId . "/gateways/" . $gatewayId . "/devices/" . $deviceId . "/features";
     }
 
     public function setData($feature, $action, $data)

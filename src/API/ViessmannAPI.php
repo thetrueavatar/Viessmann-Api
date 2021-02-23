@@ -42,7 +42,7 @@ final class ViessmannAPI
     private $viessmannFeatureProxy;
     const STATISTICS = "statistics";
     private $viessmannOauthClient;
-    const OPERATIONAL_DATA_INSTALLATIONS = "operational-data/installations/";
+    const OPERATIONAL_DATA_INSTALLATIONS = "iot/v1/equipment/installations/";
     private $installationId;
     private $gatewayId;
 

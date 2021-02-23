@@ -1,8 +1,8 @@
 <?php
-include __DIR__ . '/bootstrap.php';
+include __DIR__ . '/bootstrap-dev.php';
 
 use Viessmann\API\ViessmannFeature;
-
+echo "All datas". $viessmannApi->getRawJsonData("");
 echo "Température extérieure " . $viessmannApi->getOutsideTemperature() . "\n";
 echo "Température boiler " . $viessmannApi->getBoilerTemperature() . "\n";
 echo "Pente " . $viessmannApi->getSlope() . "\n";
