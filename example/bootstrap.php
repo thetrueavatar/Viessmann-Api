@@ -2,10 +2,8 @@
 
 use Viessmann\API\ViessmannAPI;
 use Viessmann\API\ViessmannApiException;
-
+session_start();
 include 'phar://' . __DIR__ . '/Viessmann-Api-1.5.0-SNAPSHOT.phar/index.php';
-
-
 $credentials = file(__DIR__ . "/credentials.properties");
 $params = [
     "user" => trim("$credentials[0]"),
