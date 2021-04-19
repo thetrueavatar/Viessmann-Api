@@ -1,3 +1,5 @@
+If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LPAMB5QUEPV48)
+
 Version 1.4.0
 -------------
 Basculement sur la version v2 du service Oauth Viessmann. Plusieurs autres modifications voir release note https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.4.0
@@ -37,7 +39,7 @@ Comme déjà expliqué Viessmann limite désormais le nombre de requête sur son
 * 120 calls for a time window of 10 minutes
 * 1450 calls for a time window of 24 hours
 
-If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LPAMB5QUEPV48)
+
 
 News FR
 ----
