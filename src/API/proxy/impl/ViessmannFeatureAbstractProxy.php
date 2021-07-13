@@ -17,7 +17,7 @@ abstract class ViessmannFeatureAbstractProxy implements ViessmannFeatureProxy
 
 {
 
-    const OPERATIONAL_DATA_INSTALLATIONS = "iot/v1/equipment/installations/";
+    const OPERATIONAL_DATA_INSTALLATIONS = "equipment/installations/";
     protected $featureHeatingBaseUrl;
     protected $viessmannClient;
 
