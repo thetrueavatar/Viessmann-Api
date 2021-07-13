@@ -51,7 +51,7 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
         $this->storage = new Session();
         $this->credentials = new Credentials("" . $this->clientId, "", self::REDIRECT_URL);
         $this->viessmannOauthService = $this->serviceFactory->createService('Viessmann', $this->credentials, $this->storage, $this->scope, new Uri('' . self::BASE_URL . ''));
-        $this->viessmannOauthService->setCodeChallenge(CODE_CHALLENGE);
+        $this->viessmannOauthService->setCodeChallenge(self::CODE_CHALLENGE);
         $code = $this->getCode();
         $this->getToken($code);
     }

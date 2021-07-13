@@ -2,11 +2,11 @@
 include __DIR__ . '/bootstrap.php';
 
 use Viessmann\API\ViessmannFeature;
-echo "All datas". $viessmannApi->getRawJsonData("");
+echo "All datas". $viessmannApi->getRawJsonData(""). "\n";
 echo "Température extérieure " . $viessmannApi->getOutsideTemperature() . "\n";
 echo "Température boiler " . $viessmannApi->getBoilerTemperature() . "\n";
-echo "Pente " . $viessmannApi->getSlope() . "\n";
-echo "Parallèle " . $viessmannApi->getShift() . "\n";
+//echo "Pente " . $viessmannApi->getSlope() . "\n";
+//echo "Parallèle " . $viessmannApi->getShift() . "\n";
 echo "Mode chaudière " . $viessmannApi->getActiveMode() . "\n";
 echo "Programme actif " . $viessmannApi->getActiveProgram() . "\n";
 echo "Is Heating Burner active ? " . (int) $viessmannApi->isHeatingBurnerActive() . "\n";//in php false bool is converted into empty string
