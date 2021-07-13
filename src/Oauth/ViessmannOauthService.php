@@ -20,8 +20,7 @@ final class ViessmannOauthService extends AbstractService
     const SCOPE_USAGE_GET = 'IoT%20User';
     private $authorizeURL = 'https://iam.viessmann.com/idp/v2/authorize';
     private $token_url = 'https://iam.viessmann.com/idp/v2/token';
-    protected $redirect_uri = "vicare://oauth-callback/everest";
-    const X_API_KEY = '38c97795ed8ae0ec139409d785840113bb0f5479893a72997932d447bd1178c8';
+    protected $redirect_uri = "http://localhost:4200/";
 
     /**
      * ViessmannOauthClient constructor.
@@ -42,8 +41,11 @@ final class ViessmannOauthService extends AbstractService
             $baseApiUri,
             true
         );
+        $this->clientId=$credentials->getConsumerId();
     }
-
+    public function setCodeChallenge($codeChallenge){
+        $this->codeChallenge=$codeChallenge;
+    }
     public function getAuthorizationEndpoint()
     {
         return new Uri($this->authorizeURL);
@@ -97,9 +99,11 @@ final class ViessmannOauthService extends AbstractService
             $additionalParameters,
             array(
                 'type' => 'web_server',
-                'client_id' => $this->credentials->getConsumerId(),
-                'redirect_uri' => $this->credentials->getCallbackUrl(),
+                'client_id' => $this->clientId,
+                'redirect_uri' => 'http://localhost:4200/',
                 'response_type' => 'code',
+                'code_challenge'=>$this->codeChallenge,
+                'scope' => ViessmannOauthService::SCOPE_USAGE_GET
             )
         );
         // special, hubic use a param scope with commas
