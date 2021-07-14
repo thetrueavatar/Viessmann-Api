@@ -1,40 +1,30 @@
-If you wish to contribute or thanks me [![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LPAMB5QUEPV48)
+Version 2.0.0-SNAPSHOT integrate with IOT services
+--------------------------------------------------
+Viessman warn me that on the 15th of July old api key access will be removed. I'm not sure if it does means that the old api will be discontinued.
+I have then start to work on the integration with the new IOT api on the branch features/iot https://github.com/thetrueavatar/Viessmann-Api/tree/features/iot
+It's still in work in progress but reading data seems to work. According to Viessmann writing should be the same as the old api but I didn't test it yet.
+Please note, that a lot of endpoint/feature are currently missing on the new api. Viessmann is adding it on demand. 
+Be aware that with  the iot api, you need to generate an api key on https://developer.viessmann.com/ and add it into the clintId field of credentials.properties. 
+Please note that I have change the structure of the file to match a key=value structure:
 
-Version 1.4.0
---------------
-Switch to version 2 of Oauth Viessmann servuce. Many other small improvements. See release note https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.4.0
+    user=
+    pwd=
+    installationId=
+    gatewayId=
+    clientId=
+    deviceId=0
+    circuitId=0
 
-Version 1.3.4
---------------
-Suppress dep on php 7.1 and fix  GetAvailableFeatures https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.4
+The current snapshot phar can be found here https://github.com/thetrueavatar/Viessmann-Api/raw/develop/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
 
-Version 1.3.3
---------------
-
-Added missing DateTime import.
-https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.3
-
-Version 1.3.2
---------------
-Warning. This version requires php and php-curl 7.1 to support "?".
-Added caching to reduced load is available here : https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.3.2
-It's also possible to define installationId(3rd line) and gatewayId(4th line) in the credentials.properties.
-To get those value please use the getGatewayId and getInstallationid method.
-This would reduce the total of request to 3. Moreover authentication(2 request) seems to not be taken into account so it will result in only 1 request counting in the quota.
-
-As mentionned, Viessmann as set 2 limit to their API:
-* 120 calls for a time window of 10 minutes
-* 1450 calls for a time window of 24 hours
+Changelog is now available here: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/Changelog-en.md
 
 
+If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
 
-Version 1.1.0 available !
--------------------------
+
 
 Implementation of an API to get data that are expose through the viessmann service.
-This service is available through oauth2 autorization and use HATEOAS approach. 
-Viessmann is using the specification siren such as defined here:
-https://github.com/kevinswiber/siren
 
 The goal of this api is to hide technical aspect to expose only raw data so that users doesn't have to know anything about OAuth2 and Siren. 
 
