@@ -5,15 +5,7 @@ I have then start to work on the integration with the new IOT api on the branch 
 It's still in work in progress but reading data seems to work. According to Viessmann writing should be the same as the old api but I didn't test it yet.
 Please note, that a lot of endpoint/feature are currently missing on the new api. Viessmann is adding it on demand. 
 Be aware that with  the iot api, you need to generate an api key on https://developer.viessmann.com/ and add it into the clintId field of credentials.properties. 
-Please note that I have change the structure of the file to match a key=value structure:
-
-    user=
-    pwd=
-    installationId=
-    gatewayId=
-    clientId=
-    deviceId=0
-    circuitId=0
+You'll have to download the new [bootstrap.php](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/bootstrap.php) and [credentias.properties](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/credentials.properties).
 
 The current snapshot phar can be found here https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
 
