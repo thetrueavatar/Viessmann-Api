@@ -1,3 +1,19 @@
+Version 2.0.0-SNAPSHOT intégrée avec IOT
+-------------------------
+Pour information, suite au mail d’avertissement de viessmann j’ai un peu retravaillé sur la branche features/iot (https://github.com/thetrueavatar/Viessmann-Api/tree/features/iot) qui permet de s’intégrer avec la nouvelle api de Viessmann.
+
+J’ai fait en sorte qu’elle est fonctionnelle pour la lecture des données. 
+Néanmoins en pratique j’ai remarqué que pas mal de données ne sont pas encore exposée.
+Je n’ai pas encore regardé pour les écritures.
+Attention que pour l’api, il faut générer un api key sur le portail https://developer.viessmann.com/ .
+et l'ajouter dans le champ clientId de credentials.properties dont j'ai adapté la structure:
+
+    clientId=xxxx
+
+Le phar se trouve sur https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
+
+If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
+
 Version 1.4.0
 -------------
 Basculement sur la version v2 du service Oauth Viessmann. Plusieurs autres modifications voir release note https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.4.0
@@ -37,7 +53,7 @@ Comme déjà expliqué Viessmann limite désormais le nombre de requête sur son
 * 120 calls for a time window of 10 minutes
 * 1450 calls for a time window of 24 hours
 
-If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3DAXXVZV7PCR6)
+
 
 News FR
 ----
