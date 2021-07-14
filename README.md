@@ -8,7 +8,13 @@ Je n’ai pas encore regardé pour les écritures.
 Attention que pour l’api, il faut générer un api key sur le portail https://developer.viessmann.com/ .
 et l'ajouter dans le champ clientId de credentials.properties dont j'ai adapté la structure:
 
-    clientId=xxxx
+    user=
+    pwd=
+    installationId=
+    gatewayId=
+    clientId=
+    deviceId=0
+    circuitId=0
 
 Le phar se trouve sur https://github.com/thetrueavatar/Viessmann-Api/raw/develop/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
 
