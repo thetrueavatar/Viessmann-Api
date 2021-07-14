@@ -15,7 +15,7 @@ Please note that I have change the structure of the file to match a key=value st
     deviceId=0
     circuitId=0
 
-The current snapshot phar can be found here https://github.com/thetrueavatar/Viessmann-Api/raw/develop/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
+The current snapshot phar can be found here https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
 
 Changelog is now available here: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/Changelog-en.md
 
