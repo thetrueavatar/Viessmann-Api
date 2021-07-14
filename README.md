@@ -5,8 +5,8 @@ Pour information, suite au mail d’avertissement de viessmann j’ai un peu ret
 J’ai fait en sorte qu’elle est fonctionnelle pour la lecture des données. 
 Néanmoins en pratique j’ai remarqué que pas mal de données ne sont pas encore exposée.
 Je n’ai pas encore regardé pour les écritures.
-Attention que pour l’api, il faut générer un api key sur le portail https://developer.viessmann.com/ .
-et l'ajouter dans le champ clientId de credentials.properties dont j'ai adapté la structure.
+Attention que pour l’api, il faut générer un api key sur le portail https://developer.viessmann.com/ et l'ajouter dans le champ clientId de credentials.properties.
+
 Il faut donc reprendre le fichier [bootstrap.php](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/bootstrap.php) et [credentias.properties](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/credentials.properties).
 
 Le phar se trouve sur https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
