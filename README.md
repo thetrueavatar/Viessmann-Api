@@ -3,7 +3,7 @@ Version 2.0.0-SNAPSHOT intégrée avec IOT
 Pour information, suite au mail d’avertissement de viessmann j’ai un peu retravaillé sur la branche features/iot (https://github.com/thetrueavatar/Viessmann-Api/tree/features/iot) qui permet de s’intégrer avec la nouvelle api de Viessmann.
 
 J’ai fait en sorte qu’elle est fonctionnelle pour la lecture des données. 
-Néanmoins en pratique j’ai remarqué que pas mal de données ne sont pas encore exposée.
+Néanmoins en pratique j’ai remarqué que pas mal de données ne sont pas encore exposées.
 Je n’ai pas encore regardé pour les écritures.
 Attention que pour l’api, il faut générer un api key sur le portail https://developer.viessmann.com/ et l'ajouter dans le champ clientId de credentials.properties.
 
@@ -11,7 +11,7 @@ Il faut donc reprendre le fichier [bootstrap.php](https://github.com/thetrueavat
 
 Le phar se trouve sur https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
 
-Désormais les versions précédentes sont dispo dans le changelog: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/Changelog.md  
+Désormais les informations sur les versions précédentes sont dispo dans le changelog: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/Changelog.md  
 
 If you wish to contribute or thanks me /Si souhaitez me soutenir ou me remercier:[![paypal](https://www.paypalobjects.com/fr_FR/BE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LPAMB5QUEPV48)
  
