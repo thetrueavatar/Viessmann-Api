@@ -16,7 +16,7 @@ et l'ajouter dans le champ clientId de credentials.properties dont j'ai adapté 
     deviceId=0
     circuitId=0
 
-Le phar se trouve sur https://github.com/thetrueavatar/Viessmann-Api/raw/develop/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
+Le phar se trouve sur https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
 
 Désormais les versions précédentes sont dispo dans le changelog: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/Changelog.md  
 
