@@ -10,7 +10,7 @@ Attention que pour l’api, il faut générer un api key sur le portail https://
 
 Il faut donc reprendre le fichier [bootstrap.php](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/bootstrap.php) et [credentias.properties](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/credentials.properties).
 
-Le phar se trouve sur https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
+La release  se trouve sur https://github.com/thetrueavatar/Viessmann-Api/releases/tag/2.0.0
 
 Désormais les informations sur les versions précédentes sont dispo dans le changelog: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/Changelog.md  
 
