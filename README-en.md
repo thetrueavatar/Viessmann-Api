@@ -1,15 +1,12 @@
-Version 2.0.0-SNAPSHOT integrate with IOT services
+Version 2.0.0 integrate with IOT services
 --------------------------------------------------
 Viessman has discontinued the access to the old api.
 
-I have started to work on the integration with the new IOT api on the branch features/iot https://github.com/thetrueavatar/Viessmann-Api/tree/features/iot
-It's still in work in progress but reading data seems to work. 
-Some writing seems to works but still need some deep etst.
-Please note, that somme ndpoint/feature may be missing on the new api. Viessmann is adding it on demand. 
+Please note, that somme endpoint/feature may be missing on the new api. Viessmann is adding it on demand. 
 Be aware that with  the iot api, you need to generate an api key on https://developer.viessmann.com/ and add it into the clintId field of credentials.properties. 
 You'll have to download the new [bootstrap.php](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/bootstrap.php) and [credentias.properties](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/credentials.properties).
 
-The current snapshot phar can be found here https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/Viessmann-Api-2.0.0-SNAPSHOT.phar 
+The Release is available here https://github.com/thetrueavatar/Viessmann-Api/releases/tag/2.0.0
 
 Changelog is now available here: https://github.com/thetrueavatar/Viessmann-Api/blob/develop/Changelog-en.md
 
