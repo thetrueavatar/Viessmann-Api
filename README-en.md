@@ -1,9 +1,11 @@
 Version 2.0.0-SNAPSHOT integrate with IOT services
 --------------------------------------------------
-Viessman warn me that on the 15th of July old api key access will be removed. I'm not sure if it does means that the old api will be discontinued.
-I have then start to work on the integration with the new IOT api on the branch features/iot https://github.com/thetrueavatar/Viessmann-Api/tree/features/iot
-It's still in work in progress but reading data seems to work. According to Viessmann writing should be the same as the old api but I didn't test it yet.
-Please note, that a lot of endpoint/feature are currently missing on the new api. Viessmann is adding it on demand. 
+Viessman has discontinued the access to the old api.
+
+I have started to work on the integration with the new IOT api on the branch features/iot https://github.com/thetrueavatar/Viessmann-Api/tree/features/iot
+It's still in work in progress but reading data seems to work. 
+Some writing seems to works but still need some deep etst.
+Please note, that somme ndpoint/feature may be missing on the new api. Viessmann is adding it on demand. 
 Be aware that with  the iot api, you need to generate an api key on https://developer.viessmann.com/ and add it into the clintId field of credentials.properties. 
 You'll have to download the new [bootstrap.php](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/bootstrap.php) and [credentias.properties](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/credentials.properties).
 
