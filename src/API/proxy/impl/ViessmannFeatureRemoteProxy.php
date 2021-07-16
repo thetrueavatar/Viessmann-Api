@@ -9,6 +9,7 @@
 namespace Viessmann\API\proxy\impl;
 
 use DateTime;
+use TomPHP\Siren\EntityBuilder;
 use Viessmann\API\ViessmannApiException;
 use Viessmann\Oauth\ViessmannOauthClient;
 use TomPHP\Siren\Entity;
@@ -43,8 +44,16 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
                 throw new ViessmannApiException("Unable to get data for feature " . $resources . "\nReason: " . $data["message"], 1);
             }
         }
-
-        return Entity::fromArray($data, true);
+        $classes = array();
+        foreach ($data['data'] as $feature) {
+            if ($feature["properties"] != NULL) {
+                $entityBuilder=new EntityBuilder();
+                $entityBuilder->addClass($feature['feature']);
+                $entityBuilder->addProperties($feature['properties']);
+                $classes[$feature['feature']] = $entityBuilder->build();
+            }
+        }
+        return $classes;
 
     }
 

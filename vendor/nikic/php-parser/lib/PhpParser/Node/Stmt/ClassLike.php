@@ -13,6 +13,8 @@ abstract class ClassLike extends Node\Stmt
     public $name;
     /** @var Node\Stmt[] Statements */
     public $stmts;
+    /** @var Node\AttributeGroup[] PHP attribute groups */
+    public $attrGroups;
 
     /**
      * @return TraitUse[]
@@ -51,6 +53,26 @@ abstract class ClassLike extends Node\Stmt
             }
         }
         return $properties;
+    }
+
+    /**
+     * Gets property with the given name defined directly in this class/interface/trait.
+     *
+     * @param string $name Name of the property
+     *
+     * @return Property|null Property node or null if the property does not exist
+     */
+    public function getProperty(string $name) {
+        foreach ($this->stmts as $stmt) {
+            if ($stmt instanceof Property) {
+                foreach ($stmt->props as $prop) {
+                    if ($prop instanceof PropertyProperty && $name === $prop->name->toString()) {
+                        return $stmt;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     /**

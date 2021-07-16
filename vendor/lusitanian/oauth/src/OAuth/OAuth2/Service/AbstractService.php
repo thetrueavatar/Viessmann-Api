@@ -113,8 +113,8 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
         $bodyParams = array(
             'code'          => $code,
             'client_id'     => $this->credentials->getConsumerId(),
-            'client_secret' => $this->credentials->getConsumerSecret(),
             'redirect_uri'  => $this->credentials->getCallbackUrl(),
+            'code_verifier' => '2e21faa1-db2c-4d0b-a10f-575fd372bc8c-575fd372bc8c',
             'grant_type'    => 'authorization_code',
         );
 
