@@ -1,4 +1,4 @@
-Version 2.0.0-SNAPSHOT intégrée avec IOT
+Version 2.0.0 intégrée avec IOT
 -------------------------
 Depuis le 16 juillet, l'ancienne API de Viessmann ne semble plus utilisable.
 J'ai donc planché sur une première version en urgence s'intégrant avec l'api IOT.
