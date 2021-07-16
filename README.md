@@ -7,6 +7,7 @@ Il se peut que certaines données ne soient pas tout de suite dispo et que je do
 
 
 Attention que pour l’api, il faut générer un api key sur le portail https://developer.viessmann.com/ et l'ajouter dans le champ clientId de credentials.properties.
+Attention de désactiver l'option ReCaptcha qui forcera une validation du mot de passse par captcha!
 
 Il faut donc reprendre le fichier [bootstrap.php](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/bootstrap.php) et [credentias.properties](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/credentials.properties).
 
