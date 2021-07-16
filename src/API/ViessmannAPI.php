@@ -42,7 +42,7 @@ final class ViessmannAPI
     private $viessmannFeatureProxy;
     const STATISTICS = "statistics";
     private $viessmannOauthClient;
-    const OPERATIONAL_DATA_INSTALLATIONS = "operational-data/installations/";
+    const OPERATIONAL_DATA_INSTALLATIONS = "iot/v1/equipment/installations/";
     private $installationId;
     private $gatewayId;
 
@@ -52,16 +52,14 @@ final class ViessmannAPI
     public function __construct($params, $useCache = true, $viessmannRemoteFeatureProxy = NULL, $viessmannOauthClient = NULL)
     {
         $this->circuitId = $params["circuitId"] ?? 0;
-        $this->viessmannOauthClient = $viessmannOauthClient ?? new ViessmannOauthClientImpl($params["user"], $params["pwd"]);
+        $this->viessmannOauthClient = $viessmannOauthClient ?? new ViessmannOauthClientImpl($params["user"], $params["pwd"],$params["clientId"]);
         if (!empty($params["installationId"]) && !empty($params["gatewayId"])) {
             $this->installationId = $params["installationId"];
             $this->gatewayId = $params["gatewayId"];
         } else {
-            $installationEntity = $this->getInstallationEntity();
-            $modelInstallationEntity = $installationEntity->getEntities()[0];
-            $this->installationId = $modelInstallationEntity->getProperty('id');
-            $modelDevice = $modelInstallationEntity->getEntities()[0];
-            $this->gatewayId = $modelDevice->getProperty('serial');
+            $installation = $this->getInstallationFormation();
+            $this->installationId = $installation['installationId'];
+            $this->gatewayId = $installation['gatewayId'];
 
         }
         $this->viessmannFeatureProxy = $viessmannRemoteFeatureProxy ?? new ViessmannFeatureRemoteProxy($this->viessmannOauthClient, $this->installationId, $this->gatewayId);
@@ -75,10 +73,10 @@ final class ViessmannAPI
     /**
      * @return string
      */
-    public function getInstallationEntity()
+    public function getInstallationFormation()
     {
         try {
-            $response = json_decode($this->viessmannOauthClient->readData("general-management/installations"), true);
+            $response = json_decode($this->viessmannOauthClient->readData("equipment/gateways"), true);
             if (isset($response["statusCode"])) {
                 if ($response["statusCode"] == "429") {
                     $epochtime = (int)($response["extendedPayload"]["limitReset"] / 1000);
@@ -90,7 +88,9 @@ final class ViessmannAPI
 
                 }
             }
-            return Entity::fromArray($response);
+            $installation = array('gatewayId' => $response['data'][0]['serial'],
+                'installationId' => $response['data'][0]['installationId']);
+            return $installation;
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
         }
@@ -102,43 +102,47 @@ final class ViessmannAPI
     public function getGatewayWifi()
     {
         try {
-            return $this->viessmannOauthClient->readData("operational-data/installations/".$this->getInstallationId()."/gateways/".$this->getGatewayId()."/features/gateway.wifi" );
+            return $this->viessmannOauthClient->readData("operational-data/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.wifi");
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
 
         }
     }
+
     public function getGatewayFirmware()
     {
         try {
-            return $this->viessmannOauthClient->readData("operational-data/installations/".$this->getInstallationId()."/gateways/".$this->getGatewayId()."/features/gateway.firmware" );
+            return $this->viessmannOauthClient->readData("operational-data/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.firmware");
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
 
         }
     }
+
     public function getGatewayStatus()
     {
         try {
-            return $this->viessmannOauthClient->readData("operational-data/installations/".$this->getInstallationId()."/gateways/".$this->getGatewayId()."/features/gateway.status" );
+            return $this->viessmannOauthClient->readData("operational-data/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.status");
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
 
         }
     }
+
     public function getGatewayBmuconnection()
     {
         try {
-            return $this->viessmannOauthClient->readData("operational-data/installations/".$this->getInstallationId()."/gateways/".$this->getGatewayId()."/features/gateway.bmuconnection" );
+            return $this->viessmannOauthClient->readData("operational-data/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.bmuconnection");
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
 
         }
     }
+
     public function getGatewayDevices()
     {
         try {
-            return $this->viessmannOauthClient->readData("operational-data/installations/".$this->getInstallationId()."/gateways/".$this->getGatewayId()."/features/gateway.devices" );
+            return $this->viessmannOauthClient->readData("operational-data/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.devices");
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
 
@@ -146,11 +150,11 @@ final class ViessmannAPI
     }
 
     /**
-     * @throws ViessmannApiException
      * @param $feature The feature to set
      * @param $action The action to execute
      * @param $data The data to pass to action
      *   // Exposes all setters. Less amount of code = less errors.
+     * @throws ViessmannApiException
      */
 
     public
@@ -188,9 +192,9 @@ final class ViessmannAPI
      * @return String containing a list of all the features having either a property either an action on it
      */
     public
-    function getAvailableFeatures(): String
+    function getAvailableFeatures(): string
     {
-        $features= json_decode($this->viessmannFeatureProxy->getRawJsonData(""),true);
+        $features = json_decode($this->viessmannFeatureProxy->getRawJsonData(""), true);
         return implode(",\n", $features);
     }
 
@@ -765,13 +769,13 @@ final class ViessmannAPI
      * @throws ViessmannApiException
      */
     public
-    function getDhwGasConsumption($period = "day",$addUnit = false)
+    function getDhwGasConsumption($period = "day", $addUnit = false)
     {
-        if($addUnit){
-            $data['unit']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty("unit")["value"];
-            $data['value']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
+        if ($addUnit) {
+            $data['unit'] = $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty("unit")["value"];
+            $data['value'] = $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
             return json_encode($data);
-        }else{
+        } else {
             return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_DHW)->getProperty($period)["value"];
 
         }
@@ -789,13 +793,13 @@ final class ViessmannAPI
      * @throws ViessmannApiException
      */
     public
-    function getHeatingGasConsumption($period = "day",$addUnit = false)
+    function getHeatingGasConsumption($period = "day", $addUnit = false)
     {
-        if($addUnit){
-            $data['unit']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty("unit")["value"];
-            $data['value']=$this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
+        if ($addUnit) {
+            $data['unit'] = $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty("unit")["value"];
+            $data['value'] = $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
             return json_encode($data);
-        }else{
+        } else {
             return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_GAS_CONSUMPTION_HEATING)->getProperty($period)["value"];
 
         }
@@ -1228,7 +1232,7 @@ final class ViessmannAPI
     }
 
     public
-    function getDhwChargingLevel(): String
+    function getDhwChargingLevel(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_CHARGING_LEVEL)->getProperty("value")["value"];
     }
@@ -1255,25 +1259,25 @@ final class ViessmannAPI
     }
 
     public
-    function getDhwPumpsCirculation(): String
+    function getDhwPumpsCirculation(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_CIRCULATION)->getProperty("status")["value"];
     }
 
     public
-    function getDhwPumpsPrimary(): String
+    function getDhwPumpsPrimary(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_PRIMARY)->getProperty("status")["value"];
     }
 
     public
-    function getDhwTemperatureOutlet(): String
+    function getDhwTemperatureOutlet(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_SENSORS_TEMPERATURE_OUTLET)->getProperty("value")["value"];
     }
 
     public
-    function getDhwTemperature(): String
+    function getDhwTemperature(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_TEMPERATURE)->getProperty("value")["value"];
     }
@@ -1283,7 +1287,7 @@ final class ViessmannAPI
      * @throws ViessmannApiException
      */
     public
-    function getDhwTemperatureHysteresis(): String
+    function getDhwTemperatureHysteresis(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_TEMPERATURE_HYSTERESIS)->getProperty("value")["value"];
     }
@@ -1294,7 +1298,7 @@ final class ViessmannAPI
      *
      */
     public
-    function getHeatingTemperatureReturn(): String
+    function getHeatingTemperatureReturn(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SENSORS_TEMPERATURE_RETURN)->getProperty("value")["value"];
     }
@@ -1310,7 +1314,7 @@ final class ViessmannAPI
      * @return String cooling mode
      */
     public
-    function getHeatingConfigurationCoolingMode(): String
+    function getHeatingConfigurationCoolingMode(): string
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_CONFIGURATION_COOLING)->getProperty("mode")["value"];
     }
@@ -1399,30 +1403,30 @@ final class ViessmannAPI
     }
 
     /**
-     * @return generic feature and property/properties as JSON
-     * @throws ViessmannApiException
      * @param $feature The feature to query
      * @param mixed $properties string or array describing properties to query
      *   // Exposes all getters. Less amount of code = less errors.
+     * @return generic feature and property/properties as JSON
+     * @throws ViessmannApiException
      */
     public
     function getGenericFeaturePropertyAsJSON($feature, $properties = "value"): string
     {
-        if(is_array($properties)) {
+        if (is_array($properties)) {
             $res = array();
-            foreach($properties as $prop){
+            foreach ($properties as $prop) {
                 $res[$prop] = $this->viessmannFeatureProxy->getEntity($feature)->getProperty($prop)["value"];
             }
-        } else 
+        } else
             $res = $this->viessmannFeatureProxy->getEntity($feature)->getProperty($properties)["value"];
         return json_encode($res);
     }
 
     /**
+     * @param $feature The feature to query
      * @return generic feature and property/properties as JSON
      * @throws ViessmannApiException
-     * @param $feature The feature to query
-     */ 
+     */
     public
     function getProperties($feature): string
     {

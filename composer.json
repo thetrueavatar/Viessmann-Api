@@ -2,7 +2,7 @@
     "require": {
         "php": "^7.0",
         "psr/link": "^1.0",
-        "phpunit/phpunit": "^7.3.2",
+        "phpunit/phpunit": "7.5.17",
        "lusitanian/oauth": "v0.8.11",
          "tomphp/siren": "v0.1.0",
         "ext-json": "*",
@@ -23,7 +23,7 @@
     "extra": {
         "phar-builder": {
             "compression": "GZip",
-            "name": "Viessmann-Api-1.4.0.phar",
+            "name": "Viessmann-Api-2.0.0.phar",
             "output-dir": "./example",
             "entry-point": "./index.php",
             "include": "php",

@@ -31,16 +31,16 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
      * ViessmannOauthClient constructor.
      * @param $viessmannOauthService
      */
-    const CONSUMERID = "79742319e39245de5f91d15ff4cac2a8";
-
-    const CONSUMERSECRET = "8ad97aceb92c5892e102b093c7c083fa";
+    const BASE_URL = 'https://api.viessmann.com/iot/v1/';
 
     const HTTPS_IAM_VIESSMANN_COM_IDP_V_1_AUTHORIZE = 'https://iam.viessmann.com/idp/v2/authorize';
 
-    const VICARE_OAUTH_CALLBACK_EVEREST = "vicare://oauth-callback/everest";
+    const REDIRECT_URL = "http://localhost:4200/";
 
-    public function __construct($username,$password)
-    {
+    const CODE_CHALLENGE = "2e21faa1-db2c-4d0b-a10f-575fd372bc8c-575fd372bc8c";
+
+    public function __construct($username,$password,$clientId)
+    {   $this->clientId=$clientId;
         $this->user = $username;
         $this->pwd = $password;
         $this->serviceFactory = new ServiceFactory();
@@ -49,8 +49,9 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
         $this->serviceFactory->setHttpClient($httpClient);
         $this->serviceFactory->registerService("Viessmann", "Viessmann\Oauth\ViessmannOauthService");
         $this->storage = new Session();
-        $this->credentials = new Credentials("" . self::CONSUMERID, "" . self::CONSUMERSECRET, self::VICARE_OAUTH_CALLBACK_EVEREST);
-        $this->viessmannOauthService = $this->serviceFactory->createService('Viessmann', $this->credentials, $this->storage, $this->scope, new Uri('https://api.viessmann.com'));
+        $this->credentials = new Credentials("" . $this->clientId, "", self::REDIRECT_URL);
+        $this->viessmannOauthService = $this->serviceFactory->createService('Viessmann', $this->credentials, $this->storage, $this->scope, new Uri('' . self::BASE_URL . ''));
+        $this->viessmannOauthService->setCodeChallenge(self::CODE_CHALLENGE);
         $code = $this->getCode();
         $this->getToken($code);
     }
@@ -63,14 +64,11 @@ class ViessmannOauthClientImpl implements ViessmannOauthClient
 
     public function getCode(): string
     {
-        $client_id = self::CONSUMERID;
         $authorizeURL = self::HTTPS_IAM_VIESSMANN_COM_IDP_V_1_AUTHORIZE;
-        $callback_uri = self::VICARE_OAUTH_CALLBACK_EVEREST;
-        $url = "$authorizeURL?client_id=$client_id&scope=openid&redirect_uri=$callback_uri&response_type=code";
-        $header = array("Content-Type: application/x-www-form-urlencoded");
+        $callback_uri = self::REDIRECT_URL;
+        $url = "$authorizeURL?client_id=$this->clientId&scope=IoT%20User&redirect_uri=$callback_uri&response_type=code&code_challenge=" . self::CODE_CHALLENGE . "";
         $curloptions = array(
             CURLOPT_URL => $url,
-            CURLOPT_HTTPHEADER => $header,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_USERPWD => "$this->user:$this->pwd",

@@ -1,13 +1,8 @@
 <?php
 include __DIR__.'/../index.php';
 use Viessmann\API\ViessmannAPI;
-$credentials = file(__DIR__ . "/credentials.properties");
-$params = [
-    "user" => trim("$credentials[0]"),
-    "pwd" => trim("$credentials[1]"),
-    "deviceId" => "0",
-    "circuitId" => "0"
-];
+
+$params = parse_ini_file(__DIR__ . "/credentials.properties");
 function print_exception($e){
     echo "Message: " . $e->getMessage() . "\n";
     echo "Code: " . $e->getCode() . "\n";

@@ -20,8 +20,7 @@ final class ViessmannOauthService extends AbstractService
     const SCOPE_USAGE_GET = 'IoT%20User';
     private $authorizeURL = 'https://iam.viessmann.com/idp/v2/authorize';
     private $token_url = 'https://iam.viessmann.com/idp/v2/token';
-    protected $redirect_uri = "vicare://oauth-callback/everest";
-    const X_API_KEY = '38c97795ed8ae0ec139409d785840113bb0f5479893a72997932d447bd1178c8';
+    protected $redirect_uri = "http://localhost:4200/";
 
     /**
      * ViessmannOauthClient constructor.
@@ -42,8 +41,11 @@ final class ViessmannOauthService extends AbstractService
             $baseApiUri,
             true
         );
+        $this->clientId=$credentials->getConsumerId();
     }
-
+    public function setCodeChallenge($codeChallenge){
+        $this->codeChallenge=$codeChallenge;
+    }
     public function getAuthorizationEndpoint()
     {
         return new Uri($this->authorizeURL);
@@ -97,9 +99,11 @@ final class ViessmannOauthService extends AbstractService
             $additionalParameters,
             array(
                 'type' => 'web_server',
-                'client_id' => $this->credentials->getConsumerId(),
+                'client_id' => $this->clientId,
                 'redirect_uri' => $this->credentials->getCallbackUrl(),
                 'response_type' => 'code',
+                'code_challenge'=>$this->codeChallenge,
+                'scope' => ViessmannOauthService::SCOPE_USAGE_GET
             )
         );
         // special, hubic use a param scope with commas
@@ -121,8 +125,35 @@ final class ViessmannOauthService extends AbstractService
 
     public function request($path, $method = 'GET', $body = null, array $extraHeaders = array())
     {
-        $extraHeaders ['x-api-key'] = 'token ' . self::X_API_KEY . '';
         return parent::request($path, $method, $body, $extraHeaders);
     }
+
+    public function requestAccessToken($code, $state = null)
+    {
+        if (null !== $state) {
+            $this->validateAuthorizationState($state);
+        }
+
+        $bodyParams = array(
+            'code'          => $code,
+            'client_id'     => $this->credentials->getConsumerId(),
+            'redirect_uri'  => $this->credentials->getCallbackUrl(),
+            'code_verifier' => $this->codeChallenge,
+            'grant_type'    => 'authorization_code',
+        );
+
+        $responseBody = $this->httpClient->retrieveResponse(
+            $this->getAccessTokenEndpoint(),
+            $bodyParams,
+            $this->getExtraOAuthHeaders()
+        );
+
+        $token = $this->parseAccessTokenResponse($responseBody);
+        $this->storage->storeAccessToken($this->service(), $token);
+
+        return $token;
+    }
+
+
 
 }

@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/bootstrap.php';
+include __DIR__ . '/bootstrap-dev.php';
 
 use Viessmann\API\ViessmannFeature;
 
