@@ -4,6 +4,8 @@ Viessman has discontinued the access to the old api.
 
 Please note, that somme endpoint/feature may be missing on the new api. Viessmann is adding it on demand. 
 Be aware that with  the iot api, you need to generate an api key on https://developer.viessmann.com/ and add it into the clintId field of credentials.properties. 
+Don't forget to disable ReCaptcha option otherwise it will try to force you to validate the user/pwd by a Captcha.
+
 You'll have to download the new [bootstrap.php](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/bootstrap.php) and [credentias.properties](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/credentials.properties).
 
 The Release is available here https://github.com/thetrueavatar/Viessmann-Api/releases/tag/2.0.0
