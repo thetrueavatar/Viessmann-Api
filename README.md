@@ -1,10 +1,11 @@
 Version 2.0.0-SNAPSHOT intégrée avec IOT
 -------------------------
-Pour information, suite au mail d’avertissement de viessmann j’ai un peu retravaillé sur la branche features/iot (https://github.com/thetrueavatar/Viessmann-Api/tree/features/iot) qui permet de s’intégrer avec la nouvelle api de Viessmann.
-
+Depuis le 16 juillet, l'ancienne API de Viessmann ne semble plus utilisable.
+J'ai donc planché sur une première version en urgence s'intégrant avec l'api IOT.
 J’ai fait en sorte qu’elle est fonctionnelle pour la lecture des données. 
-Néanmoins en pratique j’ai remarqué que pas mal de données ne sont pas encore exposées.
-Je n’ai pas encore regardé pour les écritures.
+Il se peut que certaines données ne soient pas tout de suite dispo et que je doives adapté certaines routes.
+
+
 Attention que pour l’api, il faut générer un api key sur le portail https://developer.viessmann.com/ et l'ajouter dans le champ clientId de credentials.properties.
 
 Il faut donc reprendre le fichier [bootstrap.php](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/bootstrap.php) et [credentias.properties](https://github.com/thetrueavatar/Viessmann-Api/raw/features/iot/example/credentials.properties).
