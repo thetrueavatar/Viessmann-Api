@@ -30,8 +30,8 @@ final class ViessmannFeature
     const HEATING_BURNER_AUTOMATIC = "heating.burner.automatic";
     const HEATING_BURNER_CURRENT_POWER = "heating.burner.current.power";
     const HEATING_BURNER = "heating.burner";
-    const HEATING_BURNER_MODULATION = "heating.burner.modulation";
-    const HEATING_BURNER_STATISTICS = "heating.burner.statistics";
+    const HEATING_BURNER_MODULATION = "heating.burner.0.modulation";
+    const HEATING_BURNER_STATISTICS = "heating.burner.0.statistics";
     const HEATING_CIRCUITS_0_CIRCULATION = "heating.circuits.0.circulation";
     const HEATING_CIRCUITS_0_CIRCULATION_PUMP = "heating.circuits.0.circulation.pump";
     const HEATING_CIRCUITS_0_CIRCULATION_SCHEDULE = "heating.circuits.0.circulation.schedule";
