@@ -29,7 +29,7 @@ final class ViessmannFeature
     const HEATING_BOILER_TEMPERATURE = "heating.boiler.temperature";
     const HEATING_BURNER_AUTOMATIC = "heating.burners.automatic";
     const HEATING_BURNER_CURRENT_POWER = "heating.burners.current.power";
-    const HEATING_BURNER = "heating.burners";
+    const HEATING_BURNER = "heating.burner";
     const HEATING_BURNER_MODULATION = "heating.burners.0.modulation";
     const HEATING_BURNER_STATISTICS = "heating.burners.0.statistics";
     const HEATING_CIRCUITS_0_CIRCULATION = "heating.circuits.0.circulation";
