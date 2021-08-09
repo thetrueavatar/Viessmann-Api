@@ -17,24 +17,35 @@ final class ViessmannAPI
     const HEATING_FROSTPROTECTION = "frostprotection";
     const HEATING_COMPRESSOR_STATISTICS = "statistics";
     const SENSORS_TEMPERATURE_ROOM = "sensors.temperature.room";
-    const ACTIVE_OPERATING_MODE = "operating.modes.active";
+    const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
+
     const OPERATING_MODES = "operating.modes.active";
+    const COOLING_MODE = "operating.modes.cooling";
     const DHW_MODE = "operating.modes.dhw";
     const DHW_AND_HEATING_MODE = "operating.modes.dhwAndHeating";
-    const FORCED_NORMAL_MODE = "operating.modes.forcedNormal";
-    const FORCED_REDUCTED_MODE = "operating.modes.forcedReduced";
+    const DHW_AND_HEATING_COOLING_MODE = "operating.modes.dhwAndHeatingCooling";
+    const HEATING_MODE = "operating.modes.heating";
+    const HEATING_COOLING_MODE = "operating.modes.heatingCooling";
+    const NORMALSTANDBY_MODE = "operating.modes.normalStandby";
     const STANDY_MODE = "operating.modes.standby";
+    
     const ACTIVE_PROGRAM = "operating.programs.active";
     const COMFORT_PROGRAM = "operating.programs.comfort";
     const ECO_PROGRAM = "operating.programs.eco";
     const EXTERNAL_PROGRAM = "operating.programs.external";
+    const FIXED_PROGRAM = "operating.programs.fixed";
+    const FORCEDLASTSCHEDULE_PROGRAM = "operating.programs.forcedLastFromSchedule";
+    const HOLIDAY_PROGRAM = "operating.programs.holiday";
+    const HOLIDAYATHOME_PROGRAM = "operating.programs.holidayAtHome";
     const NORMAL_PROGRAM = "operating.programs.normal";
+    const NODEMANDBYZERO_PROGRAM = "operating.programs.noDemandByZone";
     const REDUCED_PROGRAM = "operating.programs.reduced";
     const STANDBY_PROGRAM = "operating.programs.standby";
-    const HOLIDAY_PROGRAM = "operating.programs.holiday";
-    const FIXED_PROGRAM = "operating.programs.fixed";
-    const SENSORS_TEMPERATURE_SUPPLY = "sensors.temperature.supply";
-    const CIRCULATION_SCHEDULE = "circulation.schedule";
+    const SUMMERECO_PROGRAM = "operating.programs.summerEco";
+
+    const PUMPS_CIRCULATION_SCHEDULE = "pumps.circulation.schedule";
+    const DHW_PUMPS_CIRCULATION_SCHEDULE = "dhw.pumps.circulation.schedule";
+
     const DHW_SCHEDULE = "heating.dhw.schedule";
     const HEATING_SCHEDULE = "heating.schedule";
     const CIRCULATION_PUMP = "circulation.pump";
@@ -42,7 +53,6 @@ final class ViessmannAPI
     private $viessmannFeatureProxy;
     const STATISTICS = "statistics";
     private $viessmannOauthClient;
-    const OPERATIONAL_DATA_INSTALLATIONS = "iot/v1/equipment/installations/";
     private $installationId;
     private $gatewayId;
 
@@ -96,43 +106,54 @@ final class ViessmannAPI
         }
     }
 
+    //TODO ADD support for gateway.ethernet and gateway.ethernet.config
     /**
      * @return string
      */
     public function getGatewayWifi()
     {
         try {
-            return $this->viessmannOauthClient->readData("operational-data/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.wifi");
+            return $this->viessmannOauthClient->readData("equipment/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.wifi");
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
 
         }
     }
-
+    
+    /**
+     * [DEPRICATED]
+     */
     public function getGatewayFirmware()
     {
         try {
-            return $this->viessmannOauthClient->readData("operational-data/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.firmware");
+            return $this->viessmannOauthClient->readData("equipment/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.firmware");
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
 
         }
     }
 
+    /**
+     * [DEPRICATED]
+     */
     public function getGatewayStatus()
     {
         try {
-            return $this->viessmannOauthClient->readData("operational-data/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.status");
+            return $this->viessmannOauthClient->readData("equipment/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.status");
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
 
         }
     }
 
+
+    /**
+     * [DEPRICATED]
+     */
     public function getGatewayBmuconnection()
     {
         try {
-            return $this->viessmannOauthClient->readData("operational-data/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.bmuconnection");
+            return $this->viessmannOauthClient->readData("equipment/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.bmuconnection");
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
 
@@ -142,7 +163,7 @@ final class ViessmannAPI
     public function getGatewayDevices()
     {
         try {
-            return $this->viessmannOauthClient->readData("operational-data/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.devices");
+            return $this->viessmannOauthClient->readData("equipment/installations/" . $this->getInstallationId() . "/gateways/" . $this->getGatewayId() . "/features/gateway.devices");
         } catch (TokenResponseException $e) {
             throw new ViessmannApiException("\n\t Unable to read installation basic information   \n\t Reason: " . $e->getMessage(), 2, $e);
 
@@ -309,10 +330,11 @@ final class ViessmannAPI
     public
     function getHeatingCompressorLoadClassHours($circuitId = NULL, $classNumber = NULL): int
     {
-        return $this->viessmannFeatureProxy->getEntity($this->buildFeatureCompressors($circuitId, self::HEATING_COMPRESSOR_STATISTICS))->getProperty($this->buildHeatingCompressorLoadCassParameter($classNumber))["value"];
+        return $this->viessmannFeatureProxy->getEntity($this->buildFeatureCompressors($circuitId, self::HEATING_COMPRESSOR_STATISTICS))->getProperty($this->buildHeatingCompressorLoadClassParameter($classNumber))["value"];
     }
 
     /**
+     * [DEPRICATED]
      * @return float the result for primary circuit sensor Temperature supply
      * @throws ViessmannApiException
      */
@@ -323,6 +345,7 @@ final class ViessmannAPI
     }
 
     /**
+     * [DEPRICATED]
      * @return float the result for secondary circuit sensor Temperature supply
      * @throws ViessmannApiException
      */
@@ -333,6 +356,7 @@ final class ViessmannAPI
     }
 
     /**
+     * [DEPRICATED]
      * @return float the result for secondary circuit sensor Temperature return
      * @throws ViessmannApiException
      */
@@ -342,6 +366,7 @@ final class ViessmannAPI
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SECONDARYCIRCUIT_SENSORS_TEMPERATURE_RETURN)->getProperty("value")["value"];
     }
 
+    //TODO ADD new oparating modes in return string description
     /**
      * @param null $circuitId
      * @return string the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
@@ -350,9 +375,10 @@ final class ViessmannAPI
     public
     function getActiveMode($circuitId = NULL): string
     {
-        return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::ACTIVE_OPERATING_MODE))->getProperty("value")["value"];
+        return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::OPERATING_MODES))->getProperty("value")["value"];
     }
 
+    //TODO ADD new oparating modes in @param $mode description
     /**
      * Set the active mode to the given mode
      * @param $mode the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
@@ -364,6 +390,7 @@ final class ViessmannAPI
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::OPERATING_MODES), "setMode", "{\"mode\":\"" . $mode . "\"}");
     }
 
+    //TODO ADD new program modes in @return string description
     /**
      * @param null $circuitId
      * @return string the active program("comfort","eco","external","holiday","normal","reduced", "standby")
@@ -662,10 +689,10 @@ final class ViessmannAPI
      * Currently the number
      * are not the same that displayed on heating device
      * @param string $period amongst enume "day","week","month","year
-     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
-     *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
-     *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
-     *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
+     * @return array if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+     *               if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
+     *               if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
+     *               if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
      * @throws ViessmannApiException
      */
     public
@@ -686,7 +713,7 @@ final class ViessmannAPI
     }
 
 
-    /**
+    /** [DEPRECATED]
      * @return string heating solar power cumulative produced in kWh
      * @throws ViessmannApiException
      */
@@ -708,7 +735,7 @@ final class ViessmannAPI
     }
 
 
-    /**
+    /** [DEPRECATED]
      * @return string heating solar system operational hours
      * @throws ViessmannApiException
      */
@@ -719,7 +746,7 @@ final class ViessmannAPI
     }
 
 
-    /**
+    /** [DEPRECATED]
      * @return string off/on for recharge suppression
      * @throws ViessmannApiException
      */
@@ -745,10 +772,10 @@ final class ViessmannAPI
      * Return the Heating consumption. A period is needeed amongs day(default),week,month,year. Currently the number
      * are not the same that displayed on heating device
      * @param string $period amongst enume "day","week","month","year
-     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
-     *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
-     *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
-     *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
+     * @return array if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+     *               if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
+     *               if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
+     *               if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
      * @throws ViessmannApiException
      */
     public
@@ -762,10 +789,11 @@ final class ViessmannAPI
      * Return the Gas consumption for DHW. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
      * if addUnit is true then the return will be a json object with unit and value
      * @param string $period amongst enume "day","week","month","year
-     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
-     *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
-     *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
-     *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
+     * @param bool $addUnit add Unit 
+     * @return array if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+     *               if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
+     *               if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
+     *               if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
      * @throws ViessmannApiException
      */
     public
@@ -785,11 +813,11 @@ final class ViessmannAPI
      * Return the Gas consumption for Heating. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
      * if addUnit is true then the return will be a json object with unit and value
      * @param string $period amongst enume "day","week","month","year
-     * @return if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
-     *         if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
-     *         if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
-     *         if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
-     *
+     * @param bool $addUnit add Unit 
+     * @return array if day an array containing daily consommation for the last 7 days(each entry is consumption for a day)
+     *               if week an array containing weekly consommation for the last 52 weeks(each entry is consumption for a week)
+     *               if month an array containing monthly consommation for the last 12 month(each entry is consumption for one month)
+     *              if year an array containing yearly consommation for the last 2 years(each entry is consumption for one year)
      * @throws ViessmannApiException
      */
     public
@@ -907,6 +935,7 @@ final class ViessmannAPI
     }
 
     /**
+     *  [DEPRECATED]
      * @param null $circuitId
      * @return json containing the Circulation schedule for each days in format:
      * "mon": [
@@ -923,6 +952,44 @@ final class ViessmannAPI
     function getCirculationSchedule($circuitId = NULL): string
     {
         return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::CIRCULATION_SCHEDULE))->getProperties());
+    }
+
+    /**
+     * @param null $circuitId
+     * @return json containing the Circulation schedule for each days in format:
+     * "mon": [
+     * {
+     * "start": "03:00",
+     * "end": "24:00",
+     * "mode": "on",
+     * "position": 1
+     * }
+     * ]
+     * @throws ViessmannApiException
+     */
+    public
+    function getPumpsCirculationSchedule($circuitId = NULL): string
+    {
+        return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::PUMPS_CIRCULATION_SCHEDULE))->getProperties());
+    }
+
+    /**
+     * @param null $circuitId
+     * @return json containing the Circulation schedule for each days in format:
+     * "mon": [
+     * {
+     * "start": "03:00",
+     * "end": "24:00",
+     * "mode": "on",
+     * "position": 1
+     * }
+     * ]
+     * @throws ViessmannApiException
+     */
+    public
+    function getDhwPumpsCirculationSchedule($circuitId = NULL): string
+    {
+        return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::DHW_PUMPS_CIRCULATION_SCHEDULE))->getProperties());
     }
 
     /**
@@ -1203,10 +1270,12 @@ final class ViessmannAPI
     public
     function setRawHeatingSchedule($schedule, $circuitId = NULL)
     {
-        $data = "{\"newSchedule\": $schedule}";
-        $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::HEATING_SCHEDULE), "setSchedule", $data);
+        $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::HEATING_SCHEDULE), "setSchedule", "{\"newSchedule\": $schedule}");
     }
 
+    /**
+     * [DEPRICATED]
+     */
     public
     function getHeatingBurnerCurrentPower()
     {
@@ -1246,16 +1315,13 @@ final class ViessmannAPI
     public
     function startOneTimeDhwCharge()
     {
-        $data = "{}";
-        $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "activate", $data);
+        $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "activate", "{}");
     }
 
     public
     function stopOneTimeDhwCharge()
     {
-
-        $data = "{}";
-        $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "deactivate", $data);
+        $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_ONETIMECHARGE, "deactivate", "{}");
     }
 
     public
@@ -1306,11 +1372,11 @@ final class ViessmannAPI
     public
     function setDhwTemperature($temperature)
     {
-        $data = "{\"temperature\": $temperature}";
-        $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", $data);
+        $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_TEMPERATURE, "setTargetTemperature", "{\"temperature\": $temperature}");
     }
 
     /**
+     *  [DEPRICATED]
      * @return String cooling mode
      */
     public
@@ -1326,13 +1392,11 @@ final class ViessmannAPI
     public
     function setHeatingConfigurationCoolingMode($mode)
     {
-        {
-            $data = "{\"mode\": $mode}";
-            $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_CONFIGURATION_COOLING, "setMode", $data);
-        }
+        $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_CONFIGURATION_COOLING, "setMode", "{\"mode\": $mode}");
     }
 
     /**
+     * [DEPRICATED]
      * @return string last service if available
      * @throws ViessmannApiException
      */
@@ -1343,6 +1407,7 @@ final class ViessmannAPI
     }
 
     /**
+     * [DEPRICATED]
      * @return number of month beetween service if available
      * @throws ViessmannApiException
      */
@@ -1353,6 +1418,7 @@ final class ViessmannAPI
     }
 
     /**
+     * [DEPRICATED]
      * @return number of month since service if available
      * @throws ViessmannApiException
      */
@@ -1364,7 +1430,7 @@ final class ViessmannAPI
 
 
     private
-    function buildHeatingCompressorLoadCassParameter($classNumber)
+    function buildHeatingCompressorLoadClassParameter($classNumber)
     {
         switch ($classNumber) {
             case 1:
