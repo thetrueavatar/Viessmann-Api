@@ -21,7 +21,6 @@ $errorHandler= function($e)
 
 set_exception_handler($errorHandler);
 try {
-    print_r($params);
     $viessmannApi = new ViessmannAPI($params);
 } catch (ViessmannApiException $e) {
     $errorHandler($e);
