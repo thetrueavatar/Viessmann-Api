@@ -41,9 +41,12 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
             foreach (array_keys($this->features) as $feature){
                 array_push($allfeatures,$this->getEntityJson($feature));
             }
-
+            return json_encode($allfeatures);
         }
-        return json_encode($allfeatures);
+        else{
+            return $this->features[$resources]->toJson();
+        }
+
     }
 
     /**
