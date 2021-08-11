@@ -140,7 +140,7 @@ final class ViessmannFeature
 
     const HEATING_DHW = "heating.dhw";
     const HEATING_DHW_CHARGING = "heating.dhw.charging";
-    const HEATING_DHW_CHARGING_LEVEL = "heating.dhw.charging.level";
+    const HEATING_DHW_CHARGING_LEVEL = " heating.dhw.temperature.mainheating.dhw.charging.level";
     const HEATING_DHW_COMFORT = "heating.dhw.comfort";
     const HEATING_DHW_ONETIMECHARGE = "heating.dhw.oneTimeCharge";
     const HEATING_DHW_PUMPS_CIRCULATION = "heating.dhw.pumps.circulation";
@@ -154,7 +154,7 @@ final class ViessmannFeature
     const HEATING_DHW_SENSORS_TEMPERATURE_HOTWATERSTORAGE_TOP = "heating.dhw.sensors.temperature.hotWaterStorage.top";
     const HEATING_DHW_SENSORS_TEMPERATURE_OUTLET = "heating.dhw.sensors.temperature.outlet";
     
-    const HEATING_DHW_TEMPERATURE = "heating.dhw.temperature";
+    const HEATING_DHW_TEMPERATURE = "heating.dhw.temperature.main";
     const HEATING_DHW_TEMPERATURE_HYSTERESIS = "heating.dhw.temperature.hysteresis";
     const HEATING_DHW_TEMPERATURE_LEVELS = "heating.dhw.temperature.levels";
     const HEATING_DHW_TEMPERATURE_MAIN = "heating.dhw.temperature.main";
