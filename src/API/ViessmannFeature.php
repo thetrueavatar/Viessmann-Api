@@ -140,7 +140,7 @@ final class ViessmannFeature
 
     const HEATING_DHW = "heating.dhw";
     const HEATING_DHW_CHARGING = "heating.dhw.charging";
-    const HEATING_DHW_CHARGING_LEVEL = " heating.dhw.temperature.mainheating.dhw.charging.level";
+    const HEATING_DHW_CHARGING_LEVEL = "heating.dhw.charging.level";
     const HEATING_DHW_COMFORT = "heating.dhw.comfort";
     const HEATING_DHW_ONETIMECHARGE = "heating.dhw.oneTimeCharge";
     const HEATING_DHW_PUMPS_CIRCULATION = "heating.dhw.pumps.circulation";
