@@ -25,8 +25,8 @@ final class ViessmannFeature
     const HEATING_BOILER_TEMPERATURE = "heating.boiler.temperature";
 
     const HEATING_BURNER = "heating.burner";
-    const HEATING_BURNER_MODULATION = "heating.burners.0.modulation";
-    const HEATING_BURNER_STATISTICS = "heating.burners.0.statistics";
+    const HEATING_BURNER_MODULATION = "heating.burners.0.modulation"; //TODO split in circuits
+    const HEATING_BURNER_STATISTICS = "heating.burners.0.statistics"; //TODO split in circuits
 
     const HEATING_CIRCUITS = "heating.circuits";
 
@@ -157,34 +157,36 @@ final class ViessmannFeature
     const HEATING_DHW_TEMPERATURE = "heating.dhw.temperature.main";
     const HEATING_DHW_TEMPERATURE_HYSTERESIS = "heating.dhw.temperature.hysteresis";
     const HEATING_DHW_TEMPERATURE_LEVELS = "heating.dhw.temperature.levels";
+    const HEATING_DHW_TEMPERATURE_HYGIENE = "heating.dhw.temperature.hygiene"; //TODO currently not implemented
     const HEATING_DHW_TEMPERATURE_MAIN = "heating.dhw.temperature.main";
-    const HEATING_DHW_TEMPERATURE_TEMP2 =  "heating.dhw.temperature.temp2";
+    const HEATING_DHW_TEMPERATURE_TEMP2 =  "heating.dhw.temperature.temp2"; //TODO currently not implemented
 
     const HEATING_GAS_CONSUMPTION_DHW = "heating.gas.consumption.dhw";
     const HEATING_GAS_CONSUMPTION_HEATING = "heating.gas.consumption.heating";
+    const HEATING_GAS_CONSUMPTION_TOTAL = "heating.gas.consumption.total"; //TODO currently not implemented
 
     const HEATING_INCREASEDRETURN_TEMPERATURE = "heating.increasedReturn.temperature";
 
     const HEATING_OPERATING_PROGRAMMS_HOLLIDAY = "heating.operating.programs.holiday";
     const HEATING_OPERATING_PROGRAMMS_HOLLIDAYATHOME = "heating.operating.programs.holidayAtHome";
 
-    const HEATING_POWER_CONSUMPTION = "heating.power.consumption";
+    const HEATING_POWER_CONSUMPTION = "heating.power.consumption.total";
+    const HEATING_POWER_CONSUMPTION_DHW = "heating.power.consumption.dhw";  //TODO currently not implemented
+    const HEATING_POWER_CONSUMPTION_HEATING = "heating.power.consumption.heating"; //TODO currently not implemented
 
     const HEATING_SENSORS_TEMPERATURE_HYDRAULICSEPARATOR = "heating.sensors.temperature.hydraulicSeparator";
     const HEATING_SENSORS_TEMPERATURE_INCREASEDRETURN = "heating.sensors.temperature.increasedReturn";
     const HEATING_SENSORS_TEMPERATURE_OUTSIDE = "heating.sensors.temperature.outside";
     const HEATING_SENSORS_TEMPERATURE_RETURN = "heating.sensors.temperature.return";
-    const HEATING_SENSORS_TEMPERATURE_SYSTEMRETURN = "heating.sensors.temperature.systemReturn";
-    const HEATING_SENSORS_VALVE_BUFFERDISCHARGETHREEWAYVALVE = "heating.sensors.valve.bufferDischargeThreeWayValve";
-    const HEATING_SENSORS_VOLUMETRICFLOW_RETURN = "heating.sensors.volumetricFlow.return";
+    const HEATING_SENSORS_TEMPERATURE_SYSTEMRETURN = "heating.sensors.temperature.systemReturn"; //TODO currently not implemented
+    const HEATING_SENSORS_VALVE_BUFFERDISCHARGETHREEWAYVALVE = "heating.sensors.valve.bufferDischargeThreeWayValve"; //TODO currently not implemented
+    const HEATING_SENSORS_VOLUMETRICFLOW_RETURN = "heating.sensors.volumetricFlow.return"; //TODO currently not implemented
     
     const HEATING_SOLAR_POWER_PRODUCTION = "heating.solar.power.production";
     const HEATING_SOLAR_PUMPS_CIRCUIT = "heating.solar.pumps.circuit";
     const HEATING_SOLAR_SENSORS_TEMPERATURE_COLLECTOR = "heating.solar.sensors.temperature.collector"; 
     const HEATING_SOLAR_SENSORS_TEMPERATURE_DHW = "heating.solar.sensors.temperature.dhw";
     const HEATING_SOLAR_STATISTICS = "heating.solar.statistics";
-
-    const HEATING_POWER_CONSUPTION = "heating.power.consumption";
 
     const VENTILATION_OPERATING_MODES_ACTIVE = "ventilation.operating.modes.active";
     const VENTILATION_OPERATING_MODES_STANDARD = "ventilation.operating.modes.standard";
@@ -300,7 +302,6 @@ final class ViessmannFeature
     */
 
     // const HEATING_GAS_CONSUMPTION_FUELCELL = "heating.gas.consumption.fuelCell";
-    // const HEATING_GAS_CONSUMPTION_TOTAL = "heating.gas.consumption.total";
  
     // const HEATING = "heating";
 

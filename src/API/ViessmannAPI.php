@@ -334,7 +334,7 @@ final class ViessmannAPI
     }
 
     /**
-     * [DEPRICATED]
+     * [DEPRICATED] -> //TODO delete, replaced by getSupplyTemperature($circuitId = NULL)
      * @return float the result for primary circuit sensor Temperature supply
      * @throws ViessmannApiException
      */
@@ -345,7 +345,7 @@ final class ViessmannAPI
     }
 
     /**
-     * [DEPRICATED]
+     * [DEPRICATED] -> //TODO delete, replaced by getSupplyTemperature($circuitId = NULL)
      * @return float the result for secondary circuit sensor Temperature supply
      * @throws ViessmannApiException
      */
@@ -356,7 +356,7 @@ final class ViessmannAPI
     }
 
     /**
-     * [DEPRICATED]
+     * [DEPRICATED] -> //TODO delete, replaced by getHeatingTemperatureReturn()
      * @return float the result for secondary circuit sensor Temperature return
      * @throws ViessmannApiException
      */
@@ -366,10 +366,9 @@ final class ViessmannAPI
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SECONDARYCIRCUIT_SENSORS_TEMPERATURE_RETURN)->getProperty("value")["value"];
     }
 
-    //TODO ADD new oparating modes in return string description
     /**
      * @param null $circuitId
-     * @return string the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
+     * @return string the activeMode("cooling","dhw","dhwAndHeating","dhwAndHeatingCooling","heating","heatingCooling","normalStandby","standby")
      * @throws ViessmannApiException
      */
     public
@@ -378,10 +377,9 @@ final class ViessmannAPI
         return $this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::OPERATING_MODES))->getProperty("value")["value"];
     }
 
-    //TODO ADD new oparating modes in @param $mode description
     /**
      * Set the active mode to the given mode
-     * @param $mode the activeMode( "standby","dhw","dhwAndHeating","forcedReduced","forcedNormal")
+     * @param $mode the activeMode("cooling","dhw","dhwAndHeating","dhwAndHeatingCooling","heating","heatingCooling","normalStandby","standby")
      * @param null $circuitId
      */
     public
@@ -390,10 +388,9 @@ final class ViessmannAPI
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::OPERATING_MODES), "setMode", "{\"mode\":\"" . $mode . "\"}");
     }
 
-    //TODO ADD new program modes in @return string description
     /**
      * @param null $circuitId
-     * @return string the active program("comfort","eco","external","holiday","normal","reduced", "standby")
+     * @return string the active program("comfort","eco","external","fixed","forcedLastFromSchedule","holiday","holidayAtHome","normal","noDemandByZone","reduced","standby","summerEco")
      * @throws ViessmannApiException
      */
     public
@@ -426,6 +423,7 @@ final class ViessmannAPI
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_COMPRESSORS . "." . $circuitId)->getProperty("active")["value"];
     }
 
+    //TODO add circuitId
     /**
      * @return string statistics of the compressors
      */
@@ -833,6 +831,7 @@ final class ViessmannAPI
         }
     }
 
+    //TODO add circuitId
     /**
      * @param string $type the type of statistics("hours":number of active hours or "starts": number of start)
      * @return mixed number of hours or number of starts
@@ -844,6 +843,7 @@ final class ViessmannAPI
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER_STATISTICS)->getProperty($type)["value"];
     }
 
+    //TODO why curcuitId in param?
     /**
      * @param null $circuitId
      * @return json containing the Dhw schedule for each days in format:
@@ -1274,7 +1274,7 @@ final class ViessmannAPI
     }
 
     /**
-     * [DEPRICATED]
+     * [DEPRICATED] -> //TODO delete, not available feature
      */
     public
     function getHeatingBurnerCurrentPower()
@@ -1282,6 +1282,10 @@ final class ViessmannAPI
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER_CURRENT_POWER)->getProperty("value")["value"];
     }
 
+    //TODO add circuitId
+    /**
+     * @return array
+     */
     public
     function getHeatingBurnerModulation()
     {
