@@ -25,8 +25,8 @@ final class ViessmannFeature
     const HEATING_BOILER_TEMPERATURE = "heating.boiler.temperature";
 
     const HEATING_BURNER = "heating.burner";
-    const HEATING_BURNER_MODULATION = "heating.burners.0.modulation"; //TODO split in circuits
-    const HEATING_BURNER_STATISTICS = "heating.burners.0.statistics"; //TODO split in circuits
+    const HEATING_BURNER_MODULATION = "heating.burners.0.modulation"; 
+    const HEATING_BURNER_STATISTICS = "heating.burners.0.statistics";
 
     const HEATING_CIRCUITS = "heating.circuits";
 

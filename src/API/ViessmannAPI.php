@@ -11,6 +11,7 @@ use Viessmann\Oauth\ViessmannOauthClientImpl;
 final class ViessmannAPI
 {
     const HEATING_BURNER = "heating.burner";
+    const HEATING_BURNERS = "heating.burners";
     const HEATING_CIRCUITS = "heating.circuits";
     const HEATING_COMPRESSORS = "heating.compressors";
     const HEATING_CURVE = "heating.curve";
@@ -43,12 +44,14 @@ final class ViessmannAPI
     const STANDBY_PROGRAM = "operating.programs.standby";
     const SUMMERECO_PROGRAM = "operating.programs.summerEco";
 
+    const CIRCULATION_SCHEDULE = "circulation.schedule";
     const PUMPS_CIRCULATION_SCHEDULE = "pumps.circulation.schedule";
     const DHW_PUMPS_CIRCULATION_SCHEDULE = "dhw.pumps.circulation.schedule";
 
-    const DHW_SCHEDULE = "heating.dhw.schedule";
+    const DHW_SCHEDULE = "dhw.schedule";
     const HEATING_SCHEDULE = "heating.schedule";
     const CIRCULATION_PUMP = "circulation.pump";
+    const MODULATION = "modulation";
     private $circuitId;
     private $viessmannFeatureProxy;
     const STATISTICS = "statistics";
@@ -334,39 +337,6 @@ final class ViessmannAPI
     }
 
     /**
-     * [DEPRICATED] -> //TODO delete, replaced by getSupplyTemperature($circuitId = NULL)
-     * @return float the result for primary circuit sensor Temperature supply
-     * @throws ViessmannApiException
-     */
-    public
-    function getHeatingPrimaryCircuitTemperatureSupply(): float
-    {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_PRIMARYCIRCUIT_SENSORS_TEMPERATURE_SUPPLY)->getProperty("value")["value"];
-    }
-
-    /**
-     * [DEPRICATED] -> //TODO delete, replaced by getSupplyTemperature($circuitId = NULL)
-     * @return float the result for secondary circuit sensor Temperature supply
-     * @throws ViessmannApiException
-     */
-    public
-    function getHeatingSecondaryCircuitTemperatureSupply(): float
-    {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SECONDARYCIRCUIT_SENSORS_TEMPERATURE_SUPPLY)->getProperty("value")["value"];
-    }
-
-    /**
-     * [DEPRICATED] -> //TODO delete, replaced by getHeatingTemperatureReturn()
-     * @return float the result for secondary circuit sensor Temperature return
-     * @throws ViessmannApiException
-     */
-    public
-    function getHeatingSecondaryCircuitTemperatureReturn(): float
-    {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SECONDARYCIRCUIT_SENSORS_TEMPERATURE_RETURN)->getProperty("value")["value"];
-    }
-
-    /**
      * @param null $circuitId
      * @return string the activeMode("cooling","dhw","dhwAndHeating","dhwAndHeatingCooling","heating","heatingCooling","normalStandby","standby")
      * @throws ViessmannApiException
@@ -423,14 +393,13 @@ final class ViessmannAPI
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_COMPRESSORS . "." . $circuitId)->getProperty("active")["value"];
     }
 
-    //TODO add circuitId
     /**
      * @return string statistics of the compressors
      */
     public
-    function getHeatingCompressorsStatistics(): string
+    function getHeatingCompressorsStatistics($circuitId = NULL): string
     {
-        return json_encode($this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_COMPRESSORS . "." . $this->circuitId . "." . self::STATISTICS . "")->getProperties());
+        return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeatureCompressors($circuitId, self::STATISTICS))->getProperties());
     }
 
     /**
@@ -493,7 +462,8 @@ final class ViessmannAPI
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::ECO_PROGRAM), "activate", $data);
     }
 
-    /**DeActivate eco program
+    /**
+     * DeActivate eco program
      * @param null $circuitId
      * @throws ViessmannApiException
      */
@@ -522,7 +492,7 @@ final class ViessmannAPI
 
     /**
      * schedule holiday program
-     * start en end are in xml datetime format. See https://www.w3schools.com/xml/schema_dtypes_date.asp form more details
+     * start en end are in xml datetime format. @see https://www.w3schools.com/xml/schema_dtypes_date.asp form more details
      * @param $start of holiday in xml datetime format but seems to effectively only store date part(yyyy-MM-dd)
      * @param $end of holiday in datetime xml format
      * @param null $circuitId
@@ -831,21 +801,19 @@ final class ViessmannAPI
         }
     }
 
-    //TODO add circuitId
     /**
      * @param string $type the type of statistics("hours":number of active hours or "starts": number of start)
      * @return mixed number of hours or number of starts
      * @throws ViessmannApiException
      */
     public
-    function getHeatingBurnerStatistics($type = "hours")
+    function getHeatingBurnerStatistics($type = "hours", $circuitId = NULL)
     {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER_STATISTICS)->getProperty($type)["value"];
+        return $this->viessmannFeatureProxy->getEntity($this->buildFeatureBurners($circuitId, self::HEATING_BURNERS))->getProperty($type)["value"];
     }
 
-    //TODO why curcuitId in param?
     /**
-     * @param null $circuitId
+     * @param null $circuitId optional / use circuit number when multiFamilyHouse is configured
      * @return json containing the Dhw schedule for each days in format:
      * "mon": [
      * {
@@ -858,9 +826,13 @@ final class ViessmannAPI
      * @throws ViessmannApiException
      */
     public
-    function getDhwSchedule(): string
-    {
-        return json_encode($this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_SCHEDULE)->getProperties());
+    function getDhwSchedule($circuitId = NULL): string
+    {   
+        if (is_null($circuitId)){
+            return json_encode($this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_SCHEDULE)->getProperties());
+        } else {
+            return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::DHW_SCHEDULE))->getProperties());  
+        }
     }
 
     /**
@@ -922,7 +894,7 @@ final class ViessmannAPI
      * }
      * ]
      * }"
-     * @param null $circuitId
+     * @param null $circuitId optional / use circuit number when multiFamilyHouse is configured
      * @param $schedule
      * @return array
      * @throws ViessmannApiException
@@ -931,20 +903,24 @@ final class ViessmannAPI
     function setRawDhwSchedule($schedule, $circuitId = NULL)
     {
         $data = "{\"newSchedule\": $schedule}";
-        $this->viessmannFeatureProxy->setData(self::DHW_SCHEDULE, "setSchedule", $data);
+        if (is_null($circuitId)){
+            $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_SCHEDULE, "setSchedule", $data);
+        } else {
+            $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::DHW_SCHEDULE), "setSchedule", $data);
+        }
     }
 
     /**
-     *  [DEPRECATED]
+     * Only available when multiFamilyHouse is configured
      * @param null $circuitId
      * @return json containing the Circulation schedule for each days in format:
      * "mon": [
-     * {
-     * "start": "03:00",
-     * "end": "24:00",
-     * "mode": "on",
-     * "position": 1
-     * }
+     *   {
+     *      "start": "03:00",
+     *      "end": "24:00",
+     *      "mode": "on",
+     *      "position": 1
+     *   }
      * ]
      * @throws ViessmannApiException
      */
@@ -955,41 +931,28 @@ final class ViessmannAPI
     }
 
     /**
-     * @param null $circuitId
+     * @param null $circuitId optional / use circuit number when multiFamilyHouse is configured
      * @return json containing the Circulation schedule for each days in format:
+     * <p>
      * "mon": [
-     * {
-     * "start": "03:00",
-     * "end": "24:00",
-     * "mode": "on",
-     * "position": 1
-     * }
+     *   {
+     *      "start": "03:00",
+     *      "end": "24:00",
+     *      "mode": "on",
+     *      "position": 1
+     *   }
      * ]
-     * @throws ViessmannApiException
-     */
-    public
-    function getPumpsCirculationSchedule($circuitId = NULL): string
-    {
-        return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::PUMPS_CIRCULATION_SCHEDULE))->getProperties());
-    }
-
-    /**
-     * @param null $circuitId
-     * @return json containing the Circulation schedule for each days in format:
-     * "mon": [
-     * {
-     * "start": "03:00",
-     * "end": "24:00",
-     * "mode": "on",
-     * "position": 1
-     * }
-     * ]
+     * </p>
      * @throws ViessmannApiException
      */
     public
     function getDhwPumpsCirculationSchedule($circuitId = NULL): string
     {
-        return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::DHW_PUMPS_CIRCULATION_SCHEDULE))->getProperties());
+        if (is_null($circuitId)){
+            return json_encode($this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_CIRCULATION_SCHEDULE)->getProperties());
+        } else {
+            return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::DHW_PUMPS_CIRCULATION_SCHEDULE))->getProperties());
+        }
     }
 
     /**
@@ -1172,6 +1135,189 @@ final class ViessmannAPI
     }
 
     /**
+     * Post a complete new schedule. Warning !!! this would erase all previous schedule. Sample:
+     * "{
+     * \"mon\": [
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"tue\": [
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"23:50\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"00:10\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"23:20\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"05:30\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"wed\": [
+     * {
+     * \"start\": \"05:30\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * }
+     * ],
+     * \"thu\": [
+     * {
+     * \"start\": \"05:30\",
+     * \"end\": \"20:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"02:30\",
+     * \"end\": \"11:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"17:30\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"08:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"fri\": [
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"sat\": [
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"23:30\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"00:30\",
+     * \"end\": \"23:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"01:00\",
+     * \"end\": \"22:30\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"01:30\",
+     * \"end\": \"22:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ],
+     * \"sun\": [
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 0
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 1
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 2
+     * },
+     * {
+     * \"start\": \"00:00\",
+     * \"end\": \"24:00\",
+     * \"mode\": \"on\",
+     * \"position\": 3
+     * }
+     * ]
+     * }"
+     *
+     * @param $schedule the schedule(see format above)
+     * @param null $circuitId optional / use circuit number when multiFamilyHouse is configured
+     */
+    public
+    function setRawDhwPumpsCirculationSchedule($schedule, $circuitId = NULL)
+    {
+        $data = "{\"newSchedule\": $schedule}";
+        if (is_null($circuitId)){
+            $this->viessmannFeatureProxy->setData($this->buildFeature(ViessmannFeature::HEATING_DHW_PUMPS_CIRCULATION_SCHEDULE), "setSchedule", $data);
+        } else {
+            $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::DHW_PUMPS_CIRCULATION_SCHEDULE), "setSchedule", $data);
+        }
+    }
+
+    /**
      * @param null $circuitId
      * @return json containing the Heating schedule for each days in format:
      * "mon": [
@@ -1274,22 +1420,12 @@ final class ViessmannAPI
     }
 
     /**
-     * [DEPRICATED] -> //TODO delete, not available feature
-     */
-    public
-    function getHeatingBurnerCurrentPower()
-    {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER_CURRENT_POWER)->getProperty("value")["value"];
-    }
-
-    //TODO add circuitId
-    /**
      * @return array
      */
     public
-    function getHeatingBurnerModulation()
+    function getHeatingBurnerModulation($circuitId = NULL)
     {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER_MODULATION)->getProperty("value")["value"];
+        return $this->viessmannFeatureProxy->getEntity($this->buildFeatureBurners($circuitId, self::MODULATION))->getProperty("value")["value"];
     }
 
     public
@@ -1463,6 +1599,14 @@ final class ViessmannAPI
         return self::HEATING_CIRCUITS . "." . $circuitId . "." . $feature;
     }
 
+    private
+    function buildFeatureBurners($circuitId, $feature)
+    {
+        if ($circuitId == NULL) {
+            $circuitId = $this->circuitId;
+        }
+        return self::HEATING_BURNERS . "." . $circuitId . "." . $feature;
+    }
     private
     function buildFeatureCompressors($circuitId, $feature)
     {
