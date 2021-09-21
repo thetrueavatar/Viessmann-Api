@@ -1,3 +1,23 @@
+Version 2.1.1
+-------------- 
+Deleted functions: 
+* getHeatingPrimaryCircuitTemperatureSupply()       -> replaced by getSupplyTemperature($circuitId = NULL)
+* getHeatingSecondaryCircuitTemperatureSupply()     -> replaced by getSupplyTemperature($circuitId = NULL)
+* getHeatingSecondaryCircuitTemperatureReturn()     -> replaced by getHeatingTemperatureReturn()
+* getHeatingBurnerCurrentPower()                    -> feature not available
+* getPumpsCirculationSchedule($circuitId = NULL)    -> feature not available
+
+Added circuitId to functions:
+* getHeatingCompressorsStatistics($circuitId = NULL)
+* getHeatingBurnerStatistics($type = "hours", $circuitId = NULL)
+* getHeatingBurnerModulation($circuitId = NULL)
+* getDhwSchedule($circuitId = NULL)                 -> circuitId is optional. It depends on multiFamilyHouse is configured
+* setRawDhwSchedule($schedule, $circuitId = NULL)   -> circuitId is optional. It depends on multiFamilyHouse is configured
+* getDhwPumpsCirculationSchedule($circuitId = NULL) -> circuitId is optional. It depends on multiFamilyHouse is configured
+
+New function:
+* setRawDhwPumpsCirculationSchedule($schedule, $circuitId = NULL)
+    
 Version 1.4.0
 --------------
 Switch to version 2 of Oauth Viessmann servuce. Many other small improvements. See release note https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.4.0

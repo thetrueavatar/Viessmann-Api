@@ -13,6 +13,10 @@
         {
             "name": "thetrueavatar",
             "email": "thetrueavatar@gmail.com"
+        },
+        {
+            "name": "rogrun",
+            "email": "ronny.grun@t-online.de" 
         }
     ],
     "autoload": {
@@ -23,7 +27,7 @@
     "extra": {
         "phar-builder": {
             "compression": "GZip",
-            "name": "Viessmann-Api-2.1.0-SNAPSHOT.phar",
+            "name": "Viessmann-Api-2.1.1-SNAPSHOT.phar",
             "output-dir": "./example",
             "entry-point": "./index.php",
             "include": "php",
