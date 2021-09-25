@@ -12,17 +12,36 @@ use TomPHP\Siren\Entity;
 use TomPHP\Siren\EntityBuilder;
 use Viessmann\API\ViessmannApiException;
 
+/**
+ * ViessmannFeatureLocalProxy
+ * @package Viessmann\API\proxy\impl\ViessmannFeatureLocalProxy
+ */
 class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
-
 {
+    /**
+     * Features
+     */
     private $features;
 
+    /**
+     * ViessmannFeatureLocalProxy constructor 
+     * @param $features
+     * @param $viessmannOauthClient
+     * @param $installationId
+     * @param $gatewayId
+     * @throws ViessmannApiException
+     */
     public function __construct($features, $viessmannOauthClient,$installationId,$gatewayId)
     {
         parent::__construct($viessmannOauthClient,$installationId,$gatewayId);
         $this->features = $features;
     }
 
+    /**
+     * getEntity
+     * @param $resources
+     * @throws ViessmannApiException
+     */
     public function getEntity($resources)
     {
 
@@ -34,6 +53,12 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
 
     }
 
+    /**
+     * getRawJsonData
+     * @param $resources
+     * @return string
+     * @throws ViessmannApiException
+     */
     public function getRawJsonData($resources)
     {
         if(empty($resources)){
@@ -50,6 +75,7 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
     }
 
     /**
+     * getEntityJson
      * @param $resources
      * @return string
      * @throws ViessmannApiException

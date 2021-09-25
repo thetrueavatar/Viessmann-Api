@@ -13,15 +13,32 @@ use TomPHP\Siren\EntityBuilder;
 use Viessmann\API\ViessmannApiException;
 use Viessmann\Oauth\ViessmannOauthClient;
 use TomPHP\Siren\Entity;
-class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
 
+/**
+ * ViessmannFeatureRemoteProxy
+ * @package Viessmann\API\proxy\impl\ViessmannFeatureRemoteProxy
+ */
+class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
 {
+    /**
+     * ViessmannFeatureRemoteProxy constructor
+     * @param $viessmannClient
+     * @param $installationId
+     * @param $gatewayId
+     * @throws ViessmannApiException
+     */
     public function __construct($viessmannClient,$installationId,$gatewayId)
     {
         parent::__construct($viessmannClient,$installationId,$gatewayId);
 
     }
 
+    /**
+     * getRawJsonData
+     * @param $resources
+     * @return string
+     * @throws ViessmannApiException
+     */
     public function getRawJsonData($resources): string
     {
         try {
@@ -30,9 +47,14 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
             throw new ViessmannApiException("Unable to get data for feature" . $resources . "\n Reason: " . $e->getMessage(), 1, $e);
         }
     }
+
+    /**
+     * getEntity
+     * @param $resources
+     * @throws ViessmannApiException
+     */
     public function getEntity($resources)
     {
-
         $data = json_decode($this->getRawJsonData($resources), true);
         if (isset($data["statusCode"])) {
             if($data["statusCode"]=="429"){
@@ -54,8 +76,5 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
             }
         }
         return $classes;
-
     }
-
-
 }
