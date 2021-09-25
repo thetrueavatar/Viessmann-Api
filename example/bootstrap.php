@@ -26,6 +26,7 @@ try {
     $errorHandler($e);
     exit();
 }
+
 function parseProperties($fileContent) {
     $result = [];
     $fileContent = str_replace("\r\n", "\n", $fileContent);
