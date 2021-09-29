@@ -1074,7 +1074,7 @@ final class ViessmannAPI
     public
     function getHeatingBurnerStatistics($type = "hours", $circuitId = NULL)
     {
-        return $this->viessmannFeatureProxy->getEntity($this->buildFeatureBurners($circuitId, self::HEATING_BURNERS))->getProperty($type)["value"];
+        return $this->viessmannFeatureProxy->getEntity($this->buildFeatureBurners($circuitId, self::STATISTICS))->getProperty($type)["value"];
     }
 
     /**
