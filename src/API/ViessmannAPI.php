@@ -377,7 +377,7 @@ final class ViessmannAPI
     public
     function isHeatingBurnerActive(): bool
     {
-        return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER)->getProperty("active")["value"];
+        return $this->viessmannFeatureProxy->getEntity(self::HEATING_BURNERS.".".$this->circuitId)->getProperty("active")["value"];
     }
 
     /**
