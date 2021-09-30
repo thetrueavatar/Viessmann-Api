@@ -48,7 +48,7 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
         if (!empty($this->features[$resources])) {
             return $this->features[$resources];
         } else {
-            throw new ViessmannApiException("Unable to get data for feature " . $resources . "\n Reason: No such Feature"); ;
+            throw new ViessmannApiException("Unable to get data for feature " . $resources . "\n Reason: No such Feature",1); ;
         }
 
     }
