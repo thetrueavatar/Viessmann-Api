@@ -3,8 +3,8 @@
         "php": "^7.0",
         "psr/link": "^1.0",
         "phpunit/phpunit": "7.5.17",
-       "lusitanian/oauth": "v0.8.11",
-         "tomphp/siren": "v0.1.0",
+        "lusitanian/oauth": "v0.8.11",
+        "tomphp/siren": "v0.1.0",
         "ext-json": "*",
         "ext-curl": "*"
     },

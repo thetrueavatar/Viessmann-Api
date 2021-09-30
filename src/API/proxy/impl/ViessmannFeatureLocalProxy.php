@@ -12,28 +12,53 @@ use TomPHP\Siren\Entity;
 use TomPHP\Siren\EntityBuilder;
 use Viessmann\API\ViessmannApiException;
 
+/**
+ * ViessmannFeatureLocalProxy
+ * @package Viessmann\API\proxy\impl\ViessmannFeatureLocalProxy
+ */
 class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
-
 {
+    /**
+     * Features
+     */
     private $features;
 
+    /**
+     * ViessmannFeatureLocalProxy constructor 
+     * @param $features
+     * @param $viessmannOauthClient
+     * @param $installationId
+     * @param $gatewayId
+     * @throws ViessmannApiException
+     */
     public function __construct($features, $viessmannOauthClient,$installationId,$gatewayId)
     {
         parent::__construct($viessmannOauthClient,$installationId,$gatewayId);
         $this->features = $features;
     }
 
+    /**
+     * getEntity
+     * @param $resources
+     * @throws ViessmannApiException
+     */
     public function getEntity($resources)
     {
 
         if (!empty($this->features[$resources])) {
             return $this->features[$resources];
         } else {
-            throw new ViessmannApiException("Unable to get data for feature " . $resources . "\n Reason: No such Feature"); ;
+            throw new ViessmannApiException("Unable to get data for feature " . $resources . "\n Reason: No such Feature",1); ;
         }
 
     }
 
+    /**
+     * getRawJsonData
+     * @param $resources
+     * @return string
+     * @throws ViessmannApiException
+     */
     public function getRawJsonData($resources)
     {
         if(empty($resources)){
@@ -50,6 +75,7 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
     }
 
     /**
+     * getEntityJson
      * @param $resources
      * @return string
      * @throws ViessmannApiException
