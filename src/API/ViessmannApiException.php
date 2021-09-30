@@ -11,8 +11,19 @@ namespace Viessmann\API;
 use Exception;
 use Throwable;
 
+/**
+ * ViessmannApiException
+ * @package Viessmann\API\ViessmannApiException
+ */
 final class ViessmannApiException extends Exception
 {
+    /**
+     * ViessmannApiException constructor
+     * @param string $message
+     * @param int $code
+     * @param Throwable $previous
+     * @throws ViessmannApiException
+     */
     public function __construct(string $message = "", int $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
