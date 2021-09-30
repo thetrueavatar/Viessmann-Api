@@ -5,6 +5,7 @@
  * Date: 8/10/18
  * Time: 15:14
  */
+
 namespace Viessmann\API;
 
 use DateTime;
@@ -38,7 +39,7 @@ final class ViessmannAPI
     const HEATING_COOLING_MODE = "operating.modes.heatingCooling";
     const NORMALSTANDBY_MODE = "operating.modes.normalStandby";
     const STANDY_MODE = "operating.modes.standby";
-    
+
     const ACTIVE_PROGRAM = "operating.programs.active";
     const COMFORT_PROGRAM = "operating.programs.comfort";
     const ECO_PROGRAM = "operating.programs.eco";
@@ -77,10 +78,10 @@ final class ViessmannAPI
      * viessmannOauthClient
      */
     private $viessmannOauthClient;
- 
+
     /**
      * installationId
-     */   
+     */
     private $installationId;
 
     /**
@@ -99,7 +100,7 @@ final class ViessmannAPI
     public function __construct($params, $useCache = true, $viessmannRemoteFeatureProxy = NULL, $viessmannOauthClient = NULL)
     {
         $this->circuitId = $params["circuitId"] ?? 0;
-        $this->viessmannOauthClient = $viessmannOauthClient ?? new ViessmannOauthClientImpl($params["user"], $params["pwd"],$params["clientId"]);
+        $this->viessmannOauthClient = $viessmannOauthClient ?? new ViessmannOauthClientImpl($params["user"], $params["pwd"], $params["clientId"]);
         if (!empty($params["installationId"]) && !empty($params["gatewayId"])) {
             $this->installationId = $params["installationId"];
             $this->gatewayId = $params["gatewayId"];
@@ -145,6 +146,7 @@ final class ViessmannAPI
     }
 
     //TODO ADD support for gateway.ethernet and gateway.ethernet.config
+
     /**
      * getGatewayWifi
      * @return string
@@ -159,7 +161,7 @@ final class ViessmannAPI
 
         }
     }
-    
+
     /**
      * [DEPRICATED]
      * @return string
@@ -195,7 +197,7 @@ final class ViessmannAPI
      * [DEPRICATED]
      * @return string
      * @throws ViessmannApiException
-    */
+     */
     public function getGatewayBmuconnection()
     {
         try {
@@ -209,7 +211,7 @@ final class ViessmannAPI
      * getGatewayDevices
      * @return string
      * @throws ViessmannApiException
-    */
+     */
     public function getGatewayDevices()
     {
         try {
@@ -272,7 +274,7 @@ final class ViessmannAPI
      * getAvailableFeatures
      * @return String containing a list of all the features having either a property either an action on it
      * @throws ViessmannApiException
-    */
+     */
     public
     function getAvailableFeatures(): string
     {
@@ -283,7 +285,7 @@ final class ViessmannAPI
 
     /**
      * Outside temperature sensor
-     * 
+     *
      * Shows information related to outside temperature sensor.
      * @return string the outside temperature if available
      * @throws ViessmannApiException
@@ -296,7 +298,7 @@ final class ViessmannAPI
 
     /**
      * Boiler temperature sensor - Main
-     * 
+     *
      * Shows information related with main temperature sensor.
      * @return string the current Boiler Temperature
      * @throws ViessmannApiException
@@ -309,7 +311,7 @@ final class ViessmannAPI
 
     /**
      * Sensor - system return temperature
-     * 
+     *
      * Shows information about (Common return temperature) return sum of temperature of a cascade.
      * @return string the system return temperature
      * @throws ViessmannApiException
@@ -322,7 +324,7 @@ final class ViessmannAPI
 
     /**
      * Sensor - buffer discharge
-     * 
+     *
      * Shows information about percentage position of the buffer discharge 3-way valve.
      * @return string percentage position
      * @throws ViessmannApiException
@@ -332,10 +334,10 @@ final class ViessmannAPI
     {
         return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_SENSORS_VALVE_BUFFERDISCHARGETHREEWAYVALVE)->getProperty("value")["value"];
     }
-    
+
     /**
      * Sensor - return volumetric flow
-     * 
+     *
      * Shows information about volumetric flow on the return.
      * @return string
      * @throws ViessmannApiException
@@ -347,9 +349,9 @@ final class ViessmannAPI
     }
 
     /**
-     * 
+     *
      * Room temperature sensor
-     * 
+     *
      * Shows information about room temperature sensor.
      * @param null $circuitId
      * @return string the Room temperature
@@ -363,7 +365,7 @@ final class ViessmannAPI
 
     /**
      * Heating curve (slope)
-     * 
+     *
      * Shows values releted to heating curve (slope)
      * @param null $circuitId
      * @param null $features
@@ -382,7 +384,7 @@ final class ViessmannAPI
 
     /**
      * Heating curve (Shift)
-     * 
+     *
      * Shows values releted to heating curve (shift)
      * @param null $circuitId
      * @return string the shift configured
@@ -395,8 +397,8 @@ final class ViessmannAPI
     }
 
     /**
-      * Set Heating curve
-     * 
+     * Set Heating curve
+     *
      * Set values releted to heating curve slope and shift
      * @param $shift the new shift to set
      * @param $slope the new slope to set
@@ -411,7 +413,7 @@ final class ViessmannAPI
 
     /**
      * Frost protection
-     * 
+     *
      * Shows whether frost protection of installation is turn on in device.
      * @param null $circuitId
      * @return string the frostprotection configured
@@ -425,7 +427,7 @@ final class ViessmannAPI
 
     /**
      * Compressor start statistics
-     * 
+     *
      * Shows statistics of compressor N: times started
      * @param null $circuitId
      * @return int the statistics for starts compressor
@@ -439,7 +441,7 @@ final class ViessmannAPI
 
     /**
      * Compressor Hour statistics
-     * 
+     *
      * Shows statistics of compressor N: hours
      * @param null $circuitId
      * @return double the statistics for hours run compressor
@@ -493,7 +495,7 @@ final class ViessmannAPI
 
     /**
      * Operating program - active
-     * 
+     *
      * Shows current active operating program enabled on the device.
      * @param null $circuitId
      * @return string the active program("comfort","eco","external","fixed","forcedLastFromSchedule",<br>"holiday","holidayAtHome","normal","noDemandByZone","reduced","standby","summerEco")
@@ -507,25 +509,32 @@ final class ViessmannAPI
 
     /**
      * Burner
-     * 
+     *
      * Shows whether the burner N (0, 1, ...) is active right now.
-     * @param null $circuitId optional / use circuit number when multiFamilyHouse is configured
+     * @param null $burnerId optional / use circuit number when multiFamilyHouse is configured
      * @return bool true if heating burner is active. False otherwise
      * @throws ViessmannApiException
      */
     public
-    function isHeatingBurnerActive($circuitId = NULL): bool
+    function isHeatingBurnerActive($burnerId = 0): bool
     {
-        if (is_null($circuitId)){
-            return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER)->getProperty("active")["value"];
-        } else {
-            return $this->viessmannFeatureProxy->getEntity(self::HEATING_BURNERS . "." . $circuitId)->getProperty("active")["value"];
+        try {
+            return $this->viessmannFeatureProxy->getEntity(self::HEATING_BURNERS . "." . $burnerId)->getProperty("active")["value"];
+        } catch (ViessmannApiException $e) {
+            if ($e->getCode() == 1) {
+                try {
+                    return $this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_BURNER)->getProperty("active")["value"];
+                }catch (ViessmannApiException $e) {
+                    throw new ViessmannApiException("unable to get fallback feature heating.burner after trying ".self::HEATING_BURNERS . "." . $burnerId);
+                }
+            }
+            throw $e;
         }
     }
 
     /**
      * Compressors - N
-     * 
+     *
      * Shows whether the compressor N (0, 1, ...) is active right now.
      * @param null $circuitId
      * @return bool true if heating compressor is active. False otherwise
@@ -542,7 +551,7 @@ final class ViessmannAPI
 
     /**
      * Compressor statistics
-     * 
+     *
      * Shows statistics of compressor N: hours and times started
      * @param null $circuitId
      * @return string statistics of the compressors
@@ -556,7 +565,7 @@ final class ViessmannAPI
 
     /**
      * Operating mode - DHW
-     * 
+     *
      * Shows whether the DHW operating mode is active now.
      * @param null $circuitId
      * @return bool true if DhwMode is active. False otherwise
@@ -570,7 +579,7 @@ final class ViessmannAPI
 
     /**
      * Operating program - comfort
-     * Shows information related to comfort program. 
+     * Shows information related to comfort program.
      * @param null $circuitId
      * @return string Comfort program temperature programmed
      * @throws ViessmannApiException
@@ -583,12 +592,12 @@ final class ViessmannAPI
 
     /**
      * Set Operating program - comfort
-     * 
-     * Provides the commands to enable/disable it and change the Comfort temperature value   
-     * @todo how enable/disable??? 
+     *
+     * Provides the commands to enable/disable it and change the Comfort temperature value
      * @param $temperature Comfort program temperature to program
      * @param null $circuitId
      * @throws ViessmannApiException
+     * @todo how enable/disable???
      */
     public
     function setComfortProgramTemperature($temperature, $circuitId = NULL)
@@ -598,7 +607,7 @@ final class ViessmannAPI
 
     /**
      * Operating program - eco
-     * 
+     *
      * Shows whether Eco program is active.
      * @param null $circuitId
      * @return string Eco program temperature insntruction
@@ -641,7 +650,7 @@ final class ViessmannAPI
 
     /**
      * Operating program - holiday
-     * 
+     *
      * Shows information related to Holiday program and provides command to set it.
      * json object contains a property start and end. date are in format yyyy-MM-dd
      * @param null $circuitId
@@ -660,7 +669,7 @@ final class ViessmannAPI
 
     /**
      * Set Operating program - holiday
-     * 
+     *
      * Provides the command to set it.
      * start and end are in xml datetime format. @see https://www.w3schools.com/xml/schema_dtypes_date.asp for more details
      * @param $start of holiday in xml datetime format but seems to effectively only store date part(yyyy-MM-dd)
@@ -675,9 +684,9 @@ final class ViessmannAPI
         $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::HOLIDAY_PROGRAM), "schedule", $data);
     }
 
-    /** 
+    /**
      * Deactivate Operating program - holiday
-     * 
+     *
      * Provides the command to enable it.
      * @param null $circuitId
      * @throws ViessmannApiException
@@ -719,7 +728,7 @@ final class ViessmannAPI
 
     /**
      * Operating program - external
-     * Shows information related to External program, 
+     * Shows information related to External program,
      * which is set when device is handled by external controller.
      * @param null $circuitId
      * @return string External program temperature programmed
@@ -746,7 +755,7 @@ final class ViessmannAPI
 
     /**
      * Operating program - normal
-     * 
+     *
      * Shows whether the Normal temperature program.
      * @param null $circuitId
      * @return string Normal program temperature insntruction
@@ -760,8 +769,8 @@ final class ViessmannAPI
 
     /**
      * Set Operating program - normal
-     * 
-     * Shows whether the Normal temperature program.     
+     *
+     * Shows whether the Normal temperature program.
      * @param $temperature
      * @param null $circuitId
      * @return string Normal program temperature insntruction
@@ -837,7 +846,7 @@ final class ViessmannAPI
 
     /**
      * DHW temperature sensor
-     * 
+     *
      * Shows information about hot water storage sensor.
      * @param string $position optional / amongst enume "bottom","midBottom","middle","top"
      * @return string Hot Water storage temperature
@@ -886,7 +895,7 @@ final class ViessmannAPI
     }
 
 
-    /** 
+    /**
      * getHeatingSolarPowerCumulativeProduced [DEPRECATED]
      * @return string heating solar power cumulative produced in kWh
      * @throws ViessmannApiException
@@ -910,7 +919,7 @@ final class ViessmannAPI
     }
 
 
-    /** 
+    /**
      * getHeatingSolarStatistics [DEPRECATED]
      * @return string heating solar system operational hours
      * @throws ViessmannApiException
@@ -922,7 +931,7 @@ final class ViessmannAPI
     }
 
 
-    /** 
+    /**
      * getHeatingSolarRechargesuppression [DEPRECATED]
      * @return string off/on for recharge suppression
      * @throws ViessmannApiException
@@ -997,7 +1006,7 @@ final class ViessmannAPI
      * Return the Gas consumption for DHW. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
      * if addUnit is true then the return will be a json object with unit and value
      * @param string $period amongst enume "day","week","month","year
-     * @param bool $addUnit add Unit 
+     * @param bool $addUnit add Unit
      * @return array <code>$period="day"</code>    - containing daily consommation for the last 7 days(each entry is consumption for a day)<br>
      *               <code>$period="week"</code>   - containing weekly consommation for the last 52 weeks(each entry is consumption for a week)<br>
      *               <code>$period="month"</code>  - containing monthly consommation for the last 12 month(each entry is consumption for one month)<br>
@@ -1020,7 +1029,7 @@ final class ViessmannAPI
      * Return the Gas consumption for Heating. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
      * if addUnit is true then the return will be a json object with unit and value
      * @param string $period amongst enume "day","week","month","year
-     * @param bool $addUnit add Unit 
+     * @param bool $addUnit add Unit
      * @return array <code>$period="day"</code>    - containing daily consommation for the last 7 days(each entry is consumption for a day)<br>
      *               <code>$period="week"</code>   - containing weekly consommation for the last 52 weeks(each entry is consumption for a week)<br>
      *               <code>$period="month"</code>  - containing monthly consommation for the last 12 month(each entry is consumption for one month)<br>
@@ -1044,7 +1053,7 @@ final class ViessmannAPI
      * Return the Gas consumption for Total Heating. A period is needeed amongs day(default),week,month,year. Currently the number are not the same that displayed on heating device
      * if addUnit is true then the return will be a json object with unit and value
      * @param string $period amongst enume "day","week","month","year
-     * @param bool $addUnit add Unit 
+     * @param bool $addUnit add Unit
      * @return array <code>$period="day"</code>    - containing daily consommation for the last 7 days(each entry is consumption for a day)<br>
      *               <code>$period="week"</code>   - containing weekly consommation for the last 52 weeks(each entry is consumption for a week)<br>
      *               <code>$period="month"</code>  - containing monthly consommation for the last 12 month(each entry is consumption for one month)<br>
@@ -1074,7 +1083,7 @@ final class ViessmannAPI
     public
     function getHeatingBurnerStatistics($type = "hours", $circuitId = NULL)
     {
-        return $this->viessmannFeatureProxy->getEntity($this->buildFeatureBurners($circuitId, self::HEATING_BURNERS))->getProperty($type)["value"];
+        return $this->viessmannFeatureProxy->getEntity($this->buildFeatureBurners($circuitId, self::STATISTICS))->getProperty($type)["value"];
     }
 
     /**
@@ -1082,7 +1091,7 @@ final class ViessmannAPI
      * @param null $circuitId optional / use circuit number when multiFamilyHouse is configured
      * @return json containing the Dhw schedule for each days in format:
      * <pre>
-     * "mon": 
+     * "mon":
      * [
      *   {
      *      "start": "03:00",
@@ -1096,17 +1105,17 @@ final class ViessmannAPI
      */
     public
     function getDhwSchedule($circuitId = NULL): string
-    {   
-        if (is_null($circuitId)){
+    {
+        if (is_null($circuitId)) {
             return json_encode($this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_SCHEDULE)->getProperties());
         } else {
-            return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::DHW_SCHEDULE))->getProperties());  
+            return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::DHW_SCHEDULE))->getProperties());
         }
     }
 
     /**
      * Replace the full schedule for DHW. Sample of schedule:
-     * 
+     *
      * <pre>
      * "{
      *  \"mon\": [
@@ -1176,7 +1185,7 @@ final class ViessmannAPI
     function setRawDhwSchedule($schedule, $circuitId = NULL)
     {
         $data = "{\"newSchedule\": $schedule}";
-        if (is_null($circuitId)){
+        if (is_null($circuitId)) {
             $this->viessmannFeatureProxy->setData(ViessmannFeature::HEATING_DHW_SCHEDULE, "setSchedule", $data);
         } else {
             $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::DHW_SCHEDULE), "setSchedule", $data);
@@ -1185,9 +1194,9 @@ final class ViessmannAPI
 
     /**
      * getCirculationSchedule
-     * 
+     *
      * Only available when multiFamilyHouse is configured
-     * 
+     *
      * @param null $circuitId
      * @return json containing the Circulation schedule for each days in format:
      * <pre>
@@ -1227,7 +1236,7 @@ final class ViessmannAPI
     public
     function getDhwPumpsCirculationSchedule($circuitId = NULL): string
     {
-        if (is_null($circuitId)){
+        if (is_null($circuitId)) {
             return json_encode($this->viessmannFeatureProxy->getEntity(ViessmannFeature::HEATING_DHW_PUMPS_CIRCULATION_SCHEDULE)->getProperties());
         } else {
             return json_encode($this->viessmannFeatureProxy->getEntity($this->buildFeature($circuitId, self::DHW_PUMPS_CIRCULATION_SCHEDULE))->getProperties());
@@ -1236,7 +1245,7 @@ final class ViessmannAPI
 
     /**
      * Post a complete new schedule. Warning !!! this would erase all previous schedule. Sample:
-     * 
+     *
      * <pre>
      * "{
      *  \"mon\": [
@@ -1418,7 +1427,7 @@ final class ViessmannAPI
 
     /**
      * Post a complete new schedule. Warning !!! this would erase all previous schedule. Sample:
-     * 
+     *
      * <pre>
      * "{
      *  \"mon\": [
@@ -1595,7 +1604,7 @@ final class ViessmannAPI
     function setRawDhwPumpsCirculationSchedule($schedule, $circuitId = NULL)
     {
         $data = "{\"newSchedule\": $schedule}";
-        if (is_null($circuitId)){
+        if (is_null($circuitId)) {
             $this->viessmannFeatureProxy->setData($this->buildFeature(ViessmannFeature::HEATING_DHW_PUMPS_CIRCULATION_SCHEDULE), "setSchedule", $data);
         } else {
             $this->viessmannFeatureProxy->setData($this->buildFeature($circuitId, self::DHW_PUMPS_CIRCULATION_SCHEDULE), "setSchedule", $data);
@@ -1626,7 +1635,7 @@ final class ViessmannAPI
 
     /**
      * Replace the full schedule for Heating. Sample of schedule
-     * 
+     *
      * <pre>
      * "{
      *  \"mon\": [
@@ -1715,7 +1724,7 @@ final class ViessmannAPI
      * @param null $circuitId
      * @return array
      * @throws ViessmannApiException
-    */
+     */
     public
     function getHeatingBurnerModulation($circuitId = NULL)
     {
@@ -1739,7 +1748,7 @@ final class ViessmannAPI
      * @param null $circuitId
      * @return bool
      * @throws ViessmannApiException
-    */
+     */
     public
     function isDhwCharging(): bool
     {
@@ -1840,12 +1849,12 @@ final class ViessmannAPI
 
     /**
      * DHW temperature hysteresis
-     * 
-     * Shows the hysteresis value of the Domestic Hot Water temperature in heat pumps. 
-     * @todo Also provides the command to set it -> create setDhwTemperatureHysteresis(): string
-     * @see https://en.wikipedia.org/wiki/Hysteresis
+     *
+     * Shows the hysteresis value of the Domestic Hot Water temperature in heat pumps.
      * @return String https://en.wikipedia.org/wiki/Hysteresis
      * @throws ViessmannApiException
+     * @todo Also provides the command to set it -> create setDhwTemperatureHysteresis(): string
+     * @see https://en.wikipedia.org/wiki/Hysteresis
      */
     public
     function getDhwTemperatureHysteresis(): string
@@ -1855,7 +1864,7 @@ final class ViessmannAPI
 
     /**
      * DHW temperature hygiene
-     * 
+     *
      * To kill Legionella bacteria the system needs to heat up to at least 65 °C
      * @return String
      * @throws ViessmannApiException
@@ -1869,9 +1878,9 @@ final class ViessmannAPI
 
     /**
      * DHW temperature 2
-     * 
-     * For controllers with multiple possible dhw-setpoints. 
-     * Shows the desired value of the Domestic Hot Water Temp 2 temperature. 
+     *
+     * For controllers with multiple possible dhw-setpoints.
+     * Shows the desired value of the Domestic Hot Water Temp 2 temperature.
      * @return String
      * @throws ViessmannApiException
      */
@@ -1883,9 +1892,9 @@ final class ViessmannAPI
 
     /**
      * Set DHW temperature 2
-     * 
-     * For controllers with multiple possible dhw-setpoints. 
-     * Shows the desired value of the Domestic Hot Water Temp 2 temperature. 
+     *
+     * For controllers with multiple possible dhw-setpoints.
+     * Shows the desired value of the Domestic Hot Water Temp 2 temperature.
      * @param $temperature
      * @throws ViessmannApiException
      */
@@ -1897,7 +1906,7 @@ final class ViessmannAPI
 
     /**
      * Flow return temperature sensor
-     * 
+     *
      * Shows information about flow return temperature sensor, i.e. water temperature on return to the boiler from heating installation.
      * @return String temperature of the return to the heating
      * @throws ViessmannApiException
@@ -1910,7 +1919,7 @@ final class ViessmannAPI
 
     /**
      * Set DHW main temperature
-     * 
+     *
      * Provides the command to set it
      * @param $temperature
      * @throws ViessmannApiException
