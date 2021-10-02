@@ -31,9 +31,9 @@ class ViessmannFeatureLocalProxy extends ViessmannFeatureAbstractProxy
      * @param $gatewayId
      * @throws ViessmannApiException
      */
-    public function __construct($features, $viessmannOauthClient,$installationId,$gatewayId)
+    public function __construct($features, $viessmannOauthClient,$installationId,$gatewayId,$deviceId)
     {
-        parent::__construct($viessmannOauthClient,$installationId,$gatewayId);
+        parent::__construct($viessmannOauthClient,$installationId,$gatewayId,$deviceId);
         $this->features = $features;
     }
 

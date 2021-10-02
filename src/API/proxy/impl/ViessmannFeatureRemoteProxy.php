@@ -27,9 +27,9 @@ class ViessmannFeatureRemoteProxy extends ViessmannFeatureAbstractProxy
      * @param $gatewayId
      * @throws ViessmannApiException
      */
-    public function __construct($viessmannClient,$installationId,$gatewayId)
+    public function __construct($viessmannClient,$installationId,$gatewayId,$deviceId)
     {
-        parent::__construct($viessmannClient,$installationId,$gatewayId);
+        parent::__construct($viessmannClient,$installationId,$gatewayId,$deviceId);
 
     }
 

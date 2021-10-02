@@ -100,6 +100,7 @@ final class ViessmannAPI
     public function __construct($params, $useCache = true, $viessmannRemoteFeatureProxy = NULL, $viessmannOauthClient = NULL)
     {
         $this->circuitId = $params["circuitId"] ?? 0;
+        $this->deviceId=$params["deviceId"]??0;
         $this->viessmannOauthClient = $viessmannOauthClient ?? new ViessmannOauthClientImpl($params["user"], $params["pwd"], $params["clientId"]);
         if (!empty($params["installationId"]) && !empty($params["gatewayId"])) {
             $this->installationId = $params["installationId"];
@@ -110,11 +111,11 @@ final class ViessmannAPI
             $this->gatewayId = $installation['gatewayId'];
 
         }
-        $this->viessmannFeatureProxy = $viessmannRemoteFeatureProxy ?? new ViessmannFeatureRemoteProxy($this->viessmannOauthClient, $this->installationId, $this->gatewayId);
+        $this->viessmannFeatureProxy = $viessmannRemoteFeatureProxy ?? new ViessmannFeatureRemoteProxy($this->viessmannOauthClient, $this->installationId, $this->gatewayId,$this->deviceId);
 
         if ($useCache) {
             $features = $this->viessmannFeatureProxy->getEntity("");
-            $this->viessmannFeatureProxy = new ViessmannFeatureLocalProxy($features, $this->viessmannOauthClient, $this->installationId, $this->gatewayId);
+            $this->viessmannFeatureProxy = new ViessmannFeatureLocalProxy($features, $this->viessmannOauthClient, $this->installationId, $this->gatewayId,$this->deviceId);
         }
     }
 
