@@ -22,11 +22,13 @@ Deleted functions:
 * getHeatingBurnerCurrentPower()                    -> feature not available
 * getPumpsCirculationSchedule($circuitId = NULL)    -> feature not available
 
+Fixed:
+* deviceId is now correctly use
+* isHeatingBurnerActive now tries by default heating.burners.$burnerId(0 by default) and heating.burner as fallback.****
+
 Additional improvements in the Docs
 
-fixed:
-deviceId is now correctly use
-isHeatingBurnerActive now tries by default heating.burners.$burnerId(0 by default) and heating.burner as fallback.
+
 
 Version 1.4.0
 --------------
