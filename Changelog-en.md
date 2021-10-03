@@ -23,7 +23,7 @@ Deleted functions:
 * getPumpsCirculationSchedule($circuitId = NULL)    -> feature not available
 
 Fixed:
-* deviceId is now correctly use
+* deviceId parameter is now use. For instance, it's possible to use the zigbee device.
 * isHeatingBurnerActive now tries by default heating.burners.$burnerId(0 by default) and heating.burner as fallback.****
 
 Additional improvements in the Docs
