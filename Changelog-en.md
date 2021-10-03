@@ -24,6 +24,10 @@ Deleted functions:
 
 Additional improvements in the Docs
 
+fixed:
+deviceId is now correctly use
+isHeatingBurnerActive now tries by default heating.burners.$burnerId(0 by default) and heating.burner as fallback.
+
 Version 1.4.0
 --------------
 Switch to version 2 of Oauth Viessmann servuce. Many other small improvements. See release note https://github.com/thetrueavatar/Viessmann-Api/releases/tag/1.4.0
